@@ -15,9 +15,6 @@
     "noEmit": true,
     "baseUrl": "./translate-app",
     "paths": {
-      "~/*": [
-        "./*"
-      ],
       "@/*": [
         "./*"
       ]

@@ -17,5 +17,9 @@
     "eslint": "^8.45.0",
     "eslint-plugin-vue": "^9.15.1",
     "nuxt": "^3.6.5"
+  },
+  "dependencies": {
+    "primevue": "^3.30.2",
+    "vue": "^3.3.4"
   }
 }
