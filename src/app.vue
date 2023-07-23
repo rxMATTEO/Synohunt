@@ -4,9 +4,15 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import {useAppConfig} from 'nuxt/app';
+
 export default {
-  name: 'App'
+  name: 'App',
+  created() {
+    const appConfig = useAppConfig();
+    console.log(useAppConfig());
+  }
 };
 </script>
 

@@ -13,4 +13,4 @@ const nuxtConfig: NuxtConfig = {
   srcDir: './src',
 };
 
-export default nuxtConfig;
+export default defineNuxtConfig(nuxtConfig);
