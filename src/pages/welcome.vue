@@ -11,5 +11,5 @@ export default {
 
 <style scoped lang="sass">
 .flex
-  color: red
+  color: $secondary
 </style>

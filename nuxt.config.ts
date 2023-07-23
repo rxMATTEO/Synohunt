@@ -11,6 +11,15 @@ const nuxtConfig: NuxtConfig = {
   build: {
     transpile: ['primevue']
   },
+  vite: {
+    css: {
+      preprocessorOptions: {
+        sass: {
+          additionalData: '@use "./src/assets/_colors.sass" as *\n'
+        }
+      }
+    }
+  },
   srcDir: './src',
 };
 export default defineNuxtConfig(nuxtConfig);
