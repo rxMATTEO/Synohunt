@@ -1,5 +1,5 @@
 <template>
-  <Header />
+  <NuxtLayout name="default"/>
 This is AHJAHHAHA
 </template>
 

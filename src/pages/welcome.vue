@@ -1,5 +1,5 @@
 <template>
-Well cum
+  <div class="flex">cum</div>
 </template>
 
 <script>
