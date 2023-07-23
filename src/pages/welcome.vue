@@ -1,5 +1,6 @@
 <template>
-  <div class="flex">cum</div>
+  <div class="flex">cum</div>  <img src="/img/smook.jpg" alt="smook"/>
+
 </template>
 
 <script>
