@@ -9,7 +9,8 @@ const nuxtConfig: NuxtConfig = {
   ],
   build: {
     transpile: ['primevue']
-  }
+  },
+  srcDir: './src',
 };
 
 export default nuxtConfig;
