@@ -1,12 +1,10 @@
 <template>
-  <div class="flex">
-    This is header
-  </div>
+
 </template>
 
 <script>
 export default {
-  name: 'Header'
+  name: 'default'
 };
 </script>
 

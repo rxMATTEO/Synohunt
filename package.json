@@ -20,6 +20,7 @@
     "nuxt": "^3.6.5"
   },
   "dependencies": {
+    "primeflex": "^3.3.1",
     "primevue": "^3.30.2",
     "vue": "^3.3.4"
   }

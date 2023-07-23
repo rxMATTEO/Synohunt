@@ -3,6 +3,7 @@
 </template>
 
 <script lang="ts">
+import 'primeflex/primeflex.css';
 export default {
   name: 'App',
 };
