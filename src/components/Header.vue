@@ -1,10 +1,10 @@
 <template>
-  <NuxtPage />
+This is header
 </template>
 
-<script lang="ts">
+<script>
 export default {
-  name: 'App',
+  name: 'Header'
 };
 </script>
 
