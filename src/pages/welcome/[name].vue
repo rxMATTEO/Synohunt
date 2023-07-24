@@ -1,18 +1,29 @@
 <template>
   <div>
-    <NuxtLayout />
+    <NuxtLayout name="orange"/>
     <div class="flex">cum</div>
     <p>{{`Hello ${$route.params.name}`}}</p>
+    <p>Here is username: {{delayed}}</p>
   </div>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   name: 'welcome',
-  created() {
+  mounted() {
+    useLazyFetch('https://hub.dummyapis.com/delay?seconds=5').then((data) => {
+      data.execute().then((response) => {
+        console.log(data);
+        this.delayed = data.data.value;
+      });
+    });
   },
   data() {
-    return {color: 'red'};
+    return {
+      color: 'red',
+      delayed: {},
+      pending: true,
+    };
   }
 };
 </script>
