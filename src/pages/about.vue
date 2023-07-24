@@ -1,8 +1,9 @@
 <script lang="ts">
 import {defineComponent} from 'vue';
 
+definePageMeta({pageTransition: {name: 'spin'}});
 export default defineComponent({
-  name: 'about'
+  name: 'about',
 });
 </script>
 
