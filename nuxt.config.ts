@@ -12,6 +12,9 @@ const nuxtConfig: NuxtConfig = {
   build: {
     transpile: ['primevue']
   },
+  app: {
+    pageTransition: { name: 'page', mode: 'out-in' }
+  },
   vite: {
     css: {
       preprocessorOptions: {

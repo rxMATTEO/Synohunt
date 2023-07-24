@@ -1,7 +1,10 @@
 <template>
-  <NuxtLayout name="default"/>
-This is AHJAHHAHA
-  <NuxtLink to="welcome/quandale">To quandale</NuxtLink>
+  <div>
+    This is AHJAHHAHA
+
+    <NuxtLink to="welcome/quandale">To quandale</NuxtLink>
+    <NuxtLink to="about">To about</NuxtLink>
+  </div>
 </template>
 
 <script>

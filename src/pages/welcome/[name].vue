@@ -1,7 +1,8 @@
 <template>
-  <div class="flex">cum</div>  <img src="/img/smook.jpg" alt="smook"/>
-  <img src="~/assets/quandale.png" alt="goofy ahh"/>
-  <p>{{`Hello ${$route.params.name}`}}</p>
+  <div>
+    <div class="flex">cum</div>
+    <p>{{`Hello ${$route.params.name}`}}</p>
+  </div>
 </template>
 
 <script>
