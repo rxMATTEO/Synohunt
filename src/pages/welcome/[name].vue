@@ -12,7 +12,7 @@
 export default {
   name: 'welcome',
   mounted() {
-    useLazyFetch('https://hub.dummyapis.com/delay?seconds=5').then((data) => {
+    useLazyFetch('https://hub.dummyapis.com/delay?seconds=5').then((data) => { // TODO mb turn into watch or smthg?
       data.execute().then((response) => {
         console.log(data);
         this.delayed = data.data.value;
