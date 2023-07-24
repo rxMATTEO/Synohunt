@@ -6,7 +6,8 @@ const nuxtConfig: NuxtConfig = {
   buildModules: ['@nuxt/typescript-build'],
   css: [
     'primevue/resources/themes/bootstrap4-dark-purple/theme.css',
-    'primeflex/themes/primeone-dark.css'
+    'primeflex/themes/primeone-dark.css',
+    'primeflex/primeflex.css',
   ],
   build: {
     transpile: ['primevue']
