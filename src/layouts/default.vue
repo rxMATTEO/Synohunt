@@ -13,5 +13,5 @@ export default {
 
 <style scoped lang="sass">
 div
-  background-color: red
+  background-color: blue
 </style>
