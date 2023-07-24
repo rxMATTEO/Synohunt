@@ -11,6 +11,4 @@ export default {
 </script>
 
 <style scoped lang="sass">
-div
-  background-color: blue
 </style>
