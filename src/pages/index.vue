@@ -1,6 +1,7 @@
 <template>
   <NuxtLayout name="default"/>
 This is AHJAHHAHA
+  <NuxtLink to="welcome/quandale">To quandale</NuxtLink>
 </template>
 
 <script>
