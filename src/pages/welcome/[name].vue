@@ -8,26 +8,11 @@
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  name: 'welcome',
-  mounted() {
-    useLazyFetch('https://hub.dummyapis.com/delay?seconds=5').then((data) => { // TODO mb turn into watch or smthg?
-      data.execute().then((response) => {
-        console.log(data);
-        this.delayed = data.data.value;
-        this.pending = false;
-      });
-    });
-  },
-  data() {
-    return {
-      color: 'red',
-      delayed: {},
-      pending: true,
-    };
-  }
-};
+<script lang="ts" setup>
+import {ref} from 'vue';
+
+const color = ref('red');
+const {data: delayed, pending} = useLazyFetch('https://hub.dummyapis.com/delay?seconds=5', {server: false});
 </script>
 
 <style scoped lang="sass">
