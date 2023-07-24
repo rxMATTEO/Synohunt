@@ -1,10 +1,5 @@
 <template>
-  <div>
-    This is AHJAHHAHA
-
-    <NuxtLink to="welcome/quandale">To quandale</NuxtLink>
-    <NuxtLink to="about">To about</NuxtLink>
-  </div>
+  <div>index page</div>
 </template>
 
 <script>
