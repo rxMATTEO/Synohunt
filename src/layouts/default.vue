@@ -1,6 +1,8 @@
 <template>
-  <Header />
-  <slot />
+  <div>
+    <Header />
+    <slot />
+  </div>
 </template>
 
 <script>
@@ -9,6 +11,7 @@ export default {
 };
 </script>
 
-<style scoped>
-
+<style scoped lang="sass">
+div
+  background-color: red
 </style>

@@ -1,7 +1,8 @@
 <script lang="ts">
 import {defineComponent} from 'vue';
 
-definePageMeta({pageTransition: {name: 'spin'}});
+definePageMeta({pageTransition: {name: 'spin'}, layout: 'orange'});
+
 export default defineComponent({
   name: 'about',
 });

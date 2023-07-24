@@ -1,5 +1,6 @@
 <template>
   <div>
+    <NuxtLayout />
     <div class="flex">cum</div>
     <p>{{`Hello ${$route.params.name}`}}</p>
   </div>
