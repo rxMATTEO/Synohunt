@@ -3,7 +3,8 @@
     <NuxtLayout name="orange"/>
     <div class="flex">cum</div>
     <p>{{`Hello ${$route.params.name}`}}</p>
-    <p>Here is username: {{delayed}}</p>
+    <p v-if="pending">Loading</p>
+    <p v-else>Here is username: {{delayed}}</p>
   </div>
 </template>
 
@@ -15,6 +16,7 @@ export default {
       data.execute().then((response) => {
         console.log(data);
         this.delayed = data.data.value;
+        this.pending = false;
       });
     });
   },
