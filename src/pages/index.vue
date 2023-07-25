@@ -19,21 +19,76 @@
       <p>SynoHunt</p>
     </div>
     <div>
-      <div class="flex sm:justify-content-between sm:flex-row flex-column">
-        <p class="sm:text-6xl text-4xl font-bold">SynoHunt: The Ultimate Word Challenge!</p>
-        <p class="text-lg">Get ready to embark on a thrilling journey through the world of synonyms. Unleash your inner linguist, and dive into a realm of words and wonders with SynoHunt.</p>
+      <div class="flex sm:justify-content-between sm:flex-row flex-column py-6">
+        <span class="block sm:w-5 sm:text-6xl text-4xl font-bold">SynoHunt: The Ultimate Word Challenge!</span>
+        <span class="block sm:w-5 text-lg sm:text-right mt-5 sm:mt-0">Get ready to embark on a thrilling journey through the world of synonyms. Unleash your inner linguist, and dive into a realm of words and wonders with SynoHunt.</span>
       </div>
 
-      <div class="col-12 md:col-12 lg:col-12 p-0 lg:pr-5 lg:pb-5 mt-4 lg:mt-0">
+      <div class="col-12 md:col-12 lg:col-12 p-0 lg:pr-5 lg:pb-5 mt-2 lg:mt-0">
         <div
-            style="height: 160px; padding: 2px; border-radius: 10px"
-        >
-          <div class="p-3 surface-card h-full" style="border-radius: 8px">
-            <div class="flex align-items-center justify-content-center bg-yellow-200 mb-3" style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
+            style="padding: 2px; border-radius: 10px">
+          <div class="p-3 surface-card h-full flex align-items-center" style="border-radius: 8px">
+            <div class="flex align-items-center justify-content-center bg-yellow-200" style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
               <i class="pi pi-fw pi-users text-2xl"></i>
             </div>
-            <h5 class="mb-2 text-900">Easy to Use</h5>
-            <span class="text-600">Posuere morbi leo urna molestie.</span>
+            <div class="flex-column ml-4">
+              <span class="text-900 block">Epic Synonyms</span>
+              <span class="text-600">Conquer word battles</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 md:col-12 lg:col-12 p-0 lg:pr-5 lg:pb-5 mt-2 lg:mt-0">
+        <div
+            style="padding: 2px; border-radius: 10px">
+          <div class="p-3 surface-card h-full flex align-items-center" style="border-radius: 8px">
+            <div class="flex align-items-center justify-content-center bg-yellow-200" style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
+              <i class="pi pi-fw pi-users text-2xl"></i>
+            </div>
+            <div class="flex-column ml-4">
+              <span class="text-900 block">Epic Synonyms</span>
+              <span class="text-600">Conquer word battles</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 md:col-12 lg:col-12 p-0 lg:pr-5 lg:pb-5 mt-2 lg:mt-0">
+        <div
+            style="padding: 2px; border-radius: 10px">
+          <div class="p-3 surface-card h-full flex align-items-center" style="border-radius: 8px">
+            <div class="flex align-items-center justify-content-center bg-yellow-200" style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
+              <i class="pi pi-fw pi-users text-2xl"></i>
+            </div>
+            <div class="flex-column ml-4">
+              <span class="text-900 block">Epic Synonyms</span>
+              <span class="text-600">Conquer word battles</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-5">
+      <div class="inline-block sm:w-6 sm:pl-3">
+        <div class="w-full surface-card border-round-3xl pb-1">
+          <div class="img overflow-hidden h-16rem relative">
+            <img class="aspect-1/1 block w-full border-round-3xl absolute" src="/img/words.png" alt="words" />
+          </div>
+          <div class="desc px-3">
+            <h1 class="text-900 text-4xl font-bold">Master synonyms</h1>
+            <p>Expand your vocabulary and dominate the leaderboard</p>
+          </div>
+        </div>
+      </div>
+      <div class="inline-block sm:w-6 sm:pl-3 mt-3 sm:mt-0">
+        <div class="w-full surface-card border-round-3xl pb-1">
+          <div class="img overflow-hidden h-16rem relative">
+            <img class="aspect-1/1 block w-full border-round-3xl absolute" src="/img/words.png" alt="words" />
+          </div>
+          <div class="desc px-3">
+            <h1 class="text-900 text-4xl font-bold">Master synonyms</h1>
+            <p>Expand your vocabulary and dominate the leaderboard</p>
           </div>
         </div>
       </div>
