@@ -5,6 +5,7 @@ export const useSidebarStore = defineStore('sidebarStore', () => {
 
   function toggleMenu(){
     isExpanded.value = !isExpanded.value;
+    return isExpanded.value;
   }
   return ({
     isExpanded,
