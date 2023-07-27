@@ -1,15 +1,10 @@
 <script setup lang="ts">
-import {reactive} from 'vue';
+import {useSidebarStore} from '@/stores/sidebarStore';
 
-const expanded = reactive({value: false});
+const { toggleMenu, isExpanded: expanded } = useSidebarStore();
 onMounted(() => {
   if(window.document.documentElement.offsetWidth >= 768) toggleMenu();
 });
-
-const toggleMenu = () => {
-  console.log('expand', expanded.value);
-  expanded.value = !expanded.value;
-};
 </script>
 
 <template>
