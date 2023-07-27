@@ -11,7 +11,15 @@ const nuxtConfig: NuxtConfig = {
   build: {
     transpile: ['primevue']
   },
-  modules: ['@nuxtjs/tailwindcss'],
+  modules: [
+    '@nuxtjs/tailwindcss',
+    '@pinia/nuxt'
+  ],
+  pinia: {
+    autoImports: [ 'defineStore',
+      ['defineStore', 'definePiniaStore']
+    ],
+  },
   tailwindcss: {},
   app: {
     pageTransition: { name: 'page', mode: 'out-in' },

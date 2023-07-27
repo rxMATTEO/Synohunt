@@ -1,14 +1,10 @@
 <script setup lang="ts">
-import {onMounted} from 'vue';
 
 const props = defineProps({
   isExpanded: Object,
   toggle: Function,
 });
 
-onMounted(() => {
-  // if(window.document.documentElement.offsetWidth <= 768) props.toggle();
-});
 </script>
 
 <template>
@@ -24,4 +20,4 @@ onMounted(() => {
 <style scoped lang="sass">
 .sidebar
   width: inherit
-</style> //:class="{'md:t-w-[14rem] t-w[5rem]': expanded.value }"
+</style>
