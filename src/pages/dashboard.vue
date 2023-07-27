@@ -1,17 +1,25 @@
 <script setup lang="ts">
-import {ref} from 'vue';
+import {reactive, ref} from 'vue';
 
-const visible = ref(true);
+const visible = reactive({value: true});
+const width = ref({mobile: '[100%]', pc: '14rem'});
+const expanded = reactive({value: true});
+const toggleMenu = () => {
+  console.log('expand', expanded.value);
+  expanded.value = !expanded.value;
+};
 </script>
 
 <template>
   <div class="flex">
-    <Sidebar width="14rem" />
+    <client-only>
+      <Sidebar :isExpanded="expanded" :toggle="toggleMenu" />
+    </client-only>
     <div class="main w-full flex-1">
-      <div class="t-ml-0 lg:t-ml-[14rem] h-4rem">
-        <Header />
+      <div  class="t-ml-0 h-4rem">
+          <Header :expanded="toggleMenu" />
       </div>
-      <div class="t-ml-0 lg:t-ml-[14rem]">
+      <div class="t-ml-0">
         adssadasdas
       </div>
     </div>
