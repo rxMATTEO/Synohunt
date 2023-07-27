@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <div class="fixed surface-card w-full shadow-8">
+  <div class="fixed surface-card shadow-8 w-full">
     This is a header
   </div>
 </template>

@@ -6,14 +6,20 @@ const visible = ref(true);
 
 <template>
   <div class="flex">
-    <Sidebar />
-    <div class="relative main">
-      <Header />
+    <Sidebar width="15rem" />
+    <div class="main w-full flex-1">
+      <div class="h-4rem">
+        <Header />
+      </div>
+      <div class="ml-[14rem]">
+        adssadasdas
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped lang="sass">
-.main
-  left: 15rem
+@tailwind base
+@tailwind components
+@tailwind utilities
 </style>
