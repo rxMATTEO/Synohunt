@@ -12,6 +12,7 @@ const nuxtConfig: NuxtConfig = {
     transpile: ['primevue']
   },
   modules: ['@nuxtjs/tailwindcss'],
+  tailwindcss: {},
   app: {
     pageTransition: { name: 'page', mode: 'out-in' },
     layoutTransition: {name: 'layout', mode: 'out-in'},

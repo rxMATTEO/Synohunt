@@ -6,12 +6,12 @@ const visible = ref(true);
 
 <template>
   <div class="flex">
-    <Sidebar width="15rem" />
+    <Sidebar width="14rem" />
     <div class="main w-full flex-1">
-      <div class="h-4rem">
+      <div class="t-ml-0 lg:t-ml-[14rem] h-4rem">
         <Header />
       </div>
-      <div class="ml-[14rem]">
+      <div class="t-ml-0 lg:t-ml-[14rem]">
         adssadasdas
       </div>
     </div>
