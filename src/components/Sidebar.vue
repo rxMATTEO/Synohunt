@@ -7,7 +7,7 @@ const props = defineProps({
 });
 
 onMounted(() => {
-  if(window.document.documentElement.offsetWidth <= 768) props.toggle();
+  // if(window.document.documentElement.offsetWidth <= 768) props.toggle();
 });
 </script>
 

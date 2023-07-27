@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import {reactive, ref} from 'vue';
+import {reactive} from 'vue';
 
-const visible = reactive({value: true});
-const width = ref({mobile: '[100%]', pc: '14rem'});
-const expanded = reactive({value: true});
+const expanded = reactive({value: false});
+onMounted(() => {
+  if(window.document.documentElement.offsetWidth >= 768) toggleMenu();
+});
+
 const toggleMenu = () => {
   console.log('expand', expanded.value);
   expanded.value = !expanded.value;
@@ -12,9 +14,8 @@ const toggleMenu = () => {
 
 <template>
   <div class="flex">
-    <client-only>
       <Sidebar :isExpanded="expanded" :toggle="toggleMenu" />
-    </client-only>
+<!--      todo add suspense sceletone or some load shit cuz it's loading too long-->
     <div class="main w-full flex-1">
       <div  class="t-ml-0 h-4rem">
           <Header :expanded="toggleMenu" />
