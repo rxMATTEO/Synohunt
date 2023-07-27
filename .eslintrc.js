@@ -26,6 +26,13 @@ module.exports = {
     'parser': '@typescript-eslint/parser',
     'sourceType': 'module'
   },
+  globals: {
+    onMounted: 'readonly',
+    defineProps: 'readonly',
+    defineEmits: 'readonly',
+    defineExpose: 'readonly',
+    withDefaults: 'readonly'
+  },
   'plugins': [
     '@typescript-eslint',
     'vue'
