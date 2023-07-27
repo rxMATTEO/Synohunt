@@ -8,7 +8,7 @@ const visible = ref(true);
   <div class="flex">
     <Sidebar />
     <div class="relative main">
-
+      <Header />
     </div>
   </div>
 </template>
