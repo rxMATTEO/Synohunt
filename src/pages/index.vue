@@ -9,7 +9,7 @@
         <div class="main z-1 flex flex-column align-items-center justify-content-center h-screen">
           <p class="welcome-text text-3xl text-center font-bold">Unleash your word wizardry. Conquer synonyms.</p>
           <div>
-            <Button label="Play Now" rounded class="mr-3"/>
+            <Button label="Play Now" rounded class="mr-3" @click="() => navigateTo('/dashboard')"/>
             <Button label="Learn More" rounded/>
           </div>
         </div>
