@@ -15,8 +15,12 @@ onMounted(() => {
       <div  class="t-ml-0 h-4rem">
           <Header :expanded="toggleMenu" />
       </div>
-      <div class="t-ml-0">
-        adssadasdas
+      <div class="max-w-full surface-overlay">
+        <div class="lg:px-8 lg:mx-8 px-3">
+          <div class="gradient">
+            asdasads
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -26,4 +30,7 @@ onMounted(() => {
 @tailwind base
 @tailwind components
 @tailwind utilities
+
+.gradient
+  background-image: linear-gradient(to right, $gradient-stops)
 </style>
