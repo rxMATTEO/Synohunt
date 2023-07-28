@@ -1,5 +1,5 @@
-<script setup lang="ts">
-import {useSidebarStore} from '@/stores/sidebarStore';
+<script setup>
+import { useSidebarStore } from '@/stores/sidebarStore';
 
 const { toggleMenu, isExpanded: expanded } = useSidebarStore();
 onMounted(() => {
@@ -17,13 +17,9 @@ onMounted(() => {
       </div>
       <div class="max-w-full surface-overlay">
         <div class="lg:px-8 lg:mx-8 px-3">
-          <div class="gradient t-rounded p-1">
-            <div class="t-rounded t-background-blur-sm t-bg-black t-bg-opacity-30 p-3">
-              asdasads
-              <br/>
-              assads
-            </div>
-          </div>
+          <GradientBox>
+           <div>abc</div>
+          </GradientBox>
         </div>
       </div>
     </div>
