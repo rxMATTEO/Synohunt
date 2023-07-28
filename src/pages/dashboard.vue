@@ -55,8 +55,8 @@ const langs = ref([{name: 'EN'}, {name: 'RU'}]);
          </div>
          <div class="mt-5 flex">
            <div class="t-mx-auto">
-             <Button role="null" type="null" label="TRAIN" class="text-sm p-2 mr-2 bg-blue-300" />
-             <Button type="null" label="SKIP" class="text-sm p-2 bg-indigo-400" />
+             <Button type="null" label="TRAIN" class="text-sm p-2 mr-2 bg-blue-300 border-1 border-white hover:bg-blue-800 text-white" />
+             <Button type="null" label="SKIP" class="text-sm p-2 bg-indigo-400 border-1 border-white hover:bg-indigo-800 text-white" />
            </div>
          </div>
        </div>
