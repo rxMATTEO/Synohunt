@@ -8,7 +8,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <div :class="{expanded: isExpanded.value}" class="fixed surface-card shadow-8 right-0 header">
+  <div :class="{expanded: isExpanded.value}" class="t-transition-all t-ease-in-out t-duration-200 fixed surface-card shadow-8 right-0 header">
     <div class="flex align-items-center justify-content-between w-full py-2">
       <div>
         <Button @click="expanded" unstyled class="">
