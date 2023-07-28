@@ -9,9 +9,11 @@ const props = defineProps({
 
 <template>
   <div :class="{expanded: isExpanded.value}" class="fixed surface-card shadow-8 right-0 header">
-    <div class="flex justify-content-between w-full">
+    <div class="flex align-items-center justify-content-between w-full py-2">
       <div>
-        <Button @click="expanded">Hi</Button>
+        <Button @click="expanded" unstyled class="">
+          <i class="pi pi-align-justify text-2xl vertical-align-middle"></i>
+        </Button>
       </div>
       <div>hiaasddsasadsadsdsa</div>
     </div>
@@ -23,5 +25,4 @@ const props = defineProps({
   left: 0
   &.expanded
     left: 14rem // todo remove hardcode plz
-
 </style>
