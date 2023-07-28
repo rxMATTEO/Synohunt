@@ -6,6 +6,9 @@ module.exports = {
 
     },
   },
+  corePlugins: {
+    preflight: true
+  },
   plugins: [],
   prefix: 't-',
 };

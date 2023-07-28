@@ -13,6 +13,7 @@ const langs = ref([{name: 'EN'}, {name: 'RU'}]);
 </script>
 
 <template>
+  <div>
   <NuxtLayout name="headernsidebar">
 <div class="lg:px-8 lg:mx-8 px-3">
           <GradientBox>
@@ -52,27 +53,27 @@ const langs = ref([{name: 'EN'}, {name: 'RU'}]);
              </template>
            </Dropdown>
          </div>
-         <div class="mt-5">
-
+         <div class="mt-5 flex">
+           <div class="t-mx-auto">
+             <Button role="null" type="null" label="TRAIN" class="text-sm p-2 mr-2 bg-blue-300" />
+             <Button type="null" label="SKIP" class="text-sm p-2 bg-indigo-400" />
+           </div>
          </div>
        </div>
      </div>
      <div class="t-w-full md:t-w-2/3 t-backdrop-blur-sm t-bg-black t-bg-opacity-50">
        <div class="p-3">
-         as
+         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet animi, aperiam autem, consequuntur culpa debitis, ducimus earum esse excepturi ipsam labore modi odio perspiciatis provident quisquam rem repellat sint unde.
        </div>
      </div>
    </div>
   </GradientBox>
 </div>
 </NuxtLayout>
+</div>
 </template>
 
 <style scoped lang="sass">
-@tailwind base
-@tailwind components
-@tailwind utilities
-
 .gradient
   background-image: linear-gradient(to right, $gradient-stops)
 </style>
