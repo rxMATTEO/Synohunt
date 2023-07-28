@@ -13,10 +13,10 @@
     "sourceMap": true,
     "strict": true,
     "noEmit": true,
-    "baseUrl": "./translate-app",
+    "baseUrl": "./translate-app/src/",
     "paths": {
       "@/*": [
-        "./*"
+        "./src/*"
       ]
     },
     "types": [
@@ -27,5 +27,6 @@
   },
   "exclude": [
     "node_modules"
-  ]
+  ],
+  "extends": "./.nuxt/tsconfig.json",
 }

@@ -1,16 +1,25 @@
 <template>
   <div>
-    This is AHJAHHAHA
+    <p v-if="!pending">
+      This is prisma data: {{prisma}}
+    </p>
+    <p v-else>Pensing</p>
 
-    <NuxtLink to="welcome/quandale">To quandale</NuxtLink>
-    <NuxtLink to="about">To about</NuxtLink>
+    <div>
+      <NuxtLink to="welcome/user">To user</NuxtLink>
+      <br />
+      <NuxtLink to="about">To about</NuxtLink>
+    </div>
   </div>
 </template>
 
-<script>
-export default {
-  name: 'index.vue'
-};
+<script setup lang="ts">
+import {defineComponent} from 'vue';
+
+const {pending, data: prisma} = useLazyFetch('/api/prisma');
+defineComponent({
+  name: 'index.vue',
+});
 </script>
 
 <style scoped>

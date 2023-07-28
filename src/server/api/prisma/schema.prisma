@@ -1,0 +1,293 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./test.db"
+}
+
+// Таблица пользователей
+model User {
+  id       String    @id @default(uuid())
+  email    String // Почта пользователя
+  name     String // Имя/логин пользователя
+  role     String    @default("USER") // Уровень доступа пользователя
+  password String // Пароль пользователя
+  profile  Profile? // Связь с таблицей Профиля
+  Testrun  Testrun[] // Связь с таблицей Тестов
+
+  @@unique([email, name])
+}
+
+// Таблица профиля Пользователя
+model Profile {
+  id          String    @id @default(uuid())
+  age         String? // Возраст пользователя
+  avatar      String? // Аватар пользователя
+  skills      String? // Навыки пользователя
+  tokenGitLab String? // Токен  пользователя GitLab
+  user        User      @relation(fields: [userId], references: [id]) // Связь с таблицей пользователя
+  userId      String    @unique
+  Project     Project[] // Связь с таблицей Проектов
+}
+
+// Таблица Проектов
+model Project {
+  id                String          @id @default(uuid())
+  name              String // Название проекта
+  description       String? // Описание проекта
+  gitLabId          String? // ID проекта в GitLab
+  gitLabProjectName String? // Название проекта в GitLab'е
+  aptlyRepo         String? // Название aptly репозитория
+  profile           Profile[] // Связь с таблицей Профилей пользователя
+  TestGost          TestGost[] // Связь с таблицей Тестов по ГОСТ 56939
+  Scenario          Scenario[] // Связь с таблицей Пользовательских сценариев тестирования
+  Documentation     Documentation[] // Связь с таблицей Документации
+}
+
+// Таблица тестов по ГОСТ 56939
+model TestGost {
+  id            String  @id @default(uuid())
+  title         String // Название теста
+  description   String // Описание теста
+  preconditions String? // Условия для прохождения теста
+  Step          Step[] // Связь с таблицей Шагов тестирования
+  project       Project @relation(fields: [projectId], references: [id]) // Связь с таблицей Проектов
+  projectId     String
+}
+
+// Таблица пользовательских тестов
+model Scenario {
+  id            String  @id @default(uuid())
+  title         String? // Название теста
+  description   String? // Описание теста
+  preconditions String? // Условия для прохождения теста
+  Step          Step[] // Связь с таблицей Шагов тестирования
+  project       Project @relation(fields: [projectId], references: [id]) // Связь с таблицей Проектов
+  projectId     String
+  Tag           Tag[] // Связь с таблицей Тегов
+}
+
+// Таблица шагов тестирования
+model Step {
+  id             String      @id @default(uuid())
+  action         String? // Действие, которое выполняется для выполнения сценария тестирования
+  expectedResult String? // Ожидаемый результат выполнения Действия
+  finalResult    String? // Результат прохождения Действия
+  testGost       TestGost?   @relation(fields: [testGostId], references: [id], onDelete: Cascade) // Связь с таблицей Тестов по ГОСТ 56939
+  testGostId     String?
+  scenario       Scenario?   @relation(fields: [scenarioId], references: [id], onDelete: Cascade) // Связь с таблицей Пользовательских сценариев тестирования
+  scenarioId     String?
+  testrun        Testrun?    @relation(fields: [testrunId], references: [id], onDelete: Cascade) // Связь с таблицей Тестов
+  testrunId      String?
+  FilesStep      FilesStep[] // Связь с таблицей Файлов тестирования
+}
+
+// Таблица прохождения тестирования
+model Testrun {
+  id       String   @id @default(uuid())
+  date     DateTime // Дата прохождения Сценария тестирования
+  testType String? // Тип тестирования для тестов по ГОСТ 56939
+  reportId String? // ID отчёта о прохождении тестирования
+  Step     Step[] // Связь с таблицей Шагов тестирования
+  Issues   Issues[] // Связь с таблицей Задач
+  user     User     @relation(fields: [userId], references: [id]) // Связь с таблицей Пользователей
+  userId   String
+}
+
+// Таблица документации проекта
+model Documentation {
+  id             String  @id @default(uuid())
+  docVersion     String // Версия документа
+  docName        String // Наименование документа
+  docFileId      String // ID файла (название на диске SMB)
+  projectVersion String // Версия проекта
+  project        Project @relation(fields: [projectId], references: [id]) // Связь с таблицей Проектов
+  projectId      String
+}
+
+// Таблица задач в GitLab
+model Issues {
+  id         String  @id @default(uuid())
+  gitlabData String // Информация полученная из Gitlab'а
+  testrun    Testrun @relation(fields: [testrunId], references: [id]) // Связь с таблицей Тестов
+  testrunId  String
+}
+
+// Таблица файлов в результатам тестирования
+model FilesStep {
+  id         String  @id @default(uuid())
+  fileAction String? // Файлы для Шага Действия
+  fileER     String? // Файлы для Шага Ожидаемый результат
+  step       Step?   @relation(fields: [stepId], references: [id], onDelete: Cascade) // Связь с таблицей Шагов тестирования
+  stepId     String? @unique
+}
+
+// Таблица Тегов
+model Tag {
+  id          String     @id @default(uuid())
+  color       String // Цвет тега
+  editable    Boolean // Редактируемый ли тег
+  description String // Описание тега
+  alias       String // Псевдоним тега
+  scenario    Scenario[] // Связь с таблицей Пользовательских сценариев тестирования
+}
+
+model Package {
+  id        Int     @id @default(autoincrement())
+  repo      String
+  name      String
+  vuls      String  @default("")
+  status    String  @default("Ожидает исполнения")
+  comm      String  @default("")
+  version   String  @default("")
+  decision  String?
+  timestamp String  @default("")
+}
+
+// МОДЕЛИ ИЗ XML БД (test.db)
+
+model cvss {
+  cvss_id         Int               @id
+  cvss_vector     String
+  cvss_score      Decimal
+  vulnerabilities vulnerabilities[]
+}
+
+model cwe {
+  cwe_id     Int    @id
+  identifier String
+  vul_id     Int
+}
+
+model os {
+  os_id              Int                  @id
+  os                 String
+  vendor_id          Int
+  vulnerabilities_os vulnerabilities_os[]
+}
+
+model platforms {
+  platform_id        Int                  @id
+  platform           String
+  vulnerabilities_os vulnerabilities_os[]
+}
+
+model severity {
+  severity_id     Int               @id
+  severity_value  String
+  vulnerabilities vulnerabilities[]
+}
+
+model soft {
+  soft_id              Int                    @id
+  vendor_id            Int
+  soft_name            String
+  vulnerabilities_soft vulnerabilities_soft[]
+}
+
+model types {
+  type_id Int    @id
+  type    String
+}
+
+model exploit_statuses {
+  exploit_status_id    Int               @id
+  exploit_status_value String
+  vulnerabilities      vulnerabilities[]
+}
+
+model fix_statuses {
+  fix_status_id    Int               @id
+  fix_status_value String
+  vulnerabilities  vulnerabilities[]
+}
+
+model soft_types {
+  soft_id Int @id
+  type_id Int
+}
+
+model solutions {
+  solution_id     Int               @id
+  solution_value  String
+  vulnerabilities vulnerabilities[]
+}
+
+model vendors {
+  vendor_id Int    @id
+  name      String
+}
+
+model versions {
+  version_id Int
+  value      String
+  id         Int    @id @default(autoincrement())
+}
+
+model versions3 {
+  version_id           Int                    @id
+  min                  String?
+  max                  String?
+  unparsed             String?
+  vulnerabilities_soft vulnerabilities_soft[]
+  vulnerabilities_os   vulnerabilities_os[]
+}
+
+model vul_statuses {
+  vul_status_id    Int               @id
+  vul_status_value String
+  vulnerabilities  vulnerabilities[]
+}
+
+model vulnerabilities {
+  vul_id               Int                    @id
+  identifier           String
+  name                 String
+  description          String
+  identify_date        String
+  cvss_id              Int
+  severity_id          Int
+  solution_id          Int
+  vul_status_id        Int
+  exploit_status_id    Int
+  fix_status_id        Int
+  sources              String?
+  other                String?
+  Solution             solutions              @relation(fields: [solution_id], references: [solution_id])
+  VulStatus            vul_statuses           @relation(fields: [vul_status_id], references: [vul_status_id])
+  ExploitStatus        exploit_statuses       @relation(fields: [exploit_status_id], references: [exploit_status_id])
+  FixStatus            fix_statuses           @relation(fields: [fix_status_id], references: [fix_status_id])
+  Cvss                 cvss                   @relation(fields: [cvss_id], references: [cvss_id])
+  Severity             severity               @relation(fields: [severity_id], references: [severity_id])
+  vulnerabilities_soft vulnerabilities_soft[]
+  vulnerabilities_os   vulnerabilities_os[]
+}
+
+model vulnerabilities_os {
+  os_version_id Int @id
+  version_id    Int
+  os_id         Int
+  platform_id   Int
+  vul_id        Int
+
+  Version       versions3       @relation(references: [version_id], fields: [version_id])
+  Os            os              @relation(references: [os_id], fields: [os_id])
+  Platform      platforms       @relation(references: [platform_id], fields: [platform_id])
+  Vulnerability vulnerabilities @relation(references: [vul_id], fields: [vul_id])
+}
+
+model vulnerabilities_soft {
+  vul_soft_id Int @id
+  vul_id      Int
+  soft_id     Int
+  version_id  Int
+
+  Vulnerability vulnerabilities @relation(references: [vul_id], fields: [vul_id])
+  Soft          soft            @relation(references: [soft_id], fields: [soft_id])
+  Version       versions3       @relation(references: [version_id], fields: [version_id])
+}

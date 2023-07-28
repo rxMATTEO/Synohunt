@@ -17,12 +17,18 @@
     "@vitejs/plugin-vue": "^4.2.3",
     "eslint": "^8.45.0",
     "eslint-plugin-vue": "^9.15.1",
-    "nuxt": "^3.6.5"
+    "nuxt": "^3.6.5",
+    "prisma": "^5.0.0"
   },
   "dependencies": {
+    "@prisma/client": "^5.0.0",
     "primeflex": "^3.3.1",
     "primevue": "^3.30.2",
     "sass": "^1.64.1",
     "vue": "^3.3.4"
+  },
+  "prisma": {
+    "schema": "src/server/api/prisma/schema.prisma",
+    "seed": "ts-node src/server/api/prisma/seed.ts"
   }
 }
