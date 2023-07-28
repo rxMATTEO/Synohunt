@@ -3,7 +3,7 @@ const props = defineProps({
   isExpanded: Object,
   toggle: Function,
 });
-
+// todo add close butt on mobile cuz config done
 </script>
 
 <template>
