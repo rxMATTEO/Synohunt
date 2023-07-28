@@ -7,6 +7,7 @@ const nuxtConfig: NuxtConfig = {
   css: [
     'primevue/resources/themes/bootstrap4-dark-purple/theme.css',
     'primeflex/primeflex.css',
+    'primeicons/primeicons.css',
   ],
   build: {
     transpile: ['primevue']

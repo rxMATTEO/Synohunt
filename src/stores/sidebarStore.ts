@@ -7,8 +7,13 @@ export const useSidebarStore = defineStore('sidebarStore', () => {
     isExpanded.value = !isExpanded.value;
     return isExpanded.value;
   }
+  function setMenuVisibility(isVisible: boolean){
+    isExpanded.value = isVisible;
+    return isExpanded.value;
+  }
   return ({
     isExpanded,
-    toggleMenu
+    toggleMenu,
+    setMenuVisibility
   });
 });

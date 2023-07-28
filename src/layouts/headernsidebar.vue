@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import {useSidebarStore} from '@/stores/sidebarStore';
 
-const { toggleMenu, isExpanded: expanded } = useSidebarStore();
+const { toggleMenu, setMenuVisibility, isExpanded: expanded } = useSidebarStore();
 onMounted(() => {
-  if(window.document.documentElement.offsetWidth >= 768) toggleMenu();
+  if(window.document.documentElement.offsetWidth >= 768) {
+    setMenuVisibility(true);
+  }
 });
 </script>
 
