@@ -2,10 +2,16 @@
   <NuxtPage />
 </template>
 
-<script lang="ts">
-export default {
-  name: 'App',
-};
+<script setup lang="ts">
+const appConfig = useAppConfig();
+onMounted(() => {
+  // todo use this insted of layout headernsidebar
+  if(window.document.documentElement.offsetWidth >= 768) {
+    appConfig.platform = 'pc';
+  } else {
+    appConfig.platform = 'mobile';
+  }
+});
 </script>
 
 <style lang="sass">
