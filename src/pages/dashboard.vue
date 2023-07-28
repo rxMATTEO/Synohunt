@@ -13,6 +13,9 @@ const diffs = ref([
   {level: 'Medium'},
   {level: 'Hard'},
 ]);
+
+const selectedLanguage = ref();
+const langs = ref([{name: 'EN'}, {name: 'RU'}]);
 </script>
 
 <template>
@@ -31,7 +34,7 @@ const diffs = ref([
                <div class="t-p-3">
                  <p class="text-sm">Suggested Challenge</p>
                  <div class="mt-5">
-                   <Dropdown v-model="selectedDiff" :options="diffs" optionLabel="level" placeholder="Select a Country" class="w-full md:w-14rem">
+                   <Dropdown v-model="selectedDiff" :options="diffs" optionLabel="level" placeholder="Select a difficulty" class="w-full">
                      <template #value="slotProps">
                        <div v-if="slotProps.value" class="flex align-items-center">
                          <div>{{ slotProps.value.level }}</div>
@@ -46,6 +49,24 @@ const diffs = ref([
                        </div>
                      </template>
                    </Dropdown>
+                   <Dropdown v-model="selectedLanguage" :options="langs" optionLabel="name" placeholder="Select a language" class="w-full mt-3">
+                     <template #value="slotProps">
+                       <div v-if="slotProps.value" class="flex align-items-center">
+                         <div>{{ slotProps.value.name }}</div>
+                       </div>
+                       <span v-else>
+                    {{ slotProps.placeholder }}
+                </span>
+                     </template>
+                     <template #option="slotProps">
+                       <div class="flex align-items-center">
+                         <div>{{ slotProps.option.name }}</div>
+                       </div>
+                     </template>
+                   </Dropdown>
+                 </div>
+                 <div class="mt-5">
+                   
                  </div>
                </div>
              </div>
