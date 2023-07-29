@@ -18,4 +18,3 @@ export default defineAppConfig({
   },
   platform: ''
 });
-// todo export type and rewrite to ts also platforms types do
