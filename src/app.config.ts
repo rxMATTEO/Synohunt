@@ -4,8 +4,13 @@ export enum Platforms {
 }
 
 export type Theme = {
-  dark: boolean,
-  light: boolean
+  dark?: boolean,
+  light?: boolean
+}
+
+export enum Themes {
+  dark = 'bootstrap4-dark-purple',
+  light = 'bootstrap4-light-purple',
 }
 
 declare module 'nuxt/schema' {

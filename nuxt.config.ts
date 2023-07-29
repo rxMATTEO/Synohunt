@@ -1,6 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import type {NuxtConfig} from '@nuxt/types';
 const baseUrl = '/';
+const themeId = 'theme-link';
 const nuxtConfig = {
   devtools: {enabled: true},
   buildModules: ['@nuxt/typescript-build'],
@@ -28,12 +29,17 @@ const nuxtConfig = {
     head: {
       link: [
         {
-          id: 'theme-link',
+          id: themeId,
           rel: 'stylesheet',
           href: baseUrl + 'themes/bootstrap4-dark-purple.css'
         }
       ],
     },
+  },
+  runtimeConfig: {
+    public: {
+      themeId,
+    }
   },
   vite: {
     css: {
@@ -48,3 +54,4 @@ const nuxtConfig = {
 };
 // @ts-ignore
 export default defineNuxtConfig(nuxtConfig);
+export {themeId};
