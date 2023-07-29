@@ -5,6 +5,7 @@
 <script setup lang="ts">
 import {onMounted} from 'vue';
 import {Platforms} from './app.config.ts';
+import {useAppConfig} from 'nuxt/app';
 const appConfig = useAppConfig();
 onMounted(() => {
   if(window.document.documentElement.offsetWidth >= 768) {

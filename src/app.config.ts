@@ -3,10 +3,15 @@ export enum Platforms {
   mobile = 'mobile'
 }
 
+export type Theme = {
+  dark: boolean,
+  light: boolean
+}
+
 declare module 'nuxt/schema' {
   type AppConfig = {
     platform: Platforms,
-    theme: 'dark' | 'light',
+    theme: Theme,
     title: string
   }
 }

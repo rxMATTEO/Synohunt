@@ -1,11 +1,10 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import type {NuxtConfig} from '@nuxt/types';
-
-const nuxtConfig: NuxtConfig = {
+const baseUrl = '/';
+const nuxtConfig = {
   devtools: {enabled: true},
   buildModules: ['@nuxt/typescript-build'],
   css: [
-    'primevue/resources/themes/bootstrap4-dark-purple/theme.css',
     'primeflex/primeflex.css',
     'primeicons/primeicons.css',
   ],
@@ -25,6 +24,16 @@ const nuxtConfig: NuxtConfig = {
   app: {
     pageTransition: { name: 'page', mode: 'out-in' },
     layoutTransition: {name: 'layout', mode: 'out-in'},
+    baseURL: baseUrl,
+    head: {
+      link: [
+        {
+          id: 'theme-link',
+          rel: 'stylesheet',
+          href: baseUrl + 'themes/bootstrap4-dark-purple.css'
+        }
+      ],
+    },
   },
   vite: {
     css: {
