@@ -7,6 +7,7 @@ import {onBeforeMount, onMounted, reactive} from 'vue';
 import {Platforms, Theme, ThemesNames} from './app.config.ts';
 import {useAppConfig, useRuntimeConfig} from 'nuxt/app';
 import {usePrimeVue} from 'primevue/config';
+import {useThemeStore} from '@/stores/themeStore';
 const appConfig = useAppConfig();
 const primeVue = usePrimeVue();
 onMounted(() => {
@@ -15,18 +16,13 @@ onMounted(() => {
   } else {
     appConfig.platform = Platforms.mobile;
   }
+  const {setCurrentTheme, getCurrentTheme} = useThemeStore();
 
   setTimeout(() => {
-    const {public: {themeId}}: string = useRuntimeConfig();
-    primeVue.changeTheme('dark','light',themeId);
-  }, 0);
-
-  // const light = ThemesNames.light;
-  // const dark = ThemesNames.dark;
-  // const [currentTheme1, newTheme] = currentTheme === 'dark' ? [dark, light] : [light, dark];
-  // console.log(currentTheme1, newTheme);
-  // setCurrentTheme(currentTheme1, newTheme);
-
+    if(getCurrentTheme() === 'light'){
+      setCurrentTheme('dark','light');
+    }
+  }, 0); //TODO idk pls fix
 });
 </script>
 

@@ -22,7 +22,7 @@ onMounted(() => {
       <div  class="t-ml-0 h-4rem">
         <Header :expanded="toggleMenu" />
       </div>
-      <div class="max-w-full surface-overlay">
+      <div class="max-w-full surface-ground">
        <slot />
       </div>
     </div>
