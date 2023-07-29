@@ -2,7 +2,7 @@
 import {useSidebarStore} from '@/stores/sidebarStore';
 
 const {isExpanded} = useSidebarStore();
-const props = defineProps({
+defineProps({
   expanded: Function,
 });
 </script>
