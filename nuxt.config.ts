@@ -31,7 +31,7 @@ const nuxtConfig = {
         {
           id: themeId,
           rel: 'stylesheet',
-          href: baseUrl + 'themes/bootstrap4-dark-purple.css'
+          href: baseUrl + 'themes/bootstrap4-dark-purple/theme.css'
         }
       ],
     },

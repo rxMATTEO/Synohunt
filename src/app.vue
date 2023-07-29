@@ -1,18 +1,32 @@
 <template>
-  <NuxtPage />
+  <NuxtPage  onload="load()"/>
 </template>
 
 <script setup lang="ts">
-import {onMounted} from 'vue';
-import {Platforms} from './app.config.ts';
-import {useAppConfig} from 'nuxt/app';
+import {onBeforeMount, onMounted, reactive} from 'vue';
+import {Platforms, Theme, ThemesNames} from './app.config.ts';
+import {useAppConfig, useRuntimeConfig} from 'nuxt/app';
+import {usePrimeVue} from 'primevue/config';
 const appConfig = useAppConfig();
+const primeVue = usePrimeVue();
 onMounted(() => {
   if(window.document.documentElement.offsetWidth >= 768) {
     appConfig.platform = Platforms.pc;
   } else {
     appConfig.platform = Platforms.mobile;
   }
+
+  setTimeout(() => {
+    const {public: {themeId}}: string = useRuntimeConfig();
+    primeVue.changeTheme('dark','light',themeId);
+  }, 0);
+
+  // const light = ThemesNames.light;
+  // const dark = ThemesNames.dark;
+  // const [currentTheme1, newTheme] = currentTheme === 'dark' ? [dark, light] : [light, dark];
+  // console.log(currentTheme1, newTheme);
+  // setCurrentTheme(currentTheme1, newTheme);
+
 });
 </script>
 
