@@ -3,13 +3,14 @@
 </template>
 
 <script setup lang="ts">
+import {onMounted} from 'vue';
+import {Platforms} from './app.config.ts';
 const appConfig = useAppConfig();
 onMounted(() => {
-  // todo use this insted of layout headernsidebar
   if(window.document.documentElement.offsetWidth >= 768) {
-    appConfig.platform = 'pc';
+    appConfig.platform = Platforms.pc;
   } else {
-    appConfig.platform = 'mobile';
+    appConfig.platform = Platforms.mobile;
   }
 });
 </script>

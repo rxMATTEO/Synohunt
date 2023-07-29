@@ -1,9 +1,14 @@
 <script setup lang="ts">
 import {useSidebarStore} from '@/stores/sidebarStore';
+import {useAppConfig} from 'nuxt/app';
+import {Platforms} from '@/app.config';
+import {onMounted} from 'vue';
 
 const { toggleMenu, setMenuVisibility, isExpanded: expanded } = useSidebarStore();
+
 onMounted(() => {
-  if(window.document.documentElement.offsetWidth >= 768) {
+  const { platform } = useAppConfig();
+  if(platform == Platforms.pc){
     setMenuVisibility(true);
   }
 });
