@@ -3,9 +3,13 @@ export enum Platforms {
   mobile = 'mobile'
 }
 
+export enum ThemesNames {
+  dark = 'dark',
+  light = 'light'
+}
+
 export type Theme = {
-  dark?: boolean,
-  light?: boolean
+  [k in ThemesNames]?: boolean
 }
 
 export enum Themes {
