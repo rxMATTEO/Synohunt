@@ -15,29 +15,33 @@ const langs = ref([{name: 'EN'}, {name: 'RU'}]);
 <template>
   <div>
   <NuxtLayout name="headernsidebar">
-<div class="lg:px-8 lg:mx-8 px-3">
+<div class="lg:px-8 lg:mx-8 px-3 t-text-white">
           <GradientBox>
            <div class="flex flex-column md:flex-row">
      <div class="t-w-full md:t-w-1/3">
        <div class="t-p-3">
          <p class="text-sm">Suggested Challenge</p>
          <div class="mt-5">
-           <Dropdown v-model="selectedDiff" :options="diffs" optionLabel="level" placeholder="Select a difficulty" class="w-full">
-             <template #value="slotProps">
-               <div v-if="slotProps.value" class="flex align-items-center">
-                 <div>{{ slotProps.value.level }}</div>
-               </div>
-               <span v-else>
+           <div class="p-float-label">
+             <Dropdown input-id="dd-diff" v-model="selectedDiff" :options="diffs" optionLabel="level" placeholder="Select difficulty" class="w-full">
+               <template #value="slotProps">
+                 <div v-if="slotProps.value" class="flex align-items-center">
+                   <div>{{ slotProps.value.level }}</div>
+                 </div>
+                 <span v-else>
             {{ slotProps.placeholder }}
         </span>
-             </template>
-             <template #option="slotProps">
-               <div class="flex align-items-center">
-                 <div>{{ slotProps.option.level }}</div>
-               </div>
-             </template>
-           </Dropdown>
-           <Dropdown v-model="selectedLanguage" :options="langs" optionLabel="name" placeholder="Select a language" class="w-full mt-3">
+               </template>
+               <template #option="slotProps">
+                 <div class="flex align-items-center">
+                   <div>{{ slotProps.option.level }}</div>
+                 </div>
+               </template>
+             </Dropdown>
+             <label for="dd-diff" class="">Select difficulty</label>
+           </div>
+           <div class="p-float-label mt-5">
+           <Dropdown v-model="selectedLanguage" input-id="dd-lang" :options="langs" optionLabel="name" placeholder="Select language" class="w-full">
              <template #value="slotProps">
                <div v-if="slotProps.value" class="flex align-items-center">
                  <div>{{ slotProps.value.name }}</div>
@@ -52,6 +56,8 @@ const langs = ref([{name: 'EN'}, {name: 'RU'}]);
                </div>
              </template>
            </Dropdown>
+           <label for="dd-lang" class="">Select Language</label>
+           </div>
          </div>
          <div class="mt-5 flex">
            <div class="t-mx-auto">

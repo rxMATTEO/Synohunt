@@ -1,7 +1,7 @@
 export enum Platforms {
   pc = 'pc',
   mobile = 'mobile'
-}
+} // todo move this shit to index.d.ts or stmfhdshcdndc
 
 export enum ThemesNames {
   dark = 'dark',
