@@ -54,13 +54,13 @@ function changeTheme(){
       <div class="t-h-[20px] flex t-items-center">
         <div class="mr-3" @mouseover="(e: MouseEvent) => onMouseOver(e, 'messagesOp')">
           <i v-badge.danger class="pi pi-envelope p-text-secondary"></i>
+          <OverlayPanel dismissable :ref="overlays.messagesOp" @mouseleave="() => onMouseLeave('messagesOp')">
+            <p>Тут типа сообщения</p>
+          </OverlayPanel>
         </div>
-        <OverlayPanel dismissable :ref="overlays.messagesOp" @mouseleave="() => onMouseLeave('messagesOp')">
-          <p>Тут типа сообщения</p>
-        </OverlayPanel>
-        <div>
-          <Avatar v-badge.success="4" icon="pi pi-user" class="mr-3" size="small" @mouseover="(e) => onMouseOver(e, 'profileOp')"></Avatar>
-          <OverlayPanel dismissable :ref="overlays.profileOp" class="!t-p-0" @mouseleave="() => onMouseLeave('profileOp')">
+          <div>
+            <Avatar v-badge.success="4" icon="pi pi-user" class="mr-3" size="small" @mouseover="(e) => onMouseOver(e, 'profileOp')"></Avatar>
+            <OverlayPanel dismissable :ref="overlays.profileOp" class="!t-p-0" @mouseleave="() => onMouseLeave('profileOp')">
             <div>
               <div class="link flex t-items-center">
                 <i class="pi pi-user p-text-secondary"></i>
@@ -98,20 +98,17 @@ function changeTheme(){
           </OverlayPanel>
         </div>
         <div class="badges">
-          <div>
             <Badge :value="2" class="mr-2" @mouseover="(e) => onMouseOver(e, 'levelOp')"></Badge>
             <OverlayPanel dismissable :ref="overlays.levelOp" class="t-w-[200px]" @mouseleave="() => onMouseLeave('levelOp')">
               <div class="inline-flex w-full">
               <ProgressBar :value="62" class="w-full" :pt="{
                 value: {
-
                   class: ['animated-gradient-rainbow'],
                   }
               }"></ProgressBar>
                 <Badge :value="3" severity="danger" class="ml-2"></Badge>
               </div>
             </OverlayPanel>
-          </div>
 <!--          <Badge :value="8" severity="success" class="mr-2"></Badge>-->
 <!--          <Badge :value="4" severity="info" class="mr-2"></Badge>-->
 <!--          <Badge :value="12" severity="warning" class="mr-2"></Badge>-->
