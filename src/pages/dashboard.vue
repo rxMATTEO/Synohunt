@@ -10,6 +10,7 @@ const diffs = ref([
 
 const selectedLanguage = ref();
 const langs = ref([{name: 'EN'}, {name: 'RU'}]);
+const tags = ref(['games', 'arrays', 'puzzles']);
 </script>
 
 <template>
@@ -68,18 +69,28 @@ const langs = ref([{name: 'EN'}, {name: 'RU'}]);
        </div>
      </div>
      <div class="t-w-full md:t-w-2/3 t-backdrop-blur-sm t-bg-black t-bg-opacity-50">
-       <div class="p-3">
+       <div class="t-p-3 h-full relative">
          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet animi, aperiam autem, consequuntur culpa debitis, ducimus earum esse excepturi ipsam labore modi odio perspiciatis provident quisquam rem repellat sint unde.
+         <div class="absolute t-bottom-3 unset flex flex-row">
+           <div v-for="(tag) in tags" class="vertical-align-middle text-center mr-5 surface-ground text-sm px-1 t-rounded-md">
+             <p class="flex">
+               <span class="vertical-align-top p-1">{{tag}}</span>
+             </p>
+           </div>
+         </div>
        </div>
      </div>
    </div>
   </GradientBox>
+  <div class="mt-3"></div>
 </div>
 </NuxtLayout>
 </div>
 </template>
 
 <style scoped lang="sass">
+.unset
+  color: initial
 .gradient
   background-image: linear-gradient(to right, $gradient-stops)
 </style>
