@@ -16,7 +16,6 @@ type Overlay = {
   [k in OverlaysNames]: Ref<any>
 }
 const overlays: Overlay = overlaysNames.reduce((obj, name) => {obj[name] = ref(); return obj;}, {} as Overlay);
-const toggle = (e) => overlays.messagesOp.value.toggle(e);
 onMounted(() => {
   getCurrentTheme();
   theme.theme = currentTheme;
