@@ -87,7 +87,15 @@ const tags = ref(['games', 'arrays', 'puzzles']);
   <div class="mt-3">
     <div class="flex t-flex-col md:flex-row align-items-stretch">
       <div class="w-full md:t-w-3/4">
-        <div class="p-3 surface-ground t-rounded-md h-full">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium animi atque autem cum eos est eum exercitationem expedita explicabo labore maxime, nobis quasi sit suscipit ut. Accusamus culpa perspiciatis quisquam.</div>
+        <div class="p-3 surface-ground t-rounded-md h-full flex">
+          <div class="t-w-1/3 md:t-w-1/5">
+            <img src="/img/placeholder.png" class="block h-full" alt="todo" />
+          </div>
+          <div class="t-w-2/3 md:t-w-4/5 t-pl-2">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium animi atque autem cum eos est eum exercitationem expedita explicabo labore maxime, nobis quasi sit suscipit ut. Accusamus culpa perspiciatis quisquam.</p>
+            <div><Button label="LEARN MORE" severity="secondary" type="null" class="p-1 text-sm t-mt-3"/></div>
+          </div>
+        </div>
       </div>
       <div class="w-full max-md:t-mt-3 md:t-w-1/4 md:t-pl-5">
         <div class="p-3 surface-ground t-rounded-md h-full">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium animi atque autem cum eos est eum exercitationem expedita explicabo labore maxime, nobis quasi sit suscipit ut. Accusamus culpa perspiciatis quisquam.</div>
