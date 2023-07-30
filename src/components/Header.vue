@@ -3,6 +3,7 @@ import {onMounted, reactive, Ref, ref} from 'vue';
 import {Theme, ThemesNames} from '@/app.config';
 import {useThemeStore} from '@/stores/themeStore';
 import {useSidebarStore} from '@/stores/sidebarStore';
+import OverlayPanel from 'primevue/overlaypanel';
 
 const {isExpanded} = useSidebarStore();
 const props = defineProps({
@@ -13,20 +14,21 @@ let theme: {theme: Theme} = reactive({theme: {dark: true}});
 const overlaysNames: OverlaysNames[] = ['messagesOp', 'profileOp', 'levelOp'];
 type OverlaysNames = 'messagesOp' | 'profileOp' | 'levelOp';
 type Overlay = {
-  [k in OverlaysNames]: Ref<any>
+  [k in OverlaysNames]: Ref<OverlayPanel>
 }
-const overlays: Overlay = overlaysNames.reduce((obj, name) => {obj[name] = ref(); return obj;}, {} as Overlay);
+const overlays: Overlay = overlaysNames.reduce((obj, name) => {obj[name] = ref()!<OverlayPanel>; return obj;}, {} as Overlay);
 onMounted(() => {
   getCurrentTheme();
   theme.theme = currentTheme;
 });
 
-function onMouseOver(e, overlayName){
+function onMouseOver(e, overlayName: OverlaysNames){
+  overlays[overlayName].value.show(e);
   overlays[overlayName].value.show(e);
 }
 
-function onMouseLeave(e, overlayName){
-  overlays[overlayName].value.hide(e);
+function onMouseLeave(e, overlayName: OverlaysNames){
+  overlays[overlayName].value.hide();
 }
 
 function changeTheme(){
