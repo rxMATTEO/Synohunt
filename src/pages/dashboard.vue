@@ -71,11 +71,13 @@ const tags = ref(['games', 'arrays', 'puzzles']);
      <div class="t-w-full md:t-w-2/3 t-backdrop-blur-sm t-bg-black t-bg-opacity-50">
        <div class="t-p-3 h-full relative">
          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet animi, aperiam autem, consequuntur culpa debitis, ducimus earum esse excepturi ipsam labore modi odio perspiciatis provident quisquam rem repellat sint unde.
-         <div class="absolute t-bottom-3 unset flex flex-row">
-           <div v-for="(tag) in tags" class="vertical-align-middle text-center mr-5 surface-ground text-sm px-1 t-rounded-md">
-             <p class="flex">
-               <span class="vertical-align-top p-1">{{tag}}</span>
-             </p>
+         <div class="t-h-8">
+           <div class="absolute t-bottom-3 unset flex flex-row">
+             <div v-for="(tag) in tags" class="vertical-align-middle text-center mr-5 surface-ground text-sm px-1 t-rounded-md">
+               <p class="flex">
+                 <span class="vertical-align-top p-1">{{tag}}</span>
+               </p>
+             </div>
            </div>
          </div>
        </div>
@@ -83,20 +85,20 @@ const tags = ref(['games', 'arrays', 'puzzles']);
    </div>
   </GradientBox>
   <div class="mt-3">
-    <div class="flex flex-row align-items-stretch">
-      <div class="t-w-3/4">
+    <div class="flex t-flex-col md:flex-row align-items-stretch">
+      <div class="w-full md:t-w-3/4">
         <div class="p-3 surface-ground t-rounded-md h-full">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium animi atque autem cum eos est eum exercitationem expedita explicabo labore maxime, nobis quasi sit suscipit ut. Accusamus culpa perspiciatis quisquam.</div>
       </div>
-      <div class="t-w-1/4 t-pl-5 h-full">
+      <div class="w-full max-md:t-mt-3 md:t-w-1/4 md:t-pl-5">
         <div class="p-3 surface-ground t-rounded-md h-full">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium animi atque autem cum eos est eum exercitationem expedita explicabo labore maxime, nobis quasi sit suscipit ut. Accusamus culpa perspiciatis quisquam.</div>
       </div>
     </div>
 
-    <div class="flex flex-row align-items-stretch mt-5">
-      <div class="t-w-3/4">
+    <div class="flex t-flex-col md:flex-row align-items-stretch mt-5">
+      <div class="w-full md:t-w-3/4">
         <div class="p-3 surface-ground t-rounded-md h-full">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium animi atque autem cum eos est eum exercitationem expedita explicabo labore maxime, nobis quasi sit suscipit ut. Accusamus culpa perspiciatis quisquam.</div>
       </div>
-      <div class="t-w-1/4 t-pl-5 h-full">
+      <div class="w-full max-md:t-mt-3 md:t-w-1/4 md:t-pl-5">
         <div class="p-3 surface-ground t-rounded-md h-full">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium animi atque autem cum eos est eum exercitationem expedita explicabo labore maxime, nobis quasi sit suscipit ut. Accusamus culpa perspiciatis quisquam.</div>
       </div>
     </div>
