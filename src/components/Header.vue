@@ -16,7 +16,11 @@ type OverlaysNames = typeof overlaysNames[number]
 type Overlay = {
   [k in OverlaysNames]: Ref<OverlayPanel>
 }
-const overlays: Overlay = overlaysNames.reduce((obj, name) => {obj[name] = ref()!<OverlayPanel>; return obj;}, {} as Overlay);
+const overlays: Overlay = overlaysNames.reduce((obj, name) => {
+  obj[name] = ref()!<OverlayPanel>;
+  return obj;
+}, {} as Overlay);
+
 onMounted(() => {
   getCurrentTheme();
   theme.theme = currentTheme;
