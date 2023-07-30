@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {onMounted, reactive, ref} from 'vue';
+import {onMounted, reactive, Ref, ref} from 'vue';
 import {Theme, ThemesNames} from '@/app.config';
 import {useThemeStore} from '@/stores/themeStore';
 import {useSidebarStore} from '@/stores/sidebarStore';
@@ -10,8 +10,12 @@ const props = defineProps({
 });
 const { getCurrentTheme, setCurrentTheme, currentTheme } = useThemeStore();
 let theme: {theme: Theme} = reactive({theme: {dark: true}});
-const overlaysNames = ['messagesOp', 'profileOp', 'levelOp'];
-const overlays = overlaysNames.reduce((obj, name) => {obj[name] = ref(); return obj;}, {});
+const overlaysNames: OverlaysNames[] = ['messagesOp', 'profileOp', 'levelOp'];
+type OverlaysNames = 'messagesOp' | 'profileOp' | 'levelOp';
+type Overlay = {
+  [k in OverlaysNames]: Ref<any>
+}
+const overlays: Overlay = overlaysNames.reduce((obj, name) => {obj[name] = ref(); return obj;}, {} as Overlay);
 const toggle = (e) => overlays.messagesOp.value.toggle(e);
 onMounted(() => {
   getCurrentTheme();
