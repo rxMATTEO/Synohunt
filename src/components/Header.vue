@@ -10,15 +10,21 @@ defineProps({
 });
 const { getCurrentTheme, setCurrentTheme, currentTheme } = useThemeStore();
 let theme: {theme: Theme} = reactive({theme: {dark: true}});
-const op = ref();
-const toggle = (e) => op.value.toggle(e);
+const overlays = {
+  op: ref(),
+};
+const toggle = (e) => overlays.op.value.toggle(e);
 onMounted(() => {
   getCurrentTheme();
   theme.theme = currentTheme;
 });
 
-function onMailMouseOver(e){
-  toggle(e);
+function onMouseOver(e, overlayName){
+  overlays[overlayName].value.show(e);
+}
+
+function onMouseLeave(e, overlayName){
+  overlays[overlayName].value.hide(e);
 }
 
 function changeTheme(){
@@ -39,10 +45,10 @@ function changeTheme(){
         </Button>
       </div>
       <div class="t-h-[20px] flex t-items-center">
-        <div class="mr-3" @mouseover="onMailMouseOver" @mouseleave="onMailMouseOver">
+        <div class="mr-3" @mouseover="(e) => onMouseOver(e, 'op')" @mouseleave="(e) => onMouseLeave(e, 'op')">
           <i v-badge.danger class="pi pi-envelope p-text-secondary"></i>
         </div>
-        <OverlayPanel ref="op">
+        <OverlayPanel :ref="overlays.op">
           <p>Тут типа сообщения</p>
         </OverlayPanel>
         <div>
