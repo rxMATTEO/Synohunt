@@ -91,8 +91,12 @@ function changeTheme(){
         </div>
         <div class="badges">
           <div>
-            <Badge :value="2" class="mr-2"></Badge>
-            <OverlayPanel :ref="overlays.levelOp"  />
+            <Badge :value="2" class="mr-2" @mouseover="(e) => onMouseOver(e, 'levelOp')" @mouseleave="(e) => onMouseOver(e, 'levelOp')"></Badge>
+            <OverlayPanel :ref="overlays.levelOp" class="t-w-[200px]">
+              <div class="">
+              <ProgressBar :value="50" ></ProgressBar>
+              </div>
+            </OverlayPanel>
           </div>
 <!--          <Badge :value="8" severity="success" class="mr-2"></Badge>-->
 <!--          <Badge :value="4" severity="info" class="mr-2"></Badge>-->

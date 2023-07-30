@@ -7,6 +7,7 @@ import Avatar from 'primevue/avatar';
 import BadgeDirective from 'primevue/badgedirective';
 import OverlayPanel from 'primevue/overlaypanel';
 import Divider from 'primevue/divider';
+import ProgressBar from 'primevue/progressbar';
 
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.use(PrimeVue, { ripple: true });
@@ -18,4 +19,5 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component('Avatar', Avatar);
   nuxtApp.vueApp.component('OverlayPanel', OverlayPanel);
   nuxtApp.vueApp.component('Divider', Divider);
+  nuxtApp.vueApp.component('ProgressBar', ProgressBar);
 });
