@@ -10,10 +10,8 @@ const props = defineProps({
 });
 const { getCurrentTheme, setCurrentTheme, currentTheme } = useThemeStore();
 let theme: {theme: Theme} = reactive({theme: {dark: true}});
-const overlays = {
-  messagesOp: ref(),
-  profileOp: ref(),
-};
+const overlaysNames = ['messagesOp', 'profileOp', 'levelOp'];
+const overlays = overlaysNames.reduce((obj, name) => {obj[name] = ref(); return obj;}, {});
 const toggle = (e) => overlays.messagesOp.value.toggle(e);
 onMounted(() => {
   getCurrentTheme();
@@ -92,7 +90,10 @@ function changeTheme(){
           </OverlayPanel>
         </div>
         <div class="badges">
-          <Badge :value="2" class="mr-2"></Badge>
+          <div>
+            <Badge :value="2" class="mr-2"></Badge>
+            <OverlayPanel :ref="overlays.levelOp"  />
+          </div>
 <!--          <Badge :value="8" severity="success" class="mr-2"></Badge>-->
 <!--          <Badge :value="4" severity="info" class="mr-2"></Badge>-->
 <!--          <Badge :value="12" severity="warning" class="mr-2"></Badge>-->
