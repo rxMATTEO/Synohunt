@@ -96,7 +96,7 @@ const tags = ref(['games', 'arrays', 'puzzles']);
 
     <div class="flex t-flex-col md:flex-row align-items-stretch mt-5">
       <div class="w-full md:t-w-3/4">
-        <div class="p-3 surface-ground t-rounded-md h-full">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium animi atque autem cum eos est eum exercitationem expedita explicabo labore maxime, nobis quasi sit suscipit ut. Accusamus culpa perspiciatis quisquam.</div>
+        <div class="p-3 surface-ground gradient-black-white t-rounded-md h-full">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium animi atque autem cum eos est eum exercitationem expedita explicabo labore maxime, nobis quasi sit suscipit ut. Accusamus culpa perspiciatis quisquam.</div>
       </div>
       <div class="w-full max-md:t-mt-3 md:t-w-1/4 md:t-pl-5">
         <div class="p-3 surface-ground t-rounded-md h-full">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium animi atque autem cum eos est eum exercitationem expedita explicabo labore maxime, nobis quasi sit suscipit ut. Accusamus culpa perspiciatis quisquam.</div>
@@ -111,6 +111,5 @@ const tags = ref(['games', 'arrays', 'puzzles']);
 <style scoped lang="sass">
 .unset
   color: initial
-.gradient
-  background-image: linear-gradient(to right, $gradient-stops)
+
 </style>

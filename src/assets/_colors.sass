@@ -2,4 +2,9 @@
 @tailwind components
 @tailwind utilities
 
-$gradient-stops: var(--blue-500), var(--indigo-600)
+$gradient: ("indigo": (var(--blue-500), var(--indigo-600)), "black-white":  (var(--surface-400) 90%, var(--surface-200) 10%))
+
+.gradient
+  @each $name, $color in $gradient
+    &-#{$name}
+      background-image: linear-gradient(to right, $color)
