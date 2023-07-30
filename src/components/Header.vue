@@ -6,7 +6,7 @@ import {useSidebarStore} from '@/stores/sidebarStore';
 import OverlayPanel from 'primevue/overlaypanel';
 
 const {isExpanded} = useSidebarStore();
-const props = defineProps({
+defineProps({
   expanded: Function,
 });
 const { getCurrentTheme, setCurrentTheme, currentTheme } = useThemeStore();
