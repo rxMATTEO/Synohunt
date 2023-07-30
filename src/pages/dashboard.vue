@@ -84,7 +84,7 @@ const tags = ref(['games', 'arrays', 'puzzles']);
      </div>
    </div>
   </GradientBox>
-  <div class="mt-3">
+  <div class="mt-5">
     <div class="flex t-flex-col md:flex-row align-items-stretch">
       <div class="w-full md:t-w-3/4">
         <div class="p-3 surface-ground t-rounded-md h-full flex">
