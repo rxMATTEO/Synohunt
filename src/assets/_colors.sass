@@ -3,8 +3,24 @@
 @tailwind utilities
 
 $gradient: ("indigo": (var(--blue-500), var(--indigo-600)), "black-white":  (var(--surface-ground), transparent))
+$animated-gradient: ("rainbow":  (-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab) )
 
 .gradient
   @each $name, $color in $gradient
     &-#{$name}
-      background-image: -webkit-linear-gradient(left, $color)
+      background-image: -webkit-linear-gradient(left, $color) !important
+
+.animated-gradient
+  @each $name, $color in $animated-gradient
+    &-#{$name}
+      background-image: linear-gradient($color) !important
+      background-size: 400% 400% !important
+      animation: gradient 10s ease infinite !important
+
+  @keyframes gradient
+    0%
+      background-position: 0% 50%
+    50%
+      background-position: 100% 50%
+    100%
+      background-position: 0% 50%

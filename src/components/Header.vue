@@ -23,7 +23,7 @@ function onMouseOver(e, overlayName){
 }
 
 function onMouseLeave(e, overlayName){
-  // overlays[overlayName].value.hide(e);
+  overlays[overlayName].value.hide(e);
 }
 
 function changeTheme(){
@@ -91,10 +91,16 @@ function changeTheme(){
         </div>
         <div class="badges">
           <div>
-            <Badge :value="2" class="mr-2" @mouseover="(e) => onMouseOver(e, 'levelOp')" @mouseleave="(e) => onMouseOver(e, 'levelOp')"></Badge>
+            <Badge :value="2" class="mr-2" @mouseover="(e) => onMouseOver(e, 'levelOp')" @mouseleave="(e) => onMouseLeave(e, 'levelOp')"></Badge>
             <OverlayPanel :ref="overlays.levelOp" class="t-w-[200px]">
-              <div class="">
-              <ProgressBar :value="50" ></ProgressBar>
+              <div class="inline-flex w-full">
+              <ProgressBar :value="62" class="w-full" :pt="{
+                value: {
+
+                  class: ['animated-gradient-rainbow'],
+                  }
+              }"></ProgressBar>
+                          <Badge :value="3" severity="danger" class="ml-2"></Badge>
               </div>
             </OverlayPanel>
           </div>
