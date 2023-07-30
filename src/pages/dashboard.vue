@@ -16,9 +16,9 @@ const tags = ref(['games', 'arrays', 'puzzles']);
 <template>
   <div>
   <NuxtLayout name="headernsidebar">
-<div class="lg:px-8 lg:mx-8 px-3 t-text-white">
+<div class="lg:px-8 lg:mx-8 px-3">
           <GradientBox>
-           <div class="flex flex-column md:flex-row">
+           <div class="flex flex-column md:flex-row t-text-white">
      <div class="t-w-full md:t-w-1/3">
        <div class="t-p-3">
          <p class="text-sm">Suggested Challenge</p>
@@ -82,7 +82,25 @@ const tags = ref(['games', 'arrays', 'puzzles']);
      </div>
    </div>
   </GradientBox>
-  <div class="mt-3"></div>
+  <div class="mt-3">
+    <div class="flex flex-row align-items-stretch">
+      <div class="t-w-3/4">
+        <div class="p-3 surface-ground t-rounded-md h-full">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium animi atque autem cum eos est eum exercitationem expedita explicabo labore maxime, nobis quasi sit suscipit ut. Accusamus culpa perspiciatis quisquam.</div>
+      </div>
+      <div class="t-w-1/4 t-pl-5 h-full">
+        <div class="p-3 surface-ground t-rounded-md h-full">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium animi atque autem cum eos est eum exercitationem expedita explicabo labore maxime, nobis quasi sit suscipit ut. Accusamus culpa perspiciatis quisquam.</div>
+      </div>
+    </div>
+
+    <div class="flex flex-row align-items-stretch mt-5">
+      <div class="t-w-3/4">
+        <div class="p-3 surface-ground t-rounded-md h-full">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium animi atque autem cum eos est eum exercitationem expedita explicabo labore maxime, nobis quasi sit suscipit ut. Accusamus culpa perspiciatis quisquam.</div>
+      </div>
+      <div class="t-w-1/4 t-pl-5 h-full">
+        <div class="p-3 surface-ground t-rounded-md h-full">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium animi atque autem cum eos est eum exercitationem expedita explicabo labore maxime, nobis quasi sit suscipit ut. Accusamus culpa perspiciatis quisquam.</div>
+      </div>
+    </div>
+  </div>
 </div>
 </NuxtLayout>
 </div>
