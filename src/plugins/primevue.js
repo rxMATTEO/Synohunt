@@ -6,6 +6,7 @@ import Badge from 'primevue/badge';
 import Avatar from 'primevue/avatar';
 import BadgeDirective from 'primevue/badgedirective';
 import OverlayPanel from 'primevue/overlaypanel';
+import Divider from 'primevue/divider';
 
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.use(PrimeVue, { ripple: true });
@@ -16,4 +17,5 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component('Badge', Badge);
   nuxtApp.vueApp.component('Avatar', Avatar);
   nuxtApp.vueApp.component('OverlayPanel', OverlayPanel);
+  nuxtApp.vueApp.component('Divider', Divider);
 });
