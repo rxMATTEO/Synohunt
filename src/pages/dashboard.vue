@@ -15,7 +15,7 @@ const tags = ref(['games', 'arrays', 'puzzles']);
 
 <template>
   <div>
-  <NuxtLayout name="headernsidebar">
+  <NuxtLayout name="header-n-sidebar">
 <div class="lg:px-8 lg:mx-8 px-3">
           <GradientBox>
            <div class="flex flex-column md:flex-row t-text-white">
