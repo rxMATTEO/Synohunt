@@ -10,6 +10,7 @@ definePageMeta({
 import {ref} from 'vue';
 import {useAuth} from '../../.nuxt/imports';
 
+const { status, data, signIn, signOut } = useAuth();
 const isRememberingMe = ref(false);
 
 async function auth(){
@@ -44,7 +45,7 @@ async function auth(){
         <a class="font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer">Forgot password?</a>
       </div>
 
-      <Button label="Sign In" icon="pi pi-user" type="null" class="w-full"></Button>
+      <Button label="Sign In" icon="pi pi-user" type="null" class="w-full" @click="auth"></Button>
     </div>
   </div>
   </div>
