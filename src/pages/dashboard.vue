@@ -182,7 +182,7 @@ const positionSeverities = {
     <DataTable :value="pointLeaders" >
       <Column header="Position">
         <template #body="data: {data: Leader}">
-          <Badge :value="data.data.position" :severity=" positionSeverities[data.data.position] " :unstyled="!positionSeverities[data.data.position]" />
+          <Badge :value="data.data.position" :severity=" positionSeverities[data.data.position] " :class="{'surface-500': !positionSeverities[data.data.position]}" />
         </template>
       </Column>
       <Column header="User">
