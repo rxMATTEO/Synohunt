@@ -23,7 +23,9 @@ onMounted(() => {
         <Header :expanded="toggleMenu" />
       </div>
       <div class="max-w-full">
-       <slot />
+        <NuxtLayout name="footer">
+          <slot />
+        </NuxtLayout>
       </div>
     </div>
   </div>
