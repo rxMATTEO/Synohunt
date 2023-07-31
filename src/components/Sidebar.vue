@@ -14,6 +14,30 @@ const props = defineProps({
           <img src="/img/download.webp" class="block mx-auto w-full" alt="logo" draggable="false"  />
         </NuxtLink>
       </div>
+      <div class="mt-5 text-secondary" v-if="isExpanded.value">
+        <p class="px-1">Training</p>
+        <div class="mt-1">
+          <NuxtLink to="/" class="hover:surface-200 block">
+            <div class="flex px-1">
+              <div class="t-w-1/6">a</div>
+              <div class="t-w-5/6">
+                <p class="t-font-bold">Practice</p>
+                <p class="text-sm">Complete tasks and shit</p>
+              </div>
+            </div>
+          </NuxtLink>
+
+          <NuxtLink to="/">
+            <div class="flex">
+              <div class="t-w-1/6">a</div>
+              <div class="t-w-5/6">
+                <p class="t-font-bold">Practice</p>
+                <p class="text-sm">Complete tasks and shit</p>
+              </div>
+            </div>
+          </NuxtLink>
+        </div>
+      </div>
     </div>
   </div>
 </template>
