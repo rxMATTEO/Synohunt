@@ -11,15 +11,10 @@ import {ref} from 'vue';
 import {useAuth} from '../../.nuxt/imports';
 
 const isRememberingMe = ref(false);
-<<<<<<< HEAD
-=======
+
 async function auth(){
-  console.log('sss');
   const aut = await signIn('GitHub', {callbackUrl: 'http://localhost:3000/dashboard'});
-  console.log();
-  console.log(status);
 }
->>>>>>> afd30b6 (Add github auth)
 </script>
 
 <template>
