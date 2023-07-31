@@ -1,5 +1,25 @@
 <script setup lang="ts">
+import {definePageMeta} from '../../.nuxt/imports';
 
+definePageMeta({
+  auth: {
+    unauthenticatedOnly: true,
+    navigateAuthenticatedTo: '/dashboard',
+  }
+});
+import {ref} from 'vue';
+import {useAuth} from '../../.nuxt/imports';
+
+const isRememberingMe = ref(false);
+<<<<<<< HEAD
+=======
+async function auth(){
+  console.log('sss');
+  const aut = await signIn('GitHub', {callbackUrl: 'http://localhost:3000/dashboard'});
+  console.log();
+  console.log(status);
+}
+>>>>>>> afd30b6 (Add github auth)
 </script>
 
 <template>
@@ -11,7 +31,7 @@
       </div>
       <div class="text-900 text-3xl font-medium mb-3">Welcome Back</div>
       <span class="text-600 font-medium line-height-3">Don't have an account?</span>
-      <a class="font-medium no-underline ml-2 text-blue-500 cursor-pointer">Create today!</a>
+      <NuxtLink to="register" class="font-medium no-underline ml-2 text-blue-500 cursor-pointer">Create today!</NuxtLink>
     </div>
 
     <div>
@@ -23,13 +43,13 @@
 
       <div class="flex align-items-center justify-content-between mb-6">
         <div class="flex align-items-center">
-          <Checkbox id="rememberme1" :binary="true" v-model="checked" class="mr-2"></Checkbox>
+          <Checkbox id="rememberme1" :binary="true" v-model="isRememberingMe" class="mr-2"></Checkbox>
           <label for="rememberme1">Remember me</label>
         </div>
         <a class="font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer">Forgot password?</a>
       </div>
 
-      <Button label="Sign In" icon="pi pi-user" :type="null" class="w-full"></Button>
+      <Button label="Sign In" icon="pi pi-user" type="null" class="w-full"></Button>
     </div>
   </div>
   </div>
