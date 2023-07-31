@@ -180,7 +180,7 @@ const positionSeverities = {
       You are automatically given an allegiance with anyone who is in the same clan as you. You can also become allies with other warriors by following each other or inviting new warriors to join.
     </p>
     <DataTable :value="pointLeaders" >
-      <Column header="Position">
+      <Column style="width: 3%" header="Position">
         <template #body="data: {data: Leader}">
           <Badge :value="data.data.position" :severity=" positionSeverities[data.data.position] " :class="{'surface-500': !positionSeverities[data.data.position]}" />
         </template>
@@ -188,7 +188,7 @@ const positionSeverities = {
       <Column header="User">
         <template #body="data: { data: Leader}">
           <Badge class="mr-3" :value="data.data.lvl" severity="success" />
-          <span class="mr-3">{{data.data.user.name}}</span>
+          <span class="mr-3 max-md:t-block">{{data.data.user.name}}</span>
           <span>{{data.data.user.imgPath}}</span>
         </template>
       </Column>

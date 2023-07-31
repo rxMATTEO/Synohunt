@@ -10,6 +10,8 @@ import Divider from 'primevue/divider';
 import ProgressBar from 'primevue/progressbar';
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
+import Checkbox from 'primevue/checkbox';
+import InputText from 'primevue/inputtext';
 
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.use(PrimeVue, { ripple: true });
@@ -24,4 +26,6 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component('ProgressBar', ProgressBar);
   nuxtApp.vueApp.component('DataTable', DataTable);
   nuxtApp.vueApp.component('Column', Column);
+  nuxtApp.vueApp.component('Checkbox', Checkbox);
+  nuxtApp.vueApp.component('InputText', InputText);
 });

@@ -120,7 +120,7 @@ function changeTheme(){
 <!--          <Badge :value="12" severity="warning" class="mr-2"></Badge>-->
 <!--          <Badge :value="3" severity="danger"></Badge>-->
         </div>
-        <Button unstyled @click="changeTheme" class="ml-5 t-h-[20px]">
+        <Button unstyled @click="changeTheme" class="t-h-1/ ml-5">
           <i v-if="theme.theme.dark" class="pi pi-moon text-xl cursor-pointer t-fill-black"></i>
           <i v-else-if="theme.theme.light" class="pi pi-moon text-xl cursor-pointer t-fill-black"></i>
         </Button>
