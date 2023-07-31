@@ -10,6 +10,7 @@ defineProps({
   expanded: Function,
 });
 const { getCurrentTheme, setCurrentTheme, currentTheme } = useThemeStore();
+const selected = ref({} as OverlayPanel);
 let theme: {theme: Theme} = reactive({theme: {dark: true}});
 const overlaysNames = ['messagesOp', 'profileOp', 'levelOp'] as const;
 type OverlaysNames = typeof overlaysNames[number]
@@ -27,7 +28,10 @@ onMounted(() => {
 });
 
 function onMouseOver(e: MouseEvent, overlayName: OverlaysNames){
-  overlays[overlayName].value.show(e);
+  selected.value.hide?.();
+  const overlay = overlays[overlayName].value;
+  overlay.show(e);
+  selected.value = overlay;
 }
 
 function onMouseLeave(overlayName: OverlaysNames){
@@ -58,9 +62,9 @@ function changeTheme(){
             <p>Тут типа сообщения</p>
           </OverlayPanel>
         </div>
-          <div>
-            <Avatar v-badge.success="4" icon="pi pi-user" class="mr-3" size="small" @mouseover="(e) => onMouseOver(e, 'profileOp')"></Avatar>
-            <OverlayPanel dismissable :ref="overlays.profileOp" class="!t-p-0" @mouseleave="() => onMouseLeave('profileOp')">
+        <div>
+          <Avatar v-badge.success="4" icon="pi pi-user" class="mr-3" size="small" @mouseover="(e) => onMouseOver(e, 'profileOp')"></Avatar>
+          <OverlayPanel dismissable :ref="overlays.profileOp" class="!t-p-0" @mouseleave="() => onMouseLeave('profileOp')">
             <div>
               <div class="link flex t-items-center">
                 <i class="pi pi-user p-text-secondary"></i>
@@ -98,27 +102,27 @@ function changeTheme(){
           </OverlayPanel>
         </div>
         <div class="badges">
-            <Badge :value="2" class="mr-2" @mouseover="(e) => onMouseOver(e, 'levelOp')"></Badge>
-            <OverlayPanel dismissable :ref="overlays.levelOp" class="t-w-[300px]" @mouseleave="() => onMouseLeave('levelOp')">
-              <div class="flex t-flex-col w-full">
-                <div>
-                  <p>У вас <span class="text-primary">n</span> очков</p>
-                  <p class="mt-3">До следующего уровня осталось:</p>
-                </div>
-                <div class="flex flex-row mt-1">
-                  <ProgressBar :value="62" class="w-full" :pt="{
+          <Badge :value="2" class="mr-2" @mouseover="(e) => onMouseOver(e, 'levelOp')"></Badge>
+          <OverlayPanel dismissable :ref="overlays.levelOp" class="t-w-[300px]" @mouseleave="() => onMouseLeave('levelOp')">
+            <div class="flex t-flex-col w-full">
+              <div>
+                <p>У вас <span class="text-primary">n</span> очков</p>
+                <p class="mt-3">До следующего уровня осталось:</p>
+              </div>
+              <div class="flex flex-row mt-1">
+                <ProgressBar :value="62" class="w-full" :pt="{
                 value: {
                   class: ['animated-gradient-rainbow'],
                   }
               }"></ProgressBar>
-                  <Badge :value="3" severity="danger" class="ml-2"></Badge>
-                </div>
+                <Badge :value="3" severity="danger" class="ml-2"></Badge>
               </div>
-            </OverlayPanel>
-<!--          <Badge :value="8" severity="success" class="mr-2"></Badge>-->
-<!--          <Badge :value="4" severity="info" class="mr-2"></Badge>-->
-<!--          <Badge :value="12" severity="warning" class="mr-2"></Badge>-->
-<!--          <Badge :value="3" severity="danger"></Badge>-->
+            </div>
+          </OverlayPanel>
+          <!--          <Badge :value="8" severity="success" class="mr-2"></Badge>-->
+          <!--          <Badge :value="4" severity="info" class="mr-2"></Badge>-->
+          <!--          <Badge :value="12" severity="warning" class="mr-2"></Badge>-->
+          <!--          <Badge :value="3" severity="danger"></Badge>-->
         </div>
         <Button unstyled @click="changeTheme" class="ml-5">
           <i v-if="theme.theme.dark" class="pi pi-moon text-xl cursor-pointer t-fill-black"></i>
