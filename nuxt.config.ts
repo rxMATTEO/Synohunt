@@ -1,5 +1,4 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-import type {NuxtConfig} from '@nuxt/types';
 const baseUrl = '/';
 const themeId = 'theme-link';
 const nuxtConfig = {
@@ -14,8 +13,15 @@ const nuxtConfig = {
   },
   modules: [
     '@nuxtjs/tailwindcss',
-    '@pinia/nuxt'
+    '@pinia/nuxt',
+    '@sidebase/nuxt-auth',
   ],
+  auth: {
+    isEnabled: true,
+    origin: 'http://localhost:3000',
+    basePath: '/api/auth',
+
+  },
   pinia: {
     autoImports: [ 'defineStore',
       ['defineStore', 'definePiniaStore']

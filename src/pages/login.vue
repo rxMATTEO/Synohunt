@@ -1,7 +1,13 @@
 <script setup lang="ts">
 import {ref} from 'vue';
 
+const { status, data, signIn, signOut } = useAuth();
 const isRememberingMe = ref(false);
+async function auth(){
+  const aut = await signIn(undefined, {callbackUrl: 'http://localhost:3000/dashboard'}, undefined);
+  console.log();
+  console.log(status);
+}
 </script>
 
 <template>
@@ -31,7 +37,7 @@ const isRememberingMe = ref(false);
         <a class="font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer">Forgot password?</a>
       </div>
 
-      <Button label="Sign In" icon="pi pi-user" type="null" class="w-full"></Button>
+      <Button label="Sign In" icon="pi pi-user" type="null" class="w-full" @click="auth"></Button>
     </div>
   </div>
   </div>
