@@ -99,14 +99,20 @@ function changeTheme(){
         </div>
         <div class="badges">
             <Badge :value="2" class="mr-2" @mouseover="(e) => onMouseOver(e, 'levelOp')"></Badge>
-            <OverlayPanel dismissable :ref="overlays.levelOp" class="t-w-[200px]" @mouseleave="() => onMouseLeave('levelOp')">
-              <div class="inline-flex w-full">
-              <ProgressBar :value="62" class="w-full" :pt="{
+            <OverlayPanel dismissable :ref="overlays.levelOp" class="t-w-[300px]" @mouseleave="() => onMouseLeave('levelOp')">
+              <div class="flex t-flex-col w-full">
+                <div>
+                  <p>У вас <span class="text-primary">n</span> очков</p>
+                  <p class="mt-3">До следующего уровня осталось:</p>
+                </div>
+                <div class="flex flex-row mt-1">
+                  <ProgressBar :value="62" class="w-full" :pt="{
                 value: {
                   class: ['animated-gradient-rainbow'],
                   }
               }"></ProgressBar>
-                <Badge :value="3" severity="danger" class="ml-2"></Badge>
+                  <Badge :value="3" severity="danger" class="ml-2"></Badge>
+                </div>
               </div>
             </OverlayPanel>
 <!--          <Badge :value="8" severity="success" class="mr-2"></Badge>-->

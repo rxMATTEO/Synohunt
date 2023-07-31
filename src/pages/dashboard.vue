@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {ref} from 'vue';
+import {Ref, ref} from 'vue';
 
 const selectedDiff = ref();
 const diffs = ref([
@@ -11,6 +11,69 @@ const diffs = ref([
 const selectedLanguage = ref();
 const langs = ref([{name: 'EN'}, {name: 'RU'}]);
 const tags = ref(['games', 'arrays', 'puzzles']);
+
+
+type User = {
+  name: string,
+  imgPath: string
+}
+type Leader = {
+  position: number,
+  user: User,
+  lvl: number,
+  points: number,
+  tasks: number[],
+}
+const pointLeaders: Ref<readonly Leader[]> = ref(
+  [
+    {
+      lvl: 228,
+      user: {
+        name: 'Ivan',
+        imgPath: '/img/placeholder',
+      },
+      points: 228,
+      position: 1,
+      tasks: [1,2,3],
+    },
+    {
+      lvl: 228,
+      user: {
+        name: 'Ivan',
+        imgPath: '/img/placeholder',
+      },
+      points: 228,
+      position: 2,
+      tasks: [1,2,3],
+    },
+    {
+      lvl: 228,
+      user: {
+        name: 'Ivan',
+        imgPath: '/img/placeholder',
+      },
+      points: 228,
+      position: 3,
+      tasks: [1,2,3],
+    },
+    {
+      lvl: 228,
+      user: {
+        name: 'Ivan',
+        imgPath: '/img/placeholder',
+      },
+      points: 228,
+      position: 4,
+      tasks: [1,2,3],
+    },
+  ]
+);
+
+const positionSeverities = {
+  1: 'success',
+  2: 'info',
+  3: 'warning',
+};
 </script>
 
 <template>
@@ -110,6 +173,32 @@ const tags = ref(['games', 'arrays', 'puzzles']);
         <div class="p-3 surface-ground t-rounded-md h-full">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium animi atque autem cum eos est eum exercitationem expedita explicabo labore maxime, nobis quasi sit suscipit ut. Accusamus culpa perspiciatis quisquam.</div>
       </div>
     </div>
+  </div>
+  <div class="mt-5">
+    <p class="text-3xl">Leaderboard</p>
+    <p class="my-3">
+      You are automatically given an allegiance with anyone who is in the same clan as you. You can also become allies with other warriors by following each other or inviting new warriors to join.
+    </p>
+    <DataTable :value="pointLeaders" >
+      <Column header="Position">
+        <template #body="data: {data: Leader}">
+          <Badge :value="data.data.position" :severity=" positionSeverities[data.data.position] " :unstyled="!positionSeverities[data.data.position]" />
+        </template>
+      </Column>
+      <Column header="User">
+        <template #body="data: { data: Leader}">
+          <Badge class="mr-3" :value="data.data.lvl" severity="success" />
+          <span class="mr-3">{{data.data.user.name}}</span>
+          <span>{{data.data.user.imgPath}}</span>
+        </template>
+      </Column>
+      <Column header="Completed tasks" field="tasks.length"/>
+      <Column header="Points">
+        <template #body="data: { data: Leader}">
+          <span>{{data.data.points}}</span>
+        </template>
+      </Column>
+    </DataTable>
   </div>
 </div>
 </NuxtLayout>
