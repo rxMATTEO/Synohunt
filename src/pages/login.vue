@@ -13,7 +13,7 @@ const { status, data, signIn, signOut } = useAuth();
 const isRememberingMe = ref(false);
 
 async function auth(){
-  await signIn('GitHub', {callbackUrl: 'http://localhost:3000/dashboard'});
+  await signIn('github', {callbackUrl: 'http://localhost:3000/dashboard'});
 }
 </script>
 
@@ -21,7 +21,7 @@ async function auth(){
   <div class="t-h-screen flex justify-content-center align-items-center">
   <div class="surface-card p-4 shadow-2 border-round w-full lg:w-6">
     <div class="text-center mb-5">
-      <div class="t-h-52 relative top-0 flex justify-content-center">
+      <div class="t-h-32 relative top-0 flex justify-content-center">
         <img src="/img/biglogo.png" alt="Image" class="text-center mb-3 h-full overflow-hidden absolute top-0">
       </div>
       <div class="text-900 text-3xl font-medium mb-3">Welcome Back</div>
