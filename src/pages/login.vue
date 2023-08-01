@@ -13,7 +13,7 @@ const { status, data, signIn, signOut } = useAuth();
 const isRememberingMe = ref(false);
 
 async function auth(){
-  const aut = await signIn('GitHub', {callbackUrl: 'http://localhost:3000/dashboard'});
+  await signIn('GitHub', {callbackUrl: 'http://localhost:3000/dashboard'});
 }
 </script>
 

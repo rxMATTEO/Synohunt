@@ -20,7 +20,7 @@ const nuxtConfig = {
     isEnabled: true,
     origin: 'http://localhost:3000',
     basePath: '/api/auth',
-
+    globalAppMiddleware: true,
   },
   pinia: {
     autoImports: [ 'defineStore',
