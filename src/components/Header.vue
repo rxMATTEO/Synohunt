@@ -4,6 +4,7 @@ import {Theme, ThemesNames} from '@/app.config';
 import {useThemeStore} from '@/stores/themeStore';
 import {useSidebarStore} from '@/stores/sidebarStore';
 import OverlayPanel from 'primevue/overlaypanel';
+import {useAuth} from '../../.nuxt/imports';
 
 const {isExpanded} = useSidebarStore();
 defineProps({
@@ -12,6 +13,7 @@ defineProps({
 const { getCurrentTheme, setCurrentTheme, currentTheme } = useThemeStore();
 const selected = ref({} as OverlayPanel);
 let theme: {theme: Theme} = reactive({theme: {dark: true}});
+const { status, data, signIn, signOut } = useAuth();
 const overlaysNames = ['messagesOp', 'profileOp', 'levelOp'] as const;
 type OverlaysNames = typeof overlaysNames[number]
 type Overlay = {
@@ -36,6 +38,9 @@ function onMouseOver(e: MouseEvent, overlayName: OverlaysNames){
 
 function onMouseLeave(overlayName: OverlaysNames){
   overlays[overlayName].value.hide();
+}
+async function signOutMe(){
+  await signOut();
 }
 
 function changeTheme(){
@@ -96,7 +101,7 @@ function changeTheme(){
               <Divider />
               <div class="link flex t-items-center">
                 <i class="pi p-text-secondary pi-power-off"></i>
-                <a href="#" class="t-pl-1">Sign out</a>
+                <Button unstyled @click="signOutMe()" class="t-pl-1">Sign out</button>
               </div>
             </div>
           </OverlayPanel>

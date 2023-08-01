@@ -12,7 +12,7 @@ const selectedLanguage = ref();
 const langs = ref([{name: 'EN'}, {name: 'RU'}]);
 const tags = ref(['games', 'arrays', 'puzzles']);
 
-
+// todo move this to types :)
 type User = {
   name: string,
   imgPath: string
