@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {definePageMeta, useAuth} from '../../.nuxt/imports';
 import {ref} from 'vue';
+import {OAuthProviderType} from 'next-auth/providers/oauth-types';
 
 definePageMeta({
   auth: {
@@ -12,14 +13,14 @@ definePageMeta({
 const { status, data, signIn, signOut } = useAuth();
 const isRememberingMe = ref(false);
 
-async function auth(){
-  await signIn('github', {callbackUrl: 'http://localhost:3000/dashboard'});
+async function authViaProvider(provider: OAuthProviderType){
+  await signIn(provider, {callbackUrl: 'http://localhost:3000/dashboard'});
 }
 </script>
 
 <template>
   <div class="t-h-screen flex justify-content-center align-items-center">
-  <div class="surface-card p-4 shadow-2 border-round w-full lg:w-6">
+  <div class="surface-card p-4 shadow-2 border-round lg:w-4">
     <div class="text-center mb-5">
       <div class="t-h-32 relative top-0 flex justify-content-center">
         <img src="/img/biglogo.png" alt="Image" class="text-center mb-3 h-full overflow-hidden absolute top-0">
@@ -28,6 +29,14 @@ async function auth(){
       <span class="text-600 font-medium line-height-3">Don't have an account?</span>
       <NuxtLink to="register" class="font-medium no-underline ml-2 text-blue-500 cursor-pointer">Create today!</NuxtLink>
     </div>
+
+    <div class="auth-method">
+      <Button label="Login via Github" icon="pi pi-github" type="null" @click="authViaProvider('github')"/>
+    </div>
+
+    <Divider align="center">
+      <b>OR</b>
+    </Divider>
 
     <div>
       <label for="email1" class="block text-900 font-medium mb-2">Email</label>
@@ -44,7 +53,7 @@ async function auth(){
         <a class="font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer">Forgot password?</a>
       </div>
 
-      <Button label="Sign In" icon="pi pi-user" type="null" class="w-full" @click="auth"></Button>
+      <Button label="Sign In" icon="pi pi-user" type="null" class="w-full"></Button>
     </div>
   </div>
   </div>
