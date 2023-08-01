@@ -1,4 +1,8 @@
 <script setup lang="ts">
+
+definePageMeta({
+  middleware: 'auth'
+});
 import {Ref, ref} from 'vue';
 
 const selectedDiff = ref();

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {definePageMeta, useAuth} from '../../.nuxt/imports';
+const {signIn, status, data} = useAuth();
 import {ref} from 'vue';
 import {OAuthProviderType} from 'next-auth/providers/oauth-types';
 
@@ -7,14 +7,23 @@ definePageMeta({
   auth: {
     unauthenticatedOnly: true,
     navigateAuthenticatedTo: '/dashboard',
-  }
+  },
 });
 
-const { status, data, signIn, signOut } = useAuth();
 const isRememberingMe = ref(false);
 
+const email = ref('');
+const password = ref('');
+
+function sign(){
+  console.log(status, data);
+  // return;
+  console.log(email, password);
+  signIn('credentials', { email: email.value, password: password.value });
+}
+
 async function authViaProvider(provider: OAuthProviderType){
-  await signIn(provider, {callbackUrl: 'http://localhost:3000/dashboard'});
+  //await signIn(provider, {callbackUrl: 'http://localhost:3000/dashboard'});
 }
 </script>
 
@@ -38,23 +47,25 @@ async function authViaProvider(provider: OAuthProviderType){
       <b>OR</b>
     </Divider>
 
+      <form @submit.prevent>
     <div>
-      <label for="email1" class="block text-900 font-medium mb-2">Email</label>
-      <InputText id="email1" type="text" class="w-full mb-3" />
+        <label for="email1" class="block text-900 font-medium mb-2">Email</label>
+        <InputText required v-model="email" id="email1" type="text" class="w-full mb-3" />
 
-      <label for="password1" class="block text-900 font-medium mb-2">Password</label>
-      <InputText id="password1" type="password" class="w-full mb-3" />
+        <label for="password1" class="block text-900 font-medium mb-2">Password</label>
+        <InputText required v-model="password" id="password1" type="password" class="w-full mb-3" />
 
-      <div class="flex align-items-center justify-content-between mb-6">
-        <div class="flex align-items-center">
-          <Checkbox id="rememberme1" :binary="true" v-model="isRememberingMe" class="mr-2"></Checkbox>
-          <label for="rememberme1">Remember me</label>
+        <div class="flex align-items-center justify-content-between mb-6">
+          <div class="flex align-items-center">
+            <Checkbox id="rememberme1" :binary="true" v-model="isRememberingMe" class="mr-2"></Checkbox>
+            <label for="rememberme1">Remember me</label>
+          </div>
+          <a class="font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer">Forgot password?</a>
         </div>
-        <a class="font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer">Forgot password?</a>
-      </div>
 
-      <Button label="Sign In" icon="pi pi-user" type="null" class="w-full"></Button>
+        <Button label="Sign In" icon="pi pi-user" type="null" class="w-full" @click="sign"></Button>
     </div>
+      </form>
   </div>
   </div>
 </template>
