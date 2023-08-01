@@ -1,4 +1,14 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import {definePageMeta} from '../../.nuxt/imports';
+
+definePageMeta({
+  auth: {
+    unauthenticatedOnly: true,
+    navigateAuthenticatedTo: '/dashboard',
+  }
+});
+
+</script>
 
 <template>
   <div class="t-h-screen flex justify-content-center align-items-center">

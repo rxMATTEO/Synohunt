@@ -1,12 +1,19 @@
 <script setup lang="ts">
+import {definePageMeta, useAuth} from '../../.nuxt/imports';
 import {ref} from 'vue';
+
+definePageMeta({
+  auth: {
+    unauthenticatedOnly: true,
+    navigateAuthenticatedTo: '/dashboard',
+  }
+});
 
 const { status, data, signIn, signOut } = useAuth();
 const isRememberingMe = ref(false);
+
 async function auth(){
-  const aut = await signIn(undefined, {callbackUrl: 'http://localhost:3000/dashboard'}, undefined);
-  console.log();
-  console.log(status);
+  const aut = await signIn('GitHub', {callbackUrl: 'http://localhost:3000/dashboard'});
 }
 </script>
 
