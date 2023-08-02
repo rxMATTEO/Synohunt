@@ -6,7 +6,6 @@ definePageMeta({
 import {Ref, ref} from 'vue';
 
 const session = await useFetch('/api/session');
-console.log(session);
 
 const selectedDiff = ref();
 const diffs = ref([

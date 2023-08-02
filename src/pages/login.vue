@@ -15,15 +15,13 @@ const isRememberingMe = ref(false);
 const email = ref('');
 const password = ref('');
 
-function sign(){
-  console.log(status, data);
-  // return;
-  console.log(email, password);
-  signIn('credentials', { email: email.value, password: password.value, callbackUrl: '/dashboard' });
+type Credentials = {
+  email: string,
+  password: string,
 }
-
-async function authViaProvider(provider: OAuthProviderType){
-  await signIn(provider, {callbackUrl: 'http://localhost:3000/dashboard'});
+async function authViaProvider(provider: OAuthProviderType, extraOptions?: Credentials){
+  console.log(extraOptions);
+  await signIn(provider, { callbackUrl: 'http://localhost:3000/dashboard', ...extraOptions });
 }
 </script>
 
@@ -47,7 +45,7 @@ async function authViaProvider(provider: OAuthProviderType){
       <b>OR</b>
     </Divider>
 
-      <form @submit.prevent>
+      <form @submit.prevent="authViaProvider('credentials', { email, password })">
     <div>
         <label for="email1" class="block text-900 font-medium mb-2">Email</label>
         <InputText required v-model="email" id="email1" type="text" class="w-full mb-3" />
@@ -63,7 +61,7 @@ async function authViaProvider(provider: OAuthProviderType){
           <a class="font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer">Forgot password?</a>
         </div>
 
-        <Button label="Sign In" icon="pi pi-user" type="null" class="w-full" @click="sign"></Button>
+        <Button label="Sign In" icon="pi pi-user" type="null" class="w-full"></Button>
     </div>
       </form>
   </div>
