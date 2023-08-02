@@ -23,7 +23,7 @@ function sign(){
 }
 
 async function authViaProvider(provider: OAuthProviderType){
-  //await signIn(provider, {callbackUrl: 'http://localhost:3000/dashboard'});
+  await signIn(provider, {callbackUrl: 'http://localhost:3000/dashboard'});
 }
 </script>
 
