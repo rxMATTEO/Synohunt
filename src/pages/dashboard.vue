@@ -6,6 +6,9 @@ definePageMeta({
 import {Ref, ref} from 'vue';
 
 const session = await useFetch('/api/session');
+const headers = useRequestHeaders(['cookie']) as HeadersInit;
+const {data: token} = await useFetch('/api/token', {headers});
+console.log(token, session);
 
 const selectedDiff = ref();
 const diffs = ref([
