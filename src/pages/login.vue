@@ -19,7 +19,7 @@ function sign(){
   console.log(status, data);
   // return;
   console.log(email, password);
-  signIn('credentials', { email: email.value, password: password.value });
+  signIn('credentials', { email: email.value, password: password.value, callbackUrl: '/dashboard' });
 }
 
 async function authViaProvider(provider: OAuthProviderType){

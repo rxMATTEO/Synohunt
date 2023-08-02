@@ -20,8 +20,7 @@ export default NuxtAuthHandler({
           email : 'test@mail.com',
           password: 'password',
         };
-        if(credentials?.email === user.email && credentials?.password){
-          console.log('w');
+        if(credentials?.email === user.email && credentials?.password === user.password){
           return user;
         }
       }
