@@ -18,7 +18,7 @@ const nuxtConfig = {
   ],
   auth: {
     isEnabled: true,
-    origin: 'http://localhost:3000',
+    origin: process.env.ORIGIN,
     basePath: '/api/auth',
     globalAppMiddleware: true,
   },
