@@ -11,7 +11,7 @@ export default defineEventHandler(async (event) => {
     where: {
       AND: [
         {
-          Language: { langShort: lang },
+          Language: { langFull: lang },
           Difficulity: { name: diff }
         }
       ],

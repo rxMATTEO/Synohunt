@@ -1,6 +1,6 @@
 export default defineEventHandler(async (event) => {
   const langs = await event.context.prisma.language.findMany({select: {
-    langShort: true
+    langFull: true
   } });
-  return { langs };
+  return langs;
 });

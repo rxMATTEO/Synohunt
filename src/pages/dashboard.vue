@@ -5,20 +5,12 @@ definePageMeta({
 });
 import {Ref, ref} from 'vue';
 
-const {data: session} = useAuth();
-// const session = await useFetch('/api/session');
-// const headers = useRequestHeaders(['cookie']) as HeadersInit;
-// const {data: token} = await useFetch('/api/token', {headers});
-
 const selectedDiff = ref();
-const diffs = ref([
-  {level: 'Easy'},
-  {level: 'Medium'},
-  {level: 'Hard'},
-]);
+const diffs = (await useLazyFetch('/api/diffs').data.value);
+console.log(diffs);
 
 const selectedLanguage = ref();
-const langs = ref([{name: 'EN'}, {name: 'RU'}]);
+const langs = (await useLazyFetch('/api/langs').data.value);
 const tags = ref(['games', 'arrays', 'puzzles']);
 
 // todo move this to types :)
@@ -96,10 +88,10 @@ const positionSeverities = {
          <p class="text-sm">Suggested Challenge</p>
          <div class="mt-5">
            <div class="p-float-label">
-             <Dropdown input-id="dd-diff" v-model="selectedDiff" :options="diffs" optionLabel="level" placeholder="Select difficulty" class="w-full">
+             <Dropdown input-id="dd-diff" v-model="selectedDiff" :options="diffs" optionLabel="name" placeholder="Select difficulty" class="w-full">
                <template #value="slotProps">
                  <div v-if="slotProps.value" class="flex align-items-center">
-                   <div>{{ slotProps.value.level }}</div>
+                   <div>{{ slotProps.value.name }}</div>
                  </div>
                  <span v-else>
             {{ slotProps.placeholder }}
@@ -107,7 +99,7 @@ const positionSeverities = {
                </template>
                <template #option="slotProps">
                  <div class="flex align-items-center">
-                   <div>{{ slotProps.option.level }}</div>
+                   <div>{{ slotProps.option.name }}</div>
                  </div>
                </template>
              </Dropdown>
@@ -117,7 +109,7 @@ const positionSeverities = {
            <Dropdown v-model="selectedLanguage" input-id="dd-lang" :options="langs" optionLabel="name" placeholder="Select language" class="w-full">
              <template #value="slotProps">
                <div v-if="slotProps.value" class="flex align-items-center">
-                 <div>{{ slotProps.value.name }}</div>
+                 <div>{{ slotProps.value.langFull }}</div>
                </div>
                <span v-else>
             {{ slotProps.placeholder }}
@@ -125,7 +117,7 @@ const positionSeverities = {
              </template>
              <template #option="slotProps">
                <div class="flex align-items-center">
-                 <div>{{ slotProps.option.name }}</div>
+                 <div>{{ slotProps.option.langFull }}</div>
                </div>
              </template>
            </Dropdown>
