@@ -5,7 +5,8 @@ export default defineEventHandler(async (event) => {
   const tasks = await event.context.prisma.task.findMany({
     include: {
       Language: true,
-      Difficulity: true
+      Difficulity: true,
+      Tag: true,
     },
     where: {
       AND: [
