@@ -95,6 +95,9 @@ const positionSeverities = {
   2: 'info',
   3: 'warning',
 };
+
+console.log(import.meta.env);
+
 </script>
 
 <template>

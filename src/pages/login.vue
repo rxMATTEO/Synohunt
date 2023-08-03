@@ -20,7 +20,7 @@ type Credentials = {
   password: string,
 }
 async function authViaProvider(provider: OAuthProviderType, extraOptions?: Credentials){
-  await signIn(provider, { callbackUrl: 'http://localhost:3000/dashboard', ...extraOptions });
+  await signIn(provider, { callbackUrl: import.meta.env.VITE_AUTH_ORIGIN, ...extraOptions });
 }
 </script>
 
