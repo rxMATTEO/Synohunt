@@ -1,0 +1,139 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String  @unique
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  subscribed        Boolean @default(false)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Notification {
+  id     Int    @id @default(autoincrement())
+  typeId Int
+  userId String
+
+  User User             @relation(fields: [userId], references: [id])
+  Type NotificationType @relation(fields: [id], references: [id])
+}
+
+model NotificationType {
+  id           Int            @id @default(autoincrement())
+  value        String
+  Notification Notification[]
+}
+
+model Level {
+  id       Int    @id @default(autoincrement())
+  userId   Int
+  value    String
+  groupdId Int
+
+  Group Group  @relation(fields: [groupdId], references: [id])
+  User  User[]
+}
+
+model Group {
+  id    Int     @id @default(autoincrement())
+  min   Int
+  max   Int
+  name  String
+  Level Level[]
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  levelId       Int       @default(1)
+  Level         Level     @relation(fields: [levelId], references: [id])
+
+  account      Account[]
+  sessions     Session[]
+  Notification Notification[]
+}
+
+model Task {
+  id          Int         @id @default(autoincrement())
+  diffId      Int
+  langId      Int
+  description String
+  Word        Word[]
+  Difficulity Difficulity @relation(fields: [diffId], references: [id])
+  Language    Language    @relation(fields: [langId], references: [id])
+  Tag         Tag[]
+}
+
+model Difficulity {
+  id   Int    @id @default(autoincrement())
+  name String
+  Task Task[]
+}
+
+model Tag {
+  id     Int    @id @default(autoincrement())
+  name   String
+  taskId Int
+
+  Task Task @relation(fields: [taskId], references: [id])
+}
+
+model Language {
+  id        Int    @id @default(autoincrement())
+  langShort String
+  langFull  String
+  Task      Task[]
+}
+
+model Word {
+  id     Int    @id @default(autoincrement())
+  taskId Int
+  word   String
+
+  Synonym Synonym[]
+  Task    Task      @relation(references: [id], fields: [taskId])
+}
+
+model Synonym {
+  id     Int    @id @default(autoincrement())
+  wordId Int
+  value  String
+  Word   Word   @relation(references: [id], fields: [wordId])
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
