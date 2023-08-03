@@ -5,10 +5,10 @@ definePageMeta({
 });
 import {Ref, ref} from 'vue';
 
-// const session = await useFetch('/api/session', {method: 'POST'});
+const {data: session} = useAuth();
+// const session = await useFetch('/api/session');
 // const headers = useRequestHeaders(['cookie']) as HeadersInit;
 // const {data: token} = await useFetch('/api/token', {headers});
-// console.log(session);
 
 const selectedDiff = ref();
 const diffs = ref([

@@ -6,13 +6,11 @@ import {PrismaClient} from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-function getUser(session){
-  $fetch('/api/session', {
+async function getUser(session){
+  return await $fetch('/api/session', {
     method: 'POST',
     body: {
-      record: {
-        email: session?.user?.email
-      }
+      email: session?.user?.email
     }
   });
 }
@@ -23,8 +21,8 @@ export default NuxtAuthHandler({
   adapter: PrismaAdapter(prisma),
   callbacks: {
     session: async({session, token}) => {
-      const user = getUser(session);
-      // session.user = user;
+      const user = await getUser(session);
+      session.user = user;
       return Promise.resolve(session);
     }
   },
