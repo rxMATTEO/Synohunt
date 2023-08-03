@@ -16,7 +16,7 @@ const task = reactive<{value: Task}>({value: {} as Task});
 
 const selectedDiff = reactive<{value: ServerDiff}>({value: {} as ServerDiff});
 const selectedLanguage = reactive<{value: ServerLang}>({value: {} as ServerLang});
-useLazyFetch('/api/diffs').then(res => {
+useLazyFetch('/api/diffs').then((res) => {
   diffs.value = res.data.value;
   selectedDiff.value = diffs.value[0];
 });
@@ -24,14 +24,17 @@ useLazyFetch('/api/langs').then(res => {
   langs.value = res.data.value;
   selectedLanguage.value = langs.value[0];
 });
-setTimeout(async () => {
-  if(selectedLanguage.value.langFull && selectedDiff.value.name){
-    const tasksFetched = await $fetch(`/api/task?lang=${selectedLanguage.value.langFull}&diff=${selectedDiff.value.name}`);
-    task.value = tasksFetched[0];
-    console.log(task.value);
-  }
-});
-const tags = ref(['games', 'arrays', 'puzzles']);
+function onChangeTaskOption(){
+  setTimeout(async () => {
+    if(selectedLanguage.value.langFull && selectedDiff.value.name){
+      const tasksFetched = await $fetch(`/api/task?lang=${selectedLanguage.value.langFull}&diff=${selectedDiff.value.name}`);
+      task.value = tasksFetched[0] || {
+        description: 'По данным фильтрам не найдены испытания!'
+      };
+    }
+  });
+}
+onMounted(() => onChangeTaskOption());
 
 // todo move this to types :)
 type User = {
@@ -108,7 +111,7 @@ const positionSeverities = {
          <p class="text-sm">Suggested Challenge</p>
          <div class="mt-5">
            <div class="p-float-label">
-             <Dropdown input-id="dd-diff" v-model="selectedDiff.value" :options="diffs.value" optionLabel="name" placeholder="Select difficulty" class="w-full">
+             <Dropdown input-id="dd-diff" @change="onChangeTaskOption" v-model="selectedDiff.value" :options="diffs.value" optionLabel="name" placeholder="Select difficulty" class="w-full">
                <template #value="slotProps">
                  <div v-if="slotProps.value" class="flex align-items-center">
                    <div>{{ slotProps.value.name }}</div>
@@ -126,7 +129,7 @@ const positionSeverities = {
              <label for="dd-diff" class="">Select difficulty</label>
            </div>
            <div class="p-float-label mt-5">
-           <Dropdown v-model="selectedLanguage.value" input-id="dd-lang" :options="langs.value" optionLabel="name" placeholder="Select language" class="w-full">
+           <Dropdown v-model="selectedLanguage.value" @change="onChangeTaskOption" input-id="dd-lang" :options="langs.value" optionLabel="name" placeholder="Select language" class="w-full">
              <template #value="slotProps">
                <div v-if="slotProps.value" class="flex align-items-center">
                  <div>{{ slotProps.value.langFull }}</div>
