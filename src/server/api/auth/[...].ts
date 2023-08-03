@@ -18,6 +18,7 @@ export default NuxtAuthHandler({
   pages: {
     signIn: '/login'
   },
+  secret: '2f193d57f83e046dfcecabefcb7ad03c', // todo replace with random
   adapter: PrismaAdapter(prisma),
   callbacks: {
     session: async({session, token}) => {
