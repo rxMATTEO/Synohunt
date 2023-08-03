@@ -1,16 +1,36 @@
 <script setup lang="ts">
 
+import {Difficulity, Language, Task} from '@prisma/client';
+import {reactive, ref, Ref} from 'vue';
+
 definePageMeta({
   middleware: 'auth'
 });
-import {Ref, ref} from 'vue';
 
-const selectedDiff = ref();
-const diffs = (await useLazyFetch('/api/diffs').data.value);
-console.log(diffs);
+type ServerDiff = Pick<Difficulity, 'name'>;
+type ServerLang = Pick<Language, 'langFull'>;
 
-const selectedLanguage = ref();
-const langs = (await useLazyFetch('/api/langs').data.value);
+const diffs = reactive({value: [] as ServerDiff[]});
+const langs = reactive({value: [] as ServerLang[]});
+const task = reactive<{value: Task}>({value: {} as Task});
+
+const selectedDiff = reactive<{value: ServerDiff}>({value: {} as ServerDiff});
+const selectedLanguage = reactive<{value: ServerLang}>({value: {} as ServerLang});
+useLazyFetch('/api/diffs').then(res => {
+  diffs.value = res.data.value;
+  selectedDiff.value = diffs.value[0];
+});
+useLazyFetch('/api/langs').then(res => {
+  langs.value = res.data.value;
+  selectedLanguage.value = langs.value[0];
+});
+setTimeout(async () => {
+  if(selectedLanguage.value.langFull && selectedDiff.value.name){
+    const tasksFetched = await $fetch(`/api/task?lang=${selectedLanguage.value.langFull}&diff=${selectedDiff.value.name}`);
+    task.value = tasksFetched[0];
+    console.log(task.value);
+  }
+});
 const tags = ref(['games', 'arrays', 'puzzles']);
 
 // todo move this to types :)
@@ -88,7 +108,7 @@ const positionSeverities = {
          <p class="text-sm">Suggested Challenge</p>
          <div class="mt-5">
            <div class="p-float-label">
-             <Dropdown input-id="dd-diff" v-model="selectedDiff" :options="diffs" optionLabel="name" placeholder="Select difficulty" class="w-full">
+             <Dropdown input-id="dd-diff" v-model="selectedDiff.value" :options="diffs.value" optionLabel="name" placeholder="Select difficulty" class="w-full">
                <template #value="slotProps">
                  <div v-if="slotProps.value" class="flex align-items-center">
                    <div>{{ slotProps.value.name }}</div>
@@ -106,7 +126,7 @@ const positionSeverities = {
              <label for="dd-diff" class="">Select difficulty</label>
            </div>
            <div class="p-float-label mt-5">
-           <Dropdown v-model="selectedLanguage" input-id="dd-lang" :options="langs" optionLabel="name" placeholder="Select language" class="w-full">
+           <Dropdown v-model="selectedLanguage.value" input-id="dd-lang" :options="langs.value" optionLabel="name" placeholder="Select language" class="w-full">
              <template #value="slotProps">
                <div v-if="slotProps.value" class="flex align-items-center">
                  <div>{{ slotProps.value.langFull }}</div>
@@ -134,12 +154,12 @@ const positionSeverities = {
      </div>
      <div class="t-w-full md:t-w-2/3 t-backdrop-blur-sm t-bg-black t-bg-opacity-50">
        <div class="t-p-3 h-full relative">
-         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet animi, aperiam autem, consequuntur culpa debitis, ducimus earum esse excepturi ipsam labore modi odio perspiciatis provident quisquam rem repellat sint unde.
+         {{task.value.description}}
          <div class="t-h-8">
            <div class="absolute t-bottom-3 unset flex flex-row">
-             <div v-for="(tag) in tags" class="vertical-align-middle text-center mr-5 surface-ground text-sm px-1 t-rounded-md">
+             <div v-for="(tag) in task.value.Tag" class="vertical-align-middle text-center mr-5 surface-ground text-sm px-1 t-rounded-md">
                <p class="flex">
-                 <span class="vertical-align-top p-1">{{tag}}</span>
+                 <span class="vertical-align-top p-1">{{tag.name}}</span>
                </p>
              </div>
            </div>
