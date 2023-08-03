@@ -18,7 +18,7 @@ const nuxtConfig = {
   ],
   auth: {
     isEnabled: true,
-    origin: process.env.ORIGIN,
+    origin: process.env.AUTH_ORIGIN,
     basePath: '/api/auth',
     globalAppMiddleware: true,
   },
