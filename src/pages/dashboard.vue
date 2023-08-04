@@ -141,7 +141,7 @@ const positionSeverities = {
          </div>
          <div class="mt-5 flex">
            <div class="t-mx-auto">
-             <NuxtLink v-if="task.value.id" :to="`play/${task.value.id}`">
+             <NuxtLink v-if="task.value.id" :to="`/play/${task.value.id}`">
                <Button type="null" label="TRAIN" class="text-sm p-2 mr-2 bg-blue-300 border-1 border-white hover:bg-blue-800 text-white" />
              </NuxtLink>
              <Button type="null" label="SKIP" class="text-sm p-2 bg-indigo-400 border-1 border-white hover:bg-indigo-800 text-white" />
