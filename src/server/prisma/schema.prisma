@@ -89,7 +89,8 @@ model Task {
   diffId      Int
   langId      Int
   description String
-  Word        Word[]
+  wordId      Int
+  Word        Word        @relation(fields: [wordId], references: [id])
   Difficulity Difficulity @relation(fields: [diffId], references: [id])
   Language    Language    @relation(fields: [langId], references: [id])
   Tag         Tag[]
@@ -117,12 +118,11 @@ model Language {
 }
 
 model Word {
-  id     Int    @id @default(autoincrement())
-  taskId Int
-  word   String
+  id   Int    @id @default(autoincrement())
+  word String
 
   Synonym Synonym[]
-  Task    Task      @relation(references: [id], fields: [taskId])
+  Task    Task[]
 }
 
 model Synonym {
