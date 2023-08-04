@@ -23,10 +23,12 @@
       "@nuxt/types",
       "@nuxt/typescript-build",
       "@types/node",
-      ".nuxt/types/imports.d.ts",
+      "./.nuxt/types/imports.d.ts",
+      "./.nuxt/types/nitro-imports.d.ts"
     ],
-    "typeRoots": [".nuxt/types/imports.d.ts"]
+    "typeRoots": ["./.nuxt/types/imports.d.ts", "./.nuxt/types/nitro-imports.d.ts"]
   },
+  "include": ["./.nuxt/types/imports.d.ts", "./.nuxt/types/nitro-imports.d.ts"],
   "exclude": [
     "node_modules"
   ],
