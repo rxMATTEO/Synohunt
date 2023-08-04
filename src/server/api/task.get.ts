@@ -6,7 +6,9 @@ export default defineEventHandler(async (event) => {
     include: {
       Language: true,
       Difficulity: true,
-      Tag: true,
+      Tag: {
+        select: {name: true}
+      },
     },
     where: {
       AND: [

@@ -16,11 +16,11 @@ const task = reactive<{value: Task}>({value: {} as Task});
 
 const selectedDiff = reactive<{value: ServerDiff}>({value: {} as ServerDiff});
 const selectedLanguage = reactive<{value: ServerLang}>({value: {} as ServerLang});
-useLazyFetch('/api/diffs').then((res) => {
+useFetch('/api/diffs').then((res) => {
   diffs.value = res.data.value;
   selectedDiff.value = diffs.value[0];
 });
-useLazyFetch('/api/langs').then(res => {
+useFetch('/api/langs').then(res => {
   langs.value = res.data.value;
   selectedLanguage.value = langs.value[0];
 });
