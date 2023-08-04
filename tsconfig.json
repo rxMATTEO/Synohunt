@@ -22,11 +22,13 @@
     "types": [
       "@nuxt/types",
       "@nuxt/typescript-build",
-      "@types/node"
-    ]
+      "@types/node",
+      ".nuxt/types/imports.d.ts",
+    ],
+    "typeRoots": [".nuxt/types/imports.d.ts"]
   },
   "exclude": [
     "node_modules"
   ],
-  "extends": "./.nuxt/tsconfig.json",
+  "extends": "./.nuxt/tsconfig.json"
 }

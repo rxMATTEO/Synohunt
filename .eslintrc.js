@@ -1,30 +1,30 @@
 module.exports = {
-  'env': {
-    'browser': true,
-    'es2021': true
+  env: {
+    browser: true,
+    es2021: true
   },
-  'extends': [
+  extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
-    'plugin:vue/vue3-essential'
+    'plugin:vue/vue3-essential',
+    'plugin:nuxt/recommended',
+    '@nuxtjs'
   ],
-  'overrides': [
+  overrides: [
     {
-      'env': {
-        'node': true
+      env: {
+        node: true
       },
-      'files': [
-        '.eslintrc.{js,cjs}'
-      ],
-      'parserOptions': {
-        'sourceType': 'script'
+      files: ['.eslintrc.{js,cjs}'],
+      parserOptions: {
+        sourceType: 'script'
       }
     }
   ],
-  'parserOptions': {
-    'ecmaVersion': 'latest',
-    'parser': '@typescript-eslint/parser',
-    'sourceType': 'module'
+  parserOptions: {
+    ecmaVersion: 'latest',
+    parser: '@typescript-eslint/parser',
+    sourceType: 'module'
   },
   globals: {
     onMounted: 'readonly',
@@ -33,26 +33,12 @@ module.exports = {
     defineExpose: 'readonly',
     withDefaults: 'readonly'
   },
-  'plugins': [
-    '@typescript-eslint',
-    'vue'
-  ],
-  'rules': {
-    'indent': [
-      'error',
-      2
-    ],
-    'linebreak-style': [
-      'error',
-      'windows'
-    ],
-    'quotes': [
-      'error',
-      'single'
-    ],
-    'semi': [
-      'error',
-      'always'
-    ]
+  plugins: ['@typescript-eslint', 'vue'],
+  rules: {
+    indent: ['error', 2],
+    'linebreak-style': ['error', 'windows'],
+    quotes: ['error', 'single'],
+    semi: ['error', 'always'],
+    'no-undef': 0
   }
 };
