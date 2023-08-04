@@ -130,7 +130,7 @@ function changeTheme () {
               <div class="flex flex-row mt-1">
                 <ProgressBar
                   :value="calculatePercentOfPointsProgress(account.points, calculatePointsToNextLvl(account.Level.value))"
-                  class="w-full"
+                  class="w-full text-center"
                   :pt="{
                     value: {
                       class: ['animated-gradient-rainbow'],
