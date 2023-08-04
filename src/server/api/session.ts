@@ -1,11 +1,12 @@
 export default eventHandler(async (event) => {
   const body = await readBody(event);
-  const account = await event.context.prisma.account.findFirst({
+  const account = await event.context.prisma.user.findFirst({
     where: {
-      user: {
-        email: body.email
-      }
+      email: body.email
+    },
+    include: {
+      Level: true
     }
   });
-  return { account: account };
+  return { account };
 });
