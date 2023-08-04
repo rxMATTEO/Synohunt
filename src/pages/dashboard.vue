@@ -223,12 +223,12 @@ const positionSeverities = {
             You are automatically given an allegiance with anyone who is in the same clan as you. You can also become allies with other warriors by following each other or inviting new warriors to join.
           </p>
           <DataTable :value="pointLeaders">
-            <Column style="width: 3%" header="Position">
+            <Column style="width: 25%;" header="Position" class="max-md:!t-p-0">
               <template #body="data: {index: number, data: Leader}">
                 <Badge :value="data.index + 1" :severity=" positionSeverities[data.index + 1] " :class="{'surface-500': !positionSeverities[data.index + 1]}" />
               </template>
             </Column>
-            <Column header="User">
+            <Column header="User" style="width: 100%;" class="max-md:!t-p-0">
               <template #body="data: { data: Leader}">
                 <div class="flex align-items-center">
                   <Badge class="mr-3 t-w-[30px]" :value="data.data.Level.value" severity="success" />
@@ -239,9 +239,9 @@ const positionSeverities = {
                 </div>
               </template>
             </Column>
-            <Column header="Completed tasks" field="tasks.length" />
+            <Column header="Completed tasks" field="tasks.length" style="width: 25%;" class="max-md:!t-p-0" />
             <!--      todo realize this-->
-            <Column header="Points">
+            <Column header="Points" style="width: 25%;" class="max-md:!t-p-0">
               <template #body="data: { data: Leader}">
                 <span>{{ data.data.points }}</span>
               </template>
