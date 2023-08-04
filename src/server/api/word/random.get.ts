@@ -31,20 +31,5 @@ export default defineEventHandler(async (event) => {
     }
   });
 
-  // const synonym = await event.context.prisma.synonym.createMany({
-  //   data: synonyms.synonyms.map((syno) => {
-  //     return { value: syno.synonym, wordId: word.id };
-  //   }),
-  //   skipDuplicates: true
-  // });
-  //
-  // const task = await event.context.prisma.task.create({
-  //   data: {
-  //     description: context.examples[0].source,
-  //     diffId: 1,
-  //     langId: 1
-  //   }
-  // });
-
   return { word, synos: await Promise.all(synos), task };
 });
