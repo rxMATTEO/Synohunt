@@ -76,6 +76,7 @@ model User {
   image         String?
   levelId       Int       @default(1)
   Level         Level     @relation(fields: [levelId], references: [id])
+  points        Int       @default(1)
 
   account      Account[]
   sessions     Session[]

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
-import {Difficulity, Language, Task} from '@prisma/client';
-import {reactive, ref, Ref} from 'vue';
+import {Difficulity, Language, Level, Task, User} from '@prisma/client';
+import {reactive} from 'vue';
 
 definePageMeta({
   middleware: 'auth'
@@ -37,61 +37,53 @@ function onChangeTaskOption(){
 onMounted(() => onChangeTaskOption());
 
 // todo move this to types :)
-type User = {
-  name: string,
-  imgPath: string
-}
-type Leader = {
-  position: number,
-  user: User,
-  lvl: number,
-  points: number,
-  tasks: number[],
-}
-const pointLeaders: Ref<readonly Leader[]> = ref(
-  [
-    {
-      lvl: 228,
-      user: {
-        name: 'Ivan',
-        imgPath: '/img/placeholder',
-      },
-      points: 228,
-      position: 1,
-      tasks: [1,2,3],
-    },
-    {
-      lvl: 228,
-      user: {
-        name: 'Ivan',
-        imgPath: '/img/placeholder',
-      },
-      points: 228,
-      position: 2,
-      tasks: [1,2,3],
-    },
-    {
-      lvl: 228,
-      user: {
-        name: 'Ivan',
-        imgPath: '/img/placeholder',
-      },
-      points: 228,
-      position: 3,
-      tasks: [1,2,3],
-    },
-    {
-      lvl: 228,
-      user: {
-        name: 'Ivan',
-        imgPath: '/img/placeholder',
-      },
-      points: 228,
-      position: 4,
-      tasks: [1,2,3],
-    },
-  ]
-);
+type Leader = Pick<User, 'name' | 'image' | 'points' | {level: Level}>;
+
+const {value: pointLeaders} = reactive({value: (await useLazyFetch('/api/leaders?quantity=5')).data});
+// const pointLeaders: Ref<readonly Leader[]> = ref(
+//   [
+//     {
+//       lvl: 228,
+//       user: {
+//         name: 'Ivan',
+//         imgPath: '/img/placeholder',
+//       },
+//       points: 228,
+//       position: 1,
+//       tasks: [1,2,3],
+//     },
+//     {
+//       lvl: 228,
+//       user: {
+//         name: 'Ivan',
+//         imgPath: '/img/placeholder',
+//       },
+//       points: 228,
+//       position: 2,
+//       tasks: [1,2,3],
+//     },
+//     {
+//       lvl: 228,
+//       user: {
+//         name: 'Ivan',
+//         imgPath: '/img/placeholder',
+//       },
+//       points: 228,
+//       position: 3,
+//       tasks: [1,2,3],
+//     },
+//     {
+//       lvl: 228,
+//       user: {
+//         name: 'Ivan',
+//         imgPath: '/img/placeholder',
+//       },
+//       points: 228,
+//       position: 4,
+//       tasks: [1,2,3],
+//     },
+//   ]
+// );
 
 const positionSeverities = {
   1: 'success',
@@ -207,18 +199,23 @@ const positionSeverities = {
     </p>
     <DataTable :value="pointLeaders" >
       <Column style="width: 3%" header="Position">
-        <template #body="data: {data: Leader}">
-          <Badge :value="data.data.position" :severity=" positionSeverities[data.data.position] " :class="{'surface-500': !positionSeverities[data.data.position]}" />
+        <template #body="data: {index: number, data: Leader}">
+          <Badge :value="data.index + 1" :severity=" positionSeverities[data.index + 1] " :class="{'surface-500': !positionSeverities[data.index + 1]}" />
         </template>
       </Column>
       <Column header="User">
         <template #body="data: { data: Leader}">
-          <Badge class="mr-3" :value="data.data.lvl" severity="success" />
-          <span class="mr-3 max-md:t-block">{{data.data.user.name}}</span>
-          <span>{{data.data.user.imgPath}}</span>
+          <div class="flex">
+          <Badge class="mr-3" :value="data.data.Level.value" severity="success" />
+          <span class="mr-3 max-md:t-block">{{data.data.name}}</span>
+          <div>
+            <img class="t-w-[30px] t-h-[30px]" :src="data.data.image" :alt="data.data.name"/>
+          </div>
+          </div>
         </template>
       </Column>
       <Column header="Completed tasks" field="tasks.length"/>
+<!--      todo realize this-->
       <Column header="Points">
         <template #body="data: { data: Leader}">
           <span>{{data.data.points}}</span>
