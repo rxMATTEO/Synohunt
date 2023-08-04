@@ -14,6 +14,7 @@ const { getCurrentTheme, setCurrentTheme, currentTheme } = useThemeStore();
 const selected = ref({} as OverlayPanel);
 const theme: {theme: Theme} = reactive({ theme: { dark: true } });
 const { status, data: { value: { user: { account } } }, signIn, signOut } = useAuth();
+console.log(account);
 const overlaysNames = ['messagesOp', 'profileOp', 'levelOp'] as const;
 type OverlaysNames = typeof overlaysNames[number]
 type Overlay = {
@@ -28,6 +29,14 @@ onMounted(() => {
   getCurrentTheme();
   theme.theme = currentTheme;
 });
+
+function calculatePointsToNextLvl (lvl: string) {
+  return (parseInt(lvl) + 1) * account.Level.Group.multiplier;
+}
+
+function calculatePercentOfPointsProgress (currentPoints, nextLvlPoints) {
+  return (currentPoints / nextLvlPoints) * 100;
+}
 
 function onMouseOver (e: MouseEvent, overlayName: OverlaysNames) {
   selected.value.hide?.();
@@ -115,12 +124,12 @@ function changeTheme () {
               <div>
                 <p>У вас <span class="text-primary">{{ account.points }}</span> очков</p>
                 <p class="mt-3">
-                  До следующего уровня осталось:
+                  До следующего уровня осталось: {{ calculatePointsToNextLvl(account.Level.value) }}
                 </p>
               </div>
               <div class="flex flex-row mt-1">
                 <ProgressBar
-                  :value="62"
+                  :value="calculatePercentOfPointsProgress(account.points, calculatePointsToNextLvl(account.Level.value))"
                   class="w-full"
                   :pt="{
                     value: {

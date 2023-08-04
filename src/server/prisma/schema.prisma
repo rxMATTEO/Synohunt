@@ -53,11 +53,12 @@ model Level {
 }
 
 model Group {
-  id    Int     @id @default(autoincrement())
-  min   Int
-  max   Int
-  name  String
-  Level Level[]
+  id         Int     @id @default(autoincrement())
+  min        Int
+  max        Int
+  name       String
+  multiplier Int     @default(10) // formula: multiplier * nextLevel
+  Level      Level[]
 }
 
 model Session {

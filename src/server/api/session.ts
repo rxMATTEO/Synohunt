@@ -5,7 +5,11 @@ export default eventHandler(async (event) => {
       email: body.email
     },
     include: {
-      Level: true
+      Level: {
+        include: {
+          Group: true
+        }
+      }
     }
   });
   return { account };
