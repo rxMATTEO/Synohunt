@@ -206,7 +206,7 @@ const positionSeverities = {
       <Column header="User">
         <template #body="data: { data: Leader}">
           <div class="flex">
-          <Badge class="mr-3" :value="data.data.Level.value" severity="success" />
+          <Badge class="mr-3 t-w-[30px]" :value="data.data.Level.value" severity="success" />
           <span class="mr-3 max-md:t-block">{{data.data.name}}</span>
           <div>
             <img class="t-w-[30px] t-h-[30px]" :src="data.data.image" :alt="data.data.name"/>
