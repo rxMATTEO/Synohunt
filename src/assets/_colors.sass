@@ -24,3 +24,15 @@ $animated-gradient: ("rainbow":  (-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab) )
       background-position: 100% 50%
     100%
       background-position: 0% 50%
+
+.shake
+  animation: shake .2s ease-in-out 3 alternate-reverse !important
+
+
+@keyframes shake
+  0%
+    left: 0
+  50%
+    left: -25px
+  100%
+    left: 25px

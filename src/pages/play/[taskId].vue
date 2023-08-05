@@ -34,8 +34,17 @@ function checkUserInput (e: KeyboardEvent) {
     if (foundSynoIndex !== -1) {
       solvedSynonyms.value.push(synonyms[foundSynoIndex]);
       synonyms.splice(foundSynoIndex, 1);
+      userSyno.value = '';
+    } else {
+      shake();
     }
   }
+}
+
+const isShaking = reactive({ value: false });
+function shake () {
+  isShaking.value = true;
+  setTimeout(() => { isShaking.value = false; }, 1000);
 }
 
 const task = reactive<{value: TaskResponse}>({ value: (await useFetch(`/api/task/${route.params.taskId}`)).data });
@@ -81,7 +90,13 @@ const userSyno = ref('');
                 <label for="user-syno">Synonym</label>
               </p>
               <div class="mx-auto mt-5">
-                <Button label="Guess" type="null" class="text-center block mx-auto px-5 py-3 animated-gradient-rainbow" @click="checkUserInput" />
+                <Button
+                  label="Guess"
+                  type="null"
+                  :class="{shake: isShaking.value}"
+                  class="text-center block mx-auto px-5 py-3 animated-gradient-rainbow"
+                  @click="checkUserInput"
+                />
               </div>
             </div>
             <div class="t-w-1/5 text-right">
