@@ -58,6 +58,9 @@ const userSyno = ref('');
     <NuxtLayout name="header-n-sidebar">
       <div class="lg:px-8 lg:mx-8 px-3" @keyup="checkUserInput">
         <div class="surface-ground t-rounded-md p-5">
+          <div class="relative">
+            <Button v-tooltip="'Goto next task'" class="absolute right-0 text-right" icon="pi pi-arrow-right" unstyled />
+          </div>
           <h1 class="text-4xl">
             Guess the all synonyms
           </h1>

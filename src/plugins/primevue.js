@@ -12,11 +12,13 @@ import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
 import Checkbox from 'primevue/checkbox';
 import InputText from 'primevue/inputtext';
+import Tooltip from 'primevue/tooltip';
 
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.use(PrimeVue, { ripple: true });
   nuxtApp.vueApp.directive('badge', BadgeDirective);
-  
+  nuxtApp.vueApp.directive('tooltip', Tooltip);
+
   nuxtApp.vueApp.component('Button', Button);
   nuxtApp.vueApp.component('Dropdown', Dropdown);
   nuxtApp.vueApp.component('Badge', Badge);
