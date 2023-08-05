@@ -37,7 +37,9 @@ const task = reactive<{value: TaskResponse}>({ value: (await useFetch(`/api/task
     <NuxtLayout name="header-n-sidebar">
       <div class="lg:px-8 lg:mx-8 px-3">
         <h1>Guess the all synonyms</h1>
-        {{ task.value }}
+        <span v-for="word in task.value.description.split(' ')">
+          <span :class="{'bg-blue-500': word === task.value.Word.word} ">{{ word + " " }}</span>
+        </span>
 
         <div class="flex t-place-content-between">
           <div class="t-w-1/5">
@@ -49,7 +51,7 @@ const task = reactive<{value: TaskResponse}>({ value: (await useFetch(`/api/task
           <div class="bg-cyan-50 t-w-3/5">
             a
           </div>
-          <div class="t-w-1/5">
+          <div class="t-w-1/5 text-right">
             <p>Solved synonyms</p>
           </div>
         </div>
