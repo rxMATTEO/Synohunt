@@ -91,7 +91,8 @@ async function gotoRandomTask (diff: Diff, lang: Lang, butId: number) {
             </p>
             <div class="mt-3">
               <span v-for="word in task.value.description.split(' ')">
-                <span :class="{'bg-primary-500': word === task.value.Word.word} ">{{ word + " " }}</span>
+                <span :class="{'bg-primary-500': word === task.value.Word.word} ">{{ word }}</span>
+                {{ }}
               </span>
             </div>
           </div>
@@ -108,10 +109,14 @@ async function gotoRandomTask (diff: Diff, lang: Lang, butId: number) {
               </div>
             </div>
             <div class="max-md:t-inline-block max-md:t-mt-5 t-w-1/2 md:t-w-1/5 text-right t-order-1 md:t-order-3">
-              <p>Solved synonyms</p>
-              <p v-for="(syno) in solvedSynonyms.value">
-                {{ syno.value }}
+              <p class="text-xl">
+                Solved synonyms
               </p>
+              <div class="mt-5">
+                <p v-for="(syno) in solvedSynonyms.value">
+                  {{ syno.value }}
+                </p>
+              </div>
             </div>
             <div class="t-w-full t-w-flex md:t-w-3/5 md:t-order-1 max-md:t-h-full">
               <div class="text-8xl text-center t-min-h-[200px] t-max-h-[200px] t-h-[200px]">
