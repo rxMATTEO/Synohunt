@@ -14,7 +14,6 @@ const { getCurrentTheme, setCurrentTheme, currentTheme } = useThemeStore();
 const selected = ref({} as OverlayPanel);
 const theme: {theme: Theme} = reactive({ theme: { dark: true } });
 const { status, data: { value: { user: { account } } }, signIn, signOut } = useAuth();
-console.log(account);
 const overlaysNames = ['messagesOp', 'profileOp', 'levelOp'] as const;
 type OverlaysNames = typeof overlaysNames[number]
 type Overlay = {
