@@ -1,7 +1,3 @@
-import Index from 'reverso-api';
-
-const reverso = new Index();
-
 export default defineEventHandler(async (event) => {
   const randomWord = (await $fetch('https://random-word-form.repl.co/random/noun'))[0];
   const context = await $fetch(`/api/word/context?word=${randomWord}&lang=english`);
