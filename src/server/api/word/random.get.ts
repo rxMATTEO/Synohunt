@@ -1,7 +1,20 @@
+import { getQuery } from 'h3';
+
 export default defineEventHandler(async (event) => {
+  const { lang, diff } = getQuery(event);
+  const langFullIndex = await event.context.prisma.language.findFirst({
+    where: {
+      langFull: lang
+    }
+  });
+  const diffDb = await event.context.prisma.difficulity.findFirst({
+    where: {
+      name: diff
+    }
+  });
   const randomWord = (await $fetch('https://random-word-form.repl.co/random/noun'))[0];
-  const context = await $fetch(`/api/word/context?word=${randomWord}&lang=english`);
-  const synonyms = (await $fetch(`/api/word/synonyms?word=${randomWord}&lang=english`));
+  const context = await $fetch(`/api/word/context?word=${randomWord}&lang=${lang}`);
+  const synonyms = (await $fetch(`/api/word/synonyms?word=${randomWord}&lang=${lang}`));
 
   const word = await event.context.prisma.word.create({
     data: {
@@ -20,8 +33,8 @@ export default defineEventHandler(async (event) => {
 
   const task = await event.context.prisma.task.create({
     data: {
-      diffId: 1, // todo fix this
-      langId: 1,
+      diffId: diffDb.id, // todo fix this
+      langId: langFullIndex.id,
       description: context.examples[0].source,
       wordId: word.id
     }
