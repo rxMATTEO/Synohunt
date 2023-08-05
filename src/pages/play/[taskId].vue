@@ -119,7 +119,7 @@ async function gotoRandomTask (diff: Diff, lang: Lang, butId: number) {
               </div>
             </div>
             <div class="t-w-full t-w-flex md:t-w-3/5 md:t-order-1 max-md:t-h-full">
-              <div class="text-8xl text-center t-min-h-[200px] t-max-h-[200px] t-h-[200px]">
+              <div class="text-8xl text-center t-min-h-[200px] t-max-h-[200px] t-h-[200px] overflow-hidden">
                 {{ userSyno || " " }}
               </div>
               <p class="p-float-label w-full">
