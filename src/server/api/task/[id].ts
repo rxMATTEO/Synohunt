@@ -6,8 +6,12 @@ export default defineEventHandler(async (event) => {
       Difficulity: true,
       Tag: {
         select: { name: true }
+      },
+      Word: {
+        include: {
+          Synonym: true
+        }
       }
-
     },
     where: {
       id: parseInt(id)
