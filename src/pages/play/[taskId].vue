@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue';
+import { NuxtOptionsRouter } from '@nuxt/types/config/router';
 
 type RouteParams = {
   params: {
@@ -7,6 +8,7 @@ type RouteParams = {
   }
 }
 const route: RouteParams = useRoute();
+const router = useRouter();
 type Syno = {
   id: number,
   wordId: number,
@@ -30,10 +32,10 @@ type TaskResponse = {
 
 function checkUserInput (e?: KeyboardEvent) {
   if (!e || e.key === 'Enter') {
-    const foundSynoIndex = synonyms.findIndex(syno => syno.value === userSyno.value);
+    const foundSynoIndex = synonyms.value.findIndex(syno => syno.value === userSyno.value);
     if (foundSynoIndex !== -1) {
-      solvedSynonyms.value.push(synonyms[foundSynoIndex]);
-      synonyms.splice(foundSynoIndex, 1);
+      solvedSynonyms.value.push(synonyms.value[foundSynoIndex]);
+      synonyms.value.splice(foundSynoIndex, 1);
       userSyno.value = '';
     } else {
       shake();
@@ -48,18 +50,37 @@ function shake () {
 }
 
 const task = reactive<{value: TaskResponse}>({ value: (await useFetch(`/api/task/${route.params.taskId}`)).data });
-const synonyms = task.value.Word.Synonym;
+const synonyms = reactive({ value: task.value.Word.Synonym });
 const solvedSynonyms = reactive({ value: [] });
 const userSyno = ref('');
+
+type Diff = 'Easy' | 'Medium' | 'Hard';
+type Lang = 'English' | 'Russian';
+
+async function gotoRandomTask (diff: Diff, lang: Lang, butId: number) {
+  const randomTask = await $fetch('/api/task/random', {
+    method: 'POST',
+    body: {
+      diff, lang, butId
+    }
+  });
+  task.value = randomTask;
+  synonyms.value = task.value.Word.Synonym;
+  solvedSynonyms.value = [];
+  router.push({
+    path: '/play/' + task.value.id,
+    params: { taskId: task.value.id }
+  });
+}
 </script>
 
 <template>
   <div>
     <NuxtLayout name="header-n-sidebar">
       <div class="lg:px-8 lg:mx-8 px-3" @keyup="checkUserInput">
-        <div class="surface-ground t-rounded-md p-5">
+        <div class="surface-ground t-rounded-md p-5 h-fit">
           <div class="relative">
-            <Button v-tooltip="'Goto next task'" class="absolute right-0 text-right" icon="pi pi-arrow-right" unstyled />
+            <Button v-tooltip="'Goto next task'" class="absolute right-0 text-right" icon="pi pi-arrow-right" unstyled @click="gotoRandomTask(task.value.Difficulity.name, task.value.Language.langFull, task.value.id)" />
           </div>
           <h1 class="text-4xl">
             Guess the all synonyms
@@ -81,7 +102,7 @@ const userSyno = ref('');
                 All synonyms:
               </p>
               <div class="mt-5">
-                <p v-for="(syno) in synonyms">
+                <p v-for="(syno) in synonyms.value">
                   {{ syno.value }}
                 </p>
               </div>
@@ -92,8 +113,8 @@ const userSyno = ref('');
                 {{ syno.value }}
               </p>
             </div>
-            <div class="t-w-full t-w-flex md:t-w-3/5 md:t-order-1 overflow-hidden">
-              <div class="text-8xl text-center t-h-1/2 block overflow-hidden">
+            <div class="t-w-full t-w-flex md:t-w-3/5 md:t-order-1 max-md:t-h-full">
+              <div class="text-8xl text-center t-min-h-[200px] t-max-h-[200px] t-h-[200px]">
                 {{ userSyno || " " }}
               </div>
               <p class="p-float-label w-full">
