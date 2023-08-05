@@ -28,8 +28,8 @@ type TaskResponse = {
   task: Task[]
 }
 
-function checkUserInput (e: KeyboardEvent) {
-  if (e.key === 'Enter') {
+function checkUserInput (e?: KeyboardEvent) {
+  if (!e || e.key === 'Enter') {
     const foundSynoIndex = synonyms.findIndex(syno => syno.value === userSyno.value);
     if (foundSynoIndex !== -1) {
       solvedSynonyms.value.push(synonyms[foundSynoIndex]);
@@ -65,13 +65,15 @@ const userSyno = ref('');
             <p class="text-2xl">
               Context:
             </p>
-            <span v-for="word in task.value.description.split(' ')">
-              <span :class="{'bg-primary-500': word === task.value.Word.word} ">{{ word + " " }}</span>
-            </span>
+            <div class="mt-3">
+              <span v-for="word in task.value.description.split(' ')">
+                <span :class="{'bg-primary-500': word === task.value.Word.word} ">{{ word + " " }}</span>
+              </span>
+            </div>
           </div>
 
-          <div class="flex t-place-content-between">
-            <div class="t-w-1/5">
+          <div class="flex t-place-content-between flex-wrap">
+            <div class="max-md:t-inline-block max-md:t-mt-5 t-w-1/2 md:t-w-1/5 t-order-1">
               <p class="text-xl">
                 All synonyms:
               </p>
@@ -81,10 +83,16 @@ const userSyno = ref('');
                 </p>
               </div>
             </div>
-            <div class="t-w-3/5">
-              <p class="text-8xl text-center t-h-1/2">
-                {{ userSyno || "" }}
+            <div class="max-md:t-inline-block max-md:t-mt-5 t-w-1/2 md:t-w-1/5 text-right t-order-1 md:t-order-3">
+              <p>Solved synonyms</p>
+              <p v-for="(syno) in solvedSynonyms.value">
+                {{ syno.value }}
               </p>
+            </div>
+            <div class="t-w-full t-w-flex md:t-w-3/5 md:t-order-1">
+              <div class="text-8xl text-center t-h-1/2 block">
+                {{ userSyno || " " }}
+              </div>
               <p class="p-float-label w-full">
                 <InputText id="user-syno" v-model="userSyno" class="w-full" />
                 <label for="user-syno">Synonym</label>
@@ -95,15 +103,9 @@ const userSyno = ref('');
                   type="null"
                   :class="{shake: isShaking.value}"
                   class="text-center block mx-auto px-5 py-3 animated-gradient-rainbow"
-                  @click="checkUserInput"
+                  @click="() => checkUserInput()"
                 />
               </div>
-            </div>
-            <div class="t-w-1/5 text-right">
-              <p>Solved synonyms</p>
-              <p v-for="(syno) in solvedSynonyms.value">
-                {{ syno.value }}
-              </p>
             </div>
           </div>
         </div>
@@ -111,3 +113,7 @@ const userSyno = ref('');
     </NuxtLayout>
   </div>
 </template>
+
+<style lang="sass">
+
+</style>
