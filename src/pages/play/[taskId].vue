@@ -89,8 +89,8 @@ const userSyno = ref('');
                 {{ syno.value }}
               </p>
             </div>
-            <div class="t-w-full t-w-flex md:t-w-3/5 md:t-order-1">
-              <div class="text-8xl text-center t-h-1/2 block">
+            <div class="t-w-full t-w-flex md:t-w-3/5 md:t-order-1 overflow-hidden">
+              <div class="text-8xl text-center t-h-1/2 block overflow-hidden">
                 {{ userSyno || " " }}
               </div>
               <p class="p-float-label w-full">

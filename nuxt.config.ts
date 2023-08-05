@@ -2,11 +2,11 @@
 const baseUrl = '/';
 const themeId = 'theme-link';
 const nuxtConfig = {
-  devtools: {enabled: true},
+  devtools: { enabled: true },
   buildModules: ['@nuxt/typescript-build'],
   css: [
     'primeflex/primeflex.css',
-    'primeicons/primeicons.css',
+    'primeicons/primeicons.css'
   ],
   build: {
     transpile: ['primevue']
@@ -14,23 +14,23 @@ const nuxtConfig = {
   modules: [
     '@nuxtjs/tailwindcss',
     '@pinia/nuxt',
-    '@sidebase/nuxt-auth',
+    '@sidebase/nuxt-auth'
   ],
   auth: {
     isEnabled: true,
     origin: process.env.AUTH_ORIGIN,
     basePath: '/api/auth',
-    globalAppMiddleware: true,
+    globalAppMiddleware: true
   },
   pinia: {
-    autoImports: [ 'defineStore',
+    autoImports: ['defineStore',
       ['defineStore', 'definePiniaStore']
-    ],
+    ]
   },
   tailwindcss: {},
   app: {
     pageTransition: { name: 'page', mode: 'out-in' },
-    layoutTransition: {name: 'layout', mode: 'out-in'},
+    layoutTransition: { name: 'layout', mode: 'out-in' },
     baseURL: baseUrl,
     head: {
       link: [
@@ -39,12 +39,12 @@ const nuxtConfig = {
           rel: 'stylesheet',
           href: baseUrl + 'themes/bootstrap4-dark-purple/theme.css'
         }
-      ],
-    },
+      ]
+    }
   },
   runtimeConfig: {
     public: {
-      themeId,
+      themeId
     }
   },
   vite: {
@@ -56,8 +56,8 @@ const nuxtConfig = {
       }
     }
   },
-  srcDir: './src',
+  srcDir: './src'
 };
 // @ts-ignore
 export default defineNuxtConfig(nuxtConfig);
-export {themeId};
+export { themeId };
