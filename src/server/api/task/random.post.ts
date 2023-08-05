@@ -1,4 +1,5 @@
 import { readBody } from 'h3';
+import getRandomNumber from '../../../composables/random';
 
 export default defineEventHandler(async (event) => {
   const { diff, lang, butId } = await readBody(event);
@@ -22,5 +23,7 @@ export default defineEventHandler(async (event) => {
     }
   });
 
-  return tasks;
+  const randomNumber = getRandomNumber(0, tasks.length);
+
+  return tasks[randomNumber];
 });
