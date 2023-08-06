@@ -128,6 +128,7 @@ model Synonym {
   id     Int    @id @default(autoincrement())
   wordId Int
   value  String
+  pointsForGuess Int @default(5)
   Word   Word   @relation(references: [id], fields: [wordId])
 }
 

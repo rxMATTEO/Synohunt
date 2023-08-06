@@ -30,12 +30,13 @@ type TaskResponse = {
   task: Task[]
 }
 
-function checkUserInput (e?: KeyboardEvent) {
+function solveUserSyno (e?: KeyboardEvent) {
   if (!e || e.key === 'Enter') {
     const foundSynoIndex = synonyms.value.findIndex(syno => syno.value === userSyno.value);
     if (foundSynoIndex !== -1) {
       solvedSynonyms.value.push(synonyms.value[foundSynoIndex]);
       synonyms.value.splice(foundSynoIndex, 1);
+      console.log(synonyms.value[foundSynoIndex]);
       userSyno.value = '';
     } else {
       shake();
@@ -77,7 +78,7 @@ async function gotoRandomTask (diff: Diff, lang: Lang, butId: number) {
 <template>
   <div>
     <NuxtLayout name="header-n-sidebar">
-      <div class="lg:px-8 lg:mx-8 px-3" @keyup="checkUserInput">
+      <div class="lg:px-8 lg:mx-8 px-3" @keyup="solveUserSyno">
         <div class="surface-ground t-rounded-md p-5 h-fit">
           <div class="relative">
             <Button v-tooltip="'Goto next task'" class="absolute right-0 text-right" icon="pi pi-arrow-right" unstyled @click="gotoRandomTask(task.value.Difficulity.name, task.value.Language.langFull, task.value.id)" />
@@ -123,16 +124,22 @@ async function gotoRandomTask (diff: Diff, lang: Lang, butId: number) {
                 {{ userSyno || " " }}
               </div>
               <p class="p-float-label w-full">
-                <InputText id="user-syno" v-model="userSyno" class="w-full" />
+                <InputText
+                  id="user-syno"
+                  v-model="userSyno"
+                  class="w-full"
+                  tabindex="10"
+                />
                 <label for="user-syno">Synonym</label>
               </p>
               <div class="mx-auto mt-5">
                 <Button
+                  tabindex="10"
                   label="Guess"
                   type="null"
                   :class="{shake: isShaking.value}"
                   class="text-center block mx-auto px-5 py-3 animated-gradient-rainbow"
-                  @click="() => checkUserInput()"
+                  @click="() => solveUserSyno()"
                 />
               </div>
             </div>

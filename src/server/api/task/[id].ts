@@ -14,7 +14,7 @@ export default defineEventHandler(async (event) => {
       }
     },
     where: {
-      id: parseInt(id)
+      id: +id
     }
   });
   return task;

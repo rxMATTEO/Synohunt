@@ -1,9 +1,9 @@
-import {getQuery} from 'h3';
+import { getQuery } from 'h3';
 
 export default defineEventHandler(async (event) => {
   const { quantity } = getQuery(event) as { quantity: string };
   const leaders = await event.context.prisma.User.findMany({
-    take: parseInt(quantity),
+    take: +quantity,
 
     select: {
       name: true,

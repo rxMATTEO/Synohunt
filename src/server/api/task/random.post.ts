@@ -22,7 +22,7 @@ export default defineEventHandler(async (event) => {
       },
       NOT: {
         id: {
-          equals: parseInt(butId)
+          equals: +butId
         }
       }
     }
