@@ -14,5 +14,5 @@ export default defineEventHandler(async (event) => {
       userId
     }
   });
-  return (+user.Level.value + 1) * user.Level.Group.multiplier;
+  return { lvl: user.Level.value, current: +user.points, need: (+user.Level.value + 1) * user.Level.Group.multiplier };
 });

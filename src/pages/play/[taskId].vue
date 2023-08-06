@@ -43,7 +43,7 @@ async function solveUserSyno (e?: KeyboardEvent) {
       userSyno.value = '';
 
       const pointsForGuess = synonyms.value[foundSynoIndex].pointsForGuess;
-      console.log(await pointsStore.setPoints(pointsForGuess));
+      await pointsStore.setPoints(pointsForGuess);
     } else {
       shake();
     }

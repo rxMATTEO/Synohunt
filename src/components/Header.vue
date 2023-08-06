@@ -126,12 +126,12 @@ function changeTheme () {
               <div>
                 <p>У вас <span class="text-primary">{{ account.points }}</span> очков</p>
                 <p class="mt-3">
-                  Для следующего уровня нужно: {{ pointsToNextLvl }}
+                  Для следующего уровня нужно: {{ pointsToNextLvl.need }}
                 </p>
               </div>
               <div class="flex flex-row mt-1">
                 <ProgressBar
-                  :value="calculatePercentOfPointsProgress(account.points, pointsToNextLvl)"
+                  :value="calculatePercentOfPointsProgress(account.points, pointsToNextLvl.need)"
                   class="w-full text-center"
                   :pt="{
                     value: {
