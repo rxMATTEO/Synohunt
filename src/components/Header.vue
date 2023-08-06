@@ -95,7 +95,20 @@ function changeTheme () {
           </OverlayPanel>
         </div>
         <div>
-          <Avatar v-badge.success="4" icon="pi pi-user" class="mr-3" size="small" @mouseover="(e) => onMouseOver(e, 'profileOp')" />
+          <Avatar
+            v-badge.success="4"
+            shape="circle"
+            :image="account.image"
+            class="mr-3 overflow-hidden"
+            size="small"
+            :pt="{
+              image: {
+                class: 't-w-[10px] t-h-[10px]'
+              }
+            }"
+            }
+            @mouseover="(e) => onMouseOver(e, 'profileOp')"
+          />
           <OverlayPanel :ref="overlays.profileOp" dismissable class="!t-p-0" @mouseleave="() => onMouseLeave('profileOp')">
             <div>
               <div class="link flex t-items-center">
