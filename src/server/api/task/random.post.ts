@@ -27,8 +27,9 @@ export default defineEventHandler(async (event) => {
       }
     }
   });
-
+  if (tasks.length === 0) {
+    return [];
+  }
   const randomNumber = getRandomNumber(0, tasks.length);
-
   return tasks[randomNumber];
 });

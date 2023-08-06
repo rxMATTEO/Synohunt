@@ -23,6 +23,11 @@ useFetch('/api/langs').then((res) => {
   langs.value = res.data.value;
   selectedLanguage.value = langs.value[0];
 });
+
+function generateRandom () {
+
+}
+
 function onChangeTaskOption (id = -1) {
   setTimeout(async () => {
     if (selectedLanguage.value.langFull && selectedDiff.value.name) {
@@ -34,9 +39,11 @@ function onChangeTaskOption (id = -1) {
           butId: id
         }
       });
-      task.value = tasksFetched || {
-        description: 'По данным фильтрам не найдены испытания!'
-      };
+      task.value = Object.keys(tasksFetched).length > 0
+        ? tasksFetched
+        : {
+          description: 'По данным фильтрам не найдены испытания!'
+        };
     }
   });
 }
@@ -75,7 +82,7 @@ const positionSeverities = {
                       option-label="name"
                       placeholder="Select difficulty"
                       class="w-full"
-                      @change="onChangeTaskOption"
+                      @change="() => onChangeTaskOption()"
                     >
                       <template #value="slotProps">
                         <div v-if="slotProps.value" class="flex align-items-center">
@@ -101,7 +108,7 @@ const positionSeverities = {
                       option-label="name"
                       placeholder="Select language"
                       class="w-full"
-                      @change="onChangeTaskOption"
+                      @change="() => onChangeTaskOption()"
                     >
                       <template #value="slotProps">
                         <div v-if="slotProps.value" class="flex align-items-center">
