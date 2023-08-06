@@ -106,7 +106,6 @@ function changeTheme () {
                 class: 't-w-[10px] t-h-[10px]'
               }
             }"
-            }
             @mouseover="(e) => onMouseOver(e, 'profileOp')"
           />
           <OverlayPanel :ref="overlays.profileOp" dismissable class="!t-p-0" @mouseleave="() => onMouseLeave('profileOp')">
