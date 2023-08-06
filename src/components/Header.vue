@@ -32,7 +32,7 @@ onMounted(() => {
 
 const progress = reactive({ value: 0 });
 const level = reactive({ value: account.Level.value });
-const pointsToNextLvl = await useLazyFetch('/api/points/toNextLevel', {
+const pointsToNextLvl = await useFetch('/api/points/toNextLevel', {
   method: 'POST',
   body: {
     userId: account.userId
