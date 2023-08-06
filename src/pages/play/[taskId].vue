@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue';
 import { NuxtOptionsRouter } from '@nuxt/types/config/router';
+import { usePointsStore } from '../../stores/pointsStore';
 
 type RouteParams = {
   params: {
@@ -13,6 +14,7 @@ type Syno = {
   id: number,
   wordId: number,
   value: string,
+  pointsForGuess: number,
 }
 type Task = {
   id: number,
@@ -30,14 +32,18 @@ type TaskResponse = {
   task: Task[]
 }
 
-function solveUserSyno (e?: KeyboardEvent) {
+const pointsStore = usePointsStore();
+
+async function solveUserSyno (e?: KeyboardEvent) {
   if (!e || e.key === 'Enter') {
     const foundSynoIndex = synonyms.value.findIndex(syno => syno.value === userSyno.value);
     if (foundSynoIndex !== -1) {
       solvedSynonyms.value.push(synonyms.value[foundSynoIndex]);
       synonyms.value.splice(foundSynoIndex, 1);
-      console.log(synonyms.value[foundSynoIndex]);
       userSyno.value = '';
+
+      const pointsForGuess = synonyms.value[foundSynoIndex].pointsForGuess;
+      console.log(await pointsStore.setPoints(pointsForGuess));
     } else {
       shake();
     }

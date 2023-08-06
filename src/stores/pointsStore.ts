@@ -1,20 +1,27 @@
 import { reactive } from 'vue';
-import { defineStore, useFetch } from '../../.nuxt/imports';
+import { defineStore, useAuth, useFetch } from '../../.nuxt/imports';
 
-export const useSidebarStore = defineStore('sidebarStore', () => {
-  const currentPoints = reactive({ value: 0 });
+export const usePointsStore = defineStore('pointsStore', () => {
+  const { data: { value: { user: { account } } } } = useAuth();
+  const currentPoints = reactive({ value: account.points });
 
   function getPoints () {
-    currentPoints.value = useFetch();
-    return currentPoints.value;
+    return account.points;
   }
-  function setPoints (isVisible: boolean) {
-    currentPoints.value = isVisible;
-    return currentPoints.value;
+  async function setPoints (amount: number) {
+    currentPoints.value = currentPoints.value + amount;
+    const fetch = await useFetch('/api/points/add', {
+      method: 'POST',
+      body: {
+        userId: account.id,
+        amount
+      }
+    });
+    return fetch.data;
   }
   return ({
-    isExpanded: currentPoints,
-    toggleMenu: getPoints,
-    setMenuVisibility: setPoints
+    currentPoints,
+    getPoints,
+    setPoints
   });
 });

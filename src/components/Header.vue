@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, reactive, Ref, ref } from 'vue';
 import OverlayPanel from 'primevue/overlaypanel';
-import { useAuth } from '../../.nuxt/imports';
+import { useAuth, useFetch, useLazyFetch } from '../../.nuxt/imports';
 import { Theme, ThemesNames } from '@/app.config';
 import { useThemeStore } from '@/stores/themeStore';
 import { useSidebarStore } from '@/stores/sidebarStore';
@@ -29,9 +29,12 @@ onMounted(() => {
   theme.theme = currentTheme;
 });
 
-function calculatePointsToNextLvl (lvl: string) {
-  return (parseInt(lvl) + 1) * account.Level.Group.multiplier;
-}
+const pointsToNextLvl = await useLazyFetch('/api/points/toNextLevel', {
+  method: 'POST',
+  body: {
+    userId: account.userId
+  }
+}).data;
 
 function calculatePercentOfPointsProgress (currentPoints, nextLvlPoints) {
   return (currentPoints / nextLvlPoints) * 100;
@@ -123,12 +126,12 @@ function changeTheme () {
               <div>
                 <p>У вас <span class="text-primary">{{ account.points }}</span> очков</p>
                 <p class="mt-3">
-                  До следующего уровня осталось: {{ calculatePointsToNextLvl(account.Level.value) }}
+                  Для следующего уровня нужно: {{ pointsToNextLvl }}
                 </p>
               </div>
               <div class="flex flex-row mt-1">
                 <ProgressBar
-                  :value="calculatePercentOfPointsProgress(account.points, calculatePointsToNextLvl(account.Level.value))"
+                  :value="calculatePercentOfPointsProgress(account.points, pointsToNextLvl)"
                   class="w-full text-center"
                   :pt="{
                     value: {
@@ -136,7 +139,7 @@ function changeTheme () {
                     }
                   }"
                 />
-                <Badge :value="3" severity="danger" class="ml-2" />
+                <Badge :value="+account.Level.value + 1" severity="danger" class="ml-2" />
               </div>
             </div>
           </OverlayPanel>
