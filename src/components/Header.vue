@@ -99,38 +99,43 @@ function changeTheme () {
           <OverlayPanel :ref="overlays.profileOp" dismissable class="!t-p-0" @mouseleave="() => onMouseLeave('profileOp')">
             <div>
               <div class="link flex t-items-center">
-                <i class="pi pi-user p-text-secondary" />
-                <a href="#" class="t-pl-1">View Profile</a>
+                <NuxtLink to="/">
+                  <Button icon="p-text-secondary pi pi-user mr-1" unstyled class="t-pl-1 " label="View Profile" @click="signOutMe()" />
+                </NuxtLink>
               </div>
               <Divider />
               <div class="link flex t-items-center">
-                <i class="pi p-text-secondary pi-cog" />
-                <a href="#" class="t-pl-1">Account Settings</a>
+                <NuxtLink to="/">
+                  <Button icon="pi p-text-secondary pi-cog mr-1" unstyled class="t-pl-1 " label="Account Settings" @click="signOutMe()" />
+                </NuxtLink>
               </div>
               <div class="link flex t-items-center pt-3">
-                <i class="pi p-text-secondary pi-file-edit" />
-                <a href="#" class="t-pl-1">My tasks</a>
+                <NuxtLink to="/">
+                  <Button icon="pi p-text-secondary pi-file-edit mr-1" unstyled class="t-pl-1 " label="My tasks" @click="signOutMe()" />
+                </NuxtLink>
               </div>
               <Divider />
               <div class="link flex t-items-center">
-                <i class="pi p-text-secondary pi-comments" />
-                <a href="#" class="t-pl-1">Commented tasks</a>
+                <NuxtLink to="/">
+                  <Button icon="pi p-text-secondary pi-comments mr-1" unstyled class="t-pl-1 " label="Commented tasks" @click="signOutMe()" />
+                </NuxtLink>
               </div>
               <Divider />
               <div class="link flex t-items-center">
-                <i class="pi p-text-secondary pi-check-circle" />
-                <a href="#" class="t-pl-1">Completed tasks</a>
+                <NuxtLink to>
+                  <Button icon="pi p-text-secondary pi-check-circle mr-1" label="Completed tasks" unstyled />
+                </NuxtLink>
               </div>
-              <div class="link flex t-items-center pt-3">
-                <i class="pi p-text-secondary pi-bookmark" />
-                <a href="#" class="t-pl-1">Bookmarked tasks</a>
+              <div class="link flex t-items-center">
+                <NuxtLink to="/">
+                  <Button icon="p-text-secondary pi pi-bookmark mr-1" unstyled class="link flex t-items-center pt-3" label="Bookmarked tasks" />
+                </NuxtLink>
               </div>
               <Divider />
               <div class="link flex t-items-center">
-                <i class="pi p-text-secondary pi-power-off" />
-                <Button unstyled class="t-pl-1" @click="signOutMe()">
-                  Sign out
-                </button>
+                <NuxtLink to="/">
+                  <Button icon="p-text-secondary pi pi-power-off mr-1" unstyled class="t-pl-1 " label="Sign out" @click="signOutMe()" />
+                </NuxtLink>
               </div>
             </div>
           </OverlayPanel>
