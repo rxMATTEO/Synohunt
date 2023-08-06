@@ -20,9 +20,24 @@ export const usePointsStore = defineStore('pointsStore', () => {
     currentPoints.value = fetch.data.value.points;
     return fetch.data;
   }
+
+  async function getPointsToNextLvl () {
+    return (await useFetch('/api/points/toNextLevel', {
+      method: 'POST',
+      body: {
+        userId: account.userId
+      }
+    })).data.value;
+  }
+
+  function calculatePercentOfPointsProgress (currentPoints, nextLvlPoints) {
+    return (currentPoints / nextLvlPoints) * 100;
+  }
   return ({
     currentPoints,
     getPoints,
-    setPoints
+    setPoints,
+    calculatePercentOfPointsProgress,
+    getPointsToNextLvl
   });
 });

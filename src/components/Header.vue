@@ -3,6 +3,7 @@ import { onMounted, reactive, Ref, ref, watch } from 'vue';
 import OverlayPanel from 'primevue/overlaypanel';
 import { useAuth, useFetch, useLazyFetch } from '../../.nuxt/imports';
 import { usePointsStore } from '../stores/pointsStore';
+import { useLevelStore } from '../stores/levelStore';
 import { Theme, ThemesNames } from '@/app.config';
 import { useThemeStore } from '@/stores/themeStore';
 import { useSidebarStore } from '@/stores/sidebarStore';
@@ -31,30 +32,29 @@ onMounted(() => {
 });
 
 const progress = reactive({ value: 0 });
-const level = reactive({ value: account.Level.value });
-const pointsToNextLvl = await useFetch('/api/points/toNextLevel', {
-  method: 'POST',
-  body: {
-    userId: account.userId
-  }
-}).then((res) => {
-  progress.value = calculatePercentOfPointsProgress(account.points, res.data.value.need);
-  return res.data.value;
-});
+// const pointsToNextLvl = await useFetch('/api/points/toNextLevel', {
+//   method: 'POST',
+//   body: {
+//     userId: account.userId
+//   }
+// }).then((res) => {
+//   progress.value = calculatePercentOfPointsProgress(account.points, res.data.value.need);
+//   return res.data.value;
+// });
 
-const pointsStore = usePointsStore();
-const points = pointsStore.currentPoints;
+const { currentPoints, calculatePercentOfPointsProgress, getPointsToNextLvl } = usePointsStore();
+const levelStore = useLevelStore();
+const level = levelStore.level;
+const points = currentPoints;
+const pointsToNextLvl = await getPointsToNextLvl();
+progress.value = calculatePercentOfPointsProgress(account.points, pointsToNextLvl.need);
 
-watch(points, (newPoints, oldPoints) => { // todo move in store and add toast
+watch(points, (newPoints) => { // todo move in store and add toast
   progress.value = calculatePercentOfPointsProgress(newPoints.value, pointsToNextLvl.need);
   if (newPoints.value >= pointsToNextLvl.need) {
     level.value = +level.value + 1;
   }
 });
-
-function calculatePercentOfPointsProgress (currentPoints, nextLvlPoints) {
-  return (currentPoints / nextLvlPoints) * 100;
-}
 
 function onMouseOver (e: MouseEvent, overlayName: OverlaysNames) {
   selected.value.hide?.();

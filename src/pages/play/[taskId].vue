@@ -65,7 +65,7 @@ type Diff = 'Easy' | 'Medium' | 'Hard';
 type Lang = 'English' | 'Russian';
 
 async function gotoRandomTask (diff: Diff, lang: Lang, butId: number) {
-  const randomTask = await $fetch('/api/task.vue/random', {
+  const randomTask = await $fetch('/api/task/random', {
     method: 'POST',
     body: {
       diff, lang, butId
