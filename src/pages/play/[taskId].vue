@@ -55,7 +55,7 @@ async function solveUserSyno (e?: KeyboardEvent) {
   }
 }
 
-// TODO ADD HINTS, FILTER NOT COMPLETED TASKS ONLY
+// TODO ADD HINTS, FILTER NOT COMPLETED TASKS ONLY, COMMENTS
 
 async function completeTask () {
   return await $fetch('/api/task/complete', {

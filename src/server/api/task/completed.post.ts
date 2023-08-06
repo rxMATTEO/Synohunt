@@ -5,7 +5,15 @@ export default defineEventHandler(async (event) => {
 
   const completedTasks = event.context.prisma.completedTask.findMany({
     include: {
-      Task: true
+      Task: {
+        include: {
+          Word: {
+            include: {
+              Synonym: true
+            }
+          }
+        }
+      }
     },
     where: {
       userId
