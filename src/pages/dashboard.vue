@@ -38,7 +38,7 @@ onMounted(() => onChangeTaskOption());
 // todo move this to types :)
 type Leader = Pick<User, 'name' | 'image' | 'points' | {level: Level}>;
 
-const { value: pointLeaders } = reactive({ value: (await useLazyFetch('/api/leaders?quantity=5')).data });
+const { value: pointLeaders } = reactive({ value: (await useFetch('/api/leaders?quantity=5')).data });
 // const pointLeaders: Ref<readonly Leader[]> = ref(
 //   [
 //     {
