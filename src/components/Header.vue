@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { onMounted, reactive, Ref, ref } from 'vue';
+import { onMounted, reactive, Ref, ref, watch } from 'vue';
 import OverlayPanel from 'primevue/overlaypanel';
 import { useAuth, useFetch, useLazyFetch } from '../../.nuxt/imports';
+import { usePointsStore } from '../stores/pointsStore';
 import { Theme, ThemesNames } from '@/app.config';
 import { useThemeStore } from '@/stores/themeStore';
 import { useSidebarStore } from '@/stores/sidebarStore';
@@ -29,12 +30,27 @@ onMounted(() => {
   theme.theme = currentTheme;
 });
 
+const progress = reactive({ value: 0 });
+const level = reactive({ value: account.Level.value });
 const pointsToNextLvl = await useLazyFetch('/api/points/toNextLevel', {
   method: 'POST',
   body: {
     userId: account.userId
   }
-}).data;
+}).then((res) => {
+  progress.value = calculatePercentOfPointsProgress(account.points, res.data.value.need);
+  return res.data.value;
+});
+
+const pointsStore = usePointsStore();
+const points = pointsStore.currentPoints;
+
+watch(points, (newPoints, oldPoints) => { // todo move in store and add toast
+  progress.value = calculatePercentOfPointsProgress(newPoints.value, pointsToNextLvl.need);
+  if (newPoints.value >= pointsToNextLvl.need) {
+    level.value = +level.value + 1;
+  }
+});
 
 function calculatePercentOfPointsProgress (currentPoints, nextLvlPoints) {
   return (currentPoints / nextLvlPoints) * 100;
@@ -120,18 +136,18 @@ function changeTheme () {
           </OverlayPanel>
         </div>
         <div class="badges">
-          <Badge :value="account.Level.value" class="mr-2" @mouseover="(e) => onMouseOver(e, 'levelOp')" />
+          <Badge :value="level.value" class="mr-2" @mouseover="(e) => onMouseOver(e, 'levelOp')" />
           <OverlayPanel :ref="overlays.levelOp" dismissable class="t-w-[300px]" @mouseleave="() => onMouseLeave('levelOp')">
             <div class="flex t-flex-col w-full">
               <div>
-                <p>У вас <span class="text-primary">{{ account.points }}</span> очков</p>
+                <p>У вас <span class="text-primary">{{ points.value }}</span> очков</p>
                 <p class="mt-3">
                   Для следующего уровня нужно: {{ pointsToNextLvl.need }}
                 </p>
               </div>
               <div class="flex flex-row mt-1">
                 <ProgressBar
-                  :value="calculatePercentOfPointsProgress(account.points, pointsToNextLvl.need)"
+                  :value="+progress.value.toFixed(1)"
                   class="w-full text-center"
                   :pt="{
                     value: {
@@ -139,7 +155,7 @@ function changeTheme () {
                     }
                   }"
                 />
-                <Badge :value="+account.Level.value + 1" severity="danger" class="ml-2" />
+                <Badge :value="+level.value + 1" severity="danger" class="ml-2" />
               </div>
             </div>
           </OverlayPanel>

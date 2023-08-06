@@ -6,7 +6,7 @@ export const usePointsStore = defineStore('pointsStore', () => {
   const currentPoints = reactive({ value: account.points });
 
   function getPoints () {
-    return account.points;
+    return currentPoints.value;
   }
   async function setPoints (amount: number) {
     currentPoints.value = currentPoints.value + amount;
@@ -17,6 +17,7 @@ export const usePointsStore = defineStore('pointsStore', () => {
         amount
       }
     });
+    currentPoints.value = fetch.data.value.points;
     return fetch.data;
   }
   return ({
