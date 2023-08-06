@@ -23,11 +23,18 @@ useFetch('/api/langs').then((res) => {
   langs.value = res.data.value;
   selectedLanguage.value = langs.value[0];
 });
-function onChangeTaskOption () {
+function onChangeTaskOption (id = -1) {
   setTimeout(async () => {
     if (selectedLanguage.value.langFull && selectedDiff.value.name) {
-      const tasksFetched = await $fetch(`/api/task?lang=${selectedLanguage.value.langFull}&diff=${selectedDiff.value.name}`);
-      task.value = tasksFetched[0] || {
+      const tasksFetched = await $fetch('/api/task/random', {
+        method: 'POST',
+        body: {
+          diff: selectedDiff.value.name,
+          lang: selectedLanguage.value.langFull,
+          butId: id
+        }
+      });
+      task.value = tasksFetched || {
         description: 'По данным фильтрам не найдены испытания!'
       };
     }
@@ -118,7 +125,7 @@ const positionSeverities = {
                     <NuxtLink v-if="task.value.id" :to="`/play/${task.value.id}`">
                       <Button type="null" label="TRAIN" class="text-sm p-2 mr-2 bg-blue-300 border-1 border-white hover:bg-blue-800 text-white" />
                     </NuxtLink>
-                    <Button type="null" label="SKIP" class="text-sm p-2 bg-indigo-400 border-1 border-white hover:bg-indigo-800 text-white" />
+                    <Button type="null" label="SKIP" class="text-sm p-2 bg-indigo-400 border-1 border-white hover:bg-indigo-800 text-white" @click="onChangeTaskOption(task.value.id)" />
                   </div>
                 </div>
               </div>

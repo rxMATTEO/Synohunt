@@ -87,9 +87,9 @@ async function gotoRandomTask (diff: Diff, lang: Lang, butId: number) {
       <div class="lg:px-8 lg:mx-8 px-3" @keyup="solveUserSyno">
         <div class="surface-ground t-rounded-md p-5 h-fit">
           <div class="relative">
-            <Button v-tooltip="'Goto next task.vue'" class="absolute right-0 text-right" icon="pi pi-arrow-right" unstyled @click="gotoRandomTask(task.value.Difficulity.name, task.value.Language.langFull, task.value.id)" />
+            <Button v-tooltip="'Goto next task'" class="absolute right-0 text-right" icon="pi pi-arrow-right" unstyled @click="gotoRandomTask(task.value.Difficulity.name, task.value.Language.langFull, task.value.id)" />
             <NuxtLink to="/create/task">
-              <Button v-tooltip="'Create new task.vue'" class="mt-3 absolute t-top-5 right-0 text-right" icon="pi pi-plus" unstyled />
+              <Button v-tooltip="'Create new task'" class="mt-3 absolute t-top-5 right-0 text-right" icon="pi pi-plus" unstyled />
             </NuxtLink>
           </div>
           <h1 class="text-4xl">

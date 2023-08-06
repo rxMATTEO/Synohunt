@@ -13,6 +13,7 @@ import Column from 'primevue/column';
 import Checkbox from 'primevue/checkbox';
 import InputText from 'primevue/inputtext';
 import Tooltip from 'primevue/tooltip';
+import PickList from 'primevue/picklist';
 
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.use(PrimeVue, { ripple: true });
@@ -30,4 +31,5 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component('Column', Column);
   nuxtApp.vueApp.component('Checkbox', Checkbox);
   nuxtApp.vueApp.component('InputText', InputText);
+  nuxtApp.vueApp.component('PickList', PickList);
 });

@@ -7,6 +7,8 @@ const langs = reactive({ value: [] as ServerLang[] });
 
 const selectedDiff = reactive<{value: ServerDiff}>({ value: {} as ServerDiff });
 const selectedLanguage = reactive<{value: ServerLang}>({ value: {} as ServerLang });
+const word = reactive({ value: '' });
+const synonyms = reactive({ value: [[], []] });
 useFetch('/api/diffs').then((res) => {
   diffs.value = res.data.value;
   selectedDiff.value = diffs.value[0];
@@ -15,6 +17,12 @@ useFetch('/api/langs').then((res) => {
   langs.value = res.data.value;
   selectedLanguage.value = langs.value[0];
 });
+
+async function randomGenerateTask () {
+  const task = await $fetch(`/api/word/random?lang=${selectedLanguage.value.langFull}&diff=${selectedDiff.value.name}`);
+  word.value = task.word.word;
+  synonyms.value[0] = task.synos;
+}
 </script>
 
 <template>
@@ -24,7 +32,7 @@ useFetch('/api/langs').then((res) => {
         <div class="surface-ground t-rounded-md p-5 h-fit">
           <div class="relative">
             <div class="absolute right-0">
-              <i class="" />
+              <Button v-tooltip="'Generate randomly'" icon="pi pi-sync" unstyled @click="randomGenerateTask" />
             </div>
           </div>
           <h1 class="text-4xl">
@@ -80,6 +88,42 @@ useFetch('/api/langs').then((res) => {
                 </template>
               </Dropdown>
               <label for="dd-lang" class="">Select Language</label>
+            </div>
+          </div>
+          <div class="mt-5">
+            <p>Word</p>
+            <InputText v-model="word.value" type="text" class="w-full" />
+          </div>
+          <div class="mt-5">
+            <p>Synonyms</p>
+            <div class="mt-5">
+              <PickList
+                v-model="synonyms.value"
+                data-key="id"
+              >
+                <template #sourceheader>
+                  Available
+                </template>
+                <template #targetheader>
+                  Selected
+                </template>
+                <template #item="slotProps">
+                  <div class="flex flex-wrap p-2 align-items-center gap-3">
+                    <div class="flex-1 flex flex-column gap-2">
+                      <span class="font-bold">{{ slotProps.item.value }}</span>
+                      <div class="flex align-items-center gap-2">
+                        <Badge :value="slotProps.item.pointsForGuess" :severity="'info'" />
+                      </div>
+                    </div>
+                  </div>
+                </template>
+              </PickList>
+            </div>
+            <div class="mt-5">
+              <!--              todo redirect to my tasks-->
+              <NuxtLink to="/dashboard">
+                <Button label="Create task" type="null" class="mx-auto block" />
+              </NuxtLink>
             </div>
           </div>
         </div>
