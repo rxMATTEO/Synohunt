@@ -99,7 +99,7 @@ function changeTheme () {
             v-badge.success="4"
             shape="circle"
             :image="account.image"
-            class="mr-3 overflow-hidden"
+            class="mr-3 "
             size="small"
             :pt="{
               image: {
@@ -134,7 +134,7 @@ function changeTheme () {
               </div>
               <Divider />
               <div class="link flex t-items-center">
-                <NuxtLink to>
+                <NuxtLink to="/profile/completed">
                   <Button icon="pi p-text-secondary pi-check-circle mr-1" label="Completed tasks" unstyled />
                 </NuxtLink>
               </div>
