@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import {definePageMeta} from '../../.nuxt/imports';
+import { definePageMeta } from '#imports';
 
 definePageMeta({
   auth: {
     unauthenticatedOnly: true,
-    navigateAuthenticatedTo: '/dashboard',
+    navigateAuthenticatedTo: '/dashboard'
   }
 });
 
@@ -17,9 +17,13 @@ definePageMeta({
         <div class="t-h-52 relative top-0 flex justify-content-center">
           <img src="/img/biglogo.png" alt="Image" class="text-center mb-3 h-full overflow-hidden absolute top-0">
         </div>
-        <div class="text-900 text-3xl font-medium mb-3">Register</div>
+        <div class="text-900 text-3xl font-medium mb-3">
+          Register
+        </div>
         <span class="text-600 font-medium line-height-3">Allready have an account?</span>
-        <NuxtLink to="login" class="font-medium no-underline ml-2 text-blue-500 cursor-pointer">Login now!</NuxtLink>
+        <NuxtLink to="login" class="font-medium no-underline ml-2 text-blue-500 cursor-pointer">
+          Login now!
+        </NuxtLink>
       </div>
 
       <div>
@@ -33,7 +37,7 @@ definePageMeta({
         <InputText id="email" type="text" class="w-full mb-3" />
 
         <div class="mt-6">
-          <Button label="Register" icon="pi pi-user-plus" type="null" class="w-full"></Button>
+          <Button label="Register" icon="pi pi-user-plus" type="null" class="w-full" />
         </div>
       </div>
     </div>

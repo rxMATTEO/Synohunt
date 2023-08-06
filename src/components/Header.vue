@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { onMounted, reactive, Ref, ref, watch } from 'vue';
 import OverlayPanel from 'primevue/overlaypanel';
-import { useAuth, useFetch, useLazyFetch } from '../../.nuxt/imports';
 import { usePointsStore } from '../stores/pointsStore';
 import { useLevelStore } from '../stores/levelStore';
+import { useAuth, useFetch, useLazyFetch } from '#imports';
 import { Theme, ThemesNames } from '@/app.config';
 import { useThemeStore } from '@/stores/themeStore';
 import { useSidebarStore } from '@/stores/sidebarStore';

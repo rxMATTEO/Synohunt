@@ -1,6 +1,5 @@
 import PrimeVue from 'primevue/config';
 import Button from 'primevue/button';
-import { defineNuxtPlugin } from 'nuxt/app';
 import Dropdown from 'primevue/dropdown';
 import Badge from 'primevue/badge';
 import Avatar from 'primevue/avatar';
@@ -16,6 +15,7 @@ import Tooltip from 'primevue/tooltip';
 import PickList from 'primevue/picklist';
 import FocusTrap from 'primevue/focustrap';
 import Dialog from 'primevue/dialog';
+import { defineNuxtPlugin } from '#imports';
 
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.use(PrimeVue, { ripple: true });

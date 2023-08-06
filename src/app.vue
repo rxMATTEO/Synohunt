@@ -1,28 +1,28 @@
 <template>
-  <NuxtPage  onload="load()"/>
+  <NuxtPage onload="load()" />
 </template>
 
 <script setup lang="ts">
-import {onBeforeMount, onMounted, reactive} from 'vue';
-import {Platforms, Theme, ThemesNames} from './app.config.ts';
-import {useAppConfig, useRuntimeConfig} from 'nuxt/app';
-import {usePrimeVue} from 'primevue/config';
-import {useThemeStore} from '@/stores/themeStore';
+import { onBeforeMount, onMounted, reactive } from 'vue';
+import { usePrimeVue } from 'primevue/config';
+import { Platforms, Theme, ThemesNames } from './app.config.ts';
+import { useAppConfig, useRuntimeConfig } from '#imports';
+import { useThemeStore } from '@/stores/themeStore';
 const appConfig = useAppConfig();
 const primeVue = usePrimeVue();
 onMounted(() => {
-  if(window.document.documentElement.offsetWidth >= 768) {
+  if (window.document.documentElement.offsetWidth >= 768) {
     appConfig.platform = Platforms.pc;
   } else {
     appConfig.platform = Platforms.mobile;
   }
-  const {setCurrentTheme, getCurrentTheme} = useThemeStore();
+  const { setCurrentTheme, getCurrentTheme } = useThemeStore();
 
   setTimeout(() => {
-    if(getCurrentTheme() === 'light'){
-      setCurrentTheme('dark','light');
+    if (getCurrentTheme() === 'light') {
+      setCurrentTheme('dark', 'light');
     }
-  }, 0); //TODO idk pls fix
+  }, 0); // TODO idk pls fix
 });
 </script>
 
@@ -41,7 +41,6 @@ html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, ul, li
   border: 0
   font-size: 100%
   vertical-align: baseline
-
 
 html, body
   scroll-behavior: smooth

@@ -1,5 +1,5 @@
 import { reactive } from 'vue';
-import { defineStore, useAuth, useFetch } from '../../.nuxt/imports';
+import { defineStore, useAuth, useFetch } from '#imports';
 
 export const usePointsStore = defineStore('pointsStore', () => {
   const { data: { value: { user: { account } } } } = useAuth();
