@@ -39,11 +39,15 @@ async function solveUserSyno (e?: KeyboardEvent) {
     const foundSynoIndex = synonyms.value.findIndex(syno => syno.value === userSyno.value);
     if (foundSynoIndex !== -1) {
       solvedSynonyms.value.push(synonyms.value[foundSynoIndex]);
+      const pointsForGuess = synonyms.value[foundSynoIndex].pointsForGuess;
       synonyms.value.splice(foundSynoIndex, 1);
       userSyno.value = '';
 
-      const pointsForGuess = synonyms.value[foundSynoIndex].pointsForGuess;
       await pointsStore.setPoints(pointsForGuess);
+
+      if (synonyms.value.length === 0) {
+        isDialogVisible.value = true;
+      }
     } else {
       shake();
     }
@@ -79,11 +83,22 @@ async function gotoRandomTask (diff: Diff, lang: Lang, butId: number) {
     params: { taskId: task.value.id }
   });
 }
+
+const isDialogVisible = ref(false);
 </script>
 
 <template>
   <div>
     <NuxtLayout name="header-n-sidebar">
+      <Dialog v-model:visible="isDialogVisible" modal header="Header" :style="{ width: '50vw' }">
+        <p>
+          You completed this task!
+        </p>
+        <template #footer>
+          <Button label="Cool" icon="pi pi-check" autofocus type="null" @click="() => {isDialogVisible = false; gotoRandomTask(task.value.Difficulity.name, task.value.Language.langFull, task.value.id)}" />
+        </template>
+      </Dialog>
+
       <div class="lg:px-8 lg:mx-8 px-3" @keyup="solveUserSyno">
         <div class="surface-ground t-rounded-md p-5 h-fit">
           <div class="relative">
@@ -101,7 +116,7 @@ async function gotoRandomTask (diff: Diff, lang: Lang, butId: number) {
             </p>
             <div class="mt-3">
               <span v-for="word in task.value.description.split(' ')">
-                <span :class="{'bg-primary-500': word === task.value.Word.word} ">{{ word }}</span>
+                <span :class="{'bg-primary-500': word.toLowerCase().includes(task.value.Word.word.toLowerCase())} ">{{ word }}</span>
                 {{ }}
               </span>
             </div>
@@ -136,6 +151,7 @@ async function gotoRandomTask (diff: Diff, lang: Lang, butId: number) {
                 <InputText
                   id="user-syno"
                   v-model="userSyno"
+                  v-focustrap
                   class="w-full"
                   tabindex="10"
                 />
@@ -143,6 +159,7 @@ async function gotoRandomTask (diff: Diff, lang: Lang, butId: number) {
               </p>
               <div class="mx-auto mt-5">
                 <Button
+                  v-focustrap
                   tabindex="10"
                   label="Guess"
                   type="null"

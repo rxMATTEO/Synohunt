@@ -14,11 +14,14 @@ import Checkbox from 'primevue/checkbox';
 import InputText from 'primevue/inputtext';
 import Tooltip from 'primevue/tooltip';
 import PickList from 'primevue/picklist';
+import FocusTrap from 'primevue/focustrap';
+import Dialog from 'primevue/dialog';
 
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.use(PrimeVue, { ripple: true });
   nuxtApp.vueApp.directive('badge', BadgeDirective);
   nuxtApp.vueApp.directive('tooltip', Tooltip);
+  nuxtApp.vueApp.directive('focustrap', FocusTrap);
 
   nuxtApp.vueApp.component('Button', Button);
   nuxtApp.vueApp.component('Dropdown', Dropdown);
@@ -32,4 +35,5 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component('Checkbox', Checkbox);
   nuxtApp.vueApp.component('InputText', InputText);
   nuxtApp.vueApp.component('PickList', PickList);
+  nuxtApp.vueApp.component('Dialog', Dialog);
 });
