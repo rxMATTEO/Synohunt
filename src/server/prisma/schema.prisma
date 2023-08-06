@@ -81,6 +81,16 @@ model User {
   account      Account[]
   sessions     Session[]
   Notification Notification[]
+  CompletedTask   CompletedTask[]
+}
+
+model CompletedTask {
+  id          Int         @id @default(autoincrement())
+  userId String
+  taskId Int
+
+  User User @relation(fields: [userId], references: [id])
+  Task Task @relation(fields: [taskId], references: [id])
 }
 
 model Task {
@@ -93,6 +103,7 @@ model Task {
   Difficulity Difficulity @relation(fields: [diffId], references: [id])
   Language    Language    @relation(fields: [langId], references: [id])
   Tag         Tag[]
+  CompletedTask   CompletedTask[]
 }
 
 model Difficulity {

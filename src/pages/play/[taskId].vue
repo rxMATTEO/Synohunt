@@ -54,6 +54,10 @@ async function solveUserSyno (e?: KeyboardEvent) {
   }
 }
 
+function completeTask () {
+
+}
+
 const isShaking = reactive({ value: false });
 function shake () {
   isShaking.value = true;
