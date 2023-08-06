@@ -31,7 +31,7 @@ type TaskResponse = {
   },
   task: Task[]
 }
-
+const { data: { value: { user: { account } } } } = useAuth();
 const pointsStore = usePointsStore();
 
 async function solveUserSyno (e?: KeyboardEvent) {
@@ -47,6 +47,7 @@ async function solveUserSyno (e?: KeyboardEvent) {
 
       if (synonyms.value.length === 0) {
         isDialogVisible.value = true;
+        completeTask();
       }
     } else {
       shake();
@@ -54,8 +55,16 @@ async function solveUserSyno (e?: KeyboardEvent) {
   }
 }
 
-function completeTask () {
+// TODO ADD HINTS, FILTER NOT COMPLETED TASKS ONLY
 
+async function completeTask () {
+  return await $fetch('/api/task/complete', {
+    method: 'POST',
+    body: {
+      userId: account.id,
+      taskId: +route.params.taskId
+    }
+  });
 }
 
 const isShaking = reactive({ value: false });
