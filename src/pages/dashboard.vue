@@ -6,8 +6,8 @@ definePageMeta({
   middleware: 'auth'
 });
 
-type ServerDiff = Pick<Difficulity, 'name'>;
-type ServerLang = Pick<Language, 'langFull'>;
+export type ServerDiff = Pick<Difficulity, 'name'>;
+export type ServerLang = Pick<Language, 'langFull'>;
 
 const diffs = reactive({ value: [] as ServerDiff[] });
 const langs = reactive({ value: [] as ServerLang[] });
@@ -39,50 +39,6 @@ onMounted(() => onChangeTaskOption());
 type Leader = Pick<User, 'name' | 'image' | 'points' | {level: Level}>;
 
 const { value: pointLeaders } = reactive({ value: (await useFetch('/api/leaders?quantity=5')).data });
-// const pointLeaders: Ref<readonly Leader[]> = ref(
-//   [
-//     {
-//       lvl: 228,
-//       user: {
-//         name: 'Ivan',
-//         imgPath: '/img/placeholder',
-//       },
-//       points: 228,
-//       position: 1,
-//       tasks: [1,2,3],
-//     },
-//     {
-//       lvl: 228,
-//       user: {
-//         name: 'Ivan',
-//         imgPath: '/img/placeholder',
-//       },
-//       points: 228,
-//       position: 2,
-//       tasks: [1,2,3],
-//     },
-//     {
-//       lvl: 228,
-//       user: {
-//         name: 'Ivan',
-//         imgPath: '/img/placeholder',
-//       },
-//       points: 228,
-//       position: 3,
-//       tasks: [1,2,3],
-//     },
-//     {
-//       lvl: 228,
-//       user: {
-//         name: 'Ivan',
-//         imgPath: '/img/placeholder',
-//       },
-//       points: 228,
-//       position: 4,
-//       tasks: [1,2,3],
-//     },
-//   ]
-// );
 
 const positionSeverities = {
   1: 'success',
