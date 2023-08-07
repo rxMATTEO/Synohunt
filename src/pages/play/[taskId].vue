@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue';
-import { NuxtOptionsRouter } from '@nuxt/types/config/router';
 import { usePointsStore } from '../../stores/pointsStore';
 
 type RouteParams = {
@@ -96,6 +95,40 @@ async function gotoRandomTask (diff: Diff, lang: Lang, butId: number) {
     params: { taskId: task.value.id }
   });
 }
+const bookmark = await checkBookmark();
+const isBookmarked = reactive({ value: !!bookmark });
+
+async function toggleBookmarkTask () {
+  if (isBookmarked.value) {
+    isBookmarked.value = false;
+    return await $fetch('/api/task/deleteBookmark', {
+      method: 'POST',
+      body: {
+        userId: account.id,
+        taskId: task.value.id
+      }
+    });
+  } else {
+    isBookmarked.value = true;
+    return await $fetch('/api/task/setBookmark', {
+      method: 'POST',
+      body: {
+        userId: account.id,
+        taskId: task.value.id
+      }
+    });
+  }
+}
+
+async function checkBookmark () {
+  return await $fetch('/api/task/getBookmark', {
+    method: 'POST',
+    body: {
+      userId: account.id,
+      taskId: task.value.id
+    }
+  });
+}
 
 const isDialogVisible = ref(false);
 </script>
@@ -119,6 +152,7 @@ const isDialogVisible = ref(false);
             <NuxtLink to="/create/task">
               <Button v-tooltip="'Create new task'" class="mt-3 absolute t-top-5 right-0 text-right" icon="pi pi-plus" unstyled />
             </NuxtLink>
+            <Button class="absolute right-0 mt-5 t-top-10 text-right" :icon="isBookmarked.value ? 'pi pi-star-fill': 'pi pi-star'" unstyled @click="toggleBookmarkTask" />
           </div>
           <h1 class="text-4xl">
             Guess the all synonyms

@@ -78,14 +78,24 @@ model User {
   Level         Level     @relation(fields: [levelId], references: [id])
   points        Int       @default(1)
 
-  account      Account[]
-  sessions     Session[]
-  Notification Notification[]
-  CompletedTask   CompletedTask[]
+  account        Account[]
+  sessions       Session[]
+  Notification   Notification[]
+  CompletedTask  CompletedTask[]
+  BookmarkedTask BookmarkedTask[]
 }
 
 model CompletedTask {
-  id          Int         @id @default(autoincrement())
+  id     Int    @id @default(autoincrement())
+  userId String
+  taskId Int
+
+  User User @relation(fields: [userId], references: [id])
+  Task Task @relation(fields: [taskId], references: [id])
+}
+
+model BookmarkedTask {
+  id     Int    @id @default(autoincrement())
   userId String
   taskId Int
 
@@ -94,16 +104,17 @@ model CompletedTask {
 }
 
 model Task {
-  id          Int         @id @default(autoincrement())
-  diffId      Int
-  langId      Int
-  description String
-  wordId      Int
-  Word        Word        @relation(fields: [wordId], references: [id])
-  Difficulity Difficulity @relation(fields: [diffId], references: [id])
-  Language    Language    @relation(fields: [langId], references: [id])
-  Tag         Tag[]
-  CompletedTask   CompletedTask[]
+  id             Int              @id @default(autoincrement())
+  diffId         Int
+  langId         Int
+  description    String
+  wordId         Int
+  Word           Word             @relation(fields: [wordId], references: [id])
+  Difficulity    Difficulity      @relation(fields: [diffId], references: [id])
+  Language       Language         @relation(fields: [langId], references: [id])
+  Tag            Tag[]
+  CompletedTask  CompletedTask[]
+  BookmarkedTask BookmarkedTask[]
 }
 
 model Difficulity {
@@ -136,11 +147,11 @@ model Word {
 }
 
 model Synonym {
-  id     Int    @id @default(autoincrement())
-  wordId Int
-  value  String
-  pointsForGuess Int @default(5)
-  Word   Word   @relation(references: [id], fields: [wordId])
+  id             Int    @id @default(autoincrement())
+  wordId         Int
+  value          String
+  pointsForGuess Int    @default(5)
+  Word           Word   @relation(references: [id], fields: [wordId])
 }
 
 model VerificationToken {
