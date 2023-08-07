@@ -6,15 +6,15 @@ const { data: { value: { user: { account } } } } = useAuth();
 const active = ref(0);
 const items = ref([
   {
-    label: 'Home',
-    icon: 'pi pi-fw pi-home'
+    label: 'Stats',
+    icon: 'pi pi-fw pi-chart-bar'
   },
   {
-    label: 'Calendar',
+    label: 'Solutions',
     icon: 'pi pi-fw pi-calendar'
   },
   {
-    label: 'Edit',
+    label: 'Comments',
     icon: 'pi pi-fw pi-pencil'
   },
   {
@@ -26,6 +26,13 @@ const items = ref([
     icon: 'pi pi-fw pi-cog'
   }
 ]);
+
+function changeTab (e) {
+
+}
+
+const array = [1, 2, 3, 4, 5];
+const index = ref(0);
 </script>
 
 <template>
@@ -85,7 +92,11 @@ const items = ref([
             </div>
           </div>
         </div>
-        <TabMenu v-model:activeIndex="active" :model="items" />
+
+        <div class="px-3 mt-5 surface-ground">
+          <TabMenu v-model:activeIndex="active" :model="items" @tab-change="changeTab" />
+          {{ array[active] }}
+        </div>
       </div>
     </NuxtLayout>
   </div>
