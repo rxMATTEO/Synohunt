@@ -4,9 +4,13 @@ import { useLevelStore } from '../stores/levelStore';
 import { usePointsStore } from '../stores/pointsStore';
 
 defineProps({
-  onMouseOver: Function,
+  onMouseOver: {
+    type: Function,
+    default: () => {}
+  },
   onMouseLeave: Function,
-  overlays: Object
+  overlays: Object,
+  onlyBadge: Boolean
 });
 const { data: { value: { user: { account } } } } = useAuth();
 const { currentPoints, calculatePercentOfPointsProgress, getPointsToNextLvl } = usePointsStore();
@@ -28,7 +32,7 @@ watch(points, (newPoints) => { // todo move in store and add toast
 <template>
   <div class="badges">
     <Badge :value="level.value" class="mr-2" @mouseover="(e) => onMouseOver(e, 'levelOp')" />
-    <OverlayPanel :ref="overlays.levelOp" dismissable class="t-w-[300px]" @mouseleave="() => onMouseLeave('levelOp')">
+    <OverlayPanel v-if="!onlyBadge" :ref="overlays.levelOp" dismissable class="t-w-[300px]" @mouseleave="() => onMouseLeave('levelOp')">
       <div class="flex t-flex-col w-full">
         <div>
           <p>У вас <span class="text-primary">{{ points.value }}</span> очков</p>
