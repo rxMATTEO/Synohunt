@@ -16,6 +16,7 @@ import PickList from 'primevue/picklist';
 import FocusTrap from 'primevue/focustrap';
 import Dialog from 'primevue/dialog';
 import DataView from 'primevue/dataview';
+import TabMenu from 'primevue/tabmenu';
 import { defineNuxtPlugin } from '#imports';
 
 export default defineNuxtPlugin((nuxtApp) => {
@@ -38,4 +39,5 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component('PickList', PickList);
   nuxtApp.vueApp.component('Dialog', Dialog);
   nuxtApp.vueApp.component('DataView', DataView);
+  nuxtApp.vueApp.component('TabMenu', TabMenu);
 });

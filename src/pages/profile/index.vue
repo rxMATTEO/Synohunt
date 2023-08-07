@@ -1,5 +1,31 @@
 <script setup lang="ts">
+import { ref } from 'vue';
+
 const { data: { value: { user: { account } } } } = useAuth();
+
+const active = ref(0);
+const items = ref([
+  {
+    label: 'Home',
+    icon: 'pi pi-fw pi-home'
+  },
+  {
+    label: 'Calendar',
+    icon: 'pi pi-fw pi-calendar'
+  },
+  {
+    label: 'Edit',
+    icon: 'pi pi-fw pi-pencil'
+  },
+  {
+    label: 'Documentation',
+    icon: 'pi pi-fw pi-file'
+  },
+  {
+    label: 'Settings',
+    icon: 'pi pi-fw pi-cog'
+  }
+]);
 </script>
 
 <template>
@@ -59,6 +85,7 @@ const { data: { value: { user: { account } } } } = useAuth();
             </div>
           </div>
         </div>
+        <TabMenu v-model:activeIndex="active" :model="items" />
       </div>
     </NuxtLayout>
   </div>
