@@ -1,8 +1,6 @@
 <script setup lang="ts">
-import { onMounted, reactive, Ref, ref, watch } from 'vue';
+import { onMounted, reactive, Ref, ref } from 'vue';
 import OverlayPanel from 'primevue/overlaypanel';
-import { usePointsStore } from '../stores/pointsStore';
-import { useLevelStore } from '../stores/levelStore';
 import { useAuth } from '#imports';
 import { Theme, ThemesNames } from '@/app.config';
 import { useThemeStore } from '@/stores/themeStore';
@@ -15,7 +13,7 @@ defineProps({
 const { getCurrentTheme, setCurrentTheme, currentTheme } = useThemeStore();
 const selected = ref({} as OverlayPanel);
 const theme: {theme: Theme} = reactive({ theme: { dark: true } });
-const { status, data: { value: { user: { account } } }, signIn, signOut } = useAuth();
+const { data: { value: { user: { account } } }, signOut } = useAuth();
 const overlaysNames = ['messagesOp', 'profileOp', 'levelOp'] as const;
 type OverlaysNames = typeof overlaysNames[number]
 type Overlay = {
@@ -29,31 +27,6 @@ const overlays: Overlay = overlaysNames.reduce((obj, name) => {
 onMounted(() => {
   getCurrentTheme();
   theme.theme = currentTheme;
-});
-
-const progress = reactive({ value: 0 });
-// const pointsToNextLvl = await useFetch('/api/points/toNextLevel', {
-//   method: 'POST',
-//   body: {
-//     userId: account.userId
-//   }
-// }).then((res) => {
-//   progress.value = calculatePercentOfPointsProgress(account.points, res.data.value.need);
-//   return res.data.value;
-// });
-
-const { currentPoints, calculatePercentOfPointsProgress, getPointsToNextLvl } = usePointsStore();
-const levelStore = useLevelStore();
-const level = levelStore.level;
-const points = currentPoints;
-const pointsToNextLvl = await getPointsToNextLvl();
-progress.value = calculatePercentOfPointsProgress(account.points, pointsToNextLvl.need);
-
-watch(points, (newPoints) => { // todo move in store and add toast
-  progress.value = calculatePercentOfPointsProgress(newPoints.value, pointsToNextLvl.need);
-  if (newPoints.value >= pointsToNextLvl.need) {
-    level.value = +level.value + 1;
-  }
 });
 
 function onMouseOver (e: MouseEvent, overlayName: OverlaysNames) {
@@ -153,33 +126,7 @@ function changeTheme () {
           </OverlayPanel>
         </div>
         <div class="badges">
-          <Badge :value="level.value" class="mr-2" @mouseover="(e) => onMouseOver(e, 'levelOp')" />
-          <OverlayPanel :ref="overlays.levelOp" dismissable class="t-w-[300px]" @mouseleave="() => onMouseLeave('levelOp')">
-            <div class="flex t-flex-col w-full">
-              <div>
-                <p>У вас <span class="text-primary">{{ points.value }}</span> очков</p>
-                <p class="mt-3">
-                  Для следующего уровня нужно: {{ pointsToNextLvl.need }}
-                </p>
-              </div>
-              <div class="flex flex-row mt-1">
-                <ProgressBar
-                  :value="+progress.value.toFixed(1)"
-                  class="w-full text-center"
-                  :pt="{
-                    value: {
-                      class: ['animated-gradient-rainbow'],
-                    }
-                  }"
-                />
-                <Badge :value="+level.value + 1" severity="danger" class="ml-2" />
-              </div>
-            </div>
-          </OverlayPanel>
-          <!--          <Badge :value="8" severity="success" class="mr-2"></Badge>-->
-          <!--          <Badge :value="4" severity="info" class="mr-2"></Badge>-->
-          <!--          <Badge :value="12" severity="warning" class="mr-2"></Badge>-->
-          <!--          <Badge :value="3" severity="danger"></Badge>-->
+          <UserLevel :on-mouse-leave="onMouseLeave" :on-mouse-over="onMouseOver" :overlays="overlays" />
         </div>
         <Button unstyled class="ml-5" @click="changeTheme">
           <i v-if="theme.theme.dark" class="pi pi-moon text-xl cursor-pointer t-fill-black" />
