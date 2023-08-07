@@ -38,7 +38,7 @@ const items = ref([
               <UserLevel :only-badge="true" />
               <div>{{ account.name }}</div>
             </div>
-            <div class="max-md:mt-3">
+            <div class="mt-3">
               <div>
                 <b>Member since: </b>
                 <span class="white-space-nowrap">{{ new Date().toLocaleString() }}</span>
@@ -49,7 +49,7 @@ const items = ref([
               </div>
             </div>
 
-            <div class="max-md:mt-3">
+            <div class="mt-3">
               <div>
                 <b>Following: </b>
                 <span class="white-space-nowrap">{{ 0 }}</span>
@@ -62,9 +62,9 @@ const items = ref([
           </div>
         </div>
 
-        <div class="flex flex-wrap gap-5 mt-5 h-max">
-          <div class="md:t-w-2/3 t-w-full">
-            <div class="p-3 t-min-h-full gradient-black-white t-rounded-md flex">
+        <div class="flex gap-5 mt-5 h-max">
+          <div class="t-w-2/3">
+            <div class="p-3 t-min-h-full surface-ground t-rounded-md flex">
               <div class="t-w-1/3 md:t-w-1/5">
                 <img src="/img/placeholder.png" class="block h-full" alt="todo">
               </div>
@@ -75,7 +75,7 @@ const items = ref([
             </div>
           </div>
 
-          <div class="t-w-full md:t-w-1/3 p-3 surface-ground t-rounded-md h-full flex">
+          <div class="t-w-1/3 p-3 surface-ground t-rounded-md h-full flex">
             <div class="t-w-1/3 md:t-w-1/5">
               <img src="/img/placeholder.png" class="block h-full" alt="todo">
             </div>
