@@ -3,7 +3,7 @@ import { onMounted, reactive, Ref, ref, watch } from 'vue';
 import OverlayPanel from 'primevue/overlaypanel';
 import { usePointsStore } from '../stores/pointsStore';
 import { useLevelStore } from '../stores/levelStore';
-import { useAuth, useFetch, useLazyFetch } from '#imports';
+import { useAuth } from '#imports';
 import { Theme, ThemesNames } from '@/app.config';
 import { useThemeStore } from '@/stores/themeStore';
 import { useSidebarStore } from '@/stores/sidebarStore';
@@ -139,7 +139,7 @@ function changeTheme () {
                 </NuxtLink>
               </div>
               <div class="link flex t-items-center">
-                <NuxtLink to="/">
+                <NuxtLink to="/profile/bookmarks">
                   <Button icon="p-text-secondary pi pi-bookmark mr-1" unstyled class="link flex t-items-center pt-3" label="Bookmarked tasks" />
                 </NuxtLink>
               </div>
