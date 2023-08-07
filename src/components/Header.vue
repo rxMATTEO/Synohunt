@@ -111,25 +111,25 @@ function changeTheme () {
           <OverlayPanel :ref="overlays.profileOp" dismissable class="!t-p-0" @mouseleave="() => onMouseLeave('profileOp')">
             <div>
               <div class="link flex t-items-center">
-                <NuxtLink to="/">
-                  <Button icon="p-text-secondary pi pi-user mr-1" unstyled class="t-pl-1 " label="View Profile" @click="signOutMe()" />
+                <NuxtLink to="/profile">
+                  <Button icon="p-text-secondary pi pi-user mr-1" unstyled class="t-pl-1 " label="View Profile" />
                 </NuxtLink>
               </div>
               <Divider />
               <div class="link flex t-items-center">
                 <NuxtLink to="/">
-                  <Button icon="pi p-text-secondary pi-cog mr-1" unstyled class="t-pl-1 " label="Account Settings" @click="signOutMe()" />
+                  <Button icon="pi p-text-secondary pi-cog mr-1" unstyled class="t-pl-1 " label="Account Settings" />
                 </NuxtLink>
               </div>
               <div class="link flex t-items-center pt-3">
                 <NuxtLink to="/">
-                  <Button icon="pi p-text-secondary pi-file-edit mr-1" unstyled class="t-pl-1 " label="My tasks" @click="signOutMe()" />
+                  <Button icon="pi p-text-secondary pi-file-edit mr-1" unstyled class="t-pl-1 " label="My tasks" />
                 </NuxtLink>
               </div>
               <Divider />
               <div class="link flex t-items-center">
                 <NuxtLink to="/">
-                  <Button icon="pi p-text-secondary pi-comments mr-1" unstyled class="t-pl-1 " label="Commented tasks" @click="signOutMe()" />
+                  <Button icon="pi p-text-secondary pi-comments mr-1" unstyled class="t-pl-1 " label="Commented tasks" />
                 </NuxtLink>
               </div>
               <Divider />
