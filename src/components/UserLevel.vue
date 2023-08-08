@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { reactive, watch } from 'vue';
-import { useLevelStore } from '../stores/levelStore';
-import { usePointsStore } from '../stores/pointsStore';
+import {reactive, watch} from 'vue';
+import {useLevelStore} from '../stores/levelStore';
+import {usePointsStore} from '../stores/pointsStore';
 
 defineProps({
   onMouseOver: {
@@ -19,10 +19,10 @@ const level = levelStore.level;
 const points = currentPoints;
 const pointsToNextLvl = await getPointsToNextLvl();
 const progress = reactive({ value: 0 });
-progress.value = calculatePercentOfPointsProgress(account.points, pointsToNextLvl.need);
+progress.value = await calculatePercentOfPointsProgress();
 
-watch(points, (newPoints) => { // todo move in store and add toast
-  progress.value = calculatePercentOfPointsProgress(newPoints.value, pointsToNextLvl.need);
+watch(points, async (newPoints) => { // todo move in store and add toast
+  progress.value = await calculatePercentOfPointsProgress();
   if (newPoints.value >= pointsToNextLvl.need) {
     level.value = +level.value + 1;
   }

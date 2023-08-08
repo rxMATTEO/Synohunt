@@ -102,7 +102,7 @@ const percents = ref(percs);
               <div class="p-5 relative">
                 <div class="flex mt-3 max-md:t-flex-col">
                   <div class="t-w-1/3">
-                    <p class="text-xl absolute t-top-0 t-left-20">Progress</p>
+                    <p class="text-xl absolute t-top-3 t-left-20">Progress</p>
                     <div class="flex">
                       <div class="t-w-12 max-md:t-hidden">
                         <i class="pi-chart-pie pi" style="font-size:2.5rem"></i>
@@ -156,8 +156,10 @@ const percents = ref(percs);
                     </div>
                   </div>
                 </div>
-                <div class="flex mt-5">
-                  <div class="t-w-1/2">a</div>
+                <div class="flex mt-5 max-md:t-flex-col">
+                  <div class="t-w-1/2">
+                    <p>Honor breakdown</p>
+                  </div>
                   <div class="t-w-1/2">
                     <p>Rank breakdown</p>
                     <Knob disabled v-model="percents" valueColor="SlateGray" rangeColor="MediumTurquoise" />
