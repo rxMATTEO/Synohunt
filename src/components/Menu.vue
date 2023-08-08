@@ -8,13 +8,14 @@ export default defineComponent({
     index: Number
   },
   setup (props, { slots }) {
-    return () => props.pages[props.index];
+    return  function () {
+      console.log('hi')
+      return (<div>
+      {props.pages[props.index]}
+    </div>)};
   }
 });
 </script>
-
-<template>
-</template>
 
 <style scoped lang="sass">
 

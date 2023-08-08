@@ -1,5 +1,6 @@
 <script setup lang="jsx">
 import {ref} from 'vue';
+import {usePointsStore} from "../../stores/pointsStore";
 
 const { data: { value: { user: { account } } } } = useAuth();
 
@@ -31,13 +32,15 @@ function changeTab (e) {
 
 }
 
+const pointsStore = usePointsStore();
+const percents = ref(50);
 const array = [
   (<div class="p-5 relative">
-    <div class="flex mt-3">
+    <div class="flex mt-3 max-md:t-flex-col">
       <div class="t-w-1/3">
           <p class="text-xl absolute t-top-0 t-left-20">Progress</p>
         <div class="flex">
-          <div class="t-w-12">
+          <div class="t-w-12 max-md:t-hidden">
             <i class="pi-chart-pie pi" style="font-size:2.5rem"></i>
           </div>
           <div>
@@ -56,7 +59,7 @@ const array = [
           </div>
         </div>
       </div>
-      <div class="t-w-1/3">
+      <div class="t-w-1/3 max-md:t-mt-3">
           <div>
             <div>
               <b>Rank: </b>
@@ -72,7 +75,7 @@ const array = [
             </div>
         </div>
       </div>
-      <div class="t-w-1/3">
+      <div class="t-w-1/3 max-md:t-mt-3">
           <div>
             <div>
               <b>Rank: </b>
@@ -87,6 +90,12 @@ const array = [
               <span>{account.Level.value}</span>
             </div>
           </div>
+      </div>
+    </div>
+    <div class="flex">
+      <div class="t-w-1/2">a</div>
+      <div class="t-w-1/2">
+        <p>Rank breakdown</p>
       </div>
     </div>
   </div>),
