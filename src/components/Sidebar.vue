@@ -71,17 +71,17 @@ const props = defineProps({
           <p class="px-2 uppercase text-color-secondary mt-3">
             Community
           </p>
-          <NuxtLink to="/" class="hover:surface-200 block transition-colors t-ease-in-out t-duration-200">
+          <NuxtLink to="/leaderboard" class="hover:surface-200 block transition-colors t-ease-in-out t-duration-200">
             <div class="flex px-1">
               <div class="t-w-1/6">
                 a
               </div>
               <div class="t-w-5/6">
                 <p class="t-font-bold">
-                  Practice
+                  Leaderboard
                 </p>
                 <p class="text-sm text-color-secondary">
-                  Complete tasks and shit
+                  Achieve honor and move up the global leaderboards
                 </p>
               </div>
             </div>
