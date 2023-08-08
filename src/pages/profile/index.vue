@@ -1,4 +1,4 @@
-<script setup lang="jsx">
+<script setup lang="ts">
 import {ref} from 'vue';
 import {usePointsStore} from "../../stores/pointsStore";
 
@@ -33,73 +33,8 @@ function changeTab (e) {
 }
 
 const pointsStore = usePointsStore();
-const percents = ref(50);
-const array = [
-  (<div class="p-5 relative">
-    <div class="flex mt-3 max-md:t-flex-col">
-      <div class="t-w-1/3">
-          <p class="text-xl absolute t-top-0 t-left-20">Progress</p>
-        <div class="flex">
-          <div class="t-w-12 max-md:t-hidden">
-            <i class="pi-chart-pie pi" style="font-size:2.5rem"></i>
-          </div>
-          <div>
-            <div>
-              <b>Rank: </b>
-              <span>{ account.Level.value }</span>
-            </div>
-            <div>
-              <b>Points: </b>
-              <span>{ account.points }</span>
-            </div>
-            <div>
-              <b>Total completed tasks: </b>
-              <span>{ account.Level.value }</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="t-w-1/3 max-md:t-mt-3">
-          <div>
-            <div>
-              <b>Rank: </b>
-              <span>{account.Level.value}</span>
-            </div>
-            <div>
-              <b>Points: </b>
-              <span>{account.points}</span>
-            </div>
-            <div>
-              <b>Total completed tasks: </b>
-              <span>{account.Level.value}</span>
-            </div>
-        </div>
-      </div>
-      <div class="t-w-1/3 max-md:t-mt-3">
-          <div>
-            <div>
-              <b>Rank: </b>
-              <span>{account.Level.value}</span>
-            </div>
-            <div>
-              <b>Points: </b>
-              <span>{account.points}</span>
-            </div>
-            <div>
-              <b>Total completed tasks: </b>
-              <span>{account.Level.value}</span>
-            </div>
-          </div>
-      </div>
-    </div>
-    <div class="flex">
-      <div class="t-w-1/2">a</div>
-      <div class="t-w-1/2">
-        <p>Rank breakdown</p>
-      </div>
-    </div>
-  </div>),
-  <div>2</div>, <div>3</div>, <div>4</div>, <div>5</div>];
+const percs = (await pointsStore.calculatePercentOfPointsProgress());
+const percents = ref(percs);
 </script>
 
 <template>
@@ -163,7 +98,73 @@ const array = [
         <div class="mt-5">
           <TabMenu v-model:activeIndex="active" :model="items" @tab-change="changeTab" />
           <div class="surface-ground">
-            <Menu :pages="array" :index="active" />
+            <div v-if="active === 0">
+              <div class="p-5 relative">
+                <div class="flex mt-3 max-md:t-flex-col">
+                  <div class="t-w-1/3">
+                    <p class="text-xl absolute t-top-0 t-left-20">Progress</p>
+                    <div class="flex">
+                      <div class="t-w-12 max-md:t-hidden">
+                        <i class="pi-chart-pie pi" style="font-size:2.5rem"></i>
+                      </div>
+                      <div>
+                        <div>
+                          <b>Rank: </b>
+                          <span>{{ account.Level.value }}</span>
+                        </div>
+                        <div>
+                          <b>Points: </b>
+                          <span>{{ account.points }}</span>
+                        </div>
+                        <div>
+                          <b>Total completed tasks: </b>
+                          <span>{{ account.Level.value }}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="t-w-1/3 max-md:t-mt-3">
+                    <div>
+                      <div>
+                        <b>Rank: </b>
+                        <span>{{account.Level.value}}</span>
+                      </div>
+                      <div>
+                        <b>Points: </b>
+                        <span>{{account.points}}</span>
+                      </div>
+                      <div>
+                        <b>Total completed tasks: </b>
+                        <span>{{account.Level.value}}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="t-w-1/3 max-md:t-mt-3">
+                    <div>
+                      <div>
+                        <b>Rank: </b>
+                        <span>{{account.Level.value}}</span>
+                      </div>
+                      <div>
+                        <b>Points: </b>
+                        <span>{{account.points}}</span>
+                      </div>
+                      <div>
+                        <b>Total completed tasks: </b>
+                        <span>{{account.Level.value}}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="flex mt-5">
+                  <div class="t-w-1/2">a</div>
+                  <div class="t-w-1/2">
+                    <p>Rank breakdown</p>
+                    <Knob disabled v-model="percents" valueColor="SlateGray" rangeColor="MediumTurquoise" />
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

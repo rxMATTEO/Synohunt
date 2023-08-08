@@ -1,5 +1,5 @@
-import { reactive } from 'vue';
-import { defineStore, useAuth, useFetch } from '#imports';
+import {reactive} from 'vue';
+import {defineStore, useAuth, useFetch} from '#imports';
 
 export const usePointsStore = defineStore('pointsStore', () => {
   const { data: { value: { user: { account } } } } = useAuth();
@@ -30,7 +30,15 @@ export const usePointsStore = defineStore('pointsStore', () => {
     })).data.value;
   }
 
-  function calculatePercentOfPointsProgress (currentPoints, nextLvlPoints) {
+  async function calculatePercentOfPointsProgress () {
+    const pointsToNextLvl = await $fetch('/api/points/toNextLevel', {
+      method: 'POST',
+      body: {
+        userId: account.id
+      }
+    });
+    const currentPoints = account.points;
+    const nextLvlPoints = pointsToNextLvl.need;
     return (currentPoints / nextLvlPoints) * 100;
   }
   return ({
