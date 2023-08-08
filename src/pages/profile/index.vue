@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup lang="jsx">
 import { ref } from 'vue';
 
 const { data: { value: { user: { account } } } } = useAuth();
@@ -31,8 +31,11 @@ function changeTab (e) {
 
 }
 
-const array = [1, 2, 3, 4, 5];
-const index = ref(0);
+const array = [
+  (<div>
+    hello
+  </div>),
+  2, 3, 4, 5];
 </script>
 
 <template>
@@ -95,7 +98,7 @@ const index = ref(0);
 
         <div class="px-3 mt-5 surface-ground">
           <TabMenu v-model:activeIndex="active" :model="items" @tab-change="changeTab" />
-          {{ array[active] }}
+          <Menu :pages="array" :index="active" />
         </div>
       </div>
     </NuxtLayout>
