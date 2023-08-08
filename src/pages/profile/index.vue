@@ -156,9 +156,28 @@ const percents = ref(percs);
                     </div>
                   </div>
                 </div>
-                <div class="flex mt-5 max-md:t-flex-col">
+                <div class="flex relative mt-5 max-md:t-flex-col">
                   <div class="t-w-1/2">
-                    <p>Honor breakdown</p>
+                    <p class="relative t-left-12">Honor breakdown</p>
+                    <div class="flex ">
+                      <div class="t-w-12 max-md:t-hidden">
+                        <i class="pi-chart-pie pi" style="font-size:2.5rem"></i>
+                      </div>
+                      <div>
+                        <div>
+                          <b>Rank: </b>
+                          <span>{{ account.Level.value }}</span>
+                        </div>
+                        <div>
+                          <b>Points: </b>
+                          <span>{{ account.points }}</span>
+                        </div>
+                        <div>
+                          <b>Total completed tasks: </b>
+                          <span>{{ account.Level.value }}</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                   <div class="t-w-1/2">
                     <p>Rank breakdown</p>
