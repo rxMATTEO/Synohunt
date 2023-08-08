@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import {Difficulity, Language, Task} from '@prisma/client';
-import {reactive} from 'vue';
+import { Difficulity, Language, Task } from '@prisma/client';
+import { reactive, ref } from 'vue';
 
 definePageMeta({
   middleware: 'auth'
@@ -27,10 +27,14 @@ useFetch('/api/langs').then((res) => {
 function generateRandom () {
 
 }
+type GradientNames = 'easy' | 'medium' | 'hard';
+const gradient = reactive<GradientNames>({ value: 'easy' });
 
 function onChangeTaskOption (id = -1) {
   setTimeout(async () => {
     if (selectedLanguage.value.langFull && selectedDiff.value.name) {
+      gradient.value = selectedDiff.value.name.toLowerCase();
+      console.log(gradient.value);
       const tasksFetched = await $fetch('/api/task/random', {
         method: 'POST',
         body: {
@@ -55,7 +59,7 @@ onMounted(() => onChangeTaskOption());
   <div>
     <NuxtLayout name="header-n-sidebar">
       <div class="lg:px-8 lg:mx-8 px-3">
-        <GradientBox>
+        <GradientBox :gradient-name="gradient.value">
           <div class="flex flex-column md:flex-row t-text-white">
             <div class="t-w-full md:t-w-1/3">
               <div class="t-p-3">
@@ -182,7 +186,7 @@ onMounted(() => onChangeTaskOption());
           <p class="my-3">
             You are automatically given an allegiance with anyone who is in the same clan as you. You can also become allies with other warriors by following each other or inviting new warriors to join.
           </p>
-          <Leaderboard :limit="5"/>
+          <Leaderboard :limit="5" />
         </div>
       </div>
     </NuxtLayout>
