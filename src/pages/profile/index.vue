@@ -1,5 +1,5 @@
 <script setup lang="jsx">
-import { ref } from 'vue';
+import {ref} from 'vue';
 
 const { data: { value: { user: { account } } } } = useAuth();
 
@@ -32,10 +32,65 @@ function changeTab (e) {
 }
 
 const array = [
-  (<div>
-    hello
+  (<div class="p-5 relative">
+    <div class="flex mt-3">
+      <div class="t-w-1/3">
+          <p class="text-xl absolute t-top-0 t-left-20">Progress</p>
+        <div class="flex">
+          <div class="t-w-12">
+            <i class="pi-chart-pie pi" style="font-size:2.5rem"></i>
+          </div>
+          <div>
+            <div>
+              <b>Rank: </b>
+              <span>{ account.Level.value }</span>
+            </div>
+            <div>
+              <b>Points: </b>
+              <span>{ account.points }</span>
+            </div>
+            <div>
+              <b>Total completed tasks: </b>
+              <span>{ account.Level.value }</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="t-w-1/3">
+          <div>
+            <div>
+              <b>Rank: </b>
+              <span>{account.Level.value}</span>
+            </div>
+            <div>
+              <b>Points: </b>
+              <span>{account.points}</span>
+            </div>
+            <div>
+              <b>Total completed tasks: </b>
+              <span>{account.Level.value}</span>
+            </div>
+        </div>
+      </div>
+      <div class="t-w-1/3">
+          <div>
+            <div>
+              <b>Rank: </b>
+              <span>{account.Level.value}</span>
+            </div>
+            <div>
+              <b>Points: </b>
+              <span>{account.points}</span>
+            </div>
+            <div>
+              <b>Total completed tasks: </b>
+              <span>{account.Level.value}</span>
+            </div>
+          </div>
+      </div>
+    </div>
   </div>),
-  2, 3, 4, 5];
+  <div>2</div>, <div>3</div>, <div>4</div>, <div>5</div>];
 </script>
 
 <template>
@@ -96,9 +151,11 @@ const array = [
           </div>
         </div>
 
-        <div class="px-3 mt-5 surface-ground">
+        <div class="mt-5">
           <TabMenu v-model:activeIndex="active" :model="items" @tab-change="changeTab" />
-          <Menu :pages="array" :index="active" />
+          <div class="surface-ground">
+            <Menu :pages="array" :index="active" />
+          </div>
         </div>
       </div>
     </NuxtLayout>

@@ -17,7 +17,8 @@ import FocusTrap from 'primevue/focustrap';
 import Dialog from 'primevue/dialog';
 import DataView from 'primevue/dataview';
 import TabMenu from 'primevue/tabmenu';
-import { defineNuxtPlugin } from '#imports';
+import {defineNuxtPlugin} from '#imports';
+import Knob from "primevue/knob";
 
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.use(PrimeVue, { ripple: true });
@@ -40,4 +41,5 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component('Dialog', Dialog);
   nuxtApp.vueApp.component('DataView', DataView);
   nuxtApp.vueApp.component('TabMenu', TabMenu);
+  nuxtApp.vueApp.component('Knob', Knob);
 });
