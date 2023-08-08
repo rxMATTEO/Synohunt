@@ -184,7 +184,36 @@ const percents = ref(percs);
                     <Knob disabled v-model="percents" valueColor="SlateGray" rangeColor="MediumTurquoise" />
                   </div>
                 </div>
+                <div class="flex relative mt-5 max-md:t-flex-col">
+                  <div class="t-w-1/2">
+                    <p class="relative t-left-12">Contributions</p>
+                    <div class="flex ">
+                      <div class="t-w-12 max-md:t-hidden">
+                        <i class="pi-chart-pie pi" style="font-size:2.5rem"></i>
+                      </div>
+                      <div>
+                        <div>
+                          <b>Comments: </b>
+                          <span>{{ account.Level.value }}</span>
+                        </div>
+                        <div>
+                          <b>Bookmarks: </b>
+                          <span>{{ account.points }}</span>
+                        </div>
+                        <div>
+                          <b>Mb created tasks: </b>
+                          <span>{{ account.Level.value }}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
+            </div>
+          </div>
+          <div class="surface-ground">
+            <div v-if="active === 1">
+              <CompletedTasks />
             </div>
           </div>
         </div>

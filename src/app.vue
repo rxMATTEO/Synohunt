@@ -1,13 +1,14 @@
 <template>
-  <NuxtPage onload="load()" />
+  <NuxtPage />
 </template>
 
 <script setup lang="ts">
-import { onBeforeMount, onMounted, reactive } from 'vue';
-import { usePrimeVue } from 'primevue/config';
-import { Platforms, Theme, ThemesNames } from './app.config.ts';
-import { useAppConfig, useRuntimeConfig } from '#imports';
-import { useThemeStore } from '@/stores/themeStore';
+import {onMounted} from 'vue';
+import {usePrimeVue} from 'primevue/config';
+import {Platforms} from './app.config.ts';
+import {useAppConfig} from '#imports';
+import {useThemeStore} from '@/stores/themeStore';
+
 const appConfig = useAppConfig();
 const primeVue = usePrimeVue();
 onMounted(() => {
