@@ -19,17 +19,17 @@ const props = defineProps({
           Training
         </p>
         <div class="mt-1">
-          <NuxtLink to="/" class="hover:surface-200 block transition-colors t-ease-in-out t-duration-200">
+          <NuxtLink to="/play/random" class="hover:surface-200 block transition-colors t-ease-in-out t-duration-200">
             <div class="flex px-1">
               <div class="t-w-1/6">
                 a
               </div>
               <div class="t-w-5/6">
                 <p class="t-font-bold">
-                  Practice
+                  Play
                 </p>
                 <p class="text-sm text-color-secondary">
-                  Complete tasks and shit
+                  Complete tasks & practice
                 </p>
               </div>
             </div>
