@@ -96,7 +96,7 @@ async function gotoRandomTask (diff: Diff, lang: Lang, butId: number) {
   });
 }
 const bookmark = await checkBookmark();
-const isBookmarked = reactive({ value: !!bookmark });
+const isBookmarked = reactive({ value: bookmark });
 
 async function toggleBookmarkTask () {
   if (isBookmarked.value) {
@@ -121,13 +121,16 @@ async function toggleBookmarkTask () {
 }
 
 async function checkBookmark () {
-  return await $fetch('/api/task/getBookmark', {
+  const value = await $fetch('/api/task/getBookmark', {
     method: 'POST',
     body: {
       userId: account.id,
       taskId: task.value.id
     }
   });
+  if (value.status === 'not found') {
+    return false;
+  } else { return true; }
 }
 
 const isDialogVisible = ref(false);

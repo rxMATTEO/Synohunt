@@ -6,7 +6,7 @@ export default defineEventHandler(async (event) => {
     method: 'POST',
     body: { userId, taskId }
   });
-  if (!bookmarkedTask) {
+  if (bookmarkedTask.status === 'not found') { // standartiziruy with ts and shit
     return event.context.prisma.bookmarkedTask.create({
       data: {
         userId, taskId

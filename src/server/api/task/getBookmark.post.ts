@@ -7,5 +7,5 @@ export default defineEventHandler(async (event) => {
       userId, taskId
     }
   });
-  return bookmarkedTask;
+  return bookmarkedTask || { status: 'not found' };
 });
