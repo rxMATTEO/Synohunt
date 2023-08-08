@@ -42,8 +42,8 @@ const percents = ref(percs);
     <NuxtLayout name="header-n-sidebar">
       <div class="lg:px-8 lg:mx-8 px-3">
         <div class="surface-200 t-rounded-md p-3">
-          <div class="flex flex-column md:flex-row md:gap-5">
-            <div class="flex align-items-center">
+          <div class="flex flex-column md:flex-row md:gap-5 md:flex-wrap">
+            <div class="flex align-items-center w-full">
               <UserLevel :only-badge="true" />
               <div>{{ account.name }}</div>
             </div>
