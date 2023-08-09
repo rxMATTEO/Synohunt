@@ -12,5 +12,18 @@ export default eventHandler(async (event) => {
       }
     }
   });
+  if(!account.levelId) {
+    const createLvl = await event.context.prisma.user.update({
+      where: {id: account.id},
+      data: {
+        Level: {
+          create: ({
+              value: "1",
+              groupdId: 1
+          })
+        }
+      }
+    });
+  }
   return { account };
 });
