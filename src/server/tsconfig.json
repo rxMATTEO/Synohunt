@@ -1,5 +1,13 @@
 {
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS"
+    }
+  },
+  "extends": "../../.nuxt/tsconfig.json",
   "compilerOptions": {
+    "module": "ESNext",
+    "esModuleInterop": true,
     "lib": [
       "decorators",
       "dom",
