@@ -28,7 +28,7 @@ function generateRandom () {
 
 }
 type GradientNames = 'easy' | 'medium' | 'hard';
-const gradient = reactive<GradientNames>({ value: 'easy' });
+const gradient = reactive<{value: GradientNames}>({ value: 'easy' });
 
 function onChangeTaskOption (id = -1) {
   setTimeout(async () => {

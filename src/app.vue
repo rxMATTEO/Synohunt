@@ -11,7 +11,7 @@ import {useThemeStore} from '@/stores/themeStore';
 
 const appConfig = useAppConfig();
 const primeVue = usePrimeVue();
-onMounted(() => {
+onMounted(async () => {
   if (window.document.documentElement.offsetWidth >= 768) {
     appConfig.platform = Platforms.pc;
   } else {
@@ -25,7 +25,7 @@ onMounted(() => {
     }
   }, 0); // TODO idk pls fix
 
-  const editor = import('quill');
+  const editor = await import('quill');
 });
 </script>
 
