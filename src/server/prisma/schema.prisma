@@ -74,8 +74,8 @@ model User {
   email         String?   @unique
   emailVerified DateTime?
   image         String?
-  levelId       Int?      @default(1)
-  Level         Level?    @relation(fields: [levelId], references: [id])
+  levelId       Int       @default(1)
+  Level         Level     @relation(fields: [levelId], references: [id])
   points        Int       @default(1)
 
   account        Account[]

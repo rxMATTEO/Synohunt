@@ -10,7 +10,8 @@ async function getUser (session) {
   return await $fetch('/api/session', {
     method: 'POST',
     body: {
-      email: session?.user?.email
+      email: session?.user?.email,
+      creating: true,
     }
   });
 }

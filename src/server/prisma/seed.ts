@@ -5,10 +5,10 @@ async function main(){
   const difficulity = ['Easy', 'Medium', 'Hard'];
   difficulity.forEach(async (diff, index) => {
     const level = await prisma.difficulity.upsert({
-      where: { id: index + 1 },
+      where: { id: index },
       update: {},
       create: {
-        id: index + 1,
+        id: index,
         name: diff
       }
     });
@@ -30,7 +30,7 @@ async function main(){
     {langShort: 'ru', langFull: 'Russian'}];
   langs.forEach(async (lang, index) => {
     const prismaLang = await prisma.language.upsert({
-      where: { id: index + 1 },
+      where: { id: index },
       update: {},
       create: {
         ...lang
