@@ -9,6 +9,7 @@ const selectedDiff = reactive<{value: ServerDiff}>({ value: {} as ServerDiff });
 const selectedLanguage = reactive<{value: ServerLang}>({ value: {} as ServerLang });
 const word = reactive({ value: '' });
 const synonyms = reactive({ value: [[], []] });
+const taskFetched = ref({});
 const context = ref('');
 useFetch('/api/diffs').then((res) => {
   diffs.value = res.data.value;
@@ -24,7 +25,19 @@ async function randomGenerateTask () {
   word.value = task.word.word;
   synonyms.value[0] = task.synos;
   context.value = task.task.description;
-  console.log(context.value);
+  taskFetched.value = task;
+}
+
+async function createTask(){
+  taskFetched.value.task.description = context.value;
+  taskFetched.value.word.word = word.value;
+  const created = await $fetch('/api/task/update', {
+    method: "PATCH",
+    body: {
+      updatingTask: taskFetched.value
+    }
+  });
+  console.log(created);
 }
 </script>
 
@@ -128,9 +141,9 @@ async function randomGenerateTask () {
             </div>
             <div class="mt-5">
               <!--              todo redirect to my tasks-->
-              <NuxtLink to="/dashboard">
-                <Button label="Create task" type="null" class="mx-auto block" />
-              </NuxtLink>
+<!--              <NuxtLink to="/dashboard">-->
+                <Button label="Create task" type="null" class="mx-auto block" @click="createTask"/>
+<!--              </NuxtLink>-->
             </div>
           </div>
         </div>
