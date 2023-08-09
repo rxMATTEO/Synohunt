@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { reactive } from 'vue';
+import {onMounted, reactive} from 'vue';
 import type { ServerDiff, ServerLang } from '../dashboard.vue';
 
 const diffs = reactive({ value: [] as ServerDiff[] });
@@ -93,6 +93,7 @@ async function randomGenerateTask () {
           <div class="mt-5">
             <p>Word</p>
             <InputText v-model="word.value" type="text" class="w-full" />
+            <Editor />
           </div>
           <div class="mt-5">
             <p>Synonyms</p>

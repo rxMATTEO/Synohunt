@@ -19,6 +19,7 @@ import DataView from 'primevue/dataview';
 import TabMenu from 'primevue/tabmenu';
 import {defineNuxtPlugin} from '#imports';
 import Knob from "primevue/knob";
+import Editor from "primevue/editor";
 
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.use(PrimeVue, { ripple: true });
@@ -42,4 +43,5 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component('DataView', DataView);
   nuxtApp.vueApp.component('TabMenu', TabMenu);
   nuxtApp.vueApp.component('Knob', Knob);
+  nuxtApp.vueApp.component('Editor', Editor);
 });
