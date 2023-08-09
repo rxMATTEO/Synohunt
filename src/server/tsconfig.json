@@ -1,5 +1,4 @@
 {
-  "extends": "../.nuxt/tsconfig.server.json",
   "compilerOptions": {
     "lib": [
       "decorators",
