@@ -37,7 +37,6 @@ async function createTask(){
       updatingTask: taskFetched.value
     }
   });
-  console.log(created);
 }
 </script>
 

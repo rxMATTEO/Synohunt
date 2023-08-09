@@ -34,7 +34,6 @@ function onChangeTaskOption (id = -1) {
   setTimeout(async () => {
     if (selectedLanguage.value.langFull && selectedDiff.value.name) {
       gradient.value = selectedDiff.value.name.toLowerCase();
-      console.log(gradient.value);
       const tasksFetched = await $fetch('/api/task/random', {
         method: 'POST',
         body: {
