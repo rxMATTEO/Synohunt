@@ -132,7 +132,7 @@ onMounted(() => onChangeTaskOption());
             </div>
             <div class="t-w-full md:t-w-2/3 t-backdrop-blur-sm t-bg-black t-bg-opacity-50">
               <div class="t-p-3 h-full relative">
-                {{ task.value.description }}
+                <p v-html="task.value.description"></p>
                 <div class="t-h-8">
                   <div class="absolute t-bottom-3 unset flex flex-row">
                     <div v-for="(tag) in task.value.Tag" class="vertical-align-middle text-center mr-5 surface-ground text-sm px-1 t-rounded-md">
