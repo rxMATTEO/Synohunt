@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { reactive } from 'vue';
+import {ref, onMounted, reactive} from 'vue';
 import type { ServerDiff, ServerLang } from '../dashboard.vue';
 
 const diffs = reactive({ value: [] as ServerDiff[] });
@@ -9,6 +9,8 @@ const selectedDiff = reactive<{value: ServerDiff}>({ value: {} as ServerDiff });
 const selectedLanguage = reactive<{value: ServerLang}>({ value: {} as ServerLang });
 const word = reactive({ value: '' });
 const synonyms = reactive({ value: [[], []] });
+const taskFetched = ref({});
+const context = ref('');
 useFetch('/api/diffs').then((res) => {
   diffs.value = res.data.value;
   selectedDiff.value = diffs.value[0];
@@ -22,6 +24,20 @@ async function randomGenerateTask () {
   const task = await $fetch(`/api/word/random?lang=${selectedLanguage.value.langFull}&diff=${selectedDiff.value.name}`);
   word.value = task.word.word;
   synonyms.value[0] = task.synos;
+  context.value = task.task.description;
+  taskFetched.value = task;
+}
+
+async function createTask(){
+  taskFetched.value.task.description = context.value;
+  taskFetched.value.word.word = word.value;
+  const created = await $fetch('/api/task/update', {
+    method: "PATCH",
+    body: {
+      updatingTask: taskFetched.value
+    }
+  });
+  console.log(created);
 }
 </script>
 
@@ -94,6 +110,10 @@ async function randomGenerateTask () {
             <p>Word</p>
             <InputText v-model="word.value" type="text" class="w-full" />
           </div>
+            <div class="mt-5">
+              <p>Context</p>
+              <Editor v-model="context" />
+            </div>
           <div class="mt-5">
             <p>Synonyms</p>
             <div class="mt-5">
@@ -121,9 +141,9 @@ async function randomGenerateTask () {
             </div>
             <div class="mt-5">
               <!--              todo redirect to my tasks-->
-              <NuxtLink to="/dashboard">
-                <Button label="Create task" type="null" class="mx-auto block" />
-              </NuxtLink>
+<!--              <NuxtLink to="/dashboard">-->
+                <Button label="Create task" type="null" class="mx-auto block" @click="createTask"/>
+<!--              </NuxtLink>-->
             </div>
           </div>
         </div>

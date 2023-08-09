@@ -24,6 +24,8 @@ onMounted(() => {
       setCurrentTheme('dark', 'light');
     }
   }, 0); // TODO idk pls fix
+
+  const editor = import('quill');
 });
 </script>
 
