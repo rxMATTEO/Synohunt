@@ -17,10 +17,11 @@ import FocusTrap from 'primevue/focustrap';
 import Dialog from 'primevue/dialog';
 import DataView from 'primevue/dataview';
 import TabMenu from 'primevue/tabmenu';
-import {defineNuxtPlugin} from '#imports';
-import Knob from "primevue/knob";
-import Editor from "primevue/editor";
-import SplitButton from "primevue/splitbutton";
+import Knob from 'primevue/knob';
+import Editor from 'primevue/editor';
+import SplitButton from 'primevue/splitbutton';
+import SpeedDial from 'primevue/speeddial';
+import { defineNuxtPlugin } from '#imports';
 
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.use(PrimeVue, { ripple: true });
@@ -46,4 +47,5 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component('Knob', Knob);
   nuxtApp.vueApp.component('Editor', Editor);
   nuxtApp.vueApp.component('SplitButton', SplitButton);
+  nuxtApp.vueApp.component('SpeedDial', SpeedDial);
 });

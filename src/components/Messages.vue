@@ -29,6 +29,44 @@ const buttonItems = [
   { label: 'Upload', icon: 'pi pi-upload' }
 ];
 
+const messageActions = ref([
+  {
+    label: 'Add',
+    icon: 'pi pi-pencil',
+    command: () => {
+      toast.add({ severity: 'info', summary: 'Add', detail: 'Data Added' });
+    }
+  },
+  {
+    label: 'Update',
+    icon: 'pi pi-refresh',
+    command: () => {
+      toast.add({ severity: 'success', summary: 'Update', detail: 'Data Updated' });
+    }
+  },
+  {
+    label: 'Delete',
+    icon: 'pi pi-trash',
+    command: () => {
+      toast.add({ severity: 'error', summary: 'Delete', detail: 'Data Deleted' });
+    }
+  },
+  {
+    label: 'Upload',
+    icon: 'pi pi-upload',
+    command: () => {
+      router.push('/fileupload');
+    }
+  },
+  {
+    label: 'Vue Website',
+    icon: 'pi pi-external-link',
+    command: () => {
+      window.location.href = 'https://vuejs.org/';
+    }
+  }
+]);
+
 function update () {
 
 }
@@ -54,6 +92,7 @@ function update () {
           <template #list="slotProps: {data: Message}">
             <div class="col-12">
               <div class="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
+                <img class="w-9 sm:w-16rem xl:w-10rem shadow-2 block xl:block mx-auto border-round" src="/img/biglogo.png" :alt="slotProps.data.name">
                 <div class="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
                   <div class="flex flex-column align-items-center sm:align-items-start gap-3">
                     <div class="text-2xl font-bold text-900">
@@ -70,7 +109,7 @@ function update () {
                   </div>
                   <div class="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
                     <span class="text-2xl font-semibold">${{ slotProps.data.price }}</span>
-                    <Button icon="pi pi-shopping-cart" rounded :disabled="slotProps.data.inventoryStatus === 'OUTOFSTOCK'" />
+                    <SpeedDial button-class="p-button-outlined" :model="messageActions" direction="left" :style="{ position: 'relative', top: '50%', right: 0 }" />
                   </div>
                 </div>
               </div>
