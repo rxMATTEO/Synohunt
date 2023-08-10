@@ -5,9 +5,10 @@ export default eventHandler(async (event) => {
       email: body.email
     },
     include: {
+      Message: true,
       Level: {
         include: {
-          Group: true
+          Group: true,
         }
       }
     }
@@ -29,9 +30,10 @@ export default eventHandler(async (event) => {
         email: body.email
       },
       include: {
+        Message: true,
         Level: {
           include: {
-            Group: true
+            Group: true,
           }
         }
       }

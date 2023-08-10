@@ -83,6 +83,22 @@ model User {
   Notification   Notification[]
   CompletedTask  CompletedTask[]
   BookmarkedTask BookmarkedTask[]
+  Message        Message[]
+}
+
+model Message {
+  id       Int           @id @default(autoincrement())
+  userId   String
+  value    String
+  statusId Int
+  Status   MessageStatus @relation(fields: [statusId], references: [id])
+  User     User          @relation(fields: [userId], references: [id])
+}
+
+model MessageStatus {
+  id      Int       @id @default(autoincrement())
+  value   String
+  Message Message[]
 }
 
 model CompletedTask {

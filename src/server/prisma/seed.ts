@@ -1,4 +1,4 @@
-import {Group, Language, PrismaClient} from "@prisma/client";
+import {Group, Language, MessageStatus, PrismaClient} from "@prisma/client";
 
 const prisma = new PrismaClient();
 async function main(){
@@ -30,13 +30,24 @@ async function main(){
     {langShort: 'ru', langFull: 'Russian'}];
   langs.forEach(async (lang, index) => {
     const prismaLang = await prisma.language.upsert({
-      where: { id: index },
+      where: { id: index + 1 },
       update: {},
       create: {
         ...lang
       }
     });
-  })
+  });
+  const msgStatuses = ['Pending', 'Send', 'Read'] as const;
+  export type MessageStatuses = typeof msgStatuses[number];
+  msgStatuses.forEach(async (msgStatus, index) => {
+    const prismaStatus = await prisma.messageStatus.upsert({
+      where: { id: index  + 1},
+      update: {},
+      create: {
+        value: msgStatus
+      }
+    });
+  });
 }
 
 main().then(async () => {
