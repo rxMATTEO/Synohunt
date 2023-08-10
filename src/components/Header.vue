@@ -64,7 +64,7 @@ function changeTheme () {
         <div class="mr-3" @mouseover="(e: MouseEvent) => onMouseOver(e, 'messagesOp')">
           <i v-badge.danger class="pi pi-envelope p-text-secondary" />
           <OverlayPanel :ref="overlays.messagesOp" dismissable @mouseleave="() => onMouseLeave('messagesOp')">
-            <p>Тут типа сообщения</p>
+            <Messages />
           </OverlayPanel>
         </div>
         <div>

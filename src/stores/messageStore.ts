@@ -9,12 +9,20 @@ export const useMessageStore = defineStore('messageStore', () => {
   function getMessages () {
     return messages.value;
   }
-  function addMessage (msgText: string) {
-    messages.value.push(msgText);
+  async function addMessage (msgText: string) {
+    const postedMessage = await $fetch('/api/messages/create', {
+      method: "POST",
+      body: {
+        userId: account.id,
+        text: msgText,
+      }
+    });
+    messages.value = [...messages.value, postedMessage];
+    return messages.value;
   }
   return ({
-    getLvl,
-    upgradeLvl,
-    level: messages
+    getMessages,
+    messages,
+    addMessage
   });
 });

@@ -10,5 +10,5 @@ export default defineEventHandler(async (event) => {
       statusId: 1,
     }
   });
-  return completedTask;
+  return createdMessage;
 });
