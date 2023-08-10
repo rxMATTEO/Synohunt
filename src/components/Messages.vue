@@ -78,7 +78,7 @@ function update () {
       <div class="t-max-w-[80%]">
         <DataView :value="messages.value" class="t-max-w-full">
           <template #list="slotProps: {data: Message}">
-            <div class="t-max-w-full">
+            <div class="col-12 relative">
               <div class="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
                 <img class="w-9 sm:w-16rem xl:w-10rem shadow-2 block xl:block mx-auto border-round" src="/img/biglogo.png" :alt="slotProps.data.name">
                 <div class="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
@@ -86,19 +86,18 @@ function update () {
                     <div class="text-2xl font-bold text-900">
                       {{ slotProps.data.topic }}
                     </div>
-                    <div class="relative inline-block">
-                      <SpeedDial
-                        button-class="p-button-outlined"
-                        :model="messageActions"
-                        direction="left"
-                        :style="{ position: 'absolute', top: '50%'}"
-                        :pt="{
-                          root: {
-                            class: ['block', 't-top-50']
-                          },
-                        }"
-                      />
-                    </div>
+                    <SpeedDial
+                      button-class="p-button-outlined"
+                      :model="messageActions"
+                      direction="left"
+                      :style="{ position: 'absolute', display: 'flex'}"
+                      :pt="{
+                        root: {
+                          class: ['t-right-0', 't-top-0', 't-w-[25rem]', 't-h-[20rem]']
+                        },
+                      }"
+                    />
+                    <div class="relative inline-block" />
                     <div class="flex align-items-center gap-3">
                       <span class="flex align-items-center gap-2">
                         <i class="pi pi-tag" />
@@ -131,3 +130,7 @@ function update () {
     </div>
   </div>
 </template>
+
+<style>
+
+</style>
