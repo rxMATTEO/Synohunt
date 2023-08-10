@@ -20,6 +20,7 @@ import TabMenu from 'primevue/tabmenu';
 import {defineNuxtPlugin} from '#imports';
 import Knob from "primevue/knob";
 import Editor from "primevue/editor";
+import SplitButton from "primevue/splitbutton";
 
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.use(PrimeVue, { ripple: true });
@@ -44,4 +45,5 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component('TabMenu', TabMenu);
   nuxtApp.vueApp.component('Knob', Knob);
   nuxtApp.vueApp.component('Editor', Editor);
+  nuxtApp.vueApp.component('SplitButton', SplitButton);
 });

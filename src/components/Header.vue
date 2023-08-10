@@ -36,7 +36,13 @@ function onMouseOver (e: MouseEvent, overlayName: OverlaysNames) {
   selected.value = overlay;
 }
 
-function onMouseLeave (overlayName: OverlaysNames) {
+function onMouseLeave (overlayName: OverlaysNames, e?: MouseEvent) {
+  if(e){
+    if((e.relatedTarget<Element>)!.className === 'p-tieredmenu p-component p-tieredmenu-overlay' ){
+      e.relatedTarget.addEventListener('mouseleave', () => onMouseLeave(overlayName))
+      return false;
+    }
+  }
   overlays[overlayName].value.hide();
 }
 async function signOutMe () {
@@ -63,7 +69,7 @@ function changeTheme () {
       <div class="t-h-[20px] flex t-items-center">
         <div class="mr-3" @mouseover="(e: MouseEvent) => onMouseOver(e, 'messagesOp')">
           <i v-badge.danger class="pi pi-envelope p-text-secondary" />
-          <OverlayPanel :ref="overlays.messagesOp" dismissable @mouseleave="() => onMouseLeave('messagesOp')">
+          <OverlayPanel :ref="overlays.messagesOp" dismissable @mouseleave="(e) => onMouseLeave('messagesOp', e)">
             <Messages />
           </OverlayPanel>
         </div>
