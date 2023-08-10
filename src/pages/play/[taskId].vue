@@ -167,7 +167,7 @@ const isDialogVisible = ref(false);
             </p>
             <div class="mt-3">
               <span v-for="word in task.value.description.split(' ')">
-                <span :class="{'bg-primary-500': word.toLowerCase().includes(task.value.Word.word.toLowerCase())} ">{{ word }}</span>
+                <span :class="{'bg-primary-500': word.toLowerCase().includes(task.value.Word.word.toLowerCase())}" v-html="word"></span>
                 {{ }}
               </span>
             </div>

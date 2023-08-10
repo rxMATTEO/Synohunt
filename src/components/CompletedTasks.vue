@@ -20,7 +20,7 @@ const completedTasks = (await useFetch('/api/task/completed', {
           <div class="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
             <div class="flex flex-column align-items-center sm:align-items-start gap-3">
               <div class="text-2xl font-bold text-900">
-                {{ slotProps.data.Task.description }}
+                <p v-html="slotProps.data.Task.description"></p>
               </div>
               <Rating :model-value="slotProps.data.rating" readonly :cancel="false" />
               <div class="flex align-items-center gap-3">
