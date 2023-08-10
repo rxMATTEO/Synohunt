@@ -89,6 +89,7 @@ model User {
 model Message {
   id       Int           @id @default(autoincrement())
   userId   String
+  topic    String        @default("")
   value    String
   statusId Int
   Status   MessageStatus @relation(fields: [statusId], references: [id])
