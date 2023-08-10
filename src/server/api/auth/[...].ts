@@ -11,7 +11,6 @@ async function getUser (session) {
     method: 'POST',
     body: {
       email: session?.user?.email,
-      creating: true,
     }
   });
 }

@@ -12,7 +12,7 @@ export default eventHandler(async (event) => {
       }
     }
   });
-  if(body.creating) {
+  if(!account.levelId) {
     const createLvl = await event.context.prisma.user.update({
       where: {id: account.id},
       data: {
@@ -24,6 +24,19 @@ export default eventHandler(async (event) => {
         }
       }
     });
+    const acc = await event.context.prisma.user.findFirst({
+      where: {
+        email: body.email
+      },
+      include: {
+        Level: {
+          include: {
+            Group: true
+          }
+        }
+      }
+    });
+    return { account: acc };
   }
   return { account };
 });
