@@ -86,13 +86,25 @@ function update () {
                     <div class="text-2xl font-bold text-900">
                       {{ slotProps.data.topic }}
                     </div>
-                    <SpeedDial button-class="p-button-outlined" :model="messageActions" direction="left" :style="{ position: 'relative', top: '50%', right: 0 }" />
+                    <div class="relative inline-block">
+                      <SpeedDial
+                        button-class="p-button-outlined"
+                        :model="messageActions"
+                        direction="left"
+                        :style="{ position: 'absolute', top: '50%'}"
+                        :pt="{
+                          root: {
+                            class: ['block', 't-top-50']
+                          },
+                        }"
+                      />
+                    </div>
                     <div class="flex align-items-center gap-3">
                       <span class="flex align-items-center gap-2">
                         <i class="pi pi-tag" />
                         <span class="font-semibold">{{ slotProps.data.value }}</span>
                       </span>
-                      <Tag :value="slotProps.data.inventoryStatus" />
+                      <!--                      <Tag :value="slotProps.data.inventoryStatus" />-->
                     </div>
                   </div>
                   <!--                  <div class="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">-->
