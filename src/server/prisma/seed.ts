@@ -1,6 +1,9 @@
 import {Group, Language, MessageStatus, PrismaClient} from "@prisma/client";
 
 const prisma = new PrismaClient();
+const msgStatuses = ['Pending', 'Send', 'Read'] as const;
+export type MessageStatuses = typeof msgStatuses[number];
+
 async function main(){
   const difficulity = ['Easy', 'Medium', 'Hard'];
   difficulity.forEach(async (diff, index) => {
@@ -37,9 +40,8 @@ async function main(){
       }
     });
   });
-  const msgStatuses = ['Pending', 'Send', 'Read'] as const;
-  export type MessageStatuses = typeof msgStatuses[number];
-  msgStatuses.forEach(async (msgStatus, index) => {
+  const index =0;
+  for (const msgStatus of msgStatuses) {
     const prismaStatus = await prisma.messageStatus.upsert({
       where: { id: index  + 1},
       update: {},
@@ -47,7 +49,7 @@ async function main(){
         value: msgStatus
       }
     });
-  });
+  }
 }
 
 main().then(async () => {
