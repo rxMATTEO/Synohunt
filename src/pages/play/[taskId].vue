@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import { kMaxLength } from 'buffer';
 import { reactive, ref } from 'vue';
+import { storeToRefs } from 'pinia';
 import { usePointsStore } from '../../stores/pointsStore';
 
 type RouteParams = {

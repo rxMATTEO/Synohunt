@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import {reactive, watch} from 'vue';
-import {useLevelStore} from '../stores/levelStore';
-import {usePointsStore} from '../stores/pointsStore';
+import { reactive, watch } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useLevelStore } from '../stores/levelStore';
+import { usePointsStore } from '../stores/pointsStore';
 
 defineProps({
   onMouseOver: {
@@ -13,20 +14,12 @@ defineProps({
   onlyBadge: Boolean
 });
 const { data: { value: { user: { account } } } } = useAuth();
-const { currentPoints, calculatePercentOfPointsProgress, getPointsToNextLvl } = usePointsStore();
+const pointsStore = usePointsStore();
+const { currentPoints, progress, getPointsToNextLvl } = storeToRefs(pointsStore);
+await pointsStore.calculatePercentOfPointsProgress();
+const pointsToNextLvl = (await getPointsToNextLvl.value);
 const levelStore = useLevelStore();
-const level = levelStore.level;
-const points = currentPoints;
-const pointsToNextLvl = await getPointsToNextLvl();
-const progress = reactive({ value: 0 });
-progress.value = await calculatePercentOfPointsProgress();
-
-watch(points, async (newPoints) => { // todo move in store and add toast
-  progress.value = await calculatePercentOfPointsProgress();
-  if (newPoints.value >= pointsToNextLvl.need) {
-    level.value = +level.value + 1;
-  }
-});
+const { level } = storeToRefs(levelStore);
 </script>
 
 <template>
@@ -35,14 +28,14 @@ watch(points, async (newPoints) => { // todo move in store and add toast
     <OverlayPanel v-if="!onlyBadge" :ref="overlays.levelOp" dismissable class="t-w-[300px]" @mouseleave="() => onMouseLeave('levelOp')">
       <div class="flex t-flex-col w-full">
         <div>
-          <p>У вас <span class="text-primary">{{ points.value }}</span> очков</p>
+          <p>У вас <span class="text-primary">{{ currentPoints }}</span> очков</p>
           <p class="mt-3">
             Для следующего уровня нужно: {{ pointsToNextLvl.need }}
           </p>
         </div>
         <div class="flex flex-row mt-1">
           <ProgressBar
-            :value="+progress.value.toFixed(1)"
+            :value="+progress.toFixed(1)"
             class="w-full text-center"
             :pt="{
               value: {
