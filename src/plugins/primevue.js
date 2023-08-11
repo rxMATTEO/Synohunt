@@ -23,6 +23,7 @@ import SplitButton from 'primevue/splitbutton';
 import SpeedDial from 'primevue/speeddial';
 import Dock from 'primevue/dock';
 import RadioButton from 'primevue/radiobutton';
+import Tag from 'primevue/tag';
 import { defineNuxtPlugin } from '#imports';
 
 export default defineNuxtPlugin((nuxtApp) => {
@@ -52,4 +53,5 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component('SpeedDial', SpeedDial);
   nuxtApp.vueApp.component('Dock', Dock);
   nuxtApp.vueApp.component('RadioButton', RadioButton);
+  nuxtApp.vueApp.component('Tag', Tag);
 });

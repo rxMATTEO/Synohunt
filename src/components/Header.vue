@@ -56,7 +56,7 @@ function changeTheme () {
   const [currentTheme, newTheme] = theme.theme.dark ? [dark, light] : [light, dark];
   setCurrentTheme(currentTheme, newTheme);
 }
-
+// TODO pokazivatj coins vmesto random badge
 </script>
 
 <template>

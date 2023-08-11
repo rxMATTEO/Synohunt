@@ -5,22 +5,26 @@ export default eventHandler(async (event) => {
       email: body.email
     },
     include: {
-      Message: true,
+      Message: {
+        include: {
+          Status: true
+        }
+      },
       Level: {
         include: {
-          Group: true,
+          Group: true
         }
       }
     }
   });
-  if(!account.levelId) {
+  if (!account.levelId) {
     const createLvl = await event.context.prisma.user.update({
-      where: {id: account.id},
+      where: { id: account.id },
       data: {
         Level: {
           create: ({
-              value: "1",
-              groupdId: 1
+            value: '1',
+            groupdId: 1
           })
         }
       }
@@ -30,10 +34,14 @@ export default eventHandler(async (event) => {
         email: body.email
       },
       include: {
-        Message: true,
+        Message: {
+          include: {
+            Status: true
+          }
+        },
         Level: {
           include: {
-            Group: true,
+            Group: true
           }
         }
       }

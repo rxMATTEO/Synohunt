@@ -1,6 +1,7 @@
 import { reactive } from 'vue';
+import type { Message, MessageStatus } from '@prisma/client';
+import type { MessageStatuses } from '../server/prisma/seed';
 import { defineStore, useAuth, useFetch } from '#imports';
-import type { Message } from "@prisma/client";
 
 export const useMessageStore = defineStore('messageStore', () => {
   const { data: { value: { user: { account } } } } = useAuth();
@@ -9,12 +10,26 @@ export const useMessageStore = defineStore('messageStore', () => {
   function getMessages () {
     return messages.value;
   }
+
+  type SeverityName = 'success' | 'warning' | 'danger';
+  function getSeverity (message: Message & { Status: MessageStatus }): SeverityName {
+    type MessageSeverities = {
+      [k in MessageStatuses]: SeverityName
+    }
+    const severities: MessageSeverities = {
+      Pending: 'danger',
+      Read: 'success',
+      Send: 'warning'
+    };
+    const status = message.Status.value as MessageStatuses;
+    return severities[status];
+  }
   async function addMessage (msgText: string) {
     const postedMessage = await $fetch('/api/messages/create', {
-      method: "POST",
+      method: 'POST',
       body: {
         userId: account.id,
-        text: msgText,
+        text: msgText
       }
     });
     messages.value = [...messages.value, postedMessage];
@@ -23,6 +38,7 @@ export const useMessageStore = defineStore('messageStore', () => {
   return ({
     getMessages,
     messages,
-    addMessage
+    addMessage,
+    getSeverity
   });
 });
