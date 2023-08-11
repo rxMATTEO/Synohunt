@@ -122,8 +122,7 @@ function update () {
                     <div class="relative inline-block" />
                     <div class="flex align-items-center gap-3">
                       <span class="flex align-items-center gap-2">
-                        <i class="pi pi-tag" />
-                        <span class="font-semibold">{{ slotProps.data.value }}</span>
+                        <span class="">{{ slotProps.data.value }}</span>
                       </span>
                     </div>
                   </div>

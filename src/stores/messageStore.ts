@@ -11,6 +11,10 @@ export const useMessageStore = defineStore('messageStore', () => {
     return messages.value;
   }
 
+  function fetchMessages () {
+
+  }
+
   type SeverityName = 'success' | 'warning' | 'danger';
   function getSeverity (message: Message & { Status: MessageStatus }): SeverityName {
     type MessageSeverities = {
