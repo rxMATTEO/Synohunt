@@ -71,11 +71,11 @@ function update () {
 <template>
   <div>
     <div class="msgs relative flex flex-column flex-wrap">
-      <p class="absolute text-4xl">
-        Your messages
-      </p>
-      <div class="t-min-w-full md:t-min-w-[20%] t-h-10">
-        <div class="absolute t-right-0 t-top-0 inline-block">
+      <div class="flex t-flex-col t-min-w-full md:t-min-w-[20%] h-full">
+        <p class="text-4xl">
+          Your messages
+        </p>
+        <div class="inline-block ml-auto">
           <SplitButton
             outlined
             type="null"
@@ -104,6 +104,8 @@ function update () {
                     <div class="text-2xl font-bold text-900">
                       {{ slotProps.data.topic }}
                     </div>
+                    <!--          todo fix overlay hiding when pointing on speed dial-->
+
                     <SpeedDial
                       button-class="p-button-outlined !t-w-[25px] !t-h-[25px]"
                       :model="messageActions"
