@@ -70,7 +70,7 @@ function changeTheme () {
       <div class="t-h-[20px] flex t-items-center">
         <div class="mr-3" @mouseover="(e: MouseEvent) => onMouseOver(e, 'messagesOp')">
           <i v-badge.danger class="pi pi-envelope p-text-secondary" />
-          <OverlayPanel :ref="overlays.messagesOp" class="md:t-w-1/2 !t-top-10" dismissable @mouseleave="(e) => onMouseLeave('messagesOp', e)">
+          <OverlayPanel :ref="overlays.messagesOp" class="md:t-w-1/2 !t-top-10 !t-left-0" dismissable @mouseleave="(e) => onMouseLeave('messagesOp', e)">
             <Messages />
           </OverlayPanel>
         </div>

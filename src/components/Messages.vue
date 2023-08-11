@@ -6,6 +6,7 @@ import { useMessageStore } from '../stores/messageStore';
 
 const messageStore = useMessageStore();
 const { messages } = storeToRefs(messageStore);
+const logoSpin = ref(false);
 const buttonItems = [
   {
     label: 'Update',
@@ -38,13 +39,6 @@ const messageActions = ref([
     }
   },
   {
-    label: 'Update',
-    icon: 'pi pi-refresh',
-    command: () => {
-      toast.add({ severity: 'success', summary: 'Update', detail: 'Data Updated' });
-    }
-  },
-  {
     label: 'Delete',
     icon: 'pi pi-trash',
     command: () => {
@@ -66,9 +60,11 @@ const messageActions = ref([
     }
   }
 ]);
-
-async function update () {
-  await messageStore.fetchMessages();
+function update () {
+  logoSpin.value = true;
+  messageStore.fetchMessages().then(() => {
+    setTimeout(() => { logoSpin.value = false; }, 1000); // timeout cuz too fast
+  });
 }
 </script>
 
@@ -84,10 +80,16 @@ async function update () {
             outlined
             type="null"
             label="Update"
+            d
             icon="pi pi-refresh"
             :model="buttonItems"
             @click="update"
-          />
+          >
+            <template #icon="icon">
+              <i v-if="logoSpin" class="pi pi-refresh mr-2 pi-spin" />
+              <i v-else class="pi pi-refresh mr-2" />
+            </template>
+          </SplitButton>
         </div>
       </div>
       <div class="t-min-w-full md:t-mix-w-[80%] mt-3">

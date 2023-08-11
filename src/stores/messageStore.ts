@@ -32,6 +32,7 @@ export const useMessageStore = defineStore('messageStore', () => {
       Read: 'success',
       Send: 'warning'
     };
+    // todo translate this shit ok?
     const status = message.Status.value as MessageStatuses;
     return severities[status];
   }
