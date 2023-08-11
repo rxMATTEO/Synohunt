@@ -1,9 +1,12 @@
 <script setup lang="ts">
-import { reactive, ref } from 'vue';
+import { onMounted, reactive, ref } from 'vue';
 import { Message, MessageStatus } from '@prisma/client';
 import { storeToRefs } from 'pinia';
+import Toast from 'primevue/toast';
+import { useToast } from 'primevue/usetoast';
 import { useMessageStore } from '../stores/messageStore';
 
+const toast = useToast();
 const messageStore = useMessageStore();
 const { messages } = storeToRefs(messageStore);
 const logoSpin = ref(false);
@@ -12,7 +15,7 @@ const buttonItems = [
     label: 'Update',
     icon: 'pi pi-refresh',
     command: () => {
-      console.log('aaa');
+      toast.add({ severity: 'info', summary: 'Info', detail: 'Deatil', life: 3000 });
     }
   },
   {
@@ -76,6 +79,7 @@ function update () {
           Your messages
         </p>
         <div class="inline-block ml-auto">
+          <Toast />
           <SplitButton
             outlined
             type="null"

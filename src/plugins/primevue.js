@@ -24,10 +24,13 @@ import SpeedDial from 'primevue/speeddial';
 import Dock from 'primevue/dock';
 import RadioButton from 'primevue/radiobutton';
 import Tag from 'primevue/tag';
+import Toast from 'primevue/toast';
+import ToastService from 'primevue/toastservice';
 import { defineNuxtPlugin } from '#imports';
 
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.use(PrimeVue, { ripple: true });
+  nuxtApp.vueApp.use(ToastService);
   nuxtApp.vueApp.directive('badge', BadgeDirective);
   nuxtApp.vueApp.directive('tooltip', Tooltip);
   nuxtApp.vueApp.directive('focustrap', FocusTrap);
@@ -54,4 +57,5 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component('Dock', Dock);
   nuxtApp.vueApp.component('RadioButton', RadioButton);
   nuxtApp.vueApp.component('Tag', Tag);
+  nuxtApp.vueApp.component('Toast', Toast);
 });
