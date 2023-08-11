@@ -134,6 +134,25 @@ async function checkBookmark () {
 }
 
 const isDialogVisible = ref(false);
+
+const items = ref([
+  {
+    label: 'Finder',
+    icon: 'https://primefaces.org/cdn/primevue/images/dock/finder.svg'
+  },
+  {
+    label: 'App Store',
+    icon: 'https://primefaces.org/cdn/primevue/images/dock/appstore.svg'
+  },
+  {
+    label: 'Photos',
+    icon: 'https://primefaces.org/cdn/primevue/images/dock/photos.svg'
+  },
+  {
+    label: 'Trash',
+    icon: 'https://primefaces.org/cdn/primevue/images/dock/trash.png'
+  }
+]);
 </script>
 
 <template>
@@ -167,7 +186,7 @@ const isDialogVisible = ref(false);
             </p>
             <div class="mt-3">
               <span v-for="word in task.value.description.split(' ')">
-                <span :class="{'bg-primary-500': word.toLowerCase().includes(task.value.Word.word.toLowerCase())}" v-html="word"></span>
+                <span :class="{'bg-primary-500': word.toLowerCase().includes(task.value.Word.word.toLowerCase())}" v-html="word" />
                 {{ }}
               </span>
             </div>
@@ -224,6 +243,15 @@ const isDialogVisible = ref(false);
         </div>
       </div>
     </NuxtLayout>
+    <div class="card dock-demo fixed bottom-0 t-w-full">
+      <div class="dock-window" style="backgroundimage: 'url(https://primefaces.org/cdn/primevue/images/dock/window.jpg))'">
+        <Dock :model="items" position="bottom">
+          <template #icon="{ item }">
+            <img v-tooltip.top="'hello'" :alt="item.label" :src="item.icon" style="width: 100%">
+          </template>
+        </Dock>
+      </div>
+    </div>
   </div>
 </template>
 
