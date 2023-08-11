@@ -9,6 +9,7 @@ export const useLevelStore = defineStore('levelStore', () => {
     return level.value;
   }
   function upgradeLvl () {
+    console.log(level.value);
     level.value = +level.value + 1;
   }
   return ({
