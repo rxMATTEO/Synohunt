@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { reactive } from 'vue';
+import { reactive, ref } from 'vue';
 import { Message, MessageStatus } from '@prisma/client';
+import { storeToRefs } from 'pinia';
 import { useMessageStore } from '../stores/messageStore';
 
 const messageStore = useMessageStore();
-const messages = reactive({ value: messageStore.messages.value });
-
+const { messages } = storeToRefs(messageStore);
 const buttonItems = [
   {
     label: 'Update',
@@ -67,8 +67,8 @@ const messageActions = ref([
   }
 ]);
 
-function update () {
-
+async function update () {
+  await messageStore.fetchMessages();
 }
 </script>
 

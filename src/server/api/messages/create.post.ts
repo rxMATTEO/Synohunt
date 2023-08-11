@@ -7,7 +7,10 @@ export default defineEventHandler(async (event) => {
     data: {
       userId,
       value: text,
-      statusId: 1,
+      statusId: 1
+    },
+    include: {
+      Status: true
     }
   });
   return createdMessage;
