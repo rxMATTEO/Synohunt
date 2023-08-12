@@ -75,8 +75,9 @@ function changeTheme () {
           </OverlayPanel>
         </div>
         <div>
+          <!--              todo money here-->
           <Avatar
-            v-badge.success="4"
+            v-badge.warning="4"
             shape="circle"
             :image="account.image"
             class="mr-3 "

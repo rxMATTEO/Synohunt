@@ -1,0 +1,7 @@
+-- CreateTable
+CREATE TABLE "Money" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "userId" TEXT NOT NULL,
+    "value" INTEGER NOT NULL,
+    CONSTRAINT "Money_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+);

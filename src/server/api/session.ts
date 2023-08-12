@@ -26,6 +26,11 @@ export default eventHandler(async (event) => {
             value: '1',
             groupdId: 1
           })
+        },
+        Money: {
+          create: ({
+            value: 1
+          })
         }
       }
     });
@@ -43,7 +48,8 @@ export default eventHandler(async (event) => {
           include: {
             Group: true
           }
-        }
+        },
+        Money: true
       }
     });
     return { account: acc };
