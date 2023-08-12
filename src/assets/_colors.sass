@@ -5,6 +5,12 @@
 $gradient: ("indigo": (var(--blue-500), var(--indigo-600)), "black-white":  (var(--surface-ground), transparent), "primary": (var(--primary-500), var(--cyan-500)), "easy": (var(--green-500), var(--cyan-400)), "medium": (var(--purple-400), var(--orange-400)), "hard": (var(--red-700), var(--pink-900)) )
 $animated-gradient: ("rainbow":  (-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab) )
 
+$surfaces: 100, 200, 300, 400, 500, 600, 700, 800, 900
+.text-surface
+  @each $surface in $surfaces
+    &-#{$surface}
+      color: var(--surface-#{$surface}) !important
+
 .gradient
   @each $name, $color in $gradient
     &-#{$name}
