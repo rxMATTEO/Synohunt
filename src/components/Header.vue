@@ -3,6 +3,7 @@ import { onMounted, reactive, ref } from 'vue';
 import OverlayPanel from 'primevue/overlaypanel';
 import { storeToRefs } from 'pinia';
 import { useMoneyStore } from '../stores/moneyStore';
+import { useMessageStore } from '../stores/messageStore';
 import { useAuth } from '#imports';
 import { Theme, ThemesNames } from '@/app.config';
 import { useThemeStore } from '@/stores/themeStore';
@@ -61,6 +62,9 @@ function changeTheme () {
 // TODO pokazivatj coins vmesto random badge
 const moneyStore = useMoneyStore();
 const { currentMoney } = storeToRefs(moneyStore);
+
+const messagesStore = useMessageStore();
+const { messages } = storeToRefs(messagesStore);
 </script>
 
 <template>
@@ -73,7 +77,8 @@ const { currentMoney } = storeToRefs(moneyStore);
       </div>
       <div class="t-h-[20px] flex t-items-center">
         <div class="mr-3" @mouseover="(e: MouseEvent) => onMouseOver(e, 'messagesOp')">
-          <i v-badge.danger class="pi pi-envelope p-text-secondary" />
+          <i v-if="messages.value.length" v-badge.danger class="pi pi-envelope p-text-secondary" />
+          <i v-else class="pi pi-envelope p-text-secondary" />
           <OverlayPanel :ref="overlays.messagesOp" class="md:t-w-1/2 !t-top-10 max-md:!t-left-0" dismissable @mouseleave="(e) => onMouseLeave('messagesOp', e)">
             <Messages />
           </OverlayPanel>
