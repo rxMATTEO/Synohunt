@@ -32,33 +32,32 @@ const buttonItems = [
   { label: 'Upload', icon: 'pi pi-upload' }
 ];
 
+const selectedMsg = ref({});
+
 const messageActions = ref([
   {
     label: 'Add',
     icon: 'pi pi-pencil',
     callback: () => {
-      console.log('hi');
     }
   },
   {
     label: 'Delete',
     icon: 'pi pi-trash',
-    callback: () => {
-      console.log('hi');
+    command: async (...params) => {
+      await messageStore.removeMessage(selectedMsg.value.value.id);
     }
   },
   {
     label: 'Upload',
     icon: 'pi pi-upload',
     callback: () => {
-      console.log('hi');
     }
   },
   {
     label: 'Vue Website',
     icon: 'pi pi-external-link',
     callback: () => {
-      console.log('hi');
     }
   }
 ]);
@@ -103,7 +102,7 @@ function update () {
         </div>
         <!--        todo add status badge-->
         <DataView v-else :value="messages.value" class="t-max-w-full">
-          <template #list="{data: slotProps, index}">
+          <template #list="{data: slotProps}">
             <div class="col-12 relative">
               <div class="flex flex-row xl:align-items-start p-2 gap-4">
                 <img class="w-3 sm:w-10rem xl:w-10rem shadow-2 block xl:block mx-auto border-round" src="/img/biglogo.png" :alt="slotProps.name">
@@ -125,8 +124,8 @@ function update () {
                         root: {
                           class: ['t-right-0', 't-bottom-5'],
                         },
-                        action: ({props, state, context}) => ({
-                          onclick: () => { messageActions[index].callback(slotProps) }
+                        action: (...params) => ({
+                          onmousedown: () => { selectedMsg.value = slotProps }
                         })
                       }"
                     >
@@ -135,9 +134,7 @@ function update () {
                         <i v-else class="pi z-5 pi-cog" />
                       </template>
                       <!--                      <template #item="item">-->
-                      <!--                        <div>-->
-                      <!--                          {{ item }}-->
-                      <!--                        </div>-->
+                      <!--                        <slot />-->
                       <!--                      </template>-->
                     </SpeedDial>
                     <div class="relative inline-block" />

@@ -47,11 +47,24 @@ export const useMessageStore = defineStore('messageStore', () => {
     messages.value = [...messages.value, postedMessage];
     return messages.value;
   }
+
+  async function removeMessage (msgId: number) {
+    const removedMsg = await $fetch('/api/messages/remove', {
+      method: 'POST',
+      body: {
+        userId: account.id,
+        id: msgId
+      }
+    });
+    messages.value = messages.value.concat().filter(msg => msg.id !== removedMsg.id);
+    return messages.value;
+  }
   return ({
     getMessages,
     messages,
     addMessage,
     getSeverity,
-    fetchMessages
+    fetchMessages,
+    removeMessage
   });
 });
