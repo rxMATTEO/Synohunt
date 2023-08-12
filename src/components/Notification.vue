@@ -21,7 +21,7 @@ withDefaults(defineProps<NotificationProps>(), {
 <template>
   <Toast
     position="top-right"
-    class="t-z-[9999] fixed !t-w-full !t-right-0"
+    class="t-z-[9999] fixed max-md:!t-w-full max-md:!t-right-0"
     :pt="{
       container: {
         class: ['!t-rounded-2xl', 'gradient-primary', '!t-border-0', 'text-white'],
