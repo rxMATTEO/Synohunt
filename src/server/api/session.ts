@@ -5,6 +5,7 @@ export default eventHandler(async (event) => {
       email: body.email
     },
     include: {
+      Money: true,
       Message: {
         include: {
           Status: true

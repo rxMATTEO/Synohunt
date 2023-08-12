@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import { onMounted, reactive, Ref, ref } from 'vue';
+import { onMounted, reactive, ref } from 'vue';
 import OverlayPanel from 'primevue/overlaypanel';
+import { storeToRefs } from 'pinia';
+import { useMoneyStore } from '../stores/moneyStore';
 import { useAuth } from '#imports';
 import { Theme, ThemesNames } from '@/app.config';
 import { useThemeStore } from '@/stores/themeStore';
@@ -57,6 +59,8 @@ function changeTheme () {
   setCurrentTheme(currentTheme, newTheme);
 }
 // TODO pokazivatj coins vmesto random badge
+const moneyStore = useMoneyStore();
+const { currentMoney } = storeToRefs(moneyStore);
 </script>
 
 <template>
@@ -77,7 +81,7 @@ function changeTheme () {
         <div>
           <!--              todo money here-->
           <Avatar
-            v-badge.warning="4"
+            v-badge.warning="currentMoney"
             shape="circle"
             :image="account.image"
             class="mr-3 "
