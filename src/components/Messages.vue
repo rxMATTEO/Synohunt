@@ -2,7 +2,6 @@
 import { onMounted, reactive, ref } from 'vue';
 import { Message, MessageStatus } from '@prisma/client';
 import { storeToRefs } from 'pinia';
-import Toast from 'primevue/toast';
 import { useToast } from 'primevue/usetoast';
 import { useMessageStore } from '../stores/messageStore';
 
