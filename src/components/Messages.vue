@@ -44,7 +44,7 @@ const messageActions = ref([
   {
     label: 'Delete',
     icon: 'pi pi-trash',
-    command: async (...params) => {
+    command: async () => {
       await messageStore.removeMessage(selectedMsg.value.value.id);
     }
   },

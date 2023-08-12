@@ -89,7 +89,7 @@ model User {
 
 model Money {
     id Int @id @default(autoincrement())
-    value Int @default(1)
+    value Int @default(50)
     User User[]
 }
 
