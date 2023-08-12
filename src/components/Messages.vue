@@ -10,12 +10,15 @@ const toast = useToast();
 const messageStore = useMessageStore();
 const { messages } = storeToRefs(messageStore);
 const logoSpin = ref(false);
+onMounted(() => {
+  toast.add({ severity: 'info', summary: 'Info', detail: 'Deatil', life: 9999999 });
+});
 const buttonItems = [
   {
     label: 'Update',
     icon: 'pi pi-refresh',
     command: () => {
-      toast.add({ severity: 'info', summary: 'Info', detail: 'Deatil', life: 3000 });
+      toast.add({ severity: 'info', summary: 'Info', detail: 'Deatil' });
     }
   },
   {
@@ -73,13 +76,37 @@ function update () {
 
 <template>
   <div>
+    <Toast
+      class="t-z-[9999] absolute"
+      :pt="{
+        container: {
+          class: ['!t-rounded-2xl', 'gradient-primary', '!t-border-0', 'text-white'],
+        }
+      }"
+    >
+      <template #message="props">
+        <div class="w-full">
+          <div class="t-h-1/6">
+            <div class="">
+              <div class="relative t-right-0 flex t-place-content-between align-items-center">
+                <p>notification</p>
+                <i class="pi pi-bell" />
+              </div>
+            </div>
+          </div>
+          <div class="t-h-5/6" />
+        </div>
+      </template>
+      <template #closeicon="icon">
+        <i class="pi pi-check" />
+      </template>
+    </Toast>
     <div class="msgs relative flex flex-column flex-wrap">
       <div class="flex t-flex-col t-min-w-full md:t-min-w-[20%] h-full">
         <p class="text-4xl">
           Your messages
         </p>
         <div class="inline-block ml-auto">
-          <Toast />
           <SplitButton
             outlined
             type="null"
