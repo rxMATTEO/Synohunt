@@ -51,7 +51,7 @@ const nuxtConfig = {
     css: {
       preprocessorOptions: {
         sass: {
-          additionalData: '@use "./src/assets/_colors.sass" as *\n'
+          additionalData: '@use "./src/assets/_main.sass" as *\n'
         }
       }
     }
