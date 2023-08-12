@@ -9,9 +9,6 @@ const toast = useToast();
 const messageStore = useMessageStore();
 const { messages } = storeToRefs(messageStore);
 const logoSpin = ref(false);
-onMounted(() => {
-  toast.add({ life: 9999999 });
-});
 const buttonItems = [
   {
     label: 'Update',
@@ -75,7 +72,7 @@ function update () {
 
 <template>
   <div>
-    <Notification title="Hello" description="It's description" />
+    <Notification title="Hello" description="It's description" :secondary-text="new Date().toLocaleDateString()" />
     <div class="msgs relative flex flex-column flex-wrap">
       <div class="flex t-flex-col t-min-w-full md:t-min-w-[20%] h-full">
         <p class="text-4xl">
