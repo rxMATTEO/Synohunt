@@ -26,6 +26,7 @@ import RadioButton from 'primevue/radiobutton';
 import Tag from 'primevue/tag';
 import Toast from 'primevue/toast';
 import ToastService from 'primevue/toastservice';
+import ConfirmDialog from 'primevue/confirmdialog';
 import { defineNuxtPlugin } from '#imports';
 
 export default defineNuxtPlugin((nuxtApp) => {
@@ -58,4 +59,5 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component('RadioButton', RadioButton);
   nuxtApp.vueApp.component('Tag', Tag);
   nuxtApp.vueApp.component('Toast', Toast);
+  nuxtApp.vueApp.component('ConfirmDialog', ConfirmDialog);
 });

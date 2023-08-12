@@ -1,6 +1,10 @@
 <script setup lang="ts">
-type NotificationType = 'notification' | 'message'
+import { ref } from 'vue';
+import { useToast } from 'primevue/usetoast';
 
+const toast = useToast();
+// type NotificationType = 'notification' | 'message'
+//
 type NotificationProps = {
   title: string,
   description: string,
@@ -10,11 +14,29 @@ type NotificationProps = {
   notificationType?: NotificationType,
   secondaryText: string
 }
-withDefaults(defineProps<NotificationProps>(), {
-  icon: 'pi pi-bell',
-  closeIcon: 'pi pi-check',
-  image: '/img/placeholder.png',
-  notificationType: 'notification'
+// withDefaults(defineProps<NotificationProps>(), {
+//   icon: 'pi pi-bell',
+//   closeIcon: 'pi pi-check',
+//   image: '/img/placeholder.png',
+//   notificationType: 'notification'
+// });
+
+const notification = ref<NotificationProps>({
+  title: '',
+  description: '',
+  notificationType: '',
+  secondaryText: '',
+  image: '',
+  icon: '',
+  closeIcon: ''
+});
+
+function add (not) {
+  toast.add({ life: 3000, detail: 'a', summary: 'b' });
+  notification.value = not;
+}
+defineExpose({
+  add
 });
 </script>
 
@@ -35,7 +57,7 @@ withDefaults(defineProps<NotificationProps>(), {
           <div class="">
             <div class="relative t-right-0 flex text- t-place-content-end align-items-center">
               <p class="mr-3 text-gray-700">
-                {{ notificationType }}
+                {{ notification.notificationType }}
               </p>
               <i :class="icon" />
             </div>
@@ -51,13 +73,13 @@ withDefaults(defineProps<NotificationProps>(), {
           <div class="t-w-2/3 pl-3 pt-2">
             <div>
               <p class="font-bold text-3xl">
-                <span class="vertical-align-bottom line-height-1 t-text-black">{{ title }}</span>
+                <span class="vertical-align-bottom line-height-1 t-text-black">{{ notification.title }}</span>
               </p>
               <p class="text-sm font-semibold text-red-500 mt-2">
-                {{ secondaryText }}
+                {{ notification.secondaryText }}
               </p>
               <p class="text-lg my-2 text-gray-800">
-                {{ description }}
+                {{ notification.description }}
               </p>
               <div class="flex gap-3 t-place-content-between">
                 <Button type="null" class="t-w-1/2 t-rounded-lg text-white" severity="info" label="Accept" />
@@ -69,7 +91,7 @@ withDefaults(defineProps<NotificationProps>(), {
       </div>
     </template>
     <template #closeicon="icon">
-      <i :class="closeIcon" />
+      <i :class="notification.closeIcon" />
     </template>
   </Toast>
 </template>

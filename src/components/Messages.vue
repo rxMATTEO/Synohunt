@@ -2,10 +2,8 @@
 import { onMounted, reactive, ref } from 'vue';
 import { Message, MessageStatus } from '@prisma/client';
 import { storeToRefs } from 'pinia';
-import { useToast } from 'primevue/usetoast';
-import { useMessageStore } from '../stores/messageStore';
+import { useMessageStore } from '@/stores/messageStore';
 
-const toast = useToast();
 const messageStore = useMessageStore();
 const { messages } = storeToRefs(messageStore);
 const logoSpin = ref(false);
@@ -14,13 +12,14 @@ const buttonItems = [
     label: 'Update',
     icon: 'pi pi-refresh',
     command: (e) => {
+      emit;
     }
   },
   {
-    label: 'Delete',
+    label: 'Delete all',
     icon: 'pi pi-times',
     command: () => {
-      toast.add({ severity: 'info', summary: 'Info', detail: 'Deatil' });
+
     }
   },
   {
@@ -61,7 +60,9 @@ const messageActions = ref([
     }
   }
 ]);
+const notification = ref();
 function update () {
+  notification.value.add({ title: 'a', description: 'b', secondaryText: 'c', notificationType: 'asaa' });
   logoSpin.value = true;
   messageStore.fetchMessages().then(() => {
     setTimeout(() => { logoSpin.value = false; }, 1000); // timeout cuz too fast
@@ -71,7 +72,7 @@ function update () {
 
 <template>
   <div>
-    <Notification title="Hello" description="It's description" :secondary-text="new Date().toLocaleDateString()" />
+    <Notification ref="notification" />
     <div class="msgs relative flex flex-column flex-wrap">
       <div class="flex t-flex-col t-min-w-full md:t-min-w-[20%] h-full">
         <p class="text-4xl">
