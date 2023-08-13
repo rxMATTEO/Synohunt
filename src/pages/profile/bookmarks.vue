@@ -28,7 +28,6 @@ const completedTasks = (await useFetch('/api/task/allBookmarks', {
                       <div class="text-2xl font-bold text-900">
                         {{ slotProps.data.Task.description }}
                       </div>
-                      <Rating :model-value="slotProps.data.rating" readonly :cancel="false" />
                       <div class="flex align-items-center gap-3">
                         <span class="flex align-items-center gap-2">
                           <i class="pi pi-tag" />
