@@ -2,11 +2,6 @@
 import {onMounted, ref} from 'vue';
 
 const isAppended = ref(false);
-const coin = ref();
-onMounted(() => {
-  coin.onanimationend = hide;
-  coin.ontransitionend = hide;
-})
 
 function append () {
   isAppended.value = true;
@@ -27,7 +22,7 @@ defineExpose({
 
 <template>
   <div v-if="isAppended">
-    <div ref="coin" class="spinningasset coin absolute fly-away t-left-[500px] t-top-[500px]">
+    <div class="spinningasset coin absolute fly-away t-left-[500px] t-top-[500px]">
       <div>
         <div />
         <i />

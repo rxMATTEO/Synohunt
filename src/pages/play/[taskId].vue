@@ -248,19 +248,17 @@ const items = ref([
           </div>
         </div>
       </div>
-    </NuxtLayout>
-    <div class="card dock-demo fixed bottom-0 t-w-full">
-      <div class="dock-window" style="backgroundimage: 'url(https://primefaces.org/cdn/primevue/images/dock/window.jpg))'">
-        <Dock :model="items" position="bottom">
-          <template #icon="{ item }">
-            <img v-tooltip.top="'hello'" :alt="item.label" :src="item.icon" style="width: 100%">
-          </template>
-        </Dock>
+        <div class="sticky bottom-0 left-0 right-0">
+          <div class="card dock-demo">
+            <div class="dock-window w-full" style="backgroundimage: 'url(https://primefaces.org/cdn/primevue/images/dock/window.jpg))'">
+              <Dock :model="items" position="bottom" class="left-0 right-0 relative">
+                <template #icon="{ item }">
+                  <img v-tooltip.top="'hello'" :alt="item.label" :src="item.icon" style="width: 100%">
+                </template>
+              </Dock>
+            </div>
+          </div>
       </div>
-    </div>
+    </NuxtLayout>
   </div>
 </template>
-
-<style lang="sass">
-
-</style>

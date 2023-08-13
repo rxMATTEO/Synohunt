@@ -22,7 +22,7 @@ onMounted(() => {
       <div class="t-ml-0 h-4rem">
         <Header :expanded="toggleMenu" />
       </div>
-      <div class="max-w-full">
+      <div class="max-w-full relative">
         <NuxtLayout name="footer">
           <slot />
         </NuxtLayout>
