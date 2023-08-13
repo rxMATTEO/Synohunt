@@ -58,10 +58,6 @@ function changeTab (e) {
           </div>
         </div>
 
-        <!--        <div class="t-w-[500px] t-h-[200px] bg-cyan-50 fly-away absolute">-->
-        <!--          a-->
-        <!--        </div>-->
-
         <div class="lg:px-8 lg:mx-8 px-3">
           <div class="surface-200 t-rounded-md p-3">
             <div class="flex flex-column md:flex-row md:gap-5 md:flex-wrap">
@@ -140,37 +136,36 @@ function changeTab (e) {
 @mixin flyAway($top, $left) {
   @keyframes flyAway {
     5% {
-      left: 0;
+      left: $left;
+      top: $top;
     }
     25% {
       top: 200px;
-      left: 0px;
+      left: $left;
     }
     50% {
       top: 200px;
       left: calc(100% - 320px);
     }
     75% {
-      top: 0px;
-      left: calc(100% - 320px);
+      top: 50px;
+      left: calc(100% - 250px);
     }
     100% {
       top: 0px;
-      left: 0;
+      left: calc(100% - 200px);
     }
   }
-  animation: flyAway 4s infinite !important;
+  animation: flyAway 1.5s linear infinite !important;
 }
 
 .fly-away {
   $top: 0;
-  $left: 0;
+  $left: 200px;
   top: $top;
   left: $left;
   position: absolute;
-  &:hover {
-    @include flyAway($top, $left);
-  }
+  @include flyAway($top, $left);
 }
 @keyframes brightness {
   0%,
