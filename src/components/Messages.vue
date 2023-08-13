@@ -3,6 +3,8 @@ import { onMounted, reactive, ref } from 'vue';
 import { Message, MessageStatus } from '@prisma/client';
 import { storeToRefs } from 'pinia';
 import { useMessageStore } from '@/stores/messageStore';
+import {useNotificationsStore} from "@/stores/notificationsStore";
+import arg from "arg";
 
 const messageStore = useMessageStore();
 const { messages } = storeToRefs(messageStore);
@@ -60,9 +62,9 @@ const messageActions = ref([
     }
   }
 ]);
-const notification = ref();
+const notificationsStore = useNotificationsStore();
 function update () {
-  notification.value.add({ title: 'a', description: 'b', secondaryText: 'c', notificationType: 'asaa' });
+  notificationsStore.addNotification({ title: 'ya', secondaryText: 'huesos', description: ":D" });
   logoSpin.value = true;
   messageStore.fetchMessages().then(() => {
     setTimeout(() => { logoSpin.value = false; }, 1000); // timeout cuz too fast
@@ -72,7 +74,6 @@ function update () {
 
 <template>
   <div>
-    <Notification ref="notification" />
     <div class="msgs relative flex flex-column flex-wrap">
       <div class="flex t-flex-col t-min-w-full md:t-min-w-[20%] h-full">
         <p class="text-4xl">

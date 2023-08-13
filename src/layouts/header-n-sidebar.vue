@@ -16,6 +16,7 @@ onMounted(() => {
 
 <template>
   <div class="flex">
+    <Notification />
     <Sidebar :is-expanded="expanded" :toggle="toggleMenu" />
     <!--      todo add suspense sceletone or some load shit cuz it's loading too long-->
     <div class="w-full flex-1">
