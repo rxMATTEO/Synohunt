@@ -3,6 +3,7 @@ import { kMaxLength } from 'buffer';
 import { reactive, ref } from 'vue';
 import { storeToRefs } from 'pinia';
 import { usePointsStore } from '../../stores/pointsStore';
+import {useMoneyStore} from "@/stores/moneyStore";
 
 type RouteParams = {
   params: {
@@ -35,6 +36,7 @@ type TaskResponse = {
 }
 const { data: { value: { user: { account } } } } = useAuth();
 const pointsStore = usePointsStore();
+const moneyStore = useMoneyStore();
 const coinSpin = ref();
 
 async function solveUserSyno (e?: KeyboardEvent) {
@@ -42,13 +44,12 @@ async function solveUserSyno (e?: KeyboardEvent) {
     const foundSynoIndex = synonyms.value.findIndex(syno => syno.value === userSyno.value);
     if (foundSynoIndex !== -1) {
       solvedSynonyms.value.push(synonyms.value[foundSynoIndex]);
-      const pointsForGuess = synonyms.value[foundSynoIndex].pointsForGuess;
+      const { pointsForGuess, moneyForGuess } = synonyms.value[foundSynoIndex];
       synonyms.value.splice(foundSynoIndex, 1);
       userSyno.value = '';
-      coinSpin.value.append();
+      coinSpin.value.append(async () => { await moneyStore.setMoney(moneyForGuess) });
 
       await pointsStore.setPoints(pointsForGuess);
-      console.log(synonyms.value[foundSynoIndex].moneyForGuess);
 
       if (synonyms.value.length === 0) {
         isDialogVisible.value = true;

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, reactive, ref } from 'vue';
+import {onMounted, reactive, ref, watch} from 'vue';
 import OverlayPanel from 'primevue/overlaypanel';
 import { storeToRefs } from 'pinia';
 import { useMoneyStore } from '../stores/moneyStore';
@@ -84,7 +84,6 @@ const { messages } = storeToRefs(messagesStore);
           </OverlayPanel>
         </div>
         <div>
-          <!--              todo money here-->
           <Avatar
             v-badge.warning="currentMoney"
             shape="circle"

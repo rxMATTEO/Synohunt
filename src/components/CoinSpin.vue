@@ -2,13 +2,16 @@
 import {onMounted, ref} from 'vue';
 
 const isAppended = ref(false);
-const duration = 1500;
+const animationDuration = 1500;
 
-function append () {
+type AnimationEndCallback = () => (money: number) => void;
+
+function append (onAnimationEnd: AnimationEndCallback ) {
   isAppended.value = true;
   setTimeout(() => {
-    isAppended.value = false
-  },duration);
+    isAppended.value = false;
+    onAnimationEnd();
+  }, animationDuration);
 }
 
 defineExpose({
