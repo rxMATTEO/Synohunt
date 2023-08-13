@@ -240,7 +240,7 @@ const items = ref([
                   label="Guess"
                   type="null"
                   :class="{shake: isShaking.value}"
-                  class="text-center block mx-auto px-5 py-3 animated-gradient-rainbow"
+                  class="t-border-0 text-white text-center block mx-auto px-5 py-3 animated-gradient-rainbow"
                   @click="() => solveUserSyno()"
                 />
               </div>
