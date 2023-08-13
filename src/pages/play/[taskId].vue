@@ -160,6 +160,7 @@ const items = ref([
 <template>
   <div>
     <NuxtLayout name="header-n-sidebar">
+      <CoinSpin />
       <img v-if="isDialogVisible" src="/img/salute_v2.gif" class="w-full h-full" alt="salute">
       <Dialog v-model:visible="isDialogVisible" modal header="Header" :style="{ width: '50vw' }">
         <p>

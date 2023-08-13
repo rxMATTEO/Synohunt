@@ -1,6 +1,9 @@
+<script lang="ts" setup>
+
+</script>
 <template>
   <div>
-    <div class="spinningasset coin absolute fly-away">
+    <div class="spinningasset coin absolute fly-away t-left-[500px] t-top-[500px]">
       <div>
         <div />
         <i />
@@ -22,15 +25,13 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'CoinSpin'
-};
-</script>
-
 <style scoped lang="scss">
-
 @mixin flyAway($top, $left) {
+  .fly-away {
+    top: $top;
+    left: $left;
+    position: absolute;
+  }
   @keyframes flyAway {
     5% {
       left: $left;
@@ -53,16 +54,6 @@ export default {
       left: calc(100% - 200px);
     }
   }
-  animation: flyAway 1.5s linear !important;
-}
-
-.fly-away {
-  $top: 0;
-  $left: 200px;
-  top: $top;
-  left: $left;
-  position: absolute;
-  @include flyAway($top, $left);
 }
 @keyframes brightness {
   0%,
@@ -92,11 +83,16 @@ export default {
     transform: rotateY(180deg);
   }
 }
+
 .spinningasset {
   text-align: left;
   transition: all 0.4s ease-out;
   cursor: pointer;
   animation: brightness 2.5s infinite linear;
+  &.fly-away{
+    @include flyAway(100px,200px);
+    animation: brightness 2.5s infinite linear, flyAway 1.5s linear infinite;
+  }
 
   &::after {
     content: "";

@@ -38,7 +38,6 @@ function changeTab (e) {
 <template>
   <div>
     <NuxtLayout name="header-n-sidebar">
-      <CoinSpin />
       <div class="lg:px-8 lg:mx-8 px-3">
         <div class="surface-200 t-rounded-md p-3">
           <div class="flex flex-column md:flex-row md:gap-5 md:flex-wrap">
