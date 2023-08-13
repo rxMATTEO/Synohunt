@@ -68,7 +68,7 @@ const { messages } = storeToRefs(messagesStore);
 </script>
 
 <template>
-  <div :class="{'!t-left-56': isExpanded.value}" class="t-z-10 px-2 max-md:!t-left-0 left-0 t-transition-all t-ease-in-out t-duration-200 fixed surface-card shadow-8 right-0 header">
+  <div :class="{'!t-left-56': isExpanded.value, 'left-0': !isExpanded.value}" class="t-z-10 px-2 max-md:!t-left-0 t-transition-all t-ease-in-out t-duration-200 fixed surface-card shadow-8 right-0 header">
     <div class="flex align-items-center justify-content-between w-full py-2">
       <div>
         <Button unstyled @click="expanded">
