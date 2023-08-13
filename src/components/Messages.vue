@@ -14,14 +14,13 @@ const buttonItems = [
     label: 'Update',
     icon: 'pi pi-refresh',
     command: (e) => {
-      emit;
     }
   },
   {
     label: 'Delete all',
     icon: 'pi pi-times',
-    command: () => {
-
+    command: async () => {
+      await messageStore.removeMessage(messages.value.value);
     }
   },
   {
@@ -46,7 +45,7 @@ const messageActions = ref([
     label: 'Delete',
     icon: 'pi pi-trash',
     command: async () => {
-      await messageStore.removeMessage(selectedMsg.value.value.id);
+      await messageStore.removeMessage([selectedMsg.value.value]);
     }
   },
   {
