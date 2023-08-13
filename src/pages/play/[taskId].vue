@@ -34,6 +34,7 @@ type TaskResponse = {
 }
 const { data: { value: { user: { account } } } } = useAuth();
 const pointsStore = usePointsStore();
+const coinSpin = ref();
 
 async function solveUserSyno (e?: KeyboardEvent) {
   if (!e || e.key === 'Enter') {
@@ -43,6 +44,7 @@ async function solveUserSyno (e?: KeyboardEvent) {
       const pointsForGuess = synonyms.value[foundSynoIndex].pointsForGuess;
       synonyms.value.splice(foundSynoIndex, 1);
       userSyno.value = '';
+      coinSpin.value.append();
 
       await pointsStore.setPoints(pointsForGuess);
 
@@ -155,12 +157,13 @@ const items = ref([
     icon: 'https://primefaces.org/cdn/primevue/images/dock/trash.png'
   }
 ]);
+
 </script>
 
 <template>
   <div>
     <NuxtLayout name="header-n-sidebar">
-      <CoinSpin />
+      <CoinSpin ref="coinSpin" />
       <img v-if="isDialogVisible" src="/img/salute_v2.gif" class="w-full h-full" alt="salute">
       <Dialog v-model:visible="isDialogVisible" modal header="Header" :style="{ width: '50vw' }">
         <p>

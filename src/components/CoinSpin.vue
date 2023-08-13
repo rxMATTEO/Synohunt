@@ -1,13 +1,33 @@
 <script lang="ts" setup>
-type CoinProps = {
+import {onMounted, ref} from 'vue';
 
-};
-defineProps<CoinProps>();
+const isAppended = ref(false);
+const coin = ref();
+onMounted(() => {
+  coin.onanimationend = hide;
+  coin.ontransitionend = hide;
+})
+
+function append () {
+  isAppended.value = true;
+  setTimeout(() => {
+    isAppended.value = false
+  },1500);
+}
+function hide () {
+  isAppended.value = false;
+  console.log('hre');
+}
+
+defineExpose({
+  append
+});
+
 </script>
 
 <template>
-  <div>
-    <div class="spinningasset coin absolute fly-away t-left-[500px] t-top-[500px]">
+  <div v-if="isAppended">
+    <div ref="coin" class="spinningasset coin absolute fly-away t-left-[500px] t-top-[500px]">
       <div>
         <div />
         <i />
