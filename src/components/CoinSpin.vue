@@ -1,6 +1,10 @@
 <script lang="ts" setup>
+type CoinProps = {
 
+};
+defineProps<CoinProps>();
 </script>
+
 <template>
   <div>
     <div class="spinningasset coin absolute fly-away t-left-[500px] t-top-[500px]">
@@ -27,10 +31,11 @@
 
 <style scoped lang="scss">
 @mixin flyAway($top, $left) {
-  .fly-away {
+  & {
     top: $top;
     left: $left;
-    position: absolute;
+    position: fixed;
+    z-index: 99999999;
   }
   @keyframes flyAway {
     5% {
@@ -91,7 +96,7 @@
   animation: brightness 2.5s infinite linear;
   &.fly-away{
     @include flyAway(100px,200px);
-    animation: brightness 2.5s infinite linear, flyAway 1.5s linear infinite;
+    animation: brightness 2.5s infinite linear, flyAway 1.5s linear;
   }
 
   &::after {
