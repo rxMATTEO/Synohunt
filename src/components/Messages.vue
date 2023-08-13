@@ -50,8 +50,10 @@ const messageActions = ref([
   },
   {
     label: 'Upload',
-    icon: 'pi pi-upload',
-    callback: () => {
+    icon: 'pi-eye pi',
+    command: async () => {
+      selectedMsg.value.value.statusId = 3;
+      await messageStore.updateMessage([selectedMsg.value.value]);
     }
   },
   {

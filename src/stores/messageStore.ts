@@ -48,6 +48,19 @@ export const useMessageStore = defineStore('messageStore', () => {
     return messages.value;
   }
 
+  async function updateMessage (msgs: []) {
+    const updatedMessages = await $fetch('/api/messages/update', {
+      method: 'POST',
+      body: {
+        userId: account.id,
+        messages: msgs
+      }
+    }).then(async () => {
+      await fetchMessages();
+    });
+    return messages.value;
+  }
+
   async function removeMessage (msgs: []) {
     const removedMsg = await $fetch('/api/messages/remove', {
       method: 'POST',
@@ -65,6 +78,7 @@ export const useMessageStore = defineStore('messageStore', () => {
     addMessage,
     getSeverity,
     fetchMessages,
-    removeMessage
+    removeMessage,
+    updateMessage
   });
 });
