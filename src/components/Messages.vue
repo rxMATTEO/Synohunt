@@ -5,10 +5,12 @@ import { storeToRefs } from 'pinia';
 import { useMessageStore } from '@/stores/messageStore';
 import {useNotificationsStore} from "@/stores/notificationsStore";
 import arg from "arg";
+import {useRouter} from "#imports";
 
 const messageStore = useMessageStore();
 const { messages } = storeToRefs(messageStore);
 const logoSpin = ref(false);
+const router = useRouter();
 const buttonItems = [
   {
     label: 'Update',
@@ -57,15 +59,15 @@ const messageActions = ref([
     }
   },
   {
-    label: 'Vue Website',
+    label: 'Open in tab',
     icon: 'pi pi-external-link',
-    callback: () => {
+    command: () => {
+      const selectedId = selectedMsg.value.value.id;
+      router.push('/message/' + selectedId);
     }
   }
 ]);
-const notificationsStore = useNotificationsStore();
 function update () {
-  notificationsStore.addNotification({ title: 'ya', secondaryText: 'huesos', description: ":D" });
   logoSpin.value = true;
   messageStore.fetchMessages().then(() => {
     setTimeout(() => { logoSpin.value = false; }, 1000); // timeout cuz too fast
