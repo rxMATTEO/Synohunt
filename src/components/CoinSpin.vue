@@ -2,16 +2,13 @@
 import {onMounted, ref} from 'vue';
 
 const isAppended = ref(false);
+const duration = 1500;
 
 function append () {
   isAppended.value = true;
   setTimeout(() => {
     isAppended.value = false
-  },1500);
-}
-function hide () {
-  isAppended.value = false;
-  console.log('hre');
+  },duration);
 }
 
 defineExpose({
@@ -22,7 +19,7 @@ defineExpose({
 
 <template>
   <div v-if="isAppended">
-    <div class="spinningasset coin absolute fly-away t-left-[500px] t-top-[500px]">
+    <div :class="`spinningasset coin absolute fly-away t-left-[500px] t-top-[500px] !t-duration-[1.5s]`">
       <div>
         <div />
         <i />
@@ -54,19 +51,19 @@ defineExpose({
   }
   @keyframes flyAway {
     5% {
-      left: $left;
       top: $top;
+      left: $left + 5%;
     }
     25% {
-      top: 200px;
-      left: $left;
+      top: $top - 15%;
+      left: $left + 25%;
     }
     50% {
-      top: 200px;
-      left: calc(100% - 320px);
+      top: $top - 35%;
+      left: $left + 30%;
     }
     75% {
-      top: 50px;
+      top: $top - 50%;
       left: calc(100% - 250px);
     }
     100% {
@@ -110,7 +107,7 @@ defineExpose({
   cursor: pointer;
   animation: brightness 2.5s infinite linear;
   &.fly-away{
-    @include flyAway(100px,200px);
+    @include flyAway(60%,50%);
     animation: brightness 2.5s infinite linear, flyAway 1.5s linear;
   }
 
