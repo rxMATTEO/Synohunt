@@ -135,31 +135,46 @@ async function checkBookmark () {
       taskId: task.value.id
     }
   });
-  if (value.status === 'not found') {
-    return false;
-  } else { return true; }
+  return value.status !== 'not found';
 }
 
 const isDialogVisible = ref(false);
 
-const items = ref([
+type Hint = {
+  label: string,
+  icon: string,
+  cost: number,
+};
+const items = ref<Hint[]>([
   {
-    label: 'Finder',
-    icon: 'https://primefaces.org/cdn/primevue/images/dock/finder.svg'
+    label: 'Complete',
+    icon: 'https://primefaces.org/cdn/primevue/images/dock/finder.svg',
+    cost: 5
   },
   {
     label: 'App Store',
-    icon: 'https://primefaces.org/cdn/primevue/images/dock/appstore.svg'
+    icon: 'https://primefaces.org/cdn/primevue/images/dock/appstore.svg',
+    cost: 5
   },
   {
     label: 'Photos',
-    icon: 'https://primefaces.org/cdn/primevue/images/dock/photos.svg'
+    icon: 'https://primefaces.org/cdn/primevue/images/dock/photos.svg',
+    cost: 5
   },
   {
     label: 'Trash',
-    icon: 'https://primefaces.org/cdn/primevue/images/dock/trash.png'
+    icon: 'https://primefaces.org/cdn/primevue/images/dock/trash.png',
+    cost: 5
   }
 ]);
+const hidden = ref(false);
+function hideHintsPanel(){
+  hidden.value = true;
+}
+
+function dragStart(){
+  hidden.value = false;
+}
 
 </script>
 
@@ -251,17 +266,33 @@ const items = ref([
           </div>
         </div>
       </div>
-        <div class="sticky bottom-0 left-0 right-0">
+      <Dialog :visible="true" header="Hints" position="bottom" class="overflow-hidden" :class="{'!t-mb-[-140px]': hidden}" @dragend="dragStart" :pt="{
+        root: {
+          class: [hidden?  't-bottom-[-140px] !t-top-[unset]' : '', 'absolute', 'overflow-hidden']
+        },
+        closeButton: {
+          'onclick': hideHintsPanel
+        }
+      }">
+        <template #closeicon>
+          <i class="pi pi-times" @click="hideHintsPanel"></i>
+        </template>
+        <div>
           <div class="card dock-demo">
             <div class="dock-window w-full" style="backgroundimage: 'url(https://primefaces.org/cdn/primevue/images/dock/window.jpg))'">
-              <Dock :model="items" position="bottom" class="left-0 right-0 relative">
-                <template #icon="{ item }">
-                  <img v-tooltip.top="'hello'" :alt="item.label" :src="item.icon" style="width: 100%">
+              <Dock :model="items" position="bottom" class="left-0 right-0 relative" :pt="{
+                container: {
+                  class: ['surface-ground']
+                }
+              }">
+                <template #icon="data: { item: Hint}">
+                  <img v-tooltip.top="`Cost is ${data.item.cost}`" :alt="data.item.label" :src="data.item.icon" style="width: 100%">
                 </template>
               </Dock>
             </div>
           </div>
       </div>
+      </Dialog>
     </NuxtLayout>
   </div>
 </template>
