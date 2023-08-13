@@ -175,6 +175,7 @@ model Synonym {
   wordId         Int
   value          String
   pointsForGuess Int    @default(5)
+  moneyForGuess Int @default(5)
   Word           Word   @relation(references: [id], fields: [wordId])
 }
 

@@ -16,6 +16,7 @@ type Syno = {
   wordId: number,
   value: string,
   pointsForGuess: number,
+  moneyForGuess: number,
 }
 type Task = {
   id: number,
@@ -47,6 +48,7 @@ async function solveUserSyno (e?: KeyboardEvent) {
       coinSpin.value.append();
 
       await pointsStore.setPoints(pointsForGuess);
+      console.log(synonyms.value[foundSynoIndex].moneyForGuess);
 
       if (synonyms.value.length === 0) {
         isDialogVisible.value = true;
