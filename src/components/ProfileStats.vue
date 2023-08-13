@@ -94,7 +94,7 @@ const { data: { value: { user: { account } } } } = useAuth();
       </div>
       <div class="t-w-1/2">
         <p>Rank breakdown</p>
-        <Knob v-model="percents" disabled value-color="SlateGray" range-color="MediumTurquoise" />
+        <Knob v-model="percents" disabled value-color="SlateGray" range-color="MediumTurquoise" value-template="{value}%"  />
       </div>
     </div>
     <div class="flex relative mt-5 max-md:t-flex-col">

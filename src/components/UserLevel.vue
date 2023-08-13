@@ -27,11 +27,14 @@ watch(currentPoints, async (newPoints, oldPoints) => { // todo move in store and
     levelStore.upgradeLvl();
   }
 });
+
+const lvlBreakPoints = [ [0, 'bg-bluegray-600'], [10, 'bg-orange-500'], [20, 'bg-indigo-400'] ];
+const userLvlColor = lvlBreakPoints.findLast(([breakPoint, color]) => breakPoint <= +level.value.value );
 </script>
 
 <template>
   <div class="badges">
-    <Badge :value="level.value" class="mr-2" @mouseover="(e) => onMouseOver(e, 'levelOp')" />
+    <Badge :value="level.value" class="mr-2" :class="{[userLvlColor[1]]: true}" @mouseover="(e) => onMouseOver(e, 'levelOp')" />
     <OverlayPanel v-if="!onlyBadge" :ref="overlays.levelOp" dismissable class="t-w-[300px]" @mouseleave="() => onMouseLeave('levelOp')">
       <div class="flex t-flex-col w-full">
         <div>
@@ -42,7 +45,7 @@ watch(currentPoints, async (newPoints, oldPoints) => { // todo move in store and
         </div>
         <div class="flex flex-row mt-1">
           <ProgressBar
-            :value="+progress.toFixed(1)"
+            :value="+progress"
             class="w-full text-center"
             :pt="{
               value: {

@@ -31,8 +31,8 @@ export const usePointsStore = defineStore('pointsStore', {
       });
       const currentPoints = this.currentPoints;
       const nextLvlPoints = pointsToNextLvl.need;
-      this.progress = (currentPoints / nextLvlPoints) * 100;
-      return (currentPoints / nextLvlPoints) * 100;
+      this.progress = +((currentPoints / nextLvlPoints) * 100).toFixed(1);
+      return this.progress;
     },
     async setPoints (amount: number) {
       const { data: { value: { user: { account } } } } = useAuth();
