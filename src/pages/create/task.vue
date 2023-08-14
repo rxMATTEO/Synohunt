@@ -3,6 +3,7 @@ import { ref, onMounted, reactive } from 'vue';
 import { Synonym } from '@prisma/client';
 import type { ServerDiff, ServerLang } from '../dashboard.vue';
 
+const { data: { value: { user: { account } } } } = useAuth();
 const diffs = reactive({ value: [] as ServerDiff[] });
 const langs = reactive({ value: [] as ServerLang[] });
 
@@ -25,7 +26,15 @@ const isRandomTaskGenerating = ref(false);
 
 async function randomGenerateTask () {
   isRandomTaskGenerating.value = true;
-  const task = await $fetch(`/api/word/random?lang=${selectedLanguage.value.langFull}&diff=${selectedDiff.value.name}`);
+  // const task = await $fetch(`/api/word/random?lang=${selectedLanguage.value.langFull}&diff=${selectedDiff.value.name}`);
+  const task = await $fetch('/api/word/random', {
+    method: 'POST',
+    body: {
+      lang: selectedLanguage.value.langFull,
+      diff: selectedDiff.value.name,
+      userId: account.id
+    }
+  });
   word.value = task.word.word;
   synonyms.value[0] = task.synos;
   context.value = task.task.description;

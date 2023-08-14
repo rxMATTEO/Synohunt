@@ -1,7 +1,7 @@
-import { getQuery } from 'h3';
+import { readBody } from 'h3';
 
 export default defineEventHandler(async (event) => {
-  const { lang, diff } = getQuery(event);
+  const { lang, diff, userId } = readBody(event);
   const langFullIndex = await event.context.prisma.language.findFirst({
     where: {
       langFull: lang
@@ -36,7 +36,8 @@ export default defineEventHandler(async (event) => {
       diffId: diffDb.id, // todo fix this
       langId: langFullIndex.id,
       description: context.examples[0].source,
-      wordId: word.id
+      wordId: word.id,
+      userId
     }
   });
 

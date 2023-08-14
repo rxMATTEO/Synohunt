@@ -85,6 +85,7 @@ model User {
   BookmarkedTask BookmarkedTask[]
   Message        Message[]
   Money          Money?           @relation(fields: [moneyId], references: [id])
+  Task           Task[]
 }
 
 model Money {
@@ -133,10 +134,12 @@ model Task {
   langId         Int
   description    String
   wordId         Int
+  userId         String
   isVisible      Boolean          @default(false)
   Word           Word             @relation(fields: [wordId], references: [id])
   Difficulity    Difficulity      @relation(fields: [diffId], references: [id])
   Language       Language         @relation(fields: [langId], references: [id])
+  User           User             @relation(fields: [userId], references: [id])
   Tag            Tag[]
   CompletedTask  CompletedTask[]
   BookmarkedTask BookmarkedTask[]

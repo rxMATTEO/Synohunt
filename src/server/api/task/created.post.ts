@@ -3,16 +3,18 @@ import { readBody } from 'h3';
 export default defineEventHandler(async (event) => {
   const { userId } = await readBody(event);
 
-  const completedTasks = event.context.prisma.completedTask.findMany({
+  const completedTasks = event.context.prisma.task.findMany({
     include: {
-      Task: {
+      Word: {
         include: {
-          Word: {
-            include: {
-              Synonym: true
-            }
-          }
+          Synonym: true
         }
+      },
+      Difficulity: true,
+      Language: true,
+      Tag: true,
+      _count: {
+        select: { CompletedTask: true }
       }
     },
     where: {

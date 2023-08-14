@@ -6,7 +6,7 @@
   <div>
     <NuxtLayout name="header-n-sidebar">
       <div class="lg:px-8 lg:mx-8 px-3">
-        a
+        <CreatedTasks />
       </div>
     </NuxtLayout>
   </div>
