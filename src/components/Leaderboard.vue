@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import {Level, User} from "@prisma/client";
-import {reactive} from "vue";
+import { Level, User } from '@prisma/client';
+import { reactive } from 'vue';
 
 type Props = {
   limit: number
@@ -35,7 +35,7 @@ const positionSeverities = {
         </div>
       </template>
     </Column>
-    <Column header="Completed tasks" field="tasks.length" style="width: 25%;" class="max-md:!t-p-0" />
+    <Column header="Completed challenge" field="tasks.length" style="width: 25%;" class="max-md:!t-p-0" />
     <!--      todo realize this-->
     <Column header="Points" style="width: 25%;" class="max-md:!t-p-0">
       <template #body="data: { data: Leader}">

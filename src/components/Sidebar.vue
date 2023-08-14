@@ -29,7 +29,7 @@ const props = defineProps({
                   Play
                 </p>
                 <p class="text-sm text-color-secondary">
-                  Complete tasks & practice
+                  Complete challenges & practice
                 </p>
               </div>
             </div>
@@ -44,7 +44,7 @@ const props = defineProps({
                   Practice
                 </p>
                 <p class="text-sm text-color-secondary">
-                  Complete tasks and shit
+                  Complete challenge and shit
                 </p>
               </div>
             </div>
@@ -63,7 +63,7 @@ const props = defineProps({
                   Practice
                 </p>
                 <p class="text-sm text-color-secondary">
-                  Complete tasks and shit
+                  Complete challenge and shit
                 </p>
               </div>
             </div>
@@ -96,7 +96,7 @@ const props = defineProps({
                   Practice
                 </p>
                 <p class="text-sm text-color-secondary">
-                  Complete tasks and shit
+                  Complete challenge and shit
                 </p>
               </div>
             </div>
@@ -111,7 +111,7 @@ const props = defineProps({
                   Practice
                 </p>
                 <p class="text-sm text-color-secondary">
-                  Complete tasks and shit
+                  Complete challenge and shit
                 </p>
               </div>
             </div>
@@ -129,7 +129,7 @@ const props = defineProps({
                   Practice
                 </p>
                 <p class="text-sm text-color-secondary">
-                  Complete tasks and shit
+                  Complete challenge and shit
                 </p>
               </div>
             </div>

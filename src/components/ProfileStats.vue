@@ -28,7 +28,7 @@ const { data: { value: { user: { account } } } } = useAuth();
               <span>{{ account.points }}</span>
             </div>
             <div>
-              <b>Total completed tasks: </b>
+              <b>Total completed challenge: </b>
               <span>{{ account.Level.value }}</span>
             </div>
           </div>
@@ -45,7 +45,7 @@ const { data: { value: { user: { account } } } } = useAuth();
             <span>{{ account.points }}</span>
           </div>
           <div>
-            <b>Total completed tasks: </b>
+            <b>Total completed challenge: </b>
             <span>{{ account.Level.value }}</span>
           </div>
         </div>
@@ -61,7 +61,7 @@ const { data: { value: { user: { account } } } } = useAuth();
             <span>{{ account.points }}</span>
           </div>
           <div>
-            <b>Total completed tasks: </b>
+            <b>Total completed challenge: </b>
             <span>{{ account.Level.value }}</span>
           </div>
         </div>
@@ -86,7 +86,7 @@ const { data: { value: { user: { account } } } } = useAuth();
               <span>{{ account.points }}</span>
             </div>
             <div>
-              <b>Total completed tasks: </b>
+              <b>Total completed challenge: </b>
               <span>{{ account.Level.value }}</span>
             </div>
           </div>
@@ -94,7 +94,7 @@ const { data: { value: { user: { account } } } } = useAuth();
       </div>
       <div class="t-w-1/2">
         <p>Rank breakdown</p>
-        <Knob v-model="percents" disabled value-color="SlateGray" range-color="MediumTurquoise" value-template="{value}%"  />
+        <Knob v-model="percents" disabled value-color="SlateGray" range-color="MediumTurquoise" value-template="{value}%" />
       </div>
     </div>
     <div class="flex relative mt-5 max-md:t-flex-col">
@@ -116,7 +116,7 @@ const { data: { value: { user: { account } } } } = useAuth();
               <span>{{ account.points }}</span>
             </div>
             <div>
-              <b>Mb created tasks: </b>
+              <b>Mb created challenge: </b>
               <span>{{ account.Level.value }}</span>
             </div>
           </div>

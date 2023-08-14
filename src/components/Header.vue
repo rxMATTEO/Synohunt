@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {onMounted, reactive, ref, watch} from 'vue';
+import { onMounted, reactive, ref, watch } from 'vue';
 import OverlayPanel from 'primevue/overlaypanel';
 import { storeToRefs } from 'pinia';
 import { useMoneyStore } from '../stores/moneyStore';
@@ -112,24 +112,24 @@ const { messages } = storeToRefs(messagesStore);
               </div>
               <div class="link flex t-items-center pt-3">
                 <NuxtLink to="/">
-                  <Button icon="pi p-text-secondary pi-file-edit mr-1" unstyled class="t-pl-1 " label="My tasks" />
+                  <Button icon="pi p-text-secondary pi-file-edit mr-1" unstyled class="t-pl-1 " label="My challenges" />
                 </NuxtLink>
               </div>
               <Divider />
               <div class="link flex t-items-center">
                 <NuxtLink to="/">
-                  <Button icon="pi p-text-secondary pi-comments mr-1" unstyled class="t-pl-1 " label="Commented tasks" />
+                  <Button icon="pi p-text-secondary pi-comments mr-1" unstyled class="t-pl-1 " label="Commented challenges" />
                 </NuxtLink>
               </div>
               <Divider />
               <div class="link flex t-items-center">
                 <NuxtLink to="/profile/completed">
-                  <Button icon="pi p-text-secondary pi-check-circle mr-1" label="Completed tasks" unstyled />
+                  <Button icon="pi p-text-secondary pi-check-circle mr-1" label="Completed challenges" unstyled />
                 </NuxtLink>
               </div>
               <div class="link flex t-items-center">
                 <NuxtLink to="/profile/bookmarks">
-                  <Button icon="p-text-secondary pi pi-bookmark mr-1" unstyled class="link flex t-items-center pt-3" label="Bookmarked tasks" />
+                  <Button icon="p-text-secondary pi pi-bookmark mr-1" unstyled class="link flex t-items-center pt-3" label="Bookmarked challenges" />
                 </NuxtLink>
               </div>
               <Divider />

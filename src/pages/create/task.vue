@@ -21,12 +21,16 @@ useFetch('/api/langs').then((res) => {
   selectedLanguage.value = langs.value[0];
 });
 
+const isRandomTaskGenerating = ref(false);
+
 async function randomGenerateTask () {
+  isRandomTaskGenerating.value = true;
   const task = await $fetch(`/api/word/random?lang=${selectedLanguage.value.langFull}&diff=${selectedDiff.value.name}`);
   word.value = task.word.word;
   synonyms.value[0] = task.synos;
   context.value = task.task.description;
   taskFetched.value = task;
+  isRandomTaskGenerating.value = false;
 }
 
 async function createTask () {
@@ -49,11 +53,15 @@ async function createTask () {
         <div class="surface-ground t-rounded-md p-5 h-fit">
           <div class="relative">
             <div class="absolute right-0">
-              <Button v-tooltip="'Generate randomly'" icon="pi pi-sync" unstyled @click="randomGenerateTask" />
+              <Button v-tooltip="'Generate randomly'" unstyled @click="randomGenerateTask">
+                <template #icon>
+                  <i class="pi pi-sync" :class="{'pi-spin' : isRandomTaskGenerating}" />
+                </template>
+              </Button>
             </div>
           </div>
           <h1 class="text-4xl">
-            Create new task
+            Create new challenge
           </h1>
           <div class="mt-6">
             <Fieldset>
@@ -87,7 +95,7 @@ async function createTask () {
                   </template>
                 </Dropdown>
                 <label for="dd-diff" class="">Select difficulty</label>
-                <i v-tooltip.left="'Define task difficulty so players can choose it depends them skill'" class="pi pi-info-circle absolute t-top-[-20px] right-0" />
+                <i v-tooltip.left="'Define challenge difficulty so players can choose it depends them skill'" class="pi pi-info-circle absolute t-top-[-20px] right-0" />
               </div>
               <div class="p-float-label mt-5">
                 <Dropdown
@@ -177,7 +185,7 @@ async function createTask () {
           <div class="mt-5">
             <!--              todo redirect to my tasks-->
             <!--              <NuxtLink to="/dashboard">-->
-            <Button label="Create task" type="null" class="mx-auto block" @click="createTask" />
+            <Button label="Create challenge" type="null" class="mx-auto block" @click="createchallenge" />
           <!--              </NuxtLink>-->
           </div>
         </div>
