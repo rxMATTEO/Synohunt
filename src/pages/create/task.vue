@@ -55,8 +55,8 @@ async function createTask () {
           <h1 class="text-4xl">
             Creating new task
           </h1>
-          <div class="mt-5">
-            <div class="p-float-label">
+          <div class="mt-6">
+            <div class="p-float-label relative">
               <Dropdown
                 v-model="selectedDiff.value"
                 input-id="dd-diff"
@@ -80,6 +80,7 @@ async function createTask () {
                 </template>
               </Dropdown>
               <label for="dd-diff" class="">Select difficulty</label>
+              <i v-tooltip.left="'Define task difficulty so players can choose it depends them skill'" class="pi pi-info-circle absolute t-top-[-20px] right-0" />
             </div>
             <div class="p-float-label mt-5">
               <Dropdown
@@ -105,25 +106,34 @@ async function createTask () {
                 </template>
               </Dropdown>
               <label for="dd-lang" class="">Select Language</label>
+              <i v-tooltip.left="'Select language of word and synonyms'" class="pi pi-info-circle absolute t-top-[-20px] right-0" />
             </div>
           </div>
           <div class="mt-5">
-            <p>Word</p>
+            <div class="flex t-place-content-between">
+              <p>Word</p>
+              <i v-tooltip.left="'The word which synonyms players will be guessing'" class="pi pi-info-circle" />
+            </div>
             <InputText v-model="word.value" type="text" class="w-full" />
           </div>
           <div class="mt-5">
-            <p>Context</p>
+            <div class="flex t-place-content-between">
+              <p>Context</p>
+              <i v-tooltip.left="'Enter the context of word. You can use html tags'" class="pi pi-info-circle" />
+            </div>
             <Editor v-model="context" />
           </div>
           <div class="mt-5">
-            <p>Synonyms</p>
-            <div class="mt-5">
+            <div class="flex t-place-content-between">
+              <p>Synonyms</p>
+              <i v-tooltip.left="'The synonyms which is players will be guessing'" class="pi pi-info-circle" />
+            </div>            <div class="mt-5">
               <PickList
                 v-model="synonyms.value"
                 data-key="id"
               >
                 <template #sourceheader>
-                  Available
+                  Possible
                 </template>
                 <template #targetheader>
                   Selected
