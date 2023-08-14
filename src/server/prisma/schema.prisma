@@ -3,8 +3,10 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
+  // shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
 model Account {
@@ -21,34 +23,31 @@ model Account {
   id_token          String?
   session_state     String?
   subscribed        Boolean @default(false)
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
 
 model Notification {
-  id     Int    @id @default(autoincrement())
+  id     Int              @id @default(autoincrement())
   typeId Int
   userId String
-
-  User User             @relation(fields: [userId], references: [id])
-  Type NotificationType @relation(fields: [id], references: [id])
+  Type   NotificationType @relation(fields: [id], references: [id])
+  User   User             @relation(fields: [userId], references: [id])
 }
 
 model NotificationType {
-  id           Int            @id @default(autoincrement())
+  id           Int           @id @default(autoincrement())
   value        String
-  Notification Notification[]
+  Notification Notification?
 }
 
 model Level {
   id       Int    @id @default(autoincrement())
   value    String
   groupdId Int
-
-  Group Group  @relation(fields: [groupdId], references: [id])
-  User  User[]
+  Group    Group  @relation(fields: [groupdId], references: [id])
+  User     User[]
 }
 
 model Group {
@@ -56,7 +55,7 @@ model Group {
   min        Int
   max        Int
   name       String
-  multiplier Int     @default(10) // formula: multiplier * nextLevel
+  multiplier Int     @default(10)
   Level      Level[]
 }
 
@@ -69,28 +68,28 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  levelId       Int?
-  Level         Level?    @relation(fields: [levelId], references: [id])
-  points        Int       @default(1)
-  moneyId       Int?
-  account        Account[]
-  sessions       Session[]
-  Notification   Notification[]
-  CompletedTask  CompletedTask[]
+  id             String           @id @default(cuid())
+  name           String?
+  email          String?          @unique
+  emailVerified  DateTime?
+  image          String?
+  levelId        Int?
+  points         Int              @default(1)
+  moneyId        Int?
+  account        Account?
   BookmarkedTask BookmarkedTask[]
+  CompletedTask  CompletedTask[]
   Message        Message[]
-  Money          Money?  @relation(fields: [moneyId], references: [id])
+  Notification   Notification[]
+  sessions       Session[]
+  Level          Level?           @relation(fields: [levelId], references: [id])
+  Money          Money?           @relation(fields: [moneyId], references: [id])
 }
 
 model Money {
-    id Int @id @default(autoincrement())
-    value Int @default(50)
-    User User[]
+  id    Int    @id @default(autoincrement())
+  value Int    @default(50)
+  User  User[]
 }
 
 model Message {
@@ -113,18 +112,16 @@ model CompletedTask {
   id     Int    @id @default(autoincrement())
   userId String
   taskId Int
-
-  User User @relation(fields: [userId], references: [id])
-  Task Task @relation(fields: [taskId], references: [id])
+  Task   Task   @relation(fields: [taskId], references: [id])
+  User   User   @relation(fields: [userId], references: [id])
 }
 
 model BookmarkedTask {
   id     Int    @id @default(autoincrement())
   userId String
   taskId Int
-
-  User User @relation(fields: [userId], references: [id])
-  Task Task @relation(fields: [taskId], references: [id])
+  Task   Task   @relation(fields: [taskId], references: [id])
+  User   User   @relation(fields: [userId], references: [id])
 }
 
 model Task {
@@ -133,12 +130,12 @@ model Task {
   langId         Int
   description    String
   wordId         Int
-  Word           Word             @relation(fields: [wordId], references: [id])
+  BookmarkedTask BookmarkedTask[]
+  CompletedTask  CompletedTask[]
+  Tag            Tag[]
   Difficulity    Difficulity      @relation(fields: [diffId], references: [id])
   Language       Language         @relation(fields: [langId], references: [id])
-  Tag            Tag[]
-  CompletedTask  CompletedTask[]
-  BookmarkedTask BookmarkedTask[]
+  Word           Word             @relation(fields: [wordId], references: [id])
 }
 
 model Difficulity {
@@ -151,8 +148,7 @@ model Tag {
   id     Int    @id @default(autoincrement())
   name   String
   taskId Int
-
-  Task Task @relation(fields: [taskId], references: [id])
+  Task   Task   @relation(fields: [taskId], references: [id])
 }
 
 model Language {
@@ -163,9 +159,8 @@ model Language {
 }
 
 model Word {
-  id   Int    @id @default(autoincrement())
-  word String
-
+  id      Int       @id @default(autoincrement())
+  word    String
   Synonym Synonym[]
   Task    Task[]
 }
@@ -175,8 +170,8 @@ model Synonym {
   wordId         Int
   value          String
   pointsForGuess Int    @default(5)
-  moneyForGuess Int @default(5)
-  Word           Word   @relation(references: [id], fields: [wordId])
+  moneyForGuess  Int    @default(5)
+  Word           Word   @relation(fields: [wordId], references: [id])
 }
 
 model VerificationToken {
