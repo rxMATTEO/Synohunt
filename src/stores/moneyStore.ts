@@ -16,7 +16,7 @@ export const useMoneyStore = defineStore('moneyStore', {
           userId: account.id,
           amount
         }
-      }); // todo add toast
+      });
       this.currentMoney = fetch.data.value.Money.value;
       return fetch.data;
     }

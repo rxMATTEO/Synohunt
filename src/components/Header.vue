@@ -59,7 +59,6 @@ function changeTheme () {
   const [currentTheme, newTheme] = theme.theme.dark ? [dark, light] : [light, dark];
   setCurrentTheme(currentTheme, newTheme);
 }
-// TODO pokazivatj coins vmesto random badge
 const moneyStore = useMoneyStore();
 const { currentMoney } = storeToRefs(moneyStore);
 
@@ -111,7 +110,7 @@ const { messages } = storeToRefs(messagesStore);
                 </NuxtLink>
               </div>
               <div class="link flex t-items-center pt-3">
-                <NuxtLink to="/">
+                <NuxtLink to="/profile/challenges">
                   <Button icon="pi p-text-secondary pi-file-edit mr-1" unstyled class="t-pl-1 " label="My challenges" />
                 </NuxtLink>
               </div>

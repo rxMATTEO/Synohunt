@@ -2,10 +2,10 @@
 import { onMounted, reactive, ref } from 'vue';
 import { Message, MessageStatus } from '@prisma/client';
 import { storeToRefs } from 'pinia';
+import arg from 'arg';
 import { useMessageStore } from '@/stores/messageStore';
-import {useNotificationsStore} from "@/stores/notificationsStore";
-import arg from "arg";
-import {useRouter} from "#imports";
+import { useNotificationsStore } from '@/stores/notificationsStore';
+import { useRouter } from '#imports';
 
 const messageStore = useMessageStore();
 const { messages } = storeToRefs(messageStore);
@@ -105,7 +105,6 @@ function update () {
             У вас нет сообщений!
           </p>
         </div>
-        <!--        todo add status badge-->
         <DataView v-else :value="messages.value" class="t-max-w-full">
           <template #list="{data: slotProps}">
             <div class="col-12 relative">
