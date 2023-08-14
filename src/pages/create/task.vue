@@ -186,7 +186,7 @@ async function createTask () {
           <div class="mt-5">
             <!--              todo redirect to my tasks-->
             <!--              <NuxtLink to="/dashboard">-->
-            <Button label="Create challenge" type="null" class="mx-auto block" @click="createchallenge" />
+            <Button label="Create challenge" type="null" class="mx-auto block" @click="createTask" />
           <!--              </NuxtLink>-->
           </div>
         </div>
@@ -195,10 +195,8 @@ async function createTask () {
   </div>
 </template>
 
-<style lang="scss">
-.pick-list {
-  button, [type="button"] {
-    background-color: var(--primary-color) !important;
-  }
-}
+<style lang="sass">
+.pick-list
+  @include apply-default-button
+
 </style>
