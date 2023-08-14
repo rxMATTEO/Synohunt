@@ -69,28 +69,28 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  levelId       Int?
-  Level         Level?    @relation(fields: [levelId], references: [id])
-  points        Int       @default(1)
-  moneyId       Int?
+  id             String           @id @default(cuid())
+  name           String?
+  email          String?          @unique
+  emailVerified  DateTime?
+  image          String?
+  levelId        Int?
+  Level          Level?           @relation(fields: [levelId], references: [id])
+  points         Int              @default(1)
+  moneyId        Int?
   account        Account[]
   sessions       Session[]
   Notification   Notification[]
   CompletedTask  CompletedTask[]
   BookmarkedTask BookmarkedTask[]
   Message        Message[]
-  Money          Money?  @relation(fields: [moneyId], references: [id])
+  Money          Money?           @relation(fields: [moneyId], references: [id])
 }
 
 model Money {
-    id Int @id @default(autoincrement())
-    value Int @default(50)
-    User User[]
+  id    Int    @id @default(autoincrement())
+  value Int    @default(50)
+  User  User[]
 }
 
 model Message {
@@ -133,6 +133,7 @@ model Task {
   langId         Int
   description    String
   wordId         Int
+  isVisible      Boolean          @default(false)
   Word           Word             @relation(fields: [wordId], references: [id])
   Difficulity    Difficulity      @relation(fields: [diffId], references: [id])
   Language       Language         @relation(fields: [langId], references: [id])
@@ -175,7 +176,7 @@ model Synonym {
   wordId         Int
   value          String
   pointsForGuess Int    @default(5)
-  moneyForGuess Int @default(5)
+  moneyForGuess  Int    @default(5)
   Word           Word   @relation(references: [id], fields: [wordId])
 }
 

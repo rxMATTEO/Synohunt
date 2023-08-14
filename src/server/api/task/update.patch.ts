@@ -1,5 +1,5 @@
 import { readBody } from 'h3';
-
+import { Task } from '@prisma/client';
 export default defineEventHandler(async (event) => {
   const { updatingTask } = await readBody(event);
 
@@ -11,7 +11,7 @@ export default defineEventHandler(async (event) => {
       Word: true
     },
     data: {
-      ...updatingTask.task,
+      Object.fromEntries(Object.entries(updatingTask.task).filter(([key, value]) => key != 'id'))
     }
   });
 
@@ -28,10 +28,11 @@ export default defineEventHandler(async (event) => {
           data: {
             ...updatingTask.word
 
-          }})
+          }
+        })
       }
     }
   });
 
-  return {prismaUpdated, prismaUpdatedWord};
+  return { prismaUpdated, prismaUpdatedWord };
 });

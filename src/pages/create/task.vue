@@ -1,5 +1,6 @@
 <script lang="ts" setup>
-import {ref, onMounted, reactive} from 'vue';
+import { ref, onMounted, reactive } from 'vue';
+import { Synonym } from '@prisma/client';
 import type { ServerDiff, ServerLang } from '../dashboard.vue';
 
 const diffs = reactive({ value: [] as ServerDiff[] });
@@ -28,11 +29,12 @@ async function randomGenerateTask () {
   taskFetched.value = task;
 }
 
-async function createTask(){
+async function createTask () {
   taskFetched.value.task.description = context.value;
+  taskFetched.value.task.isVisible = true;
   taskFetched.value.word.word = word.value;
   const created = await $fetch('/api/task/update', {
-    method: "PATCH",
+    method: 'PATCH',
     body: {
       updatingTask: taskFetched.value
     }
@@ -109,10 +111,10 @@ async function createTask(){
             <p>Word</p>
             <InputText v-model="word.value" type="text" class="w-full" />
           </div>
-            <div class="mt-5">
-              <p>Context</p>
-              <Editor v-model="context" />
-            </div>
+          <div class="mt-5">
+            <p>Context</p>
+            <Editor v-model="context" />
+          </div>
           <div class="mt-5">
             <p>Synonyms</p>
             <div class="mt-5">
@@ -126,12 +128,13 @@ async function createTask(){
                 <template #targetheader>
                   Selected
                 </template>
-                <template #item="slotProps">
-                  <div class="flex flex-wrap p-2 align-items-center gap-3">
+                <template #item="slotProps : {item: Synonym}">
+                  <div class="flex flex-wrap p-2 align-items-center gap-3 pick-list">
                     <div class="flex-1 flex flex-column gap-2">
                       <span class="font-bold">{{ slotProps.item.value }}</span>
                       <div class="flex align-items-center gap-2">
-                        <Badge :value="slotProps.item.pointsForGuess" :severity="'info'" />
+                        <Badge v-tooltip="{value: `<p>Player will get <b>${slotProps.item.pointsForGuess} points</b> for guessing this synonym</p`, escape: true}" :value="slotProps.item.pointsForGuess" :severity="'info'" />
+                        <Badge v-tooltip="{value: `<p>Player will get <b>${slotProps.item.moneyForGuess} points</b> for guessing this synonym</p`, escape: true}" :value="slotProps.item.moneyForGuess" :severity="'warning'" />
                       </div>
                     </div>
                   </div>
@@ -140,9 +143,9 @@ async function createTask(){
             </div>
             <div class="mt-5">
               <!--              todo redirect to my tasks-->
-<!--              <NuxtLink to="/dashboard">-->
-                <Button label="Create task" type="null" class="mx-auto block" @click="createTask"/>
-<!--              </NuxtLink>-->
+              <!--              <NuxtLink to="/dashboard">-->
+              <Button label="Create task" type="null" class="mx-auto block" @click="createTask" />
+              <!--              </NuxtLink>-->
             </div>
           </div>
         </div>
@@ -151,6 +154,10 @@ async function createTask(){
   </div>
 </template>
 
-<style scoped>
-
+<style lang="scss">
+.pick-list{
+  button, [type="button"] {
+    color: var(--primary) !important;
+  }
+}
 </style>
