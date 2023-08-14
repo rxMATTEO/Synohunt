@@ -155,12 +155,13 @@ async function createTask () {
               </div>
             </template>
             <div class="relative">
-              <i v-tooltip.left="'The synonyms which is players will be guessing'" class="pi pi-info-circle absolute t-right-0" />
+              <i v-tooltip.left="'The synonyms which is players will be guessing'" class="pi pi-info-circle absolute t-right-0 t-top-0" />
             </div>
             <div class="mt-5">
               <PickList
                 v-model="synonyms.value"
                 data-key="id"
+                class="pick-list"
               >
                 <template #sourceheader>
                   Possible
@@ -195,9 +196,9 @@ async function createTask () {
 </template>
 
 <style lang="scss">
-.pick-list{
+.pick-list {
   button, [type="button"] {
-    color: var(--primary) !important;
+    background-color: var(--primary-color) !important;
   }
 }
 </style>
