@@ -27,6 +27,7 @@ import Tag from 'primevue/tag';
 import Toast from 'primevue/toast';
 import ToastService from 'primevue/toastservice';
 import ConfirmDialog from 'primevue/confirmdialog';
+import Fieldset from 'primevue/fieldset';
 import { defineNuxtPlugin } from '#imports';
 
 export default defineNuxtPlugin((nuxtApp) => {
@@ -60,4 +61,5 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component('Tag', Tag);
   nuxtApp.vueApp.component('Toast', Toast);
   nuxtApp.vueApp.component('ConfirmDialog', ConfirmDialog);
+  nuxtApp.vueApp.component('Fieldset', Fieldset);
 });

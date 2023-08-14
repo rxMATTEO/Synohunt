@@ -53,81 +53,103 @@ async function createTask () {
             </div>
           </div>
           <h1 class="text-4xl">
-            Creating new task
+            Create new task
           </h1>
           <div class="mt-6">
-            <div class="p-float-label relative">
-              <Dropdown
-                v-model="selectedDiff.value"
-                input-id="dd-diff"
-                :options="diffs.value"
-                option-label="name"
-                placeholder="Select difficulty"
-                class="w-full"
-              >
-                <template #value="slotProps">
-                  <div v-if="slotProps.value" class="flex align-items-center">
-                    <div>{{ slotProps.value.name }}</div>
-                  </div>
-                  <span v-else>
-                    {{ slotProps.placeholder }}
-                  </span>
-                </template>
-                <template #option="slotProps">
-                  <div class="flex align-items-center">
-                    <div>{{ slotProps.option.name }}</div>
-                  </div>
-                </template>
-              </Dropdown>
-              <label for="dd-diff" class="">Select difficulty</label>
-              <i v-tooltip.left="'Define task difficulty so players can choose it depends them skill'" class="pi pi-info-circle absolute t-top-[-20px] right-0" />
-            </div>
-            <div class="p-float-label mt-5">
-              <Dropdown
-                v-model="selectedLanguage.value"
-                input-id="dd-lang"
-                :options="langs.value"
-                option-label="name"
-                placeholder="Select language"
-                class="w-full"
-              >
-                <template #value="slotProps">
-                  <div v-if="slotProps.value" class="flex align-items-center">
-                    <div>{{ slotProps.value.langFull }}</div>
-                  </div>
-                  <span v-else>
-                    {{ slotProps.placeholder }}
-                  </span>
-                </template>
-                <template #option="slotProps">
-                  <div class="flex align-items-center">
-                    <div>{{ slotProps.option.langFull }}</div>
-                  </div>
-                </template>
-              </Dropdown>
-              <label for="dd-lang" class="">Select Language</label>
-              <i v-tooltip.left="'Select language of word and synonyms'" class="pi pi-info-circle absolute t-top-[-20px] right-0" />
-            </div>
+            <Fieldset>
+              <template #legend>
+                <div class="flex align-items-center text-primary">
+                  <span class="pi pi-language mr-2" />
+                  <span class="font-bold text-lg">Language & difficulty</span>
+                </div>
+              </template>
+              <div class="p-float-label relative mt-3">
+                <Dropdown
+                  v-model="selectedDiff.value"
+                  input-id="dd-diff"
+                  :options="diffs.value"
+                  option-label="name"
+                  placeholder="Select difficulty"
+                  class="w-full"
+                >
+                  <template #value="slotProps">
+                    <div v-if="slotProps.value" class="flex align-items-center">
+                      <div>{{ slotProps.value.name }}</div>
+                    </div>
+                    <span v-else>
+                      {{ slotProps.placeholder }}
+                    </span>
+                  </template>
+                  <template #option="slotProps">
+                    <div class="flex align-items-center">
+                      <div>{{ slotProps.option.name }}</div>
+                    </div>
+                  </template>
+                </Dropdown>
+                <label for="dd-diff" class="">Select difficulty</label>
+                <i v-tooltip.left="'Define task difficulty so players can choose it depends them skill'" class="pi pi-info-circle absolute t-top-[-20px] right-0" />
+              </div>
+              <div class="p-float-label mt-5">
+                <Dropdown
+                  v-model="selectedLanguage.value"
+                  input-id="dd-lang"
+                  :options="langs.value"
+                  option-label="name"
+                  placeholder="Select language"
+                  class="w-full"
+                >
+                  <template #value="slotProps">
+                    <div v-if="slotProps.value" class="flex align-items-center">
+                      <div>{{ slotProps.value.langFull }}</div>
+                    </div>
+                    <span v-else>
+                      {{ slotProps.placeholder }}
+                    </span>
+                  </template>
+                  <template #option="slotProps">
+                    <div class="flex align-items-center">
+                      <div>{{ slotProps.option.langFull }}</div>
+                    </div>
+                  </template>
+                </Dropdown>
+                <label for="dd-lang" class="">Select Language</label>
+                <i v-tooltip.left="'Select language of word and synonyms'" class="pi pi-info-circle absolute t-top-[-20px] right-0" />
+              </div>
+            </Fieldset>
           </div>
-          <div class="mt-5">
-            <div class="flex t-place-content-between">
-              <p>Word</p>
-              <i v-tooltip.left="'The word which synonyms players will be guessing'" class="pi pi-info-circle" />
+          <Fieldset class="my-5">
+            <template #legend>
+              <div class="flex align-items-center text-primary">
+                <span class="pi pi-book mr-2" />
+                <span class="font-bold text-lg">Word & context</span>
+              </div>
+            </template>
+            <div class="mt-0">
+              <div class="flex t-place-content-between">
+                <p>Word</p>
+                <i v-tooltip.left="'The word which synonyms players will be guessing'" class="pi pi-info-circle" />
+              </div>
+              <InputText v-model="word.value" type="text" class="w-full" />
             </div>
-            <InputText v-model="word.value" type="text" class="w-full" />
-          </div>
-          <div class="mt-5">
-            <div class="flex t-place-content-between">
-              <p>Context</p>
-              <i v-tooltip.left="'Enter the context of word. You can use html tags'" class="pi pi-info-circle" />
+            <div class="mt-5">
+              <div class="flex t-place-content-between">
+                <p>Context</p>
+                <i v-tooltip.left="'Enter the context of word. You can use html tags'" class="pi pi-info-circle" />
+              </div>
+              <Editor v-model="context" />
             </div>
-            <Editor v-model="context" />
-          </div>
-          <div class="mt-5">
-            <div class="flex t-place-content-between">
-              <p>Synonyms</p>
-              <i v-tooltip.left="'The synonyms which is players will be guessing'" class="pi pi-info-circle" />
-            </div>            <div class="mt-5">
+          </Fieldset>
+          <Fieldset>
+            <template #legend>
+              <div class="flex align-items-center text-primary">
+                <span class="pi pi-file-import mr-2" />
+                <span class="font-bold text-lg">Synonyms</span>
+              </div>
+            </template>
+            <div class="relative">
+              <i v-tooltip.left="'The synonyms which is players will be guessing'" class="pi pi-info-circle absolute t-right-0" />
+            </div>
+            <div class="mt-5">
               <PickList
                 v-model="synonyms.value"
                 data-key="id"
@@ -151,12 +173,12 @@ async function createTask () {
                 </template>
               </PickList>
             </div>
-            <div class="mt-5">
-              <!--              todo redirect to my tasks-->
-              <!--              <NuxtLink to="/dashboard">-->
-              <Button label="Create task" type="null" class="mx-auto block" @click="createTask" />
-              <!--              </NuxtLink>-->
-            </div>
+          </Fieldset>
+          <div class="mt-5">
+            <!--              todo redirect to my tasks-->
+            <!--              <NuxtLink to="/dashboard">-->
+            <Button label="Create task" type="null" class="mx-auto block" @click="createTask" />
+          <!--              </NuxtLink>-->
           </div>
         </div>
       </div>
