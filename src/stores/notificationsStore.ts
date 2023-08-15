@@ -1,7 +1,14 @@
 import { defineStore, useAuth, useFetch } from '#imports';
-import type { NotificationProps } from "@/components/Notification.vue";
+import type { NotificationProps } from '@/components/Notification.vue';
 
-export const useNotificationsStore = defineStore('notificationsStore', {
+type NotificationsStore = {
+  () :{
+    notifications: NotificationProps[],
+    addNotification<T extends NotificationProps>(notification: T): T
+  }
+}
+
+export const useNotificationsStore: NotificationsStore = defineStore('notificationsStore', {
   state: () => {
     const { data: { value: { user: { account } } } } = useAuth();
     return {

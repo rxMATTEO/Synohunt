@@ -4,6 +4,7 @@ import { storeToRefs } from 'pinia';
 import { useConfirm } from 'primevue/useconfirm/useconfirm.esm';
 import { usePointsStore } from '../../stores/pointsStore';
 import { useMoneyStore } from '@/stores/moneyStore';
+import { useNotificationsStore } from '@/stores/notificationsStore';
 
 type RouteParams = {
   params: {
@@ -37,6 +38,7 @@ type TaskResponse = {
 const { data: { value: { user: { account } } } } = useAuth();
 const pointsStore = usePointsStore();
 const moneyStore = useMoneyStore();
+const notificationsStore = useNotificationsStore();
 const coinSpin = ref();
 
 async function solveUserSyno (e?: KeyboardEvent) {
@@ -184,10 +186,10 @@ function onHintClick (hint: Hint) {
     header: 'Purchase confirmation',
     position: 'bottom',
     accept: () => {
-      console.log('yes');
+      moneyStore.setMoney(-hint.cost);
+      notificationsStore.addNotification({ title: 'Hi', secondaryText: 'Hooray', description: `You buyed this shit for ${hint.cost}` });
     },
     reject: () => {
-      console.log('no');
     }
   });
 }
