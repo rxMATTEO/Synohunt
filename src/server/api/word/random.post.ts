@@ -1,7 +1,7 @@
 import { readBody } from 'h3';
 
 export default defineEventHandler(async (event) => {
-  const { lang, diff, userId } = readBody(event);
+  const { lang, diff, userId } = await readBody(event);
   const langFullIndex = await event.context.prisma.language.findFirst({
     where: {
       langFull: lang
