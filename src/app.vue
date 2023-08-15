@@ -3,11 +3,11 @@
 </template>
 
 <script setup lang="ts">
-import {onMounted} from 'vue';
-import {usePrimeVue} from 'primevue/config';
-import {Platforms} from './app.config.ts';
-import {useAppConfig} from '#imports';
-import {useThemeStore} from '@/stores/themeStore';
+import { onMounted } from 'vue';
+import { usePrimeVue } from 'primevue/config';
+import { Platforms } from './app.config.ts';
+import { useAppConfig } from '#imports';
+import { useThemeStore } from '@/stores/themeStore';
 
 const appConfig = useAppConfig();
 const primeVue = usePrimeVue();

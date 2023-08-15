@@ -5,6 +5,12 @@ const pointsStore = usePointsStore();
 const percs = (await pointsStore.calculatePercentOfPointsProgress());
 const percents = ref(percs);
 const { data: { value: { user: { account } } } } = useAuth();
+const bookmarked = ref((await useFetch('/api/task/allBookmarks', {
+  method: 'POST',
+  body: {
+    userId: account.id
+  }
+})).data.value);
 </script>
 
 <template>
@@ -113,7 +119,7 @@ const { data: { value: { user: { account } } } } = useAuth();
             </div>
             <div>
               <b>Bookmarks: </b>
-              <span>{{ account.points }}</span>
+              <span>{{ bookmarked.length }}</span>
             </div>
             <div>
               <b>Mb created challenge: </b>
