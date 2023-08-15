@@ -53,17 +53,17 @@ const props = defineProps({
           <p class="px-2 uppercase text-color-secondary mt-3">
             CAREER
           </p>
-          <NuxtLink to="/" class="hover:surface-200 block transition-colors t-ease-in-out t-duration-200">
+          <NuxtLink to="/create/task" class="hover:surface-200 block transition-colors t-ease-in-out t-duration-200">
             <div class="flex px-1">
               <div class="t-w-1/6">
                 a
               </div>
               <div class="t-w-5/6">
                 <p class="t-font-bold">
-                  Practice
+                  Create challenge
                 </p>
                 <p class="text-sm text-color-secondary">
-                  Complete challenge and shit
+                  Create your own challenge for players and get coins
                 </p>
               </div>
             </div>

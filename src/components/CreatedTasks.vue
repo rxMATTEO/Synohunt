@@ -18,7 +18,7 @@ const createdTasks = ref((await useFetch('/api/task/created', {
   }
 })).data.value as CompletedTasksResponse[]);
 
-// mb add coins that was spend on task and creator can loot them
+// mb add coins that was spent on task and creator can loot them
 </script>
 <template>
   <DataView
@@ -46,13 +46,15 @@ const createdTasks = ref((await useFetch('/api/task/created', {
         </template>
         <template #right-side>
           <div class="p-3 relative">
-            <TinyCoin class="absolute right-0" :value="slotProps.data._count.CompletedTask.toString()" />
-            <TinyCoin
-              class="absolute right-0 bottom-0"
-              :value="slotProps.data.Word.Synonym.reduce((prev: 0, current: Synonym) => {
-                return prev + current.pointsForGuess;
-              }, 0).toString()"
-            />
+            <div class="absolute right-0">
+              <TinyCoin class="relative right-0" :value="slotProps.data._count.CompletedTask.toString()" />
+              <TinyCoin
+                class="relative right-0"
+                :value="slotProps.data.Word.Synonym.reduce((prev: 0, current: Synonym) => {
+                  return prev + current.pointsForGuess;
+                }, 0).toString()"
+              />
+            </div>
             <div class="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
               <div v-for="syno in slotProps.data.Word.Synonym">
                 <p>{{ syno.value }}</p>

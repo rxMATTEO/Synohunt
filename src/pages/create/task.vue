@@ -153,7 +153,11 @@ async function createTask () {
                 <p>Context</p>
                 <i v-tooltip.left="'Enter the context of word. You can use html tags'" class="pi pi-info-circle" />
               </div>
-              <Editor v-model="context" />
+              <Editor
+                v-model="context"
+                :modules="{
+                }"
+              />
             </div>
           </Fieldset>
           <Fieldset>
