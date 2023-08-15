@@ -28,8 +28,8 @@ watch(currentPoints, async (newPoints, oldPoints) => { // todo move in store and
   }
 });
 
-const lvlBreakPoints = [ [0, 'bg-bluegray-600'], [10, 'bg-orange-500'], [20, 'bg-indigo-400'] ];
-const userLvlColor = lvlBreakPoints.findLast(([breakPoint, color]) => breakPoint <= +level.value.value );
+const lvlBreakPoints = [[0, 'bg-bluegray-600'], [10, 'bg-orange-500'], [20, 'bg-indigo-400']];
+const userLvlColor = lvlBreakPoints.findLast(([breakPoint, color]) => breakPoint <= +level.value.value);
 </script>
 
 <template>
@@ -49,7 +49,10 @@ const userLvlColor = lvlBreakPoints.findLast(([breakPoint, color]) => breakPoint
             class="w-full text-center"
             :pt="{
               value: {
-                class: ['animated-gradient-rainbow'],
+                class: ['animated-gradient-rainbow', 'static'],
+              },
+              label: {
+                class: ['absolute', 't-left-[42%]', 'text-color']
               }
             }"
           />
