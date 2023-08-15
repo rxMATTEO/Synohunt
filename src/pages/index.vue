@@ -133,6 +133,7 @@
 </template>
 
 <script setup>
+// todo add from codewars responsive background or maybe logo like nuxt
 definePageMeta({ auth: false });
 </script>
 
