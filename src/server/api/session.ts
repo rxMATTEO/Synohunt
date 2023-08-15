@@ -22,6 +22,7 @@ export default eventHandler(async (event) => {
     const createLvl = await event.context.prisma.user.update({
       where: { id: account.id },
       data: {
+        registrationDate: new Date(),
         Level: {
           create: ({
             value: '1',

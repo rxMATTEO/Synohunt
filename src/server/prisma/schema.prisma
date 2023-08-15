@@ -69,23 +69,24 @@ model Session {
 }
 
 model User {
-  id             String           @id @default(cuid())
-  name           String?
-  email          String?          @unique
-  emailVerified  DateTime?
-  image          String?
-  levelId        Int?
-  Level          Level?           @relation(fields: [levelId], references: [id])
-  points         Int              @default(1)
-  moneyId        Int?
-  account        Account[]
-  sessions       Session[]
-  Notification   Notification[]
-  CompletedTask  CompletedTask[]
-  BookmarkedTask BookmarkedTask[]
-  Message        Message[]
-  Money          Money?           @relation(fields: [moneyId], references: [id])
-  Task           Task[]
+  id               String           @id @default(cuid())
+  name             String?
+  email            String?          @unique
+  emailVerified    DateTime?
+  image            String?
+  levelId          Int?
+  Level            Level?           @relation(fields: [levelId], references: [id])
+  points           Int              @default(1)
+  moneyId          Int?
+  registrationDate BigInt?
+  account          Account[]
+  sessions         Session[]
+  Notification     Notification[]
+  CompletedTask    CompletedTask[]
+  BookmarkedTask   BookmarkedTask[]
+  Message          Message[]
+  Money            Money?           @relation(fields: [moneyId], references: [id])
+  Task             Task[]
 }
 
 model Money {

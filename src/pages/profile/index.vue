@@ -48,7 +48,7 @@ function changeTab (e) {
             <div class="max-md:mt-3">
               <div>
                 <b>Member since: </b>
-                <span class="white-space-nowrap">{{ new Date().toLocaleString() }}</span>
+                <span class="white-space-nowrap">{{ new Date(account.registrationDate).toLocaleString() }}</span>
               </div>
               <div>
                 <b>Last seen: </b>

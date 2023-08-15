@@ -190,7 +190,7 @@ function onHintClick (hint: Hint) {
       notificationsStore.addNotification({ title: 'Hi', secondaryText: 'Hooray', description: `You buyed this shit for ${hint.cost}` });
     },
     reject: () => {
-    } // todo fixed sidebar remember sidebar state, hide when navigate
+    } // todo fixed sidebar remember sidebar state, hide when navigate store create mb
   });
 }
 
