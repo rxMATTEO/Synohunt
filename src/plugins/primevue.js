@@ -30,11 +30,12 @@ import ConfirmDialog from 'primevue/confirmdialog';
 import Fieldset from 'primevue/fieldset';
 import ConfirmationService from 'primevue/confirmationservice';
 import { defineNuxtPlugin } from '#imports';
-
+import vue3dLoader from "vue-3d-loader";
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.use(PrimeVue, { ripple: true });
   nuxtApp.vueApp.use(ToastService);
   nuxtApp.vueApp.use(ConfirmationService);
+  nuxtApp.vueApp.use(vue3dLoader);
   nuxtApp.vueApp.directive('badge', BadgeDirective);
   nuxtApp.vueApp.directive('tooltip', Tooltip);
   nuxtApp.vueApp.directive('focustrap', FocusTrap);
