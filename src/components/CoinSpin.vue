@@ -1,12 +1,12 @@
 <script lang="ts" setup>
-import {onMounted, ref} from 'vue';
+import { onMounted, ref } from 'vue';
 
 const isAppended = ref(false);
 const animationDuration = 1500;
 
 type AnimationEndCallback = () => (money: number) => void;
 
-function append (onAnimationEnd: AnimationEndCallback ) {
+function append (onAnimationEnd: AnimationEndCallback) {
   isAppended.value = true;
   setTimeout(() => {
     isAppended.value = false;
@@ -44,7 +44,7 @@ defineExpose({
   </div>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss">
 @mixin flyAway($top, $left) {
   & {
     top: $top;

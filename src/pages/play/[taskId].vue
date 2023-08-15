@@ -2,8 +2,9 @@
 import { kMaxLength } from 'buffer';
 import { reactive, ref } from 'vue';
 import { storeToRefs } from 'pinia';
+import { useConfirm } from 'primevue/useconfirm/useconfirm.esm';
 import { usePointsStore } from '../../stores/pointsStore';
-import {useMoneyStore} from "@/stores/moneyStore";
+import { useMoneyStore } from '@/stores/moneyStore';
 
 type RouteParams = {
   params: {
@@ -47,7 +48,7 @@ async function solveUserSyno (e?: KeyboardEvent) {
       const { pointsForGuess, moneyForGuess } = synonyms.value[foundSynoIndex];
       synonyms.value.splice(foundSynoIndex, 1);
       userSyno.value = '';
-      coinSpin.value.append(async () => { await moneyStore.setMoney(moneyForGuess) });
+      coinSpin.value.append(async () => { await moneyStore.setMoney(moneyForGuess); });
 
       await pointsStore.setPoints(pointsForGuess);
 
@@ -168,12 +169,28 @@ const items = ref<Hint[]>([
   }
 ]);
 const hidden = ref(false);
-function hideHintsPanel(){
+function hideHintsPanel () {
   hidden.value = true;
 }
+const confirmPurchaseDialog = useConfirm();
 
-function dragStart(){
+function showHintsPanel () {
   hidden.value = false;
+}
+
+function onHintClick (hint: Hint) {
+  confirmPurchaseDialog.require({
+    group: 'buyHintDialog',
+    message: `Do you want buy this hint for ${hint.cost} *money icon*`,
+    header: 'Purchase confirmation',
+    position: 'bottom',
+    accept: () => {
+      console.log('yes');
+    },
+    reject: () => {
+      console.log('no');
+    }
+  });
 }
 
 </script>
@@ -181,6 +198,20 @@ function dragStart(){
 <template>
   <div>
     <NuxtLayout name="header-n-sidebar">
+      <ConfirmDialog
+        class="confirm-purchase"
+        group="buyHintDialog"
+        :pt="{
+          rejectButton: {
+            root: {
+              class: ['!t-text-white']
+            }
+          },
+          closeButton: {
+            class: ['transparent']
+          }
+        }"
+      />
       <CoinSpin ref="coinSpin" />
       <img v-if="isDialogVisible" src="/img/salute_v2.gif" class="w-full h-full" alt="salute">
       <Dialog v-model:visible="isDialogVisible" modal header="Header" :style="{ width: '50vw' }">
@@ -213,6 +244,35 @@ function dragStart(){
                 <span :class="{'bg-primary-500': word.toLowerCase().includes(task.value.Word.word.toLowerCase())}" v-html="word" />
                 {{ }}
               </span>
+            </div>
+          </div>
+
+          <div class="flex money-spin">
+            <div class="card">
+              <div class="card-content flex">
+                <div class="spinningasset coin is-sm">
+                  <div>
+                    <div />
+                    <i />
+                    <i />
+                    <i />
+                    <i />
+                    <i />
+                    <i />
+                    <i />
+                    <i />
+                    <i />
+                    <i />
+                    <i />
+                    <em />
+                    <em />
+                    <div />
+                  </div>
+                </div>
+                <div class="ml-2 t-text-white">
+                  12
+                </div>
+              </div>
             </div>
           </div>
 
@@ -266,33 +326,114 @@ function dragStart(){
           </div>
         </div>
       </div>
-      <Dialog :visible="true" header="Hints" position="bottom" class="overflow-hidden" :class="{'!t-mb-[-140px]': hidden}" @dragend="dragStart" :pt="{
-        root: {
-          class: [hidden?  't-bottom-[-140px] !t-top-[unset]' : '', 'absolute', 'overflow-hidden']
-        },
-        closeButton: {
-          'onclick': hideHintsPanel
-        }
-      }">
+      <Dialog
+        :visible="true"
+        header="Hints"
+        position="bottom"
+        class="overflow-hidden"
+        :class="{'!t-mb-[-140px]': hidden}"
+        :pt="{
+          root: {
+            class: [hidden? 't-bottom-[-140px] !t-top-[unset]' : '', 'absolute', 'overflow-hidden']
+          },
+          closeButton: {
+            'onclick': hideHintsPanel
+          }
+        }"
+        @dragend="showHintsPanel"
+      >
         <template #closeicon>
-          <i class="pi pi-times" @click="hideHintsPanel"></i>
+          <i class="pi pi-times" @click="hideHintsPanel" />
         </template>
         <div>
           <div class="card dock-demo">
             <div class="dock-window w-full" style="backgroundimage: 'url(https://primefaces.org/cdn/primevue/images/dock/window.jpg))'">
-              <Dock :model="items" position="bottom" class="left-0 right-0 relative" :pt="{
-                container: {
-                  class: ['surface-ground']
-                }
-              }">
-                <template #icon="data: { item: Hint}">
-                  <img v-tooltip.top="`Cost is ${data.item.cost}`" :alt="data.item.label" :src="data.item.icon" style="width: 100%">
+              <Dock
+                :model="items"
+                position="bottom"
+                class="left-0 right-0 relative"
+                :pt="{
+                  container: {
+                    class: ['surface-ground']
+                  }
+                }"
+              >
+                <template #item="data: {item: Hint }">
+                  <a href="#" class="p-dock-link" @click="onHintClick(data.item)">
+                    <img v-tooltip.top="`Cost is ${data.item.cost}`" :alt="data.item.label" :src="data.item.icon" style="width: 100%">
+                  </a>
                 </template>
               </Dock>
             </div>
           </div>
-      </div>
+        </div>
       </Dialog>
-    </NuxtLayout>
+    </nuxtlayout>
   </div>
 </template>
+
+<style lang="scss" scoped>
+.money-spin {
+  .card {
+    background: radial-gradient(
+            100% 100% at 50% 5%,
+            rgba(255, 255, 255, 0.05) 0%,
+            rgba(255, 255, 255, 0.03) 100%
+    );
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 1rem;
+    padding: 0.5rem;
+    backdrop-filter: blur(4px);
+
+    > div {
+      position: relative;
+      z-index: 2;
+      background: #2d2d59;
+      border-radius: 0.5rem;
+      padding: 1rem;
+      backdrop-filter: blur(8px);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+      0 1.5px 1.1px rgba(0, 0, 0, 0.034), 0 3.6px 2.5px rgba(0, 0, 0, 0.048),
+      0 6.8px 4.8px rgba(0, 0, 0, 0.06), 0 12.1px 8.5px rgba(0, 0, 0, 0.072),
+      0 22.6px 15.9px rgba(0, 0, 0, 0.086), 0 54px 38px rgba(0, 0, 0, 0.12);
+    }
+
+    &.is-alt {
+      background: transparent;
+      border: none;
+
+      > .card-content {
+        background: #191a2f;
+      }
+
+      &::before,
+      &::after {
+        content: "";
+        position: absolute;
+        z-index: 1;
+        top: 1.5rem;
+        bottom: 1.5rem;
+        width: 4rem;
+        background: linear-gradient(to bottom, #00a6fb 0%, #00fddc 100%);
+        border-radius: 0.25rem;
+        transition: all 0.6s ease-out 0.22s;
+      }
+
+      &::before {
+        left: 0;
+        transform: translateX(1rem);
+      }
+
+      &::after {
+        right: 0;
+        transform: translateX(-1rem);
+      }
+    }
+  }
+}
+</style>
+
+<style lang="sass">
+.confirm-purchase
+  @include apply-default-button()
+</style>

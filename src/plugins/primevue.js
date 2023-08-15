@@ -28,11 +28,13 @@ import Toast from 'primevue/toast';
 import ToastService from 'primevue/toastservice';
 import ConfirmDialog from 'primevue/confirmdialog';
 import Fieldset from 'primevue/fieldset';
+import ConfirmationService from 'primevue/confirmationservice';
 import { defineNuxtPlugin } from '#imports';
 
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.use(PrimeVue, { ripple: true });
   nuxtApp.vueApp.use(ToastService);
+  nuxtApp.vueApp.use(ConfirmationService);
   nuxtApp.vueApp.directive('badge', BadgeDirective);
   nuxtApp.vueApp.directive('tooltip', Tooltip);
   nuxtApp.vueApp.directive('focustrap', FocusTrap);

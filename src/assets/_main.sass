@@ -43,7 +43,9 @@ body
   position: absolute
   width: 100%
 
-@mixin apply-default-button
+@mixin apply-default-button($color: var(--primary-color))
   &
     button, [type="button"]
-      background-color: var(--primary-color) !important
+      background-color: $color !important
+    .transparent
+      background-color: transparent !important
