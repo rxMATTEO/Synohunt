@@ -36,7 +36,7 @@ const userLvlColor = lvlBreakPoints.findLast(([breakPoint, color]) => breakPoint
 <template>
   <div class="badges">
     <div @mouseover="(e) => onMouseOver(e, 'levelOp')">
-      <UserLevelBadge :value="level.value" class="mr-2" />
+      <UserLevelBadge :value="+level.value" class="mr-2" />
     </div>
     <OverlayPanel v-if="!onlyBadge" :ref="overlays.levelOp" dismissable class="t-w-[300px]" @mouseleave="() => onMouseLeave('levelOp')">
       <div class="flex t-flex-col w-full">

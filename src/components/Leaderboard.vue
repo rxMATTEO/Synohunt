@@ -28,7 +28,7 @@ const positionSeverities = {
       <template #body="data: { data: Leader}">
         <div class="flex align-items-center">
           <div class="mr-3 t-w-[30px]">
-            <UserLevelBadge :value="data.data.Level.value" />
+            <UserLevelBadge :value="+data.data.Level.value" />
           </div>
           <span class="mr-3 max-md:t-block">{{ data.data.name }}</span>
           <div>
