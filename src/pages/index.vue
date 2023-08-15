@@ -4,7 +4,7 @@
       <vue3d-loader
           :showFps="true"
           :height="1080"
-          :backgroundColor="0xff00ff"
+          backgroundColor="#82C6E7"
           filePath="/img/models/ImageToStl.com_biglogo.stl"
           :rotation = "rotation"
 
@@ -158,7 +158,7 @@ function onLoad() {
 }
 function rotate() {
   setInterval(() => {
-    rotation.value.y -= 0.07;
+    rotation.value.y -= 0.06;
     console.log('im re')
   }, 40);
 }

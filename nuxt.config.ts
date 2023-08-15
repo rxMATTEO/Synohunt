@@ -8,7 +8,6 @@ const nuxtConfig = {
     'primeflex/primeflex.css',
     'primeicons/primeicons.css'
   ],
-  ssr: false,
   build: {
     transpile: ['primevue']
   },
