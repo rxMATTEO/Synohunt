@@ -199,6 +199,7 @@ function onHintClick (hint: Hint) {
   <div>
     <NuxtLayout name="header-n-sidebar">
       <ConfirmDialog
+        :draggable="false"
         class="confirm-purchase"
         group="buyHintDialog"
         :pt="{
@@ -334,7 +335,7 @@ function onHintClick (hint: Hint) {
         :class="{'!t-mb-[-140px]': hidden}"
         :pt="{
           root: {
-            class: [hidden? 't-bottom-[-140px] !t-top-[unset]' : '', 'absolute', 'overflow-hidden']
+            class: [hidden? 't-bottom-[-140px] !t-top-[unset]' : '', 'absolute', 'overflow-hidden', 't-rounded-xl']
           },
           closeButton: {
             'onclick': hideHintsPanel
