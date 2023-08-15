@@ -2,12 +2,14 @@
 <!--  <div class="surface-ground">-->
     <client-only>
       <vue3d-loader
-          :showFps="true"
           :height="1080"
-          backgroundColor="#82C6E7"
-          filePath="/img/models/ImageToStl.com_biglogo.stl"
+          backgroundColor="white"
+          :webGLRendererOptions="{ antialias: true, alpha: true }"
+          filePath="/img/models/ImageToStl.com_biglogo.obj"
+          fileType="obj"
           :rotation = "rotation"
-
+          :lights="[{ type: 'DirectionalLight', position: { x: 1, y: 1, z: 1 }, color: '#FF3630', intensity: 1, }]"
+          outputEncoding="sRGB"
           @load="onLoad"
       />
     </client-only>
@@ -156,6 +158,17 @@ rotation.value = {
 function onLoad() {
   rotate();
 }
+
+const lights = [
+
+  {
+    type: "PointLight",
+    color: "#000000",
+    position: { x: 200, y: -200, z: 100 },
+    intensity: 1
+  },
+
+]
 function rotate() {
   setInterval(() => {
     rotation.value.y -= 0.06;
