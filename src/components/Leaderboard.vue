@@ -27,7 +27,9 @@ const positionSeverities = {
     <Column header="User" style="width: 100%;" class="max-md:!t-p-0">
       <template #body="data: { data: Leader}">
         <div class="flex align-items-center">
-          <Badge class="mr-3 t-w-[30px]" :value="data.data.Level.value" severity="success" />
+          <div class="mr-3 t-w-[30px]">
+            <UserLevelBadge :value="data.data.Level.value" />
+          </div>
           <span class="mr-3 max-md:t-block">{{ data.data.name }}</span>
           <div>
             <img class="t-w-[30px] t-h-[30px]" :src="data.data.image" :alt="data.data.name">

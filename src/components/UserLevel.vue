@@ -3,6 +3,7 @@ import { reactive, watch } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useLevelStore } from '../stores/levelStore';
 import { usePointsStore } from '../stores/pointsStore';
+import UserLevelBadge from '@/components/UserLevelBadge.vue';
 
 defineProps({
   onMouseOver: {
@@ -34,7 +35,9 @@ const userLvlColor = lvlBreakPoints.findLast(([breakPoint, color]) => breakPoint
 
 <template>
   <div class="badges">
-    <Badge :value="level.value" class="mr-2" :class="{[userLvlColor[1]]: true}" @mouseover="(e) => onMouseOver(e, 'levelOp')" />
+    <div @mouseover="(e) => onMouseOver(e, 'levelOp')">
+      <UserLevelBadge :value="level.value" class="mr-2" />
+    </div>
     <OverlayPanel v-if="!onlyBadge" :ref="overlays.levelOp" dismissable class="t-w-[300px]" @mouseleave="() => onMouseLeave('levelOp')">
       <div class="flex t-flex-col w-full">
         <div>
