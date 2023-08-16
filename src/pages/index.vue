@@ -1,33 +1,67 @@
 <template>
   <div class="surface-ground">
-    <div class="logo-holder absolute inline-block z-1 max-w-full overflow-hidden">
-      <!--      <img src="/img/biglogo.png" class="logo relative max-w-full overflow-hidden" alt="logo">-->
-      <div class="">
-        <!--        todo fix cant drag shit-->
-        <ModelLoader3D class="t-z-[99] relative" />
-      </div>
-    </div>
-    <div class="lg:px-8 lg:mx-8 px-3 max-w-full">
-      <div class="absolute left-0 right-0">
-        <div class="w-full relative z-1">
-          <div class="main z-1 flex flex-column align-items-center justify-content-center h-screen">
-            <p class="welcome-text text-3xl text-center font-bold">
-              Unleash your word wizardry. Conquer synonyms.
-            </p>
-            <div>
-              <Button label="Play Now" rounded class="mr-3" @click="() => navigateTo('/dashboard')" />
-              <Button label="Learn More" rounded />
-            </div>
+    <div class="h-screen t-max-h-screen">
+      <div class="text-color py-3 absolute right-0 left-0">
+        <div class="flex t-place-content-between t-items-center lg:px-8 lg:mx-8 ">
+          <div>
+            <a class="font-bold t-tracking-wider">
+              SynoHunt
+            </a>
+          </div>
+          <div class="">
+            <a class="mr-3">
+              Home
+            </a>
+            <a class="mr-3">
+              About us
+            </a>
+            <a class="mr-3">
+              Services
+            </a>
+            <a class="mr-3">
+              Blog
+            </a>
+          </div>
+          <div>
+            <Button class="" label="Login" :type="null" outlined />
           </div>
         </div>
       </div>
-      <div class="h-screen text-color main-screen pt-3">
-        <p>SynoHunt</p>
+      <div class="lg:px-8 lg:mx-8 px-3 max-w-full h-full">
+        <div class="h-full">
+          <div class="flex h-full align-items-center">
+            <div class="t-w-1/2 relative z-1 ">
+              <div class="main z-1 flex flex-column align-items-start justify-content-center">
+                <p class="t-uppercase t-tracking-wider text-indigo-300">
+                  somelabel!
+                </p>
+                <p class="welcome-text text-6xl text-left font-bold capitalize mt-3">
+                  Unleash your word wizardry and conquer synonyms with <span class="gradient-primary text">Synohunt</span>
+                </p>
+                <div class="mt-5">
+                  <p>
+                    Get ready to embark on a thrilling journey through the world of synonyms and unleash your inner linguist, and dive into a realm of words and wonders with SynoHunt.
+                  </p>
+                </div>
+                <div class="mt-5">
+                  <Button label="Play Now" class="mr-3 gradient-indigo t-border-0 text-white" @click="() => navigateTo('/dashboard')" />
+                  <Button label="Learn More" :type="null" outlined />
+                </div>
+              </div>
+            </div>
+            <div class="logo-holder absolute inline-block z-1 max-w-full overflow-hidden right-0">
+              <ModelLoader3D class="t-z-[99] relative right-0 top-20" />
+            </div>
+          </div>
+        </div>
+
+        <!--      <img src="/img/biglogo.png" class="logo relative max-w-full overflow-hidden" alt="logo">-->
+        <!--        todo fix cant drag shit-->
       </div>
-      <div>
+      <div class="lg:px-8 lg:mx-8 px-3 max-w-full surface-ground">
         <div class="flex sm:justify-content-between sm:flex-row flex-column py-6">
           <span class="block sm:w-5 sm:text-6xl text-4xl font-bold">SynoHunt: The Ultimate Word Challenge!</span>
-          <span class="block sm:w-5 text-lg sm:text-right mt-5 sm:mt-0">Get ready to embark on a thrilling journey through the world of synonyms. Unleash your inner linguist, and dive into a realm of words and wonders with SynoHunt.</span>
+          <span class="block sm:w-5 text-lg sm:text-right mt-5 sm:mt-0">Get ready to embark on a thrilling journey through the world of synonyms and unleash your inner linguist, and dive into a realm of words and wonders with SynoHunt.</span>
         </div>
 
         <div class="col-12 md:col-12 lg:col-12 p-0 lg:pr-5 lg:pb-5 mt-2 lg:mt-0">
