@@ -99,7 +99,7 @@
             <img class="block t-max-w-[66%] max-h-full" src="/img/biglogo.png">
           </div>
           <div class="t-w-1/2">
-            <p class="uppercase text-primary font-medium">
+            <p class="uppercase text-primary font-bold">
               Explore latest vision!
             </p>
             <p class="capitalize text-5xl mt-3 font-bold">
@@ -113,12 +113,16 @@
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur autem consectetur harum incidunt libero quis voluptates voluptatibus? Alias, aperiam blanditiis deserunt dolores, ducimus eum natus, optio rem repellat vel voluptatem.
               </p>
+              <div class="mt-5">
+                <Button label="Upcoming sales" class="gradient-medium t-border-0 text-white" :type="null" />
+              </div>
             </div>
           </div>
         </div>
-        <div class="flex sm:justify-content-between sm:flex-row flex-column py-6">
-          <span class="block sm:w-5 sm:text-6xl text-4xl font-bold">SynoHunt: The Ultimate Word Challenge!</span>
-          <span class="block sm:w-5 text-lg sm:text-right mt-5 sm:mt-0">Get ready to embark on a thrilling journey through the world of synonyms and unleash your inner linguist, and dive into a realm of words and wonders with SynoHunt.</span>
+        <div class="flex sm:justify-content-between flex-column align-items-center py-6">
+          <span class="block sm:w-5 font-bold text-center uppercase text-primary">Our challenge!</span>
+          <span class="block sm:w-5 sm:text-6xl text-4xl font-bold text-center">SynoHunt: The <span class="gradient-primary">Ultimate</span> Word Challenge!</span>
+          <span class="block sm:w-5 text-lg mt-5 text-center">Get ready to embark on a thrilling journey through the world of synonyms and unleash your inner linguist, and dive into a realm of words and wonders with SynoHunt.</span>
         </div>
 
         <div class="col-12 md:col-12 lg:col-12 p-0 lg:pr-5 lg:pb-5 mt-2 lg:mt-0">
