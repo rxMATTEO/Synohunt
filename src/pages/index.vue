@@ -1,18 +1,18 @@
 <template>
-<!--  <div class="surface-ground">-->
-    <client-only>
-      <vue3d-loader
-          :height="1080"
-          backgroundColor="white"
-          :webGLRendererOptions="{ antialias: true, alpha: true }"
-          filePath="/img/models/ImageToStl.com_biglogo.obj"
-          fileType="obj"
-          :rotation = "rotation"
-          :lights="[{ type: 'DirectionalLight', position: { x: 1, y: 1, z: 1 }, color: '#FF3630', intensity: 1, }]"
-          outputEncoding="sRGB"
-          @load="onLoad"
-      />
-    </client-only>
+  <!--  <div class="surface-ground">-->
+  <client-only>
+    <vue3d-loader
+      :height="1080"
+      background-color="white"
+      :web-g-l-renderer-options="{ antialias: true, alpha: true }"
+      file-path="/img/models/synohunt.obj"
+      file-type="obj"
+      :rotation="rotation"
+      :lights="lights"
+      output-encoding="linear"
+      @load="onLoad"
+    />
+  </client-only>
 
 <!--    <div class="logo-holder absolute inline-block z-1 max-w-full overflow-hidden">-->
 <!--      <img src="/img/biglogo.png" class="logo relative max-w-full overflow-hidden" alt="logo">-->
@@ -146,34 +146,46 @@
 <!--  </div>-->
 </template>
 
-<script setup>
+<script setup lang="ts">
 // todo add from codewars responsive background or maybe logo like nuxt
-import {vue3dLoader} from "vue-3d-loader";
+import { vue3dLoader } from 'vue-3d-loader';
 const rotation = ref();
 rotation.value = {
-  x: -Math.PI / 2,
+  x: 220,
   y: 0,
-  z: 0,
+  z: 0
 };
-function onLoad() {
+
+function onLoad () {
   rotate();
 }
-
 const lights = [
 
+  // {
+  //   type: 'HemisphereLight',
+  //   skyColor: '#00FF00',
+  //   groundColor: '#FF3630',
+  //   position: { x: 1, y: 1, z: 1 },
+  //   intensity: 1
+  // },
   {
-    type: "PointLight",
-    color: "#000000",
-    position: { x: 200, y: -200, z: 100 },
+    type: 'DirectionalLight',
+    position: { x: 1, y: 1, z: 1 },
+    color: 'white',
     intensity: 1
-  },
-
-]
-function rotate() {
-  setInterval(() => {
-    rotation.value.y -= 0.06;
-    console.log('im re')
-  }, 40);
+  }
+];
+onMounted(() => {
+  window.addEventListener('mousemove', (e: MouseEvent) => {
+    const { x, y } = e;
+    lights[0].position.x = x;
+    lights[0].position.y = y;
+  });
+});
+// [{ type: 'DirectionalLight', position: { x: 1, y: 1, z: 1 }, color: '#FF3630', intensity: 1, }]
+function rotate () {
+  rotation.value.y -= 0.007;
+  requestAnimationFrame(() => rotate());
 }
 
 definePageMeta({ auth: false });
