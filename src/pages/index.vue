@@ -93,6 +93,29 @@
             </p>
           </div>
         </div>
+
+        <div class="flex gap-5 t-mt-40 t-place-content-between">
+          <div class="t-w-1/2">
+            <img class="block t-max-w-[66%] max-h-full" src="/img/biglogo.png">
+          </div>
+          <div class="t-w-1/2">
+            <p class="uppercase text-primary font-medium">
+              Explore latest vision!
+            </p>
+            <p class="capitalize text-5xl mt-3 font-bold">
+              <span class="gradient-primary text">Launch your</span> brand to new heights.
+            </p>
+            <div class="mt-5">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur autem consectetur harum incidunt libero quis voluptates voluptatibus? Alias, aperiam blanditiis deserunt dolores, ducimus eum natus, optio rem repellat vel voluptatem.
+              </p>
+              <br>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur autem consectetur harum incidunt libero quis voluptates voluptatibus? Alias, aperiam blanditiis deserunt dolores, ducimus eum natus, optio rem repellat vel voluptatem.
+              </p>
+            </div>
+          </div>
+        </div>
         <div class="flex sm:justify-content-between sm:flex-row flex-column py-6">
           <span class="block sm:w-5 sm:text-6xl text-4xl font-bold">SynoHunt: The Ultimate Word Challenge!</span>
           <span class="block sm:w-5 text-lg sm:text-right mt-5 sm:mt-0">Get ready to embark on a thrilling journey through the world of synonyms and unleash your inner linguist, and dive into a realm of words and wonders with SynoHunt.</span>
