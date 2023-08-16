@@ -2,7 +2,7 @@
   <div class="surface-ground">
     <div class="h-screen t-max-h-screen">
       <div class="text-color py-3 absolute right-0 left-0">
-        <div class="flex t-place-content-between t-items-center lg:px-8 lg:mx-8 ">
+        <div class="flex t-place-content-between t-items-center lg:!t-px-52 lg:mx-10 ">
           <div>
             <a class="font-bold t-tracking-wider">
               SynoHunt
@@ -27,7 +27,7 @@
           </div>
         </div>
       </div>
-      <div class="lg:px-8 lg:mx-8 px-3 max-w-full h-full">
+      <div class="lg:!t-px-52 lg:mx-10 t-px-3 max-w-full h-full">
         <div class="h-full">
           <div class="flex h-full align-items-center">
             <div class="t-w-1/2 relative z-1 ">
@@ -44,8 +44,8 @@
                   </p>
                 </div>
                 <div class="mt-5">
-                  <Button label="Play Now" class="mr-3 gradient-indigo t-border-0 text-white" @click="() => navigateTo('/dashboard')" />
-                  <Button label="Learn More" :type="null" outlined />
+                  <Button label="Play Now" class="mr-3 gradient-indigo t-border-transparent text-white" @click="() => navigateTo('/dashboard')" />
+                  <Button label="Learn More" class="t-border-0" :type="null" outlined />
                 </div>
               </div>
             </div>
@@ -58,7 +58,7 @@
         <!--      <img src="/img/biglogo.png" class="logo relative max-w-full overflow-hidden" alt="logo">-->
         <!--        todo fix cant drag shit-->
       </div>
-      <div class="lg:px-8 lg:mx-8 px-3 max-w-full surface-ground">
+      <div class="lg:!t-px-52 lg:mx-10 t-px-3 max-w-full surface-ground">
         <div class="flex sm:justify-content-between sm:flex-row flex-column py-6">
           <span class="block sm:w-5 sm:text-6xl text-4xl font-bold">SynoHunt: The Ultimate Word Challenge!</span>
           <span class="block sm:w-5 text-lg sm:text-right mt-5 sm:mt-0">Get ready to embark on a thrilling journey through the world of synonyms and unleash your inner linguist, and dive into a realm of words and wonders with SynoHunt.</span>

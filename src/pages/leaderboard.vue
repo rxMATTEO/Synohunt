@@ -5,7 +5,7 @@
 <template>
   <div>
     <NuxtLayout name="header-n-sidebar">
-      <div class="lg:px-8 lg:mx-8 px-3">
+      <div class="lg:!t-px-52 lg:mx-10 t-px-3">
         <div
           class="surface-ground t-rounded-md p-5"
         >
