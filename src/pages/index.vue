@@ -1,18 +1,20 @@
 <template>
   <!--  <div class="surface-ground">-->
-  <client-only>
-    <vue3d-loader
-      :height="1080"
-      background-color="white"
-      :web-g-l-renderer-options="{ antialias: true, alpha: true }"
-      file-path="/img/models/synohunt.obj"
-      file-type="obj"
-      :rotation="rotation"
-      :lights="lights"
-      output-encoding="linear"
-      @load="onLoad"
-    />
-  </client-only>
+  <vue3d-loader
+    :height="1080"
+    background-color="white"
+    :web-g-l-renderer-options="{ antialias: true, alpha: true }"
+    file-path="/img/models/synohunt.obj"
+    file-type="obj"
+    :rotation="rotation"
+    :lights="lights"
+    output-encoding="linear"
+    :controls-options="
+      {
+        enableZoom: false
+      }"
+    @load="onLoad"
+  />
 
 <!--    <div class="logo-holder absolute inline-block z-1 max-w-full overflow-hidden">-->
 <!--      <img src="/img/biglogo.png" class="logo relative max-w-full overflow-hidden" alt="logo">-->
@@ -165,7 +167,7 @@ const lights = [
     type: 'DirectionalLight',
     position: { x: 1, y: 1, z: 1 },
     color: 'white',
-    intensity: 1
+    intensity: 0.8
   },
   {
     type: 'DirectionalLight',
