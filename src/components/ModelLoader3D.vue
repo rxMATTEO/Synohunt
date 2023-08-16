@@ -34,7 +34,14 @@ const lights = [
     intensity: 0.2
   }
 ];
+
+const height = ref(0);
+const width = ref(0);
+
 onMounted(() => {
+  width.value = window.innerWidth / 2;
+  height.value = window.innerHeight / 1;
+  console.log(height, width);
   window.addEventListener('mousemove', (e: MouseEvent) => {
     const { x, y } = e;
     lights[0].position.x = x;
@@ -45,12 +52,13 @@ onMounted(() => {
 function rotate () {
   rotation.value.y -= 0.007;
   requestAnimationFrame(() => rotate());
-}</script>
+}
+</script>
 
 <template>
   <vue3d-loader
-    :height="920"
-    :width="960"
+    :height="height"
+    :width="width"
     :camera-position="{ x: 10, y: 10, z: 200 }"
     background-color="#20262e"
     :web-g-l-renderer-options="{ antialias: true, alpha: true }"

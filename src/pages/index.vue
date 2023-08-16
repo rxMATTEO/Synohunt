@@ -171,59 +171,59 @@
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="mt-5">
-        <div class="inline-block sm:w-6 sm:pr-1">
-          <div class="w-full surface-card border-round-3xl pb-1">
-            <div class="img overflow-hidden h-16rem relative">
-              <img class="aspect-1/1 block w-full border-round-3xl absolute" src="/img/words.png" alt="words">
+        <div class="mt-5">
+          <div class="inline-block sm:w-6 sm:pr-1">
+            <div class="w-full surface-card border-round-3xl pb-1">
+              <div class="img overflow-hidden h-16rem relative">
+                <img class="aspect-1/1 block w-full border-round-3xl absolute" src="/img/words.png" alt="words">
+              </div>
+              <div class="desc px-3">
+                <h1 class="text-900 text-4xl font-bold">
+                  Master synonyms
+                </h1>
+                <p>Expand your vocabulary and dominate the leaderboard</p>
+              </div>
             </div>
-            <div class="desc px-3">
-              <h1 class="text-900 text-4xl font-bold">
-                Master synonyms
-              </h1>
-              <p>Expand your vocabulary and dominate the leaderboard</p>
+          </div>
+          <div class="inline-block sm:w-6 sm:pl-1 mt-3 sm:mt-0">
+            <div class="w-full surface-card border-round-3xl pb-1">
+              <div class="img overflow-hidden h-16rem relative">
+                <img class="aspect-1/1 block w-full border-round-3xl absolute" src="/img/words.png" alt="words">
+              </div>
+              <div class="desc px-3">
+                <h1 class="text-900 text-4xl font-bold">
+                  Master synonyms
+                </h1>
+                <p>Expand your vocabulary and dominate the leaderboard</p>
+              </div>
             </div>
           </div>
         </div>
-        <div class="inline-block sm:w-6 sm:pl-1 mt-3 sm:mt-0">
-          <div class="w-full surface-card border-round-3xl pb-1">
-            <div class="img overflow-hidden h-16rem relative">
-              <img class="aspect-1/1 block w-full border-round-3xl absolute" src="/img/words.png" alt="words">
-            </div>
-            <div class="desc px-3">
-              <h1 class="text-900 text-4xl font-bold">
-                Master synonyms
-              </h1>
-              <p>Expand your vocabulary and dominate the leaderboard</p>
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <div class="mt-5">
-        <h1 class="text-900 text-6xl sm:text-7xl font-bold">
-          Have qustions?
-        </h1>
-        <div class="flex justify-content-between flex-column sm:flex-row">
-          <div class="sm:pr-5 border-round-3xl">
-            <h1 class="text-900 text-4xl font-bold">
-              How do i start playing?
-            </h1>
-            <p>Get started by clicking the “Play” button, choose your difficulty level, and you’re ready to take on SynoHunt.</p>
-          </div>
-          <div class="sm:px-5 border-round-3xl mt-2 sm:mt-0">
-            <h1 class="text-900 text-4xl font-bold">
-              How do i start playing?
-            </h1>
-            <p>Get started by clicking the “Play” button, choose your difficulty level, and you’re ready to take on SynoHunt.</p>
-          </div>
-          <div class="sm:pl-5 border-round-3xl mt-2 sm:mt-0">
-            <h1 class="text-900 text-4xl font-bold">
-              How do i start playing?
-            </h1>
-            <p>Get started by clicking the “Play” button, choose your difficulty level, and you’re ready to take on SynoHunt.</p>
+        <div class="mt-5">
+          <h1 class="text-900 text-6xl sm:text-7xl font-bold mb-5">
+            Have qustions?
+          </h1>
+          <div class="flex justify-content-between flex-column sm:flex-row">
+            <div class="sm:pr-5 border-round-3xl">
+              <h1 class="text-900 text-4xl font-bold">
+                How do i start playing?
+              </h1>
+              <p>Get started by clicking the “Play” button, choose your difficulty level, and you’re ready to take on SynoHunt.</p>
+            </div>
+            <div class="sm:px-5 border-round-3xl mt-2 sm:mt-0">
+              <h1 class="text-900 text-4xl font-bold">
+                How do i start playing?
+              </h1>
+              <p>Get started by clicking the “Play” button, choose your difficulty level, and you’re ready to take on SynoHunt.</p>
+            </div>
+            <div class="sm:pl-5 border-round-3xl mt-2 sm:mt-0">
+              <h1 class="text-900 text-4xl font-bold">
+                How do i start playing?
+              </h1>
+              <p>Get started by clicking the “Play” button, choose your difficulty level, and you’re ready to take on SynoHunt.</p>
+            </div>
           </div>
         </div>
       </div>
