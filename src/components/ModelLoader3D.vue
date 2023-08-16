@@ -49,7 +49,7 @@ function rotate () {
 
 <template>
   <vue3d-loader
-    :height="1080"
+    :height="920"
     :width="960"
     :camera-position="{ x: 10, y: 10, z: 200 }"
     background-color="#20262e"

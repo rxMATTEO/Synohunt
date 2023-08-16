@@ -59,6 +59,40 @@
         <!--        todo fix cant drag shit-->
       </div>
       <div class="lg:!t-px-52 lg:mx-10 t-px-3 max-w-full surface-ground">
+        <div class="flex gap-5">
+          <div class="shadow-6 w-full surface-card px-5 py-3 t-rounded-lg">
+            <p class="text-center vertical-align-top text-3xl font-bold">
+              100
+            </p>
+            <p class="text-center uppercase text-color-secondary">
+              Challenges
+            </p>
+          </div>
+          <div class="shadow-6 w-full surface-card px-5 py-3 t-rounded-lg">
+            <p class="text-center vertical-align-top text-3xl font-bold">
+              100
+            </p>
+            <p class="text-center uppercase text-color-secondary">
+              Challenges
+            </p>
+          </div>
+          <div class="shadow-6 w-full surface-card px-5 py-3 t-rounded-lg">
+            <p class="text-center vertical-align-top text-3xl font-bold">
+              100
+            </p>
+            <p class="text-center uppercase text-color-secondary">
+              Challenges
+            </p>
+          </div>
+          <div class="shadow-6 w-full surface-card px-5 py-3 t-rounded-lg">
+            <p class="text-center vertical-align-top text-3xl font-bold">
+              100
+            </p>
+            <p class="text-center uppercase text-color-secondary">
+              Challenges
+            </p>
+          </div>
+        </div>
         <div class="flex sm:justify-content-between sm:flex-row flex-column py-6">
           <span class="block sm:w-5 sm:text-6xl text-4xl font-bold">SynoHunt: The Ultimate Word Challenge!</span>
           <span class="block sm:w-5 text-lg sm:text-right mt-5 sm:mt-0">Get ready to embark on a thrilling journey through the world of synonyms and unleash your inner linguist, and dive into a realm of words and wonders with SynoHunt.</span>
