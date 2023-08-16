@@ -161,18 +161,24 @@ function onLoad () {
 }
 const lights = [
 
-  // {
-  //   type: 'HemisphereLight',
-  //   skyColor: '#00FF00',
-  //   groundColor: '#FF3630',
-  //   position: { x: 1, y: 1, z: 1 },
-  //   intensity: 1
-  // },
   {
     type: 'DirectionalLight',
     position: { x: 1, y: 1, z: 1 },
     color: 'white',
     intensity: 1
+  },
+  {
+    type: 'DirectionalLight',
+    position: { x: 1, y: 1, z: 1 },
+    color: 'purple',
+    intensity: 1
+  },
+  {
+    type: 'HemisphereLight',
+    skyColor: '#purple',
+    groundColor: '#af00ff',
+    position: { x: 1, y: 1, z: 1 },
+    intensity: 0.2
   }
 ];
 onMounted(() => {
