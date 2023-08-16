@@ -148,8 +148,6 @@ definePageMeta({ auth: false });
 
 .logo-holder
   overflow: hidden
-  width: 100%
-  height: 100%
   .logo
     max-width: 100%
     max-height: 100%
