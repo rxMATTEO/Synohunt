@@ -11,6 +11,9 @@ $surfaces: 100, 200, 300, 400, 500, 600, 700, 800, 900
   @each $name, $color in $gradient
     &-#{$name}
       background-image: -webkit-linear-gradient(left, $color) !important
+      &.text
+        -webkit-background-clip: text
+        -webkit-text-fill-color: transparent
 
 .animated-gradient
   @each $name, $color in $animated-gradient
