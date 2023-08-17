@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue';
-import { storeToRefs } from 'pinia';
-import { useConfirm } from 'primevue/useconfirm/useconfirm.esm';
 import { usePointsStore } from '../../stores/pointsStore';
 import { useMoneyStore } from '@/stores/moneyStore';
-import { useNotificationsStore } from '@/stores/notificationsStore';
+import Hints from '@/components/Hints.vue';
 
 type RouteParams = {
   params: {
@@ -38,7 +36,6 @@ type TaskResponse = {
 const { data: { value: { user: { account } } } } = useAuth();
 const pointsStore = usePointsStore();
 const moneyStore = useMoneyStore();
-const notificationsStore = useNotificationsStore();
 const coinSpin = ref();
 
 async function solveUserSyno (e?: KeyboardEvent) {
@@ -141,59 +138,6 @@ async function checkBookmark () {
 }
 
 const isDialogVisible = ref(false);
-
-type Hint = {
-  label: string,
-  icon: string,
-  cost: number,
-};
-const items = ref<Hint[]>([
-  {
-    label: 'Complete',
-    icon: 'https://primefaces.org/cdn/primevue/images/dock/finder.svg',
-    cost: 5
-  },
-  {
-    label: 'App Store',
-    icon: 'https://primefaces.org/cdn/primevue/images/dock/appstore.svg',
-    cost: 5
-  },
-  {
-    label: 'Photos',
-    icon: 'https://primefaces.org/cdn/primevue/images/dock/photos.svg',
-    cost: 5
-  },
-  {
-    label: 'Trash',
-    icon: 'https://primefaces.org/cdn/primevue/images/dock/trash.png',
-    cost: 5
-  }
-]);
-const hidden = ref(false);
-function hideHintsPanel () {
-  hidden.value = true;
-}
-const confirmPurchaseDialog = useConfirm();
-
-function showHintsPanel () {
-  hidden.value = false;
-}
-
-function onHintClick (hint: Hint) {
-  confirmPurchaseDialog.require({
-    group: 'buyHintDialog',
-    message: hint.cost,
-    header: 'Purchase confirmation',
-    position: 'bottom',
-    accept: () => {
-      moneyStore.setMoney(-hint.cost);
-      notificationsStore.addNotification({ title: 'Hi', secondaryText: 'Hooray', description: `You buyed this shit for ${hint.cost}` });
-    },
-    reject: () => {
-    } // todo fixed sidebar remember sidebar state, hide when navigate store create mb
-  });
-}
-
 </script>
 
 <template>
@@ -307,48 +251,7 @@ function onHintClick (hint: Hint) {
         </div>
       </div>
       <KeepAlive>
-        <Dialog
-          :visible="true"
-          header="Hints"
-          position="bottom"
-          class="overflow-hidden"
-          :class="{'!t-mb-[-140px]': hidden}"
-          :pt="{
-            root: {
-              class: [hidden? 't-bottom-[-140px] !t-top-[unset]' : '', 'absolute', 'overflow-hidden', 't-rounded-xl']
-            },
-            closeButton: {
-              'onclick': hideHintsPanel
-            }
-          }"
-          @dragend="showHintsPanel"
-        >
-          <template #closeicon>
-            <i class="pi pi-times" @click="hideHintsPanel" />
-          </template>
-          <div>
-            <div class="card dock-demo">
-              <div class="dock-window w-full" style="backgroundimage: 'url(https://primefaces.org/cdn/primevue/images/dock/window.jpg))'">
-                <Dock
-                  :model="items"
-                  position="bottom"
-                  class="left-0 right-0 relative"
-                  :pt="{
-                    container: {
-                      class: ['surface-ground']
-                    }
-                  }"
-                >
-                  <template #item="data: {item: Hint }">
-                    <a href="#" class="p-dock-link" @click="onHintClick(data.item)">
-                      <img v-tooltip.top="`Cost is ${data.item.cost}`" :alt="data.item.label" :src="data.item.icon" style="width: 100%">
-                    </a>
-                  </template>
-                </Dock>
-              </div>
-            </div>
-          </div>
-        </Dialog>
+        <component :is="Hints" />
       </KeepAlive>
     </NuxtLayout>
   </div>
