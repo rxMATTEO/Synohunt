@@ -26,8 +26,13 @@
               </NuxtLink>
             </div>
           </div>
-          <div>
-            <Button class="" label="Login" :type="null" outlined />
+          <div class="flex max-md:t-flex-col">
+            <NuxtLink to="/login" class="block md:mr-3">
+              <Button class="text-white t-border-0 bg-blue-400 w-full" label="Login" :type="null" />
+            </NuxtLink>
+            <NuxtLink to="/register" class="block">
+              <Button class="text-white max-md:t-mt-2 t-border-0 bg-indigo-500" label="Register" :type="null" />
+            </NuxtLink>
           </div>
         </div>
       </div>
@@ -63,7 +68,7 @@
         <!--        todo fix cant drag shit-->
       </div>
       <div class="lg:!t-px-52 lg:mx-10 t-px-3 max-w-full surface-ground">
-        <div class="flex gap-5 max-md:flex-wrap">
+        <div class="flex gap-5 max-md:t-flex-wrap">
           <div class="shadow-6 w-full surface-card px-5 py-3 t-rounded-lg">
             <p class="text-center vertical-align-top text-3xl font-bold">
               100
