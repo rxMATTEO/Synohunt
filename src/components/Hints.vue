@@ -12,8 +12,17 @@ function hideHintsPanel () {
 }
 const confirmPurchaseDialog = useConfirm();
 
-function showHintsPanel (e) {
+const x = ref(0);
+const y = ref(0);
+
+onActivated(() => {
+  console.log(x, y);
+});
+function showHintsPanel (e: MouseEvent) {
   hidden.value = false;
+  x.value = e.x;
+  y.value = e.y;
+  console.log(x, y);
 }
 
 type Hint = { label: string; icon: string; cost: number };
@@ -59,58 +68,57 @@ const items = ref<Hint[]>([
 </script>
 
 <template>
-  <Dialog
-    :visible="true"
-    header="Hints"
-    position="bottom"
-    class="overflow-hidden"
-    :class="{ '!t-mb-[-140px]': hidden }"
-    :pt="{
-      root: {
-        class: [hidden? 't-bottom-[-140px] !t-top-[unset]' : '', 'absolute', 'overflow-hidden', 't-rounded-xl']
-      },
-      closeButton: {
-        'onclick': hideHintsPanel
-      }
-    }"
-    @dragend="showHintsPanel"
-  >
-    <template #closeicon>
-      <i class="pi pi-times" @click="hideHintsPanel" />
-    </template>
-    <div>
-      <div class="card dock-demo">
-        <div
-          class="dock-window w-full"
-          style="
-            backgroundimage: &quot;url(https://primefaces.org/cdn/primevue/images/dock/window.jpg))&quot;;
-          "
-        >
-          <Dock
-            :model="items"
-            position="bottom"
-            class="left-0 right-0 relative"
-            :pt="{
-              container: {
-                class: ['surface-ground'],
-              },
-            }"
+  <keep-alive>
+    <Dialog
+      :visible="true"
+      header="Hints"
+      position="bottom"
+      class="overflow-hidden"
+      :class="{ '!t-mb-[-140px]': hidden }"
+      :pt="{
+        root: {
+          class: [hidden? 't-bottom-[-140px] !t-top-[unset]' : '', 'absolute', 'overflow-hidden', 't-rounded-xl']
+        },
+        closeButton: {
+          'onclick': hideHintsPanel
+        }
+      }"
+      @dragend="showHintsPanel"
+    >
+      <template #closeicon>
+        <i class="pi pi-times" @click="hideHintsPanel" />
+      </template>
+      <div>
+        <div class="card dock-demo">
+          <div
+            class="dock-window w-full"
           >
-            <template #item="data: { item: Hint }">
-              <a href="#" class="p-dock-link" @click="onHintClick(data.item)">
-                <img
-                  v-tooltip.top="`Cost is ${data.item.cost}`"
-                  :alt="data.item.label"
-                  :src="data.item.icon"
-                  style="width: 100%"
-                >
-              </a>
-            </template>
-          </Dock>
+            <Dock
+              :model="items"
+              position="bottom"
+              :class="`t-left-[${x}] right-[${y}] relative`"
+              :pt="{
+                container: {
+                  class: ['surface-ground'],
+                },
+              }"
+            >
+              <template #item="data: { item: Hint }">
+                <a href="#" class="p-dock-link" @click="onHintClick(data.item)">
+                  <img
+                    v-tooltip.top="`Cost is ${data.item.cost}`"
+                    :alt="data.item.label"
+                    :src="data.item.icon"
+                    style="width: 100%"
+                  >
+                </a>
+              </template>
+            </Dock>
+          </div>
         </div>
       </div>
-    </div>
-  </Dialog>
+    </Dialog>
+  </keep-alive>
 </template>
 
 <style scoped lang="sass"></style>

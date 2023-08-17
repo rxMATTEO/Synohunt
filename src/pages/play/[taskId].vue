@@ -250,9 +250,10 @@ const isDialogVisible = ref(false);
           </div>
         </div>
       </div>
-      <KeepAlive>
+      <!--      todo test it outside of nuxt-->
+      <keep-alive>
         <component :is="Hints" />
-      </KeepAlive>
+      </keep-alive>
     </NuxtLayout>
   </div>
 </template>
