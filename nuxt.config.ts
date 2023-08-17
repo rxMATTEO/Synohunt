@@ -2,7 +2,7 @@
 const baseUrl = '/';
 const themeId = 'theme-link';
 const nuxtConfig = {
-  // devtools: { enabled: true },
+  devtools: { enabled: true },
   buildModules: ['@nuxt/typescript-build'],
   css: [
     'primeflex/primeflex.css',

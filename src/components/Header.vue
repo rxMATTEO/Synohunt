@@ -13,6 +13,18 @@ const { isExpanded } = useSidebarStore();
 defineProps({
   expanded: Function
 });
+
+// todo add listener to app:template complete into nuxt config so we can add sceletons everywhere mb set runtime config from hook
+
+// defineNuxtConfig({
+//   hooks: {
+//     'app:templates': () => {
+//       console.log('agtggkdfkgfd');
+//     }
+//   }
+// });
+
+// add half opacity shit
 const { getCurrentTheme, setCurrentTheme, currentTheme } = useThemeStore();
 const selected = ref({} as OverlayPanel);
 const theme: {theme: Theme} = reactive({ theme: { dark: true } });
