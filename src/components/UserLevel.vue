@@ -30,7 +30,7 @@ watch(currentPoints, async (newPoints, oldPoints) => { // todo move in store and
 });
 
 const lvlBreakPoints = [[0, 'bg-bluegray-600'], [10, 'bg-orange-500'], [20, 'bg-indigo-400']];
-const userLvlColor = lvlBreakPoints.findLast(([breakPoint, color]) => breakPoint <= +level.value.value);
+const userLvlColor = lvlBreakPoints.reverse().find(([breakPoint, color]) => breakPoint <= +level.value.value);
 </script>
 
 <template>

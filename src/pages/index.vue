@@ -59,7 +59,7 @@
               </div>
             </div>
             <div class="logo-holder absolute inline-block z-1 max-w-full overflow-hidden right-0">
-              <!--              <ModelLoader3D class="t-z-[99] relative right-0 top-20" />-->
+              <ModelLoader3D class="t-z-[99] relative right-0 top-20" />
             </div>
           </div>
         </div>
