@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { usePointsStore } from '../../stores/pointsStore';
 import ProfileStats from '../../components/ProfileStats.vue';
-import CoinSpin from '@/components/CoinSpin.vue';
+import CompletedTasks from '../../components/CompletedTasks.vue';
 
+const tabs = {
+  ProfileStats,
+  CompletedTasks
+};
 const { data: { value: { user: { account } } } } = useAuth();
 
-const active = ref(0);
+const selectedTabIndex = ref(0);
 const items = ref([
   {
     label: 'Stats',
@@ -94,16 +97,9 @@ function changeTab (e) {
         </div>
 
         <div class="mt-5">
-          <TabMenu v-model:activeIndex="active" :model="items" @tab-change="changeTab" />
+          <TabMenu v-model:activeIndex="selectedTabIndex" :model="items" @tab-change="changeTab" />
           <div class="surface-ground">
-            <div v-if="active === 0">
-              <ProfileStats />
-            </div>
-          </div>
-          <div class="surface-ground">
-            <div v-if="active === 1">
-              <CompletedTasks />
-            </div>
+            <component :is="Object.values(tabs)[selectedTabIndex]" />
           </div>
         </div>
       </div>
