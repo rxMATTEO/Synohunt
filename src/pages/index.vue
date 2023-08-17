@@ -30,12 +30,12 @@
       <div class="lg:!t-px-52 lg:mx-10 t-px-3 max-w-full h-full">
         <div class="h-full">
           <div class="flex h-full align-items-center">
-            <div class="t-w-1/2 relative z-1 ">
+            <div class="md:t-w-1/2 relative z-1 ">
               <div class="main z-1 flex flex-column align-items-start justify-content-center">
                 <p class="t-uppercase t-tracking-wider text-indigo-300">
                   somelabel!
                 </p>
-                <p class="welcome-text text-6xl text-left font-bold capitalize mt-3">
+                <p class="welcome-text text-2xl md:text-6xl text-left font-bold capitalize mt-3">
                   Unleash your word wizardry and conquer synonyms with <span class="gradient-primary text">Synohunt</span>
                 </p>
                 <div class="mt-5">
@@ -50,7 +50,7 @@
               </div>
             </div>
             <div class="logo-holder absolute inline-block z-1 max-w-full overflow-hidden right-0">
-              <ModelLoader3D class="t-z-[99] relative right-0 top-20" />
+              <!--              <ModelLoader3D class="t-z-[99] relative right-0 top-20" />-->
             </div>
           </div>
         </div>
@@ -59,7 +59,7 @@
         <!--        todo fix cant drag shit-->
       </div>
       <div class="lg:!t-px-52 lg:mx-10 t-px-3 max-w-full surface-ground">
-        <div class="flex gap-5">
+        <div class="flex gap-5 flex-wrap">
           <div class="shadow-6 w-full surface-card px-5 py-3 t-rounded-lg">
             <p class="text-center vertical-align-top text-3xl font-bold">
               100
@@ -94,11 +94,11 @@
           </div>
         </div>
 
-        <div class="flex gap-5 t-mt-40 t-place-content-between">
-          <div class="t-w-1/2">
+        <div class="flex gap-5 t-mt-40 t-place-content-between flex-column md:flex-row">
+          <div class="md:t-w-1/2">
             <img class="block t-max-w-[66%] max-h-full" src="/img/biglogo.png">
           </div>
-          <div class="t-w-1/2">
+          <div class="md:t-w-1/2">
             <p class="uppercase text-primary font-bold">
               Explore latest vision!
             </p>
