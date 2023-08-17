@@ -29,10 +29,22 @@ import ToastService from 'primevue/toastservice';
 import ConfirmDialog from 'primevue/confirmdialog';
 import Fieldset from 'primevue/fieldset';
 import ConfirmationService from 'primevue/confirmationservice';
+import vue3dLoader from 'vue-3d-loader';
+import Skeleton from 'primevue/skeleton';
 import { defineNuxtPlugin } from '#imports';
-import vue3dLoader from "vue-3d-loader";
 export default defineNuxtPlugin((nuxtApp) => {
-  nuxtApp.vueApp.use(PrimeVue, { ripple: true });
+  nuxtApp.vueApp.use(PrimeVue, {
+    ripple: true,
+    pt: {
+      skeleton: {
+        root: {
+          style: {
+            backgroundColor: 'rgba(255, 255, 255, 0.3)'
+          }
+        }
+      }
+    }
+  });
   nuxtApp.vueApp.use(ToastService);
   nuxtApp.vueApp.use(ConfirmationService);
   nuxtApp.vueApp.use(vue3dLoader);
@@ -65,4 +77,5 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component('Toast', Toast);
   nuxtApp.vueApp.component('ConfirmDialog', ConfirmDialog);
   nuxtApp.vueApp.component('Fieldset', Fieldset);
+  nuxtApp.vueApp.component('Skeleton', Skeleton);
 });

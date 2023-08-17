@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { Difficulity, Language, Task } from '@prisma/client';
 import { reactive } from 'vue';
+import Dropdowns from '@/components/loading/Dropdowns.vue';
+import ChallengeContent from '@/components/loading/ChallengeContent.vue';
 
 export type ServerDiff = Pick<Difficulity, 'name'>;
 export type ServerLang = Pick<Language, 'langFull'>;
@@ -60,13 +62,19 @@ function onChangeTaskOption (id = -1) {
     }
   });
 }
+
+// const loading = ref(true);
+const loading = ref(diffsPending || langsPending);
 </script>
 
 <template>
-  <div v-if="!diffsPending && !langsPending">
-    <GradientBox :gradient-name="gradient.value">
-      <template #left-side>
-        <div class="t-p-3">
+  <GradientBox :gradient-name="gradient.value">
+    <template #left-side>
+      <div class="t-p-3">
+        <div v-if="loading">
+          <Dropdowns />
+        </div>
+        <div v-else>
           <p class="text-sm">
             Suggested Challenge
           </p>
@@ -133,9 +141,14 @@ function onChangeTaskOption (id = -1) {
             </div>
           </div>
         </div>
-      </template>
-      <template #right-side>
-        <div class="t-p-3 h-full relative">
+      </div>
+    </template>
+    <template #right-side>
+      <div class="t-p-3 h-full relative">
+        <div v-if="loading">
+          <ChallengeContent />
+        </div>
+        <div v-else>
           <p v-html="task.value.description" />
           <div class="t-h-8">
             <div class="absolute t-bottom-3 unset flex flex-row">
@@ -147,9 +160,9 @@ function onChangeTaskOption (id = -1) {
             </div>
           </div>
         </div>
-      </template>
-    </GradientBox>
-  </div>
+      </div>
+    </template>
+  </GradientBox>
 </template>
 
 <style scoped lang="sass">
