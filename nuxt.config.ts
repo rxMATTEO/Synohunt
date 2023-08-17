@@ -9,7 +9,15 @@ const nuxtConfig = {
     'primeicons/primeicons.css'
   ],
   build: {
-    transpile: ['primevue']
+    transpile: ['primevue'],
+    postcss: {
+      postcssOptions: {
+        plugins: {
+          tailwindcss: {},
+          autoprefixer: {}
+        }
+      }
+    }
   },
   modules: [
     '@nuxtjs/tailwindcss',

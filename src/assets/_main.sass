@@ -7,13 +7,22 @@ $surfaces: 100, 200, 300, 400, 500, 600, 700, 800, 900
     &-#{$surface}
       color: var(--surface-#{$surface}) !important
 
-.gradient
+@mixin setGradient($isImportant)
   @each $name, $color in $gradient
     &-#{$name}
-      background-image: -webkit-linear-gradient(left, $color) !important
+      @if($isImportant)
+        background-image: -webkit-linear-gradient(left, $color) !important
+      @else
+        background-image: -webkit-linear-gradient(left, $color)
       &.text
         -webkit-background-clip: text
         -webkit-text-fill-color: transparent
+
+.gradient
+  @include setGradient(true)
+
+.gradient-non
+  @include setGradient(false)
 
 .animated-gradient
   @each $name, $color in $animated-gradient

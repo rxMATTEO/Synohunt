@@ -2,25 +2,29 @@
   <div class="surface-ground">
     <div class="h-screen t-max-h-screen">
       <div class="text-color py-3 absolute right-0 left-0">
-        <div class="flex t-place-content-between t-items-center lg:!t-px-52 lg:mx-10 ">
+        <div class="flex t-place-content-between t-items-center lg:!t-px-52 lg:mx-10 gap-3">
           <div>
-            <a class="font-bold t-tracking-wider">
+            <NuxtLink to="/" class="font-bold t-tracking-wider">
               SynoHunt
-            </a>
+            </NuxtLink>
           </div>
-          <div class="">
-            <a class="mr-3">
-              Home
-            </a>
-            <a class="mr-3">
-              About us
-            </a>
-            <a class="mr-3">
-              Services
-            </a>
-            <a class="mr-3">
-              Blog
-            </a>
+          <div class="md:flex">
+            <div>
+              <NuxtLink to="/dashboard" class="mr-3 hover:text-primary transition-colors t-duration-300">
+                Dashboard
+              </NuxtLink>
+              <NuxtLink to="/about" class="mr-3 hover:text-primary transition-colors t-duration-300">
+                About us
+              </NuxtLink>
+            </div>
+            <div>
+              <NuxtLink to="/" class="mr-3 hover:text-primary transition-colors t-duration-300">
+                Services
+              </NuxtLink>
+              <NuxtLink to="/" class="mr-3 hover:text-primary transition-colors t-duration-300">
+                Blog
+              </NuxtLink>
+            </div>
           </div>
           <div>
             <Button class="" label="Login" :type="null" outlined />
@@ -59,7 +63,7 @@
         <!--        todo fix cant drag shit-->
       </div>
       <div class="lg:!t-px-52 lg:mx-10 t-px-3 max-w-full surface-ground">
-        <div class="flex gap-5 flex-wrap">
+        <div class="flex gap-5 max-md:flex-wrap">
           <div class="shadow-6 w-full surface-card px-5 py-3 t-rounded-lg">
             <p class="text-center vertical-align-top text-3xl font-bold">
               100
@@ -114,7 +118,7 @@
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur autem consectetur harum incidunt libero quis voluptates voluptatibus? Alias, aperiam blanditiis deserunt dolores, ducimus eum natus, optio rem repellat vel voluptatem.
               </p>
               <div class="mt-5">
-                <Button label="Upcoming sales" class="gradient-medium t-border-0 text-white" :type="null" />
+                <Button label="Upcoming sales" class="animated-gradient-rainbow t-border-0 text-white" :type="null" />
               </div>
             </div>
           </div>
