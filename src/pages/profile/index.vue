@@ -3,10 +3,10 @@ import { ref } from 'vue';
 import ProfileStats from '../../components/ProfileStats.vue';
 import CompletedTasks from '../../components/CompletedTasks.vue';
 
-const tabs = {
+const tabs = [
   ProfileStats,
   CompletedTasks
-};
+];
 const { data: { value: { user: { account } } } } = useAuth();
 
 const selectedTabIndex = ref(0);
@@ -99,7 +99,7 @@ function changeTab (e) {
         <div class="mt-5">
           <TabMenu v-model:activeIndex="selectedTabIndex" :model="items" @tab-change="changeTab" />
           <div class="surface-ground">
-            <component :is="Object.values(tabs)[selectedTabIndex]" />
+            <component :is="tabs[selectedTabIndex]" />
           </div>
         </div>
       </div>
