@@ -15,7 +15,7 @@ if (process.client) {
   if (currentTheme === 'light') {
     setTimeout(() => {
       setCurrentTheme('dark', 'light');
-    }, 1);
+    }, 300);
   }
 }
 onMounted(async () => {
