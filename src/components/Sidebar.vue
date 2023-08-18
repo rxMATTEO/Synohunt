@@ -86,6 +86,11 @@ const navLinks = ref([
     ]
   }
 ] as NavLink[]);
+
+const emit = defineEmits(['navigate']);
+function onLinkClick () {
+  emit('navigate');
+}
 </script>
 
 <template>
@@ -106,7 +111,7 @@ const navLinks = ref([
             {{ navItem.title }}
           </p>
           <div class="mt-1">
-            <NuxtLink v-for="link in navItem.links" :to="link.to" class="hover:surface-200 block transition-colors t-ease-in-out t-duration-200">
+            <NuxtLink v-for="link in navItem.links" :to="link.to" class="hover:surface-200 block transition-colors t-ease-in-out t-duration-200" @click="onLinkClick">
               <div class="flex px-1">
                 <div class="t-w-1/6">
                   {{ link.logoPath }}
