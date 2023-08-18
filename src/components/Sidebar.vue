@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { Ref, UnwrapRef } from 'vue';
+
 const props = defineProps({
   isExpanded: Object,
   toggle: Function
@@ -9,6 +11,81 @@ const loaded = ref(false);
 onMounted(() => {
   loaded.value = true;
 });
+
+type NavItem = {
+  logoPath: string,
+  title: string,
+  description: string,
+  to: string
+}
+type NavLink = {
+  title: string,
+  links: NavItem[],
+}
+const navLinks = ref([
+  {
+    title: 'Training',
+    links: [
+      {
+        title: 'Play',
+        description: 'Complete challenges & practice',
+        logoPath: 'a',
+        to: '/play/random'
+      },
+      {
+        title: 'Practice',
+        description: 'Complete challenges & shit',
+        logoPath: 'a',
+        to: '/'
+      }
+    ]
+  },
+  {
+    title: 'career',
+    links: [
+      {
+        title: 'Create challenge',
+        description: 'Create your own challenge for players and get coins',
+        to: '/create/task',
+        logoPath: 'a'
+      }
+    ]
+  },
+  {
+    title: 'Community',
+    links: [
+      {
+        title: 'Leaderboard',
+        to: '/leaderboard',
+        description: 'Achieve honor and move up the global leaderboards',
+        logoPath: 'a'
+      },
+      {
+        title: 'Practice',
+        description: 'Complete challenges & shit',
+        logoPath: 'a',
+        to: '/'
+      },
+      {
+        title: 'Practice',
+        description: 'Complete challenges & shit',
+        logoPath: 'a',
+        to: '/'
+      }
+    ]
+  },
+  {
+    title: 'About',
+    links: [
+      {
+        title: 'Practice',
+        description: 'Complete challenges & shit',
+        logoPath: 'a',
+        to: '/'
+      }
+    ]
+  }
+] as NavLink[]);
 </script>
 
 <template>
@@ -24,125 +101,27 @@ onMounted(() => {
         </NuxtLink>
       </div>
       <div v-if="isExpanded.value" class="mt-5 text-secondary t-text-sm t-w-1/">
-        <p class="px-2 uppercase text-color-secondary">
-          Training
-        </p>
-        <div class="mt-1">
-          <NuxtLink to="/play/random" class="hover:surface-200 block transition-colors t-ease-in-out t-duration-200">
-            <div class="flex px-1">
-              <div class="t-w-1/6">
-                a
-              </div>
-              <div class="t-w-5/6">
-                <p class="t-font-bold">
-                  Play
-                </p>
-                <p class="text-sm text-color-secondary">
-                  Complete challenges & practice
-                </p>
-              </div>
-            </div>
-          </NuxtLink>
-          <NuxtLink to="/" class="hover:surface-200 block transition-colors t-ease-in-out t-duration-200">
-            <div class="flex px-1">
-              <div class="t-w-1/6">
-                a
-              </div>
-              <div class="t-w-5/6">
-                <p class="t-font-bold">
-                  Practice
-                </p>
-                <p class="text-sm text-color-secondary">
-                  Complete challenge and shit
-                </p>
-              </div>
-            </div>
-          </NuxtLink>
-
-          <p class="px-2 uppercase text-color-secondary mt-3">
-            CAREER
+        <div v-for="navItem in navLinks">
+          <p class="px-2 uppercase text-color-secondary">
+            {{ navItem.title }}
           </p>
-          <NuxtLink to="/create/task" class="hover:surface-200 block transition-colors t-ease-in-out t-duration-200">
-            <div class="flex px-1">
-              <div class="t-w-1/6">
-                a
+          <div class="mt-1">
+            <NuxtLink v-for="link in navItem.links" :to="link.to" class="hover:surface-200 block transition-colors t-ease-in-out t-duration-200">
+              <div class="flex px-1">
+                <div class="t-w-1/6">
+                  {{ link.logoPath }}
+                </div>
+                <div class="t-w-5/6">
+                  <p class="t-font-bold">
+                    {{ link.title }}
+                  </p>
+                  <p class="text-sm text-color-secondary">
+                    {{ link.description }}
+                  </p>
+                </div>
               </div>
-              <div class="t-w-5/6">
-                <p class="t-font-bold">
-                  Create challenge
-                </p>
-                <p class="text-sm text-color-secondary">
-                  Create your own challenge for players and get coins
-                </p>
-              </div>
-            </div>
-          </NuxtLink>
-          <p class="px-2 uppercase text-color-secondary mt-3">
-            Community
-          </p>
-          <NuxtLink to="/leaderboard" class="hover:surface-200 block transition-colors t-ease-in-out t-duration-200">
-            <div class="flex px-1">
-              <div class="t-w-1/6">
-                a
-              </div>
-              <div class="t-w-5/6">
-                <p class="t-font-bold">
-                  Leaderboard
-                </p>
-                <p class="text-sm text-color-secondary">
-                  Achieve honor and move up the global leaderboards
-                </p>
-              </div>
-            </div>
-          </NuxtLink>
-          <NuxtLink to="/" class="hover:surface-200 block transition-colors t-ease-in-out t-duration-200">
-            <div class="flex px-1">
-              <div class="t-w-1/6">
-                a
-              </div>
-              <div class="t-w-5/6">
-                <p class="t-font-bold">
-                  Practice
-                </p>
-                <p class="text-sm text-color-secondary">
-                  Complete challenge and shit
-                </p>
-              </div>
-            </div>
-          </NuxtLink>
-          <NuxtLink to="/" class="hover:surface-200 block transition-colors t-ease-in-out t-duration-200">
-            <div class="flex px-1">
-              <div class="t-w-1/6">
-                a
-              </div>
-              <div class="t-w-5/6">
-                <p class="t-font-bold">
-                  Practice
-                </p>
-                <p class="text-sm text-color-secondary">
-                  Complete challenge and shit
-                </p>
-              </div>
-            </div>
-          </NuxtLink>
-          <p class="px-2 uppercase text-color-secondary mt-3">
-            About
-          </p>
-          <NuxtLink to="/" class="hover:surface-200 block transition-colors t-ease-in-out t-duration-200">
-            <div class="flex px-1">
-              <div class="t-w-1/6">
-                a
-              </div>
-              <div class="t-w-5/6">
-                <p class="t-font-bold">
-                  Practice
-                </p>
-                <p class="text-sm text-color-secondary">
-                  Complete challenge and shit
-                </p>
-              </div>
-            </div>
-          </NuxtLink>
+            </NuxtLink>
+          </div>
         </div>
       </div>
     </div>
