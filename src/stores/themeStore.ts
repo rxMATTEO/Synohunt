@@ -26,12 +26,12 @@ export const useThemeStore = defineStore('themeStore', () => {
   }
 
   function setCurrentTheme (currentThemeName: ThemesNames, newThemeName: ThemesNames) {
-    appConfig.theme[currentThemeName] = false;
-    appConfig.theme[newThemeName] = true;
+    setPrimeTheme(currentThemeName, newThemeName);
+    // appConfig.theme[currentThemeName] = false;
+    // appConfig.theme[newThemeName] = true;
     localStorage.setItem(modeKey, newThemeName);
 
     currentTheme = { [newThemeName]: true };
-    setPrimeTheme(currentThemeName, newThemeName);
   }
   return ({
     getCurrentTheme,

@@ -9,16 +9,27 @@ export type ServerLang = Pick<Language, 'langFull'>;
 
 const diffs = reactive({ value: [] as ServerDiff[] });
 const langs = reactive({ value: [] as ServerLang[] });
-const task = reactive<{value: Task}>({ value: {} as Task });
+const task = reactive<{ value: Task }>({ value: {} as Task });
 
-const selectedDiff = reactive<{value: ServerDiff}>({ value: {} as ServerDiff });
-const selectedLanguage = reactive<{value: ServerLang}>({ value: {} as ServerLang });
-const { pending: diffsPending, data: diffsFetched } = useLazyFetch('/api/diffs', {
-  server: false
+const selectedDiff = reactive<{ value: ServerDiff }>({
+  value: {} as ServerDiff
 });
-const { pending: langsPending, data: langsFetched } = useLazyFetch('/api/langs', {
-  server: false
+const selectedLanguage = reactive<{ value: ServerLang }>({
+  value: {} as ServerLang
 });
+const { pending: diffsPending, data: diffsFetched } = useLazyFetch(
+  '/api/diffs',
+  {
+    server: false
+  }
+);
+const { pending: langsPending, data: langsFetched } = useLazyFetch(
+  '/api/langs',
+  {
+    server: false
+  }
+);
+const taskPending = ref(true);
 
 watch(diffsFetched, (newDiffs) => {
   diffs.value = newDiffs;
@@ -40,30 +51,31 @@ watch(langsFetched, (newLangs) => {
 //   selectedLanguage.value = langs.value[0];
 // });
 type GradientNames = 'easy' | 'medium' | 'hard';
-const gradient = reactive<{value: GradientNames}>({ value: 'easy' });
+const gradient = reactive<{ value: GradientNames }>({ value: 'easy' });
 
 function onChangeTaskOption (id = -1) {
   setTimeout(async () => {
     if (selectedLanguage.value.langFull && selectedDiff.value.name) {
       gradient.value = selectedDiff.value.name.toLowerCase() as GradientNames;
-      const tasksFetched = await $fetch('/api/task/random', {
+      const { data: tasksFetched, pending } = await useAsyncData('task', () => $fetch('/api/task/random', {
         method: 'POST',
         body: {
           diff: selectedDiff.value.name,
           lang: selectedLanguage.value.langFull,
           butId: id
         }
-      });
-      task.value = Object.keys(tasksFetched).length > 0
-        ? tasksFetched
-        : {
-          description: 'По данным фильтрам не найдены испытания!'
-        };
+      }));
+      taskPending.value = pending.value;
+      task.value =
+        Object.keys(tasksFetched).length > 0
+          ? tasksFetched
+          : {
+            description: 'По данным фильтрам не найдены испытания!'
+          };
     }
   });
 }
 
-// const loading = ref(true);
 const loading = ref(diffsPending || langsPending);
 </script>
 
@@ -135,9 +147,18 @@ const loading = ref(diffsPending || langsPending);
           <div class="mt-5 flex">
             <div class="t-mx-auto">
               <NuxtLink v-if="task.value.id" :to="`/play/${task.value.id}`">
-                <Button type="null" label="TRAIN" class="text-sm p-2 mr-2 bg-blue-300 border-1 border-white hover:bg-blue-800 text-white" />
+                <Button
+                  type="null"
+                  label="TRAIN"
+                  class="text-sm p-2 mr-2 bg-blue-300 border-1 border-white hover:bg-blue-800 text-white"
+                />
               </NuxtLink>
-              <Button type="null" label="SKIP" class="text-sm p-2 bg-indigo-400 border-1 border-white hover:bg-indigo-800 text-white" @click="onChangeTaskOption(task.value.id)" />
+              <Button
+                type="null"
+                label="SKIP"
+                class="text-sm p-2 bg-indigo-400 border-1 border-white hover:bg-indigo-800 text-white"
+                @click="onChangeTaskOption(task.value.id)"
+              />
             </div>
           </div>
         </div>
@@ -145,14 +166,17 @@ const loading = ref(diffsPending || langsPending);
     </template>
     <template #right-side>
       <div class="t-p-3 h-full relative">
-        <div v-if="loading">
+        <div v-if="taskPending">
           <ChallengeContent />
         </div>
         <div v-else>
           <p v-html="task.value.description" />
           <div class="t-h-8">
             <div class="absolute t-bottom-3 unset flex flex-row">
-              <div v-for="(tag) in task.value.Tag" class="vertical-align-middle text-center mr-5 surface-ground text-sm px-1 t-rounded-md">
+              <div
+                v-for="tag in task.value.Tag"
+                class="vertical-align-middle text-center mr-5 surface-ground text-sm px-1 t-rounded-md"
+              >
                 <p class="flex">
                   <span class="vertical-align-top p-1">{{ tag.name }}</span>
                 </p>
@@ -165,6 +189,4 @@ const loading = ref(diffsPending || langsPending);
   </GradientBox>
 </template>
 
-<style scoped lang="sass">
-
-</style>
+<style scoped lang="sass"></style>

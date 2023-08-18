@@ -22,6 +22,10 @@ useFetch('/api/langs').then((res) => {
   selectedLanguage.value = langs.value[0];
 });
 
+onMounted(async () => {
+  const editor = await import('quill');
+});
+
 const isRandomTaskGenerating = ref(false);
 
 async function randomGenerateTask () {

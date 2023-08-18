@@ -9,19 +9,21 @@ import { useAppConfig } from '#imports';
 import { useThemeStore } from '@/stores/themeStore';
 
 const appConfig = useAppConfig();
+const { setCurrentTheme, getCurrentTheme } = useThemeStore();
+if (process.client) {
+  const currentTheme = getCurrentTheme();
+  if (currentTheme === 'light') {
+    setTimeout(() => {
+      setCurrentTheme('dark', 'light');
+    }, 1);
+  }
+}
 onMounted(async () => {
   if (window.document.documentElement.offsetWidth >= 768) {
     appConfig.platform = Platforms.pc;
   } else {
     appConfig.platform = Platforms.mobile;
   }
-  const { setCurrentTheme, getCurrentTheme } = useThemeStore();
-
-  setTimeout(() => {
-    if (getCurrentTheme() === 'light') {
-      setCurrentTheme('dark', 'light');
-    }
-  }, 0); // TODO idk pls fix
 });
 </script>
 
