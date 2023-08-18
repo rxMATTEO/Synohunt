@@ -5,7 +5,7 @@ import { useAppConfig, useRuntimeConfig } from '#imports';
 
 export const useThemeStore = defineStore('themeStore', () => {
   const { public: { themeId } }: string = useRuntimeConfig();
-  const modeKey = import.meta.env.VITE_COLOR_MODE_KEY;
+  const modeKey = 'colorMode';
   const primeVue = usePrimeVue();
   const appConfig = useAppConfig();
 

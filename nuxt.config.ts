@@ -1,7 +1,9 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import { NuxtConfig } from '@nuxt/types';
+
 const baseUrl = '/';
 const themeId = 'theme-link';
-const nuxtConfig = {
+const nuxtConfig: NuxtConfig = {
   devtools: { enabled: true, enableTimeline: true },
   buildModules: ['@nuxt/typescript-build'],
   css: [
@@ -35,10 +37,7 @@ const nuxtConfig = {
       ['defineStore', 'definePiniaStore']
     ]
   },
-  tailwindcss: {},
   app: {
-    pageTransition: { name: 'page', mode: 'out-in' },
-    layoutTransition: { name: 'layout', mode: 'out-in' },
     baseURL: baseUrl,
     head: {
       link: [

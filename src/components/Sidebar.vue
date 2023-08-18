@@ -3,10 +3,19 @@ const props = defineProps({
   isExpanded: Object,
   toggle: Function
 });
+
+const loaded = ref(false);
+
+onMounted(() => {
+  loaded.value = true;
+});
 </script>
 
 <template>
-  <div class="t-relative t-top-10 t-z-[11] t-transition-[width] t-ease-in-out t-duration-200" :class="{'md:t-w-56 t-w-full': isExpanded.value, 't-w-0': !isExpanded.value}">
+  <div v-if="!loaded" class="t-relative t-top-10 t-z-[11] t-transition-[width] t-ease-in-out t-duration-200" :class="{'md:t-w-56 t-w-full': isExpanded.value, 't-w-0': !isExpanded.value}">
+    {{ isExpanded }}
+  </div>
+  <div v-else class="t-relative t-top-10 t-z-[11] t-transition-[width] t-ease-in-out t-duration-200" :class="{'md:t-w-56 t-w-full': isExpanded.value, 't-w-0': !isExpanded.value}">
     <div class="z-1 md:t-block lg:flex-auto flex-none left-0 md:t-top-0 t-top-10 bottom-0 fixed surface-card shadow-8 sidebar">
       <div class="logo">
         <!--         todo center this shit */-->
