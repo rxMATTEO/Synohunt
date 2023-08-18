@@ -2,10 +2,6 @@
 import { Difficulity, Language, Task } from '@prisma/client';
 import { reactive, ref } from 'vue';
 import ChallengeBox from '@/components/ChallengeBox.vue';
-
-definePageMeta({
-  middleware: 'auth'
-});
 </script>
 
 <template>
