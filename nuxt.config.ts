@@ -22,9 +22,7 @@ const nuxtConfig = {
   modules: [
     '@nuxtjs/tailwindcss',
     '@pinia/nuxt',
-    '@sidebase/nuxt-auth',
-    '@nuxtjs/eslint-module'
-
+    '@sidebase/nuxt-auth'
   ],
   auth: {
     isEnabled: true,
