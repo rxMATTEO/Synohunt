@@ -6,9 +6,8 @@ import { Platforms } from '@/app.config';
 
 const { toggleMenu, setMenuVisibility, isExpanded: expanded } = useSidebarStore();
 
-const { platform } = useAppConfig();
-
 function hideMenuMobile () {
+  const { platform } = useAppConfig();
   if (platform === Platforms.pc) {
     setMenuVisibility(true);
   } else {

@@ -91,6 +91,7 @@ const emit = defineEmits(['navigate']);
 function onLinkClick () {
   emit('navigate');
 }
+// todo figure out like wtf its behind hints panel and optimize it for mobiles
 </script>
 
 <template>

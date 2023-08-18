@@ -1,6 +1,6 @@
 import { reactive, ref } from 'vue';
 import type { Message, MessageStatus } from '@prisma/client';
-import type { MessageStatuses } from '../server/prisma/seed';
+import type { MessageStatuses } from '@/server/prisma/seed';
 import { defineStore, useAuth, useFetch } from '#imports';
 
 export const useMessageStore = defineStore('messageStore', () => {
