@@ -100,7 +100,7 @@ const { messages } = storeToRefs(messagesStore);
             shape="circle"
             :image="account.image"
             class="mr-3 "
-            size="small"
+            size="normal"
             :pt="{
               image: {
                 class: 't-w-[10px] t-h-[10px]'

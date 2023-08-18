@@ -23,7 +23,7 @@ export const usePointsStore = defineStore('pointsStore', {
     }
   },
   actions: {
-    async calculatePercentOfPointsProgress () {
+    calculatePercentOfPointsProgress () {
       const pointsToNextLvl = this.toNextLvl;
       const currentPoints = this.currentPoints;
       const nextLvlPoints = pointsToNextLvl.need;
