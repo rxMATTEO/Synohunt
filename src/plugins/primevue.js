@@ -31,49 +31,52 @@ import Fieldset from 'primevue/fieldset';
 import ConfirmationService from 'primevue/confirmationservice';
 import Skeleton from 'primevue/skeleton';
 import { defineNuxtPlugin } from '#imports';
-export default defineNuxtPlugin((nuxtApp) => {
-  nuxtApp.vueApp.use(PrimeVue, {
-    ripple: true,
-    pt: {
-      skeleton: {
-        root: {
-          style: {
-            backgroundColor: 'rgba(255, 255, 255, 0.3)'
+export default defineNuxtPlugin({
+  parallel: true,
+  setup: async (nuxtApp) => {
+    nuxtApp.vueApp.use(PrimeVue, {
+      ripple: true,
+      pt: {
+        skeleton: {
+          root: {
+            style: {
+              backgroundColor: 'rgba(255, 255, 255, 0.3)'
+            }
           }
         }
       }
-    }
-  });
-  nuxtApp.vueApp.use(ToastService);
-  nuxtApp.vueApp.use(ConfirmationService);
-  nuxtApp.vueApp.directive('badge', BadgeDirective);
-  nuxtApp.vueApp.directive('tooltip', Tooltip);
-  nuxtApp.vueApp.directive('focustrap', FocusTrap);
+    });
+    nuxtApp.vueApp.use(ToastService);
+    nuxtApp.vueApp.use(ConfirmationService);
+    nuxtApp.vueApp.directive('badge', BadgeDirective);
+    nuxtApp.vueApp.directive('tooltip', Tooltip);
+    nuxtApp.vueApp.directive('focustrap', FocusTrap);
 
-  nuxtApp.vueApp.component('Button', Button);
-  nuxtApp.vueApp.component('Dropdown', Dropdown);
-  nuxtApp.vueApp.component('Badge', Badge);
-  nuxtApp.vueApp.component('Avatar', Avatar);
-  nuxtApp.vueApp.component('OverlayPanel', OverlayPanel);
-  nuxtApp.vueApp.component('Divider', Divider);
-  nuxtApp.vueApp.component('ProgressBar', ProgressBar);
-  nuxtApp.vueApp.component('DataTable', DataTable);
-  nuxtApp.vueApp.component('Column', Column);
-  nuxtApp.vueApp.component('Checkbox', Checkbox);
-  nuxtApp.vueApp.component('InputText', InputText);
-  nuxtApp.vueApp.component('PickList', PickList);
-  nuxtApp.vueApp.component('Dialog', Dialog);
-  nuxtApp.vueApp.component('DataView', DataView);
-  nuxtApp.vueApp.component('TabMenu', TabMenu);
-  nuxtApp.vueApp.component('Knob', Knob);
-  nuxtApp.vueApp.component('Editor', Editor);
-  nuxtApp.vueApp.component('SplitButton', SplitButton);
-  nuxtApp.vueApp.component('SpeedDial', SpeedDial);
-  nuxtApp.vueApp.component('Dock', Dock);
-  nuxtApp.vueApp.component('RadioButton', RadioButton);
-  nuxtApp.vueApp.component('Tag', Tag);
-  nuxtApp.vueApp.component('Toast', Toast);
-  nuxtApp.vueApp.component('ConfirmDialog', ConfirmDialog);
-  nuxtApp.vueApp.component('Fieldset', Fieldset);
-  nuxtApp.vueApp.component('Skeleton', Skeleton);
+    nuxtApp.vueApp.component('Button', Button);
+    nuxtApp.vueApp.component('Dropdown', Dropdown);
+    nuxtApp.vueApp.component('Badge', Badge);
+    nuxtApp.vueApp.component('Avatar', Avatar);
+    nuxtApp.vueApp.component('OverlayPanel', OverlayPanel);
+    nuxtApp.vueApp.component('Divider', Divider);
+    nuxtApp.vueApp.component('ProgressBar', ProgressBar);
+    nuxtApp.vueApp.component('DataTable', DataTable);
+    nuxtApp.vueApp.component('Column', Column);
+    nuxtApp.vueApp.component('Checkbox', Checkbox);
+    nuxtApp.vueApp.component('InputText', InputText);
+    nuxtApp.vueApp.component('PickList', PickList);
+    nuxtApp.vueApp.component('Dialog', Dialog);
+    nuxtApp.vueApp.component('DataView', DataView);
+    nuxtApp.vueApp.component('TabMenu', TabMenu);
+    nuxtApp.vueApp.component('Knob', Knob);
+    nuxtApp.vueApp.component('Editor', Editor);
+    nuxtApp.vueApp.component('SplitButton', SplitButton);
+    nuxtApp.vueApp.component('SpeedDial', SpeedDial);
+    nuxtApp.vueApp.component('Dock', Dock);
+    nuxtApp.vueApp.component('RadioButton', RadioButton);
+    nuxtApp.vueApp.component('Tag', Tag);
+    nuxtApp.vueApp.component('Toast', Toast);
+    nuxtApp.vueApp.component('ConfirmDialog', ConfirmDialog);
+    nuxtApp.vueApp.component('Fieldset', Fieldset);
+    nuxtApp.vueApp.component('Skeleton', Skeleton);
+  }
 });
