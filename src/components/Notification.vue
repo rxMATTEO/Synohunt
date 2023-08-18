@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useToast } from 'primevue/usetoast';
-import {useNotificationsStore} from "@/stores/notificationsStore";
+import { useNotificationsStore } from '@/stores/notificationsStore';
 
 const toast = useToast();
 type NotificationType = 'notification' | 'message'
@@ -33,12 +33,12 @@ const notification = ref<NotificationProps>({
 });
 
 const notificationsStore = useNotificationsStore();
-const unsubscribe = notificationsStore.$onAction( ({name, args}) => {
-  if(name === 'addNotification'){
+const unsubscribe = notificationsStore.$onAction(({ name, args }) => {
+  if (name === 'addNotification') {
     toast.add({ life: 3000, detail: 'a', summary: 'b' });
     notification.value = args[0];
   }
-} );
+});
 </script>
 
 <template>
