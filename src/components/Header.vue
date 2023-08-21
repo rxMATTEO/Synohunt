@@ -140,7 +140,7 @@ const { messages } = storeToRefs(messagesStore);
               </div>
               <div class="link flex t-items-center">
                 <NuxtLink to="/profile/bookmarks">
-                  <Button icon="p-text-secondary pi pi-bookmark mr-1" unstyled class="link flex t-items-center pt-3" label="Bookmarked challenges" />
+                  <Button icon="p-text-secondary pi pi-star mr-1" unstyled class="link flex t-items-center pt-3" label="Bookmarked challenges" />
                 </NuxtLink>
               </div>
               <Divider />

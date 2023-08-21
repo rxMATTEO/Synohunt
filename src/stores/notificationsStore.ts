@@ -16,7 +16,7 @@ export const useNotificationsStore: NotificationsStore = defineStore('notificati
     };
   },
   actions: {
-    async addNotification (notification: NotificationProps) {
+    addNotification (notification: NotificationProps) {
       this.notifications.push(notification);
       return notification;
     }
