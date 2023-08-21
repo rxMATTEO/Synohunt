@@ -80,8 +80,7 @@ const positionSeverities = {
           </div>
         </template>
       </Column>
-      <Column header="Completed challenge" field="tasks.length" style="width: 25%;" class="max-md:!t-p-0" />
-      <!--      todo realize this-->
+      <Column header="Challenges complete" field="_count.CompletedTask" style="width: 25%;" class="max-md:!t-p-0" />
       <Column header="Points" style="width: 25%;" class="max-md:!t-p-0">
         <template #body="data: { data: Leader}">
           <span>{{ data.data.points }}</span>
