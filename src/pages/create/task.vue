@@ -26,11 +26,11 @@ onMounted(async () => {
   const editor = await import('quill');
 });
 
+const router = useRouter();
 const isRandomTaskGenerating = ref(false);
 
 async function randomGenerateTask () {
   isRandomTaskGenerating.value = true;
-  // const task = await $fetch(`/api/word/random?lang=${selectedLanguage.value.langFull}&diff=${selectedDiff.value.name}`);
   const task = await $fetch('/api/word/random', {
     method: 'POST',
     body: {
@@ -46,6 +46,7 @@ async function randomGenerateTask () {
   isRandomTaskGenerating.value = false;
 }
 
+const isDialogVisible = ref(false);
 async function createTask () {
   taskFetched.value.task.description = context.value;
   taskFetched.value.task.isVisible = true;
@@ -56,11 +57,23 @@ async function createTask () {
       updatingTask: taskFetched.value
     }
   });
+  isDialogVisible.value = true;
+}
+function gotoMyChallenges () {
+  router.push('/profile/challenges');
 }
 </script>
 
 <template>
   <div>
+    <Dialog v-model:visible="isDialogVisible" modal header="Congratulations" :style="{ width: '50vw' }">
+      <p>
+        You created new task!
+      </p>
+      <template #footer>
+        <Button label="Cool" icon="pi pi-check" autofocus type="null" @click="() => {isDialogVisible = false; gotoMyChallenges()}" />
+      </template>
+    </Dialog>
     <NuxtLayout name="header-n-sidebar">
       <div class="lg:px-8 lg:mx-8 px-3">
         <div class="surface-ground t-rounded-md p-5 h-fit">
@@ -202,7 +215,7 @@ async function createTask () {
           </Fieldset>
           <div class="mt-5">
             <!--              todo redirect to my tasks-->
-            <!--              <NuxtLink to="/dashboard">-->
+            <!--                          <NuxtLink to="/dashboard">-->
             <Button label="Create challenge" type="null" class="mx-auto block" @click="createTask" />
           <!--              </NuxtLink>-->
           </div>
