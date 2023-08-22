@@ -78,8 +78,8 @@ const navLinks = ref([
     title: 'About',
     links: [
       {
-        title: 'Practice',
-        description: 'Complete challenges & shit',
+        title: 'About',
+        description: 'Check out our advantages',
         logoPath: 'a',
         to: '/'
       }
@@ -95,10 +95,7 @@ function onLinkClick () {
 </script>
 
 <template>
-  <div v-if="!loaded" class="t-relative t-top-10 t-z-[11] t-transition-[width] t-ease-in-out t-duration-200" :class="{'md:t-w-56 t-w-full': isExpanded.value, 't-w-0': !isExpanded.value}">
-    {{ isExpanded }}
-  </div>
-  <div v-else class="t-relative t-top-10 t-z-[11] t-transition-[width] t-ease-in-out t-duration-200" :class="{'md:t-w-56 t-w-full': isExpanded.value, 't-w-0': !isExpanded.value}">
+  <div class="t-relative t-top-10 t-z-[11] t-transition-[width] t-ease-in-out t-duration-200" :class="{'md:t-w-56 t-w-full': isExpanded.value, 't-w-0': !isExpanded.value}">
     <div class="z-1 md:t-block lg:flex-auto flex-none left-0 md:t-top-0 t-top-10 bottom-0 fixed surface-card shadow-8 sidebar">
       <div class="logo">
         <!--         todo center this shit */-->
