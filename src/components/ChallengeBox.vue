@@ -64,11 +64,11 @@ function onChangeTaskOption (id = -1) {
           lang: selectedLanguage.value.langFull,
           butId: id
         }
-      }));
+      }), { server: false, lazy: true });
       taskPending.value = pending.value;
       task.value =
-        Object.keys(tasksFetched).length > 0
-          ? tasksFetched
+        Object.keys(tasksFetched.value).length > 0
+          ? tasksFetched.value
           : {
             description: 'По данным фильтрам не найдены испытания!'
           };
