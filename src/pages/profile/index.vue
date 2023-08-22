@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import ProfileStats from '../../components/ProfileStats.vue';
-import CompletedTasks from '../../components/CompletedTasks.vue';
+import CompletedTasks from '../../components/CompletedTasks.vue'; // to lazy
+import TabmenuLoader from '../../components/loading/TabmenuLoader.vue';
 
 const tabs = [
   ProfileStats,
@@ -32,6 +33,11 @@ const items = ref([
     icon: 'pi pi-fw pi-cog'
   }
 ]);
+
+const pending = ref(true);
+onMounted(() => {
+  pending.value = false;
+});
 
 function changeTab (e) {
 
@@ -97,7 +103,12 @@ function changeTab (e) {
         </div>
 
         <div class="mt-5">
-          <TabMenu v-model:activeIndex="selectedTabIndex" :model="items" @tab-change="changeTab" />
+          <div v-if="pending">
+            <TabmenuLoader />
+          </div>
+          <div v-else>
+            <TabMenu v-model:activeIndex="selectedTabIndex" :model="items" @tab-change="changeTab" />
+          </div>
           <div class="surface-ground">
             <component :is="tabs[selectedTabIndex]" />
           </div>
