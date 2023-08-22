@@ -37,7 +37,6 @@ const nuxtConfig: NuxtConfig = {
       ['defineStore', 'definePiniaStore']
     ]
   },
-  ssr: false,
   app: {
     baseURL: baseUrl,
     head: {

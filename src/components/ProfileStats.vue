@@ -2,15 +2,28 @@
 import { ref } from 'vue';
 import { usePointsStore } from '../stores/pointsStore';
 const pointsStore = usePointsStore();
-const percs = (await pointsStore.calculatePercentOfPointsProgress());
-const percents = ref(percs);
-const { data: { value: { user: { account } } } } = useAuth();
-const bookmarked = ref((await useFetch('/api/task/allBookmarks', {
-  method: 'POST',
-  body: {
-    userId: account.id
+const percents = ref(0);
+const { data: percs, pending } = await useAsyncData('points', () => {
+  const pointsStore = usePointsStore();
+  return pointsStore.calculatePercentOfPointsProgress();
+}, { server: false, lazy: true });
+const {
+  data: {
+    value: {
+      user: { account }
+    }
   }
-})).data.value);
+} = useAuth();
+const bookmarked = ref(
+  (
+    await useFetch('/api/task/allBookmarks', {
+      method: 'POST',
+      body: {
+        userId: account.id
+      }
+    })
+  ).data.value
+);
 </script>
 
 <template>
@@ -22,7 +35,7 @@ const bookmarked = ref((await useFetch('/api/task/allBookmarks', {
         </p>
         <div class="flex">
           <div class="t-w-12 max-md:t-hidden">
-            <i class="pi-chart-pie pi" style="font-size:2.5rem" />
+            <i class="pi-chart-pie pi" style="font-size: 2.5rem" />
           </div>
           <div>
             <div>
@@ -78,9 +91,9 @@ const bookmarked = ref((await useFetch('/api/task/allBookmarks', {
         <p class="relative t-left-12">
           Honor breakdown
         </p>
-        <div class="flex ">
+        <div class="flex">
           <div class="t-w-12 max-md:t-hidden">
-            <i class="pi-chart-pie pi" style="font-size:2.5rem" />
+            <i class="pi-chart-pie pi" style="font-size: 2.5rem" />
           </div>
           <div>
             <div>
@@ -100,7 +113,20 @@ const bookmarked = ref((await useFetch('/api/task/allBookmarks', {
       </div>
       <div class="t-w-1/2">
         <p>Rank breakdown</p>
-        <Knob v-model="percents" disabled value-color="SlateGray" range-color="MediumTurquoise" value-template="{value}%" />
+        <div>
+          <div v-if="pending">
+            <Skeleton shape="circle" size="5rem" />
+          </div>
+          <div v-else>
+            <Knob
+              :model-value="percs"
+              disabled
+              value-color="SlateGray"
+              value-template="{value}%"
+              range-color="MediumTurquoise"
+            />
+          </div>
+        </div>
       </div>
     </div>
     <div class="flex relative mt-5 max-md:t-flex-col">
@@ -108,9 +134,9 @@ const bookmarked = ref((await useFetch('/api/task/allBookmarks', {
         <p class="relative t-left-12">
           Contributions
         </p>
-        <div class="flex ">
+        <div class="flex">
           <div class="t-w-12 max-md:t-hidden">
-            <i class="pi-chart-pie pi" style="font-size:2.5rem" />
+            <i class="pi-chart-pie pi" style="font-size: 2.5rem" />
           </div>
           <div>
             <div>
@@ -132,6 +158,4 @@ const bookmarked = ref((await useFetch('/api/task/allBookmarks', {
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
