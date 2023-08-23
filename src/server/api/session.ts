@@ -1,7 +1,6 @@
 export default eventHandler(async (event) => {
   BigInt.prototype.toJSON = function () { return this.toString(); };
   const body = await readBody(event);
-  console.log('im in session', body.email);
   const account = await event.context.prisma.user.findFirst({
     where: {
       email: body.email
@@ -20,6 +19,7 @@ export default eventHandler(async (event) => {
       }
     }
   });
+  // todo remember me do
   if (!account.levelId) {
     const createLvl = await event.context.prisma.user.update({
       where: { id: account.id },
