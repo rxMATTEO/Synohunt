@@ -69,7 +69,7 @@
       </div>
       <div class="lg:!t-px-52 lg:mx-10 t-px-3 max-w-full surface-ground">
         <div class="flex gap-5 max-md:t-flex-wrap">
-          <div class="shadow-6 w-full surface-card px-5 py-3 t-rounded-lg relative t-bottom-0 hover:t-bottom-3 transition-all transition-duration-200 !t-ease-in-out">
+          <div class="shadow-6 w-full surface-card px-5 py-3 t-rounded-lg relative up-hover">
             <p class="text-center vertical-align-top text-3xl font-bold">
               100
             </p>
@@ -77,7 +77,7 @@
               Challenges
             </p>
           </div>
-          <div class="shadow-6 w-full surface-card px-5 py-3 t-rounded-lg relative t-bottom-0 hover:t-bottom-3 transition-all transition-duration-200 !t-ease-in-out">
+          <div class="shadow-6 w-full surface-card px-5 py-3 t-rounded-lg relative up-hover">
             <p class="text-center vertical-align-top text-3xl font-bold">
               100
             </p>
@@ -85,7 +85,7 @@
               Challenges
             </p>
           </div>
-          <div class="shadow-6 w-full surface-card px-5 py-3 t-rounded-lg relative t-bottom-0 hover:t-bottom-3 transition-all transition-duration-200 !t-ease-in-out">
+          <div class="shadow-6 w-full surface-card px-5 py-3 t-rounded-lg relative up-hover">
             <p class="text-center vertical-align-top text-3xl font-bold">
               100
             </p>
@@ -93,7 +93,7 @@
               Challenges
             </p>
           </div>
-          <div class="shadow-6 w-full surface-card px-5 py-3 t-rounded-lg relative t-bottom-0 hover:t-bottom-3 transition-all transition-duration-200 !t-ease-in-out">
+          <div class="shadow-6 w-full surface-card px-5 py-3 t-rounded-lg relative up-hover">
             <p class="text-center vertical-align-top text-3xl font-bold">
               100
             </p>

@@ -7,7 +7,7 @@ const nuxtConfig: NuxtConfig = {
   devtools: { enabled: true, enableTimeline: true },
   buildModules: ['@nuxt/typescript-build'],
   css: [
-    'primeflex/primeflex.css',
+    // 'primeflex/primeflex.css', it's imported in _main tho
     'primeicons/primeicons.css'
   ],
   build: {

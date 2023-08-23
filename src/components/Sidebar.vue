@@ -81,7 +81,7 @@ const navLinks = ref([
         title: 'About',
         description: 'Check out our advantages',
         logoPath: 'a',
-        to: '/'
+        to: '/about'
       }
     ]
   }
