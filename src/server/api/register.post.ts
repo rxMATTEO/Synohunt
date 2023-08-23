@@ -8,9 +8,7 @@ export default eventHandler(async (event) => {
       email,
       name: username,
       id,
-      levelId: 16,
-      points: 30,
-      moneyId: 1,
+      points: 0,
       registrationDate: Date.now()
     }
   });

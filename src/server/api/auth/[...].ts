@@ -23,7 +23,6 @@ export default NuxtAuthHandler({
   // adapter: PrismaAdapter(prisma),
   callbacks: {
     session: async ({ session, token }) => {
-      console.log('session', session);
       const user = await getUser(session);
       session.user = user;
       return Promise.resolve(session);
@@ -44,7 +43,7 @@ export default NuxtAuthHandler({
         };
         const prisma = new PrismaClient();
         const user = await prisma.user.findFirst({
-          where: { name: 'rxrx' }
+          where: { name: '1' }
         });
         console.log(user);
         return user;
