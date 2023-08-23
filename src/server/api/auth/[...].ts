@@ -23,6 +23,7 @@ export default NuxtAuthHandler({
   // adapter: PrismaAdapter(prisma),
   callbacks: {
     session: async ({ session, token }) => {
+      console.log('session', session);
       const user = await getUser(session);
       session.user = user;
       return Promise.resolve(session);
@@ -37,13 +38,16 @@ export default NuxtAuthHandler({
     // @ts-expect-error You need to use .default here for it to work during SSR. May be fixed via Vite at some point
     CredentialsProvider.default({
       name: 'Credentials',
-      authorize (credentials: any) {
-        const user = {
-          email: 'test@email.com',
-          password: 'pass'
+      async authorize (credentials: any) {
+        const userCreds = {
+          username: 'a'
         };
         const prisma = new PrismaClient();
-        return { user: prisma.user.findFirst() };
+        const user = await prisma.user.findFirst({
+          where: { name: 'rxrx' }
+        });
+        console.log(user);
+        return user;
       }
     })
   ]

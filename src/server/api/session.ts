@@ -1,6 +1,7 @@
 export default eventHandler(async (event) => {
   BigInt.prototype.toJSON = function () { return this.toString(); };
   const body = await readBody(event);
+  console.log('im in session', body.email);
   const account = await event.context.prisma.user.findFirst({
     where: {
       email: body.email

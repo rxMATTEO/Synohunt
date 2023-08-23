@@ -8,6 +8,17 @@ definePageMeta({
   }
 });
 
+async function registerUser () {
+  return await $fetch('/api/register', {
+    method: 'POST',
+    body: {
+      username: 'rxrx',
+      password: '121',
+      email: '2@mail.ru'
+    }
+  });
+}
+
 </script>
 
 <template>
@@ -20,7 +31,7 @@ definePageMeta({
         <div class="text-900 text-3xl font-medium mb-3">
           Register
         </div>
-        <span class="text-600 font-medium line-height-3">Allready have an account?</span>
+        <span class="text-600 font-medium line-height-3">Already have an account?</span>
         <NuxtLink to="login" class="font-medium no-underline ml-2 text-blue-500 cursor-pointer">
           Login now!
         </NuxtLink>
@@ -37,7 +48,7 @@ definePageMeta({
         <InputText id="email" type="text" class="w-full mb-3" />
 
         <div class="mt-6">
-          <Button label="Register" icon="pi pi-user-plus" type="null" class="w-full" />
+          <Button label="Register" icon="pi pi-user-plus" type="null" class="w-full" @click="registerUser" />
         </div>
       </div>
     </div>
