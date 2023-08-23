@@ -9,7 +9,6 @@ definePageMeta({
 });
 
 async function registerUser () {
-  console.log(username, password, email);
   return await $fetch('/api/register', {
     method: 'POST',
     body: {

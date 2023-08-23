@@ -232,6 +232,9 @@
             </div>
           </div>
         </div>
+        <div class="t-py-10">
+          <NuxtLayout name="footer" />
+        </div>
       </div>
     </div>
   </div>
