@@ -59,7 +59,7 @@
               </div>
             </div>
             <div class="logo-holder absolute inline-block z-1 max-w-full overflow-hidden right-0">
-              <ModelLoader3D class="t-z-[99] relative right-0 top-20" />
+              <LazyModelLoader3D class="t-z-[99] relative right-0 top-20" />
             </div>
           </div>
         </div>
@@ -241,7 +241,6 @@
 </template>
 
 <script setup lang="ts">
-import ModelLoader3D from '@/components/ModelLoader3D.vue';
 definePageMeta({ auth: false });
 
 </script>

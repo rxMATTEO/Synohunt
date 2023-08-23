@@ -29,7 +29,7 @@ const lights = [
   {
     type: 'HemisphereLight',
     skyColor: 'purple',
-    groundColor: '#af00ff',
+    groundColor: '#20262e',
     position: { x: 1, y: 1, z: 1 },
     intensity: 0.2
   }
@@ -38,10 +38,14 @@ const lights = [
 const height = ref(0);
 const width = ref(0);
 
+const background = ref('');
 onMounted(() => {
+  setTimeout(() => {
+    const globalStyle = getComputedStyle(document.body);
+    background.value = globalStyle.getPropertyValue('--surface-b');
+  }, 200);
   width.value = window.innerWidth / 2;
-  height.value = window.innerHeight / 1;
-  console.log(height, width);
+  height.value = window.innerHeight / 2;
   window.addEventListener('mousemove', (e: MouseEvent) => {
     const { x, y } = e;
     lights[0].position.x = x;
@@ -59,8 +63,8 @@ function rotate () {
   <vue3d-loader
     :height="height"
     :width="width"
-    :camera-position="{ x: 10, y: 10, z: 200 }"
-    background-color="#20262e"
+    :camera-position="{ x: 10, y: 10, z: 100 }"
+    :background-color="background"
     :web-g-l-renderer-options="{ antialias: true, alpha: true }"
     file-path="/img/models/synohunt.obj"
     file-type="obj"
