@@ -63,9 +63,6 @@
             </div>
           </div>
         </div>
-
-        <!--      <img src="/img/biglogo.png" class="logo relative max-w-full overflow-hidden" alt="logo">-->
-        <!--        todo fix cant drag shit-->
       </div>
       <div class="lg:!t-px-52 lg:mx-10 t-px-3 max-w-full surface-ground">
         <div class="flex gap-5 max-md:t-flex-wrap">

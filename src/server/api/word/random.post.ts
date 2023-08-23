@@ -33,7 +33,7 @@ export default defineEventHandler(async (event) => {
 
   const task = await event.context.prisma.task.create({
     data: {
-      diffId: diffDb.id, // todo fix this
+      diffId: diffDb.id,
       langId: langFullIndex.id,
       description: context.examples[0].source,
       wordId: word.id,

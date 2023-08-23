@@ -214,10 +214,7 @@ function gotoMyChallenges () {
             </div>
           </Fieldset>
           <div class="mt-5">
-            <!--              todo redirect to my tasks-->
-            <!--                          <NuxtLink to="/dashboard">-->
             <Button label="Create challenge" type="null" class="mx-auto block" @click="createTask" />
-          <!--              </NuxtLink>-->
           </div>
         </div>
       </div>

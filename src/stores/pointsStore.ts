@@ -38,7 +38,7 @@ export const usePointsStore = defineStore('pointsStore', {
           userId: account.id,
           amount
         }
-      }); // todo add toast
+      });
       this.currentPoints = fetch.data.value.points;
       this.progress = await this.calculatePercentOfPointsProgress();
       return fetch.data;

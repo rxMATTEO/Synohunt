@@ -8,7 +8,6 @@ import ChallengeBox from '@/components/ChallengeBox.vue';
   <div>
     <NuxtLayout name="header-n-sidebar">
       <div class="lg:px-8 lg:mx-8 px-3">
-        <!--        todo remove this to slots-->
         <ChallengeBox />
         <div class="mt-5">
           <div class="flex t-flex-col md:flex-row align-items-stretch">

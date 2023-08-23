@@ -28,7 +28,6 @@ function onNavigate () {
   <div class="flex">
     <Notification />
     <Sidebar :is-expanded="expanded" :toggle="toggleMenu" @navigate="onNavigate" />
-    <!--      todo add suspense sceletone or some load shit cuz it's loading too long-->
     <div class="w-full flex-1">
       <div class="t-ml-0 h-4rem">
         <Header :expanded="toggleMenu" />

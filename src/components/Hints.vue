@@ -40,7 +40,7 @@ function onHintClick (hint: Hint) {
         description: `You buyed this shit for ${hint.cost}`
       });
     },
-    reject: () => {} // todo fixed sidebar remember sidebar state, hide when navigate store create mb
+    reject: () => {}
   });
 }
 const items = ref<Hint[]>([
