@@ -348,7 +348,6 @@
 
 <script setup lang="ts">
 definePageMeta({ auth: false });
-console.log(await useFetch('/api/jwk', { method: 'POST' }), 'result');
 </script>
 
 <style scoped lang="sass">

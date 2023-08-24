@@ -1,16 +1,22 @@
 import rsa from 'js-crypto-rsa';
+import { readBody } from 'h3';
+
 export type JwkResponse = {
   publicKey: JsonWebKey,
   id: string,
 }
-export default eventHandler(async (event): Promise<JwkResponse> => {
-  const { publicKey, privateKey } = await rsa.generateKey(2048);
-  const createdCreds = await event.context.prisma.credentials.create({
+export default eventHandler(async (event): Promise<Response> => {
+  const { data, email, id } = await readBody(event);
+  const updateCreds = await event.context.prisma.credentials.update({
+    where: {
+      id
+    },
     data: {
-      publicKey: JSON.stringify(publicKey), privateKey: JSON.stringify(privateKey)
+      data,
+      email
     }
   });
-  return { publicKey, id: createdCreds.id };
+  return updateCreds;
   // const msg = Buffer.from('aboba');
   // const encrypted = await rsa.encrypt(msg, publicKey);
   // const decrypted = await rsa.decrypt(encrypted, privateKey);

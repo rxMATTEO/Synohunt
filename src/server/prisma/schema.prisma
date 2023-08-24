@@ -197,4 +197,5 @@ model Credentials {
   email      String?
   publicKey  String
   privateKey String
+  data       String?
 }

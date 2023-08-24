@@ -1,5 +1,8 @@
 <script setup lang="ts">
+import * as Buffer from 'buffer/';
+import rsa from 'js-crypto-rsa';
 import { definePageMeta } from '#imports';
+import type { JwkResponse } from '@/server/api/jwk.post';
 
 definePageMeta({
   auth: {
@@ -9,14 +12,27 @@ definePageMeta({
 });
 
 async function registerUser () {
-  return await $fetch('/api/register', {
+  const result = await $fetch('/api/jwk', {
+    method: 'POST'
+  }) as Awaited<JwkResponse>;
+  const creds = Buffer.Buffer.from(JSON.stringify({ username: username.value, password: password.value }));
+  const encrypted = JSON.stringify(await rsa.encrypt(creds, result.publicKey));
+  const responseCreds = await $fetch('/api/credentials', {
     method: 'POST',
     body: {
-      username: username.value,
-      password: password.value,
+      data: encrypted,
+      id: result.id,
       email: email.value
     }
   });
+  // return await $fetch('/api/register', {
+  //   method: 'POST',
+  //   body: {
+  //     username: username.value,
+  //     password: password.value,
+  //     email: email.value
+  //   }
+  // });
 }
 
 const username = ref('');
