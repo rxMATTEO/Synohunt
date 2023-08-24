@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import * as Buffer from 'buffer/';
 import rsa from 'js-crypto-rsa';
+import { useField, useForm } from 'vee-validate';
 import { definePageMeta } from '#imports';
 import type { JwkResponse } from '@/server/api/jwk.post';
 
@@ -11,7 +12,29 @@ definePageMeta({
   }
 });
 
-async function registerUser () {
+const mediumRegex = /^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})	/;
+const strongRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/;
+
+const { handleSubmit, resetForm } = useForm();
+const { value: password, errorMessage } = useField('value', validateField);
+
+function validateField (value) {
+  console.log(value);
+  if (value.match(mediumRegex) || value.match(strongRegex)) {
+    return true;
+  }
+  return 'Password is required.';
+}
+
+const onSubmit = handleSubmit((values) => {
+  if (values.value && values.value.length > 0) {
+    toast.add({ severity: 'info', summary: 'Form Submitted', detail: values.value, life: 3000 });
+    resetForm();
+  }
+});
+
+const registerUser = handleSubmit(async (values) => {
+  if (!values.value && !values.value.length > 0) { return false; }
   const result = await $fetch('/api/jwk', {
     method: 'POST'
   }) as Awaited<JwkResponse>;
@@ -33,10 +56,9 @@ async function registerUser () {
   //     email: email.value
   //   }
   // });
-}
+});
 
 const username = ref('');
-const password = ref('');
 const email = ref('');
 
 </script>
@@ -58,18 +80,52 @@ const email = ref('');
       </div>
 
       <div>
-        <label for="username" class="block text-900 font-medium mb-2">Username</label>
-        <InputText id="username" v-model="username" type="text" class="w-full mb-3" />
+        <form @submit="registerUser">
+          <label for="username" class="block text-900 font-medium mb-2">Username</label>
+          <InputText id="username" v-model="username" type="text" class="w-full mb-3" />
 
-        <label for="password" class="block text-900 font-medium mb-2">Password</label>
-        <InputText id="password" v-model="password" type="password" class="w-full mb-3" />
+          <label for="value" class="block text-900 font-medium mb-2">Password</label>
+          <Password
+            id="value"
+            v-model="password"
+            type="text"
+            :class="{ 'p-invalid': errorMessage }"
+            aria-describedby="text-error"
+            toggle-mask
+            class="w-full mb-3"
+            :pt="{
+              root: {
+                class: 'w-full',
+              }
+            }"
+            input-class="w-full"
+          >
+            <template #header>
+              <h6>Pick a password</h6>
+            </template>
 
-        <label for="email" class="block text-900 font-medium mb-2">Email</label>
-        <InputText id="email" v-model="email" type="text" class="w-full mb-3" />
+            <template #footer>
+              <Divider />
+              <p class="mt-2">
+                Suggestions
+              </p>
+              <ul class="pl-2 ml-2 mt-0" style="line-height: 1.5">
+                <li>At least one lowercase</li>
+                <li>At least one uppercase</li>
+                <li>At least one numeric</li>
+                <li>Minimum 8 characters</li>
+              </ul>
+            </template>
+          </Password>
+          <small id="text-error" class="p-error">{{ errorMessage || '&nbsp;' }}</small>
 
-        <div class="mt-6">
-          <Button label="Register" icon="pi pi-user-plus" type="null" class="w-full" @click="registerUser" />
-        </div>
+          <label for="email" class="block text-900 font-medium mb-2">Email</label>
+          <InputText id="email" v-model="email" type="text" class="w-full mb-3" />
+
+          <div class="mt-6 prevent-tw">
+            <Button label="Register" icon="pi pi-user-plus" type="submit" class="w-full" />
+          </div>
+        </form>
       </div>
     </div>
   </div>

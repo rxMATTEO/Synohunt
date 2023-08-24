@@ -30,6 +30,7 @@ import ConfirmDialog from 'primevue/confirmdialog';
 import Fieldset from 'primevue/fieldset';
 import ConfirmationService from 'primevue/confirmationservice';
 import Skeleton from 'primevue/skeleton';
+import Password from 'primevue/password';
 import { defineNuxtPlugin } from '#imports';
 export default defineNuxtPlugin({
   parallel: true,
@@ -78,5 +79,6 @@ export default defineNuxtPlugin({
     nuxtApp.vueApp.component('ConfirmDialog', ConfirmDialog);
     nuxtApp.vueApp.component('Fieldset', Fieldset);
     nuxtApp.vueApp.component('Skeleton', Skeleton);
+    nuxtApp.vueApp.component('Password', Password);
   }
 });
