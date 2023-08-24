@@ -15,7 +15,7 @@ async function registerUser () {
   const result = await $fetch('/api/jwk', {
     method: 'POST'
   }) as Awaited<JwkResponse>;
-  const creds = Buffer.Buffer.from(JSON.stringify({ username: username.value, password: password.value }));
+  const creds = Buffer.Buffer.from(JSON.stringify({ email: email.value, password: password.value }));
   const encrypted = JSON.stringify(await rsa.encrypt(creds, result.publicKey));
   const responseCreds = await $fetch('/api/credentials', {
     method: 'POST',

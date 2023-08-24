@@ -12,14 +12,12 @@ export default eventHandler(async (event): Promise<Response> => {
       id
     },
     data: {
-      data: JSON.stringify(data),
+      data,
       email
+    },
+    select: {
+      publicKey: true // todo look at this and think what i need mb status
     }
   });
   return updateCreds;
-  // const msg = Buffer.from('aboba');
-  // const encrypted = await rsa.encrypt(msg, publicKey);
-  // const decrypted = await rsa.decrypt(encrypted, privateKey);
-  // console.log(Buffer.from(decrypted.buffer).toString(), 'dec');
-  // return decrypted;
 });
