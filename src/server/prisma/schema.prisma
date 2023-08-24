@@ -191,3 +191,10 @@ model VerificationToken {
 
   @@unique([identifier, token])
 }
+
+model Credentials {
+  id         String  @id @default(uuid())
+  email      String?
+  publicKey  String
+  privateKey String
+}

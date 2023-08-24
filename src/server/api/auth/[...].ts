@@ -38,14 +38,11 @@ export default NuxtAuthHandler({
     CredentialsProvider.default({
       name: 'Credentials',
       async authorize (credentials: any) {
-        const userCreds = {
-          username: 'a'
-        };
+        const { email, password } = credentials;
         const prisma = new PrismaClient();
         const user = await prisma.user.findFirst({
-          where: { name: '1' }
+          where: { email }
         });
-        console.log(user);
         return user;
       }
     })

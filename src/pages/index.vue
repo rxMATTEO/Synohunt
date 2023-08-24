@@ -2,7 +2,9 @@
   <div class="surface-ground">
     <div class="h-screen t-max-h-screen">
       <div class="text-color py-3 absolute right-0 left-0">
-        <div class="flex t-place-content-between t-items-center lg:!t-px-52 lg:mx-10 gap-3">
+        <div
+          class="flex t-place-content-between t-items-center lg:!t-px-52 lg:mx-10 gap-3"
+        >
           <div>
             <NuxtLink to="/" class="font-bold t-tracking-wider">
               SynoHunt
@@ -10,28 +12,48 @@
           </div>
           <div class="md:flex">
             <div>
-              <NuxtLink to="/dashboard" class="mr-3 hover:text-primary transition-colors t-duration-300">
+              <NuxtLink
+                to="/dashboard"
+                class="mr-3 hover:text-primary transition-colors t-duration-300"
+              >
                 Dashboard
               </NuxtLink>
-              <NuxtLink to="/about" class="mr-3 hover:text-primary transition-colors t-duration-300">
+              <NuxtLink
+                to="/about"
+                class="mr-3 hover:text-primary transition-colors t-duration-300"
+              >
                 About us
               </NuxtLink>
             </div>
             <div>
-              <NuxtLink to="/" class="mr-3 hover:text-primary transition-colors t-duration-300">
+              <NuxtLink
+                to="/"
+                class="mr-3 hover:text-primary transition-colors t-duration-300"
+              >
                 Services
               </NuxtLink>
-              <NuxtLink to="/" class="mr-3 hover:text-primary transition-colors t-duration-300">
+              <NuxtLink
+                to="/"
+                class="mr-3 hover:text-primary transition-colors t-duration-300"
+              >
                 Blog
               </NuxtLink>
             </div>
           </div>
           <div class="flex max-md:t-flex-col">
             <NuxtLink to="/login" class="block md:mr-3">
-              <Button class="text-white t-border-0 bg-blue-400 w-full" label="Login" :type="null" />
+              <Button
+                class="text-white t-border-0 bg-blue-400 w-full"
+                label="Login"
+                :type="null"
+              />
             </NuxtLink>
             <NuxtLink to="/register" class="block">
-              <Button class="text-white max-md:t-mt-2 t-border-0 bg-indigo-500" label="Register" :type="null" />
+              <Button
+                class="text-white max-md:t-mt-2 t-border-0 bg-indigo-500"
+                label="Register"
+                :type="null"
+              />
             </NuxtLink>
           </div>
         </div>
@@ -39,26 +61,44 @@
       <div class="lg:!t-px-52 lg:mx-10 t-px-3 max-w-full h-full">
         <div class="h-full">
           <div class="flex h-full align-items-center">
-            <div class="md:t-w-1/2 relative z-1 ">
-              <div class="main z-1 flex flex-column align-items-start justify-content-center">
+            <div class="md:t-w-1/2 relative z-1">
+              <div
+                class="main z-1 flex flex-column align-items-start justify-content-center"
+              >
                 <p class="t-uppercase t-tracking-wider text-indigo-300">
                   somelabel!
                 </p>
-                <p class="welcome-text text-2xl md:text-6xl text-left font-bold capitalize mt-3">
-                  Unleash your word wizardry and conquer synonyms with <span class="gradient-primary text">Synohunt</span>
+                <p
+                  class="welcome-text text-2xl md:text-6xl text-left font-bold capitalize mt-3"
+                >
+                  Unleash your word wizardry and conquer synonyms with
+                  <span class="gradient-primary text">Synohunt</span>
                 </p>
                 <div class="mt-5">
                   <p>
-                    Get ready to embark on a thrilling journey through the world of synonyms and unleash your inner linguist, and dive into a realm of words and wonders with SynoHunt.
+                    Get ready to embark on a thrilling journey through the world
+                    of synonyms and unleash your inner linguist, and dive into a
+                    realm of words and wonders with SynoHunt.
                   </p>
                 </div>
                 <div class="mt-5">
-                  <Button label="Play Now" class="mr-3 gradient-indigo t-border-transparent text-white" @click="() => navigateTo('/dashboard')" />
-                  <Button label="Learn More" class="t-border-0" :type="null" outlined />
+                  <Button
+                    label="Play Now"
+                    class="mr-3 gradient-indigo t-border-transparent text-white"
+                    @click="() => navigateTo('/dashboard')"
+                  />
+                  <Button
+                    label="Learn More"
+                    class="t-border-0"
+                    :type="null"
+                    outlined
+                  />
                 </div>
               </div>
             </div>
-            <div class="logo-holder absolute inline-block z-1 max-w-full overflow-hidden right-0">
+            <div
+              class="logo-holder absolute inline-block z-1 max-w-full overflow-hidden right-0"
+            >
               <LazyModelLoader3D class="t-z-[99] relative right-0 top-20" />
             </div>
           </div>
@@ -66,7 +106,9 @@
       </div>
       <div class="lg:!t-px-52 lg:mx-10 t-px-3 max-w-full surface-ground">
         <div class="flex gap-5 max-md:t-flex-wrap">
-          <div class="shadow-6 w-full surface-card px-5 py-3 t-rounded-lg relative up-hover">
+          <div
+            class="shadow-6 w-full surface-card px-5 py-3 t-rounded-lg relative up-hover"
+          >
             <p class="text-center vertical-align-top text-3xl font-bold">
               100
             </p>
@@ -74,7 +116,9 @@
               Challenges
             </p>
           </div>
-          <div class="shadow-6 w-full surface-card px-5 py-3 t-rounded-lg relative up-hover">
+          <div
+            class="shadow-6 w-full surface-card px-5 py-3 t-rounded-lg relative up-hover"
+          >
             <p class="text-center vertical-align-top text-3xl font-bold">
               100
             </p>
@@ -82,7 +126,9 @@
               Challenges
             </p>
           </div>
-          <div class="shadow-6 w-full surface-card px-5 py-3 t-rounded-lg relative up-hover">
+          <div
+            class="shadow-6 w-full surface-card px-5 py-3 t-rounded-lg relative up-hover"
+          >
             <p class="text-center vertical-align-top text-3xl font-bold">
               100
             </p>
@@ -90,7 +136,9 @@
               Challenges
             </p>
           </div>
-          <div class="shadow-6 w-full surface-card px-5 py-3 t-rounded-lg relative up-hover">
+          <div
+            class="shadow-6 w-full surface-card px-5 py-3 t-rounded-lg relative up-hover"
+          >
             <p class="text-center vertical-align-top text-3xl font-bold">
               100
             </p>
@@ -100,43 +148,72 @@
           </div>
         </div>
 
-        <div class="flex gap-5 t-mt-40 t-place-content-between flex-column md:flex-row">
+        <div
+          class="flex gap-5 t-mt-40 t-place-content-between flex-column md:flex-row"
+        >
           <div class="md:t-w-1/2">
-            <img class="block t-max-w-[66%] max-h-full" src="/img/biglogo.png">
+            <img
+              class="block t-max-w-[66%] max-h-full"
+              src="/img/biglogo.png"
+            >
           </div>
           <div class="md:t-w-1/2">
             <p class="uppercase text-primary font-bold">
               Explore latest vision!
             </p>
             <p class="capitalize text-5xl mt-3 font-bold">
-              <span class="gradient-primary text">Launch your</span> brand to new heights.
+              <span class="gradient-primary text">Launch your</span> brand to
+              new heights.
             </p>
             <div class="mt-5">
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur autem consectetur harum incidunt libero quis voluptates voluptatibus? Alias, aperiam blanditiis deserunt dolores, ducimus eum natus, optio rem repellat vel voluptatem.
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Aspernatur autem consectetur harum incidunt libero quis
+                voluptates voluptatibus? Alias, aperiam blanditiis deserunt
+                dolores, ducimus eum natus, optio rem repellat vel voluptatem.
               </p>
               <br>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur autem consectetur harum incidunt libero quis voluptates voluptatibus? Alias, aperiam blanditiis deserunt dolores, ducimus eum natus, optio rem repellat vel voluptatem.
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Aspernatur autem consectetur harum incidunt libero quis
+                voluptates voluptatibus? Alias, aperiam blanditiis deserunt
+                dolores, ducimus eum natus, optio rem repellat vel voluptatem.
               </p>
               <div class="mt-5">
-                <Button label="Upcoming sales" class="animated-gradient-rainbow t-border-0 text-white" :type="null" />
+                <Button
+                  label="Upcoming sales"
+                  class="animated-gradient-rainbow t-border-0 text-white"
+                  :type="null"
+                />
               </div>
             </div>
           </div>
         </div>
-        <div class="flex sm:justify-content-between flex-column align-items-center py-6">
-          <span class="block sm:w-5 font-bold text-center uppercase text-primary">Our challenge!</span>
-          <span class="block sm:w-5 sm:text-6xl text-4xl font-bold text-center">SynoHunt: The <span class="gradient-primary">Ultimate</span> Word Challenge!</span>
-          <span class="block sm:w-5 text-lg mt-5 text-center">Get ready to embark on a thrilling journey through the world of synonyms and unleash your inner linguist, and dive into a realm of words and wonders with SynoHunt.</span>
+        <div
+          class="flex sm:justify-content-between flex-column align-items-center py-6"
+        >
+          <span
+            class="block sm:w-5 font-bold text-center uppercase text-primary"
+          >Our challenge!</span>
+          <span class="block sm:w-5 sm:text-6xl text-4xl font-bold text-center">SynoHunt: The <span class="gradient-primary">Ultimate</span> Word
+            Challenge!</span>
+          <span class="block sm:w-5 text-lg mt-5 text-center">Get ready to embark on a thrilling journey through the world of
+            synonyms and unleash your inner linguist, and dive into a realm of
+            words and wonders with SynoHunt.</span>
         </div>
 
-        <div class="col-12 md:col-12 lg:col-12 p-0 lg:pr-5 lg:pb-5 mt-2 lg:mt-0">
-          <div
-            style="padding: 2px; border-radius: 10px"
-          >
-            <div class="p-3 surface-card h-full flex align-items-center" style="border-radius: 8px">
-              <div class="flex align-items-center justify-content-center bg-yellow-200" style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
+        <div
+          class="col-12 md:col-12 lg:col-12 p-0 lg:pr-5 lg:pb-5 mt-2 lg:mt-0"
+        >
+          <div style="padding: 2px; border-radius: 10px">
+            <div
+              class="p-3 surface-card h-full flex align-items-center"
+              style="border-radius: 8px"
+            >
+              <div
+                class="flex align-items-center justify-content-center bg-yellow-200"
+                style="width: 3.5rem; height: 3.5rem; border-radius: 10px"
+              >
                 <i class="pi pi-fw pi-users text-2xl" />
               </div>
               <div class="flex-column ml-4">
@@ -146,12 +223,18 @@
             </div>
           </div>
         </div>
-        <div class="col-12 md:col-12 lg:col-12 p-0 lg:pr-5 lg:pb-5 mt-2 lg:mt-0">
-          <div
-            style="padding: 2px; border-radius: 10px"
-          >
-            <div class="p-3 surface-card h-full flex align-items-center" style="border-radius: 8px">
-              <div class="flex align-items-center justify-content-center bg-yellow-200" style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
+        <div
+          class="col-12 md:col-12 lg:col-12 p-0 lg:pr-5 lg:pb-5 mt-2 lg:mt-0"
+        >
+          <div style="padding: 2px; border-radius: 10px">
+            <div
+              class="p-3 surface-card h-full flex align-items-center"
+              style="border-radius: 8px"
+            >
+              <div
+                class="flex align-items-center justify-content-center bg-yellow-200"
+                style="width: 3.5rem; height: 3.5rem; border-radius: 10px"
+              >
                 <i class="pi pi-fw pi-users text-2xl" />
               </div>
               <div class="flex-column ml-4">
@@ -162,12 +245,18 @@
           </div>
         </div>
 
-        <div class="col-12 md:col-12 lg:col-12 p-0 lg:pr-5 lg:pb-5 mt-2 lg:mt-0">
-          <div
-            style="padding: 2px; border-radius: 10px"
-          >
-            <div class="p-3 surface-card h-full flex align-items-center" style="border-radius: 8px">
-              <div class="flex align-items-center justify-content-center bg-yellow-200" style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
+        <div
+          class="col-12 md:col-12 lg:col-12 p-0 lg:pr-5 lg:pb-5 mt-2 lg:mt-0"
+        >
+          <div style="padding: 2px; border-radius: 10px">
+            <div
+              class="p-3 surface-card h-full flex align-items-center"
+              style="border-radius: 8px"
+            >
+              <div
+                class="flex align-items-center justify-content-center bg-yellow-200"
+                style="width: 3.5rem; height: 3.5rem; border-radius: 10px"
+              >
                 <i class="pi pi-fw pi-users text-2xl" />
               </div>
               <div class="flex-column ml-4">
@@ -182,7 +271,11 @@
           <div class="inline-block sm:w-6 sm:pr-1">
             <div class="w-full surface-card border-round-3xl pb-1">
               <div class="img overflow-hidden h-16rem relative">
-                <img class="aspect-1/1 block w-full border-round-3xl absolute" src="/img/words.png" alt="words">
+                <img
+                  class="aspect-1/1 block w-full border-round-3xl absolute"
+                  src="/img/words.png"
+                  alt="words"
+                >
               </div>
               <div class="desc px-3">
                 <h1 class="text-900 text-4xl font-bold">
@@ -195,7 +288,11 @@
           <div class="inline-block sm:w-6 sm:pl-1 mt-3 sm:mt-0">
             <div class="w-full surface-card border-round-3xl pb-1">
               <div class="img overflow-hidden h-16rem relative">
-                <img class="aspect-1/1 block w-full border-round-3xl absolute" src="/img/words.png" alt="words">
+                <img
+                  class="aspect-1/1 block w-full border-round-3xl absolute"
+                  src="/img/words.png"
+                  alt="words"
+                >
               </div>
               <div class="desc px-3">
                 <h1 class="text-900 text-4xl font-bold">
@@ -216,19 +313,28 @@
               <h1 class="text-900 text-4xl font-bold">
                 How do i start playing?
               </h1>
-              <p>Get started by clicking the “Play” button, choose your difficulty level, and you’re ready to take on SynoHunt.</p>
+              <p>
+                Get started by clicking the “Play” button, choose your
+                difficulty level, and you’re ready to take on SynoHunt.
+              </p>
             </div>
             <div class="sm:px-5 border-round-3xl mt-2 sm:mt-0">
               <h1 class="text-900 text-4xl font-bold">
                 How do i start playing?
               </h1>
-              <p>Get started by clicking the “Play” button, choose your difficulty level, and you’re ready to take on SynoHunt.</p>
+              <p>
+                Get started by clicking the “Play” button, choose your
+                difficulty level, and you’re ready to take on SynoHunt.
+              </p>
             </div>
             <div class="sm:pl-5 border-round-3xl mt-2 sm:mt-0">
               <h1 class="text-900 text-4xl font-bold">
                 How do i start playing?
               </h1>
-              <p>Get started by clicking the “Play” button, choose your difficulty level, and you’re ready to take on SynoHunt.</p>
+              <p>
+                Get started by clicking the “Play” button, choose your
+                difficulty level, and you’re ready to take on SynoHunt.
+              </p>
             </div>
           </div>
         </div>
@@ -242,7 +348,7 @@
 
 <script setup lang="ts">
 definePageMeta({ auth: false });
-
+console.log(await useFetch('/api/jwk', { method: 'POST' }), 'result');
 </script>
 
 <style scoped lang="sass">
