@@ -7,6 +7,14 @@ export type JwkResponse = {
 }
 export default eventHandler(async (event): Promise<Response> => {
   const { data, email, id } = await readBody(event);
+
+  const postedUser = await $fetch('/api/register', {
+    method: 'POST',
+    body: {
+      email
+    }
+  });
+
   const updateCreds = await event.context.prisma.credentials.update({
     where: {
       id

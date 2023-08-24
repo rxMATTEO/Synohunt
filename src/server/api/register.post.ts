@@ -1,7 +1,8 @@
 import { readBody } from 'h3';
 import { v4 as uuidv4 } from 'uuid';
 export default eventHandler(async (event) => {
-  const { username, password, email } = await readBody(event);
+  BigInt.prototype.toJSON = function () { return this.toString(); };
+  const { username, email } = await readBody(event);
   const id = uuidv4();
   const account = await event.context.prisma.user.create({
     data: {

@@ -40,21 +40,13 @@ async function authViaProvider (
     } else {
       const buffer = Buffer.Buffer.from(JSON.stringify({ email: email.value, password: password.value }));
       const parsedPublicKey = JSON.parse(publicKey);
-      console.log(parsedPublicKey);
       const encrypted = JSON.stringify(await rsa.encrypt(buffer, parsedPublicKey));
-      const verified = await $fetch('/api/verify', {
-        method: 'POST',
-        body: {
-          email: email.value,
-          creds: encrypted
-        }
-      });
 
-      if (verified) {
-        console.log('verified');
-      } else {
-        console.log('hell nah bruh');
-      }
+      await signIn(provider, {
+        callbackUrl: import.meta.env.VITE_AUTH_ORIGIN + '/dashboard',
+        email: email.value,
+        creds: encrypted
+      });
     }
   } else {
     await signIn(provider, {

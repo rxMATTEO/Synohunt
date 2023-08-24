@@ -11,9 +11,4 @@ export default eventHandler(async (event): Promise<JwkResponse> => {
     }
   });
   return { publicKey, id: createdCreds.id };
-  // const msg = Buffer.from('aboba');
-  // const encrypted = await rsa.encrypt(msg, publicKey);
-  // const decrypted = await rsa.decrypt(encrypted, privateKey);
-  // console.log(Buffer.from(decrypted.buffer).toString(), 'dec');
-  // return decrypted;
 });

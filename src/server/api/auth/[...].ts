@@ -38,12 +38,26 @@ export default NuxtAuthHandler({
     CredentialsProvider.default({
       name: 'Credentials',
       async authorize (credentials: any) {
-        const { email, password } = credentials;
-        const prisma = new PrismaClient();
-        const user = await prisma.user.findFirst({
-          where: { email }
+        const { email, creds } = credentials;
+        const verified = await $fetch('/api/verify', {
+          method: 'POST',
+          body: {
+            email,
+            creds
+          }
         });
-        return user;
+        if (verified.isCredentialsValid) {
+          const prisma = new PrismaClient();
+          const user = await prisma.user.update({
+            where: { email },
+            data: {
+              name: verified.username
+            }
+          });
+          return user;
+        } else {
+          return null;
+        }
       }
     })
   ]
