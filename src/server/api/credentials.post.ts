@@ -12,7 +12,7 @@ export default eventHandler(async (event): Promise<Response> => {
       id
     },
     data: {
-      data,
+      data: JSON.stringify(data),
       email
     }
   });

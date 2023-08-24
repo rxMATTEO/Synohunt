@@ -15,10 +15,9 @@ export default eventHandler(async (event): Promise<Response> => {
   }) as Credentials;
   const privateKey = JSON.parse(credentials.privateKey);
   const data = JSON.parse(credentials.data);
-  console.log(privateKey, data);
-  const decrypted = await rsa.decrypt(data, privateKey);
-  console.log(decrypted);
-  return null;
+  const uintArray = Uint8Array.from(Object.values(data));
+  const decrypted = await rsa.decrypt(uintArray, privateKey);
+  return decrypted;
   // const msg = Buffer.from('aboba');
   // const encrypted = await rsa.encrypt(msg, publicKey);
   // const decrypted = await rsa.decrypt(encrypted, privateKey);
