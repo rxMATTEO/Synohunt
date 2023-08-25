@@ -18,3 +18,4 @@ export default function validateWeakness (
   }
   return true;
 }
+export const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;

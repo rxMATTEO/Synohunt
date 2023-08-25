@@ -4,7 +4,7 @@ import rsa from 'js-crypto-rsa';
 import { useField, useForm } from 'vee-validate';
 import { definePageMeta } from '#imports';
 import type { JwkResponse } from '@/server/api/jwk.post';
-import validateWeakness from '@/composables/validator';
+import validateWeakness, { emailRegex } from '@/composables/validator';
 
 definePageMeta({
   auth: {
@@ -17,7 +17,6 @@ const router = useRouter();
 const mediumRegex =
   /^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})/;
 const strongRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/;
-const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
 const { handleSubmit, resetForm } = useForm();
 const { value: password, errorMessage } = useField('password', value =>

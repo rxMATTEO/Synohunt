@@ -3,7 +3,9 @@ import { ref } from 'vue';
 import { OAuthProviderType } from 'next-auth/providers/oauth-types';
 import Buffer from 'buffer/';
 import rsa from 'js-crypto-rsa';
+import { useField, useForm } from 'vee-validate';
 import type { PublicKeyResponse } from '@/server/api/publicKey.post';
+import validateWeakness, { emailRegex } from '@/composables/validator';
 
 const { signIn, status, data } = useAuth();
 
@@ -16,8 +18,15 @@ definePageMeta({
 
 const isRememberingMe = ref(false);
 
-const email = ref('');
-const password = ref('');
+const { handleSubmit, resetForm } = useForm();
+const { value: email, errorMessage: errorMailMessage } = useField(
+  'email1',
+  value => validateWeakness(value, 'Email')
+);
+const { value: password, errorMessage: errorPasswordMessage } = useField(
+  'password1',
+  value => validateWeakness(value, 'Password')
+);
 
 type Credentials = {
   email: string;
@@ -54,6 +63,10 @@ async function authViaProvider (
     });
   }
 }
+
+const a = handleSubmit((e, params) => {
+  params.evt.callback();
+});
 </script>
 
 <template>
@@ -93,7 +106,7 @@ async function authViaProvider (
       </Divider>
 
       <form
-        @submit.prevent="authViaProvider('credentials', { email, password })"
+        @submit.prevent="a({callback: () => authViaProvider('credentials', { email, password })})"
       >
         <div>
           <label
@@ -103,10 +116,13 @@ async function authViaProvider (
           <InputText
             id="email1"
             v-model="email"
-            required
             type="text"
-            class="w-full mb-3"
+            :class="{ 'p-invalid': errorMailMessage }"
+            class="w-full"
           />
+          <small id="text-error" class="p-error">{{
+            errorMailMessage || "&nbsp;"
+          }}</small>
 
           <label
             for="password1"
@@ -115,10 +131,14 @@ async function authViaProvider (
           <InputText
             id="password1"
             v-model="password"
-            required
             type="password"
-            class="w-full mb-3"
+            class="w-full"
+            :class="{ 'p-invalid': errorPasswordMessage }"
+            aria-describedby="text-error"
           />
+          <small id="text-error" class="p-error">{{
+            errorPasswordMessage || "&nbsp;"
+          }}</small>
 
           <div class="flex align-items-center justify-content-between mb-6">
             <div class="flex align-items-center">
@@ -135,12 +155,14 @@ async function authViaProvider (
             <!--            >Forgot password?</a>-->
           </div>
 
-          <Button
-            label="Sign In"
-            icon="pi pi-user"
-            type="null"
-            class="w-full"
-          />
+          <div class="prevent-tw">
+            <Button
+              label="Sign In"
+              icon="pi pi-user"
+              type="submit"
+              class="w-full"
+            />
+          </div>
         </div>
       </form>
     </div>
