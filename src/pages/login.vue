@@ -18,7 +18,7 @@ definePageMeta({
 
 const isRememberingMe = ref(false);
 
-const { handleSubmit, resetForm } = useForm();
+const { setErrors, handleSubmit, resetForm } = useForm();
 const { value: email, errorMessage: errorMailMessage } = useField(
   'email1',
   value => validateWeakness(value, 'Email')
@@ -36,6 +36,7 @@ async function authViaProvider (
   provider: OAuthProviderType,
   extraOptions?: Credentials
 ) {
+  isLoading.value = true;
   if (provider === 'credentials') {
     const { publicKey }: PublicKeyResponse = await $fetch('/api/publicKey', {
       method: 'POST',
@@ -45,7 +46,7 @@ async function authViaProvider (
     });
     if (!publicKey) {
       // here like errors or validate :D
-      console.log('no such email');
+      setErrors({ email1: 'Invalid email/password', password1: 'Invalid email/password' });
     } else {
       const buffer = Buffer.Buffer.from(JSON.stringify({ email: email.value, password: password.value }));
       const parsedPublicKey = JSON.parse(publicKey);
@@ -62,11 +63,13 @@ async function authViaProvider (
       callbackUrl: import.meta.env.VITE_AUTH_ORIGIN + 'dashboard'
     });
   }
+  isLoading.value = false;
 }
 
 const a = handleSubmit((e, params) => {
   params.evt.callback();
 });
+const isLoading = ref(false);
 </script>
 
 <template>
@@ -159,6 +162,7 @@ const a = handleSubmit((e, params) => {
             <Button
               label="Sign In"
               icon="pi pi-user"
+              :loading="isLoading"
               type="submit"
               class="w-full"
             />
