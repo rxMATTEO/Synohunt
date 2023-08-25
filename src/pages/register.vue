@@ -68,7 +68,8 @@ const registerUser = handleSubmit(async ({ email, password, username }) => {
 
 <template>
   <div class="t-h-screen flex justify-content-center align-items-center">
-    <div class="surface-card p-4 shadow-2 border-round w-full lg:w-4">
+    <div class="surface-card p-4 shadow-2 border-round w-full lg:w-4 relative">
+      <CircleLoader />
       <div class="text-center mb-5">
         <div class="t-h-32 relative top-0 flex justify-content-center">
           <img
