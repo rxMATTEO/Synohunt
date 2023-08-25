@@ -64,12 +64,14 @@ const registerUser = handleSubmit(async ({ email, password, username }) => {
     }
   });
 });
+const isLoading = ref(false);
+setTimeout(() => { isLoading.value = true; }, 5000);
 </script>
 
 <template>
   <div class="t-h-screen flex justify-content-center align-items-center">
     <div class="surface-card p-4 shadow-2 border-round w-full lg:w-4 relative">
-      <CircleLoader />
+      <CircleLoader message="W8 lil bit" :completed="isLoading" />
       <div class="text-center mb-5">
         <div class="t-h-32 relative top-0 flex justify-content-center">
           <img

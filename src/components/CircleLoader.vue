@@ -1,14 +1,29 @@
 <script setup lang="ts">
+import { watch, ref, onMounted } from 'vue';
 
+type CircleLoaderProps = {
+  message: string,
+  completed: boolean
+}
+const props = defineProps<CircleLoaderProps>();
+const isCompleted = ref(false);
+
+onMounted(() => {
+  watch(props, (newLoadingState) => {
+    setTimeout(() => { isCompleted.value = newLoadingState.completed; }, 2000);
+  });
+});
 </script>
 
 <template>
-  <div class="absolute top-0 left-0 right-0 bottom-0 t-z-50 surface-ground">
+  <div class="absolute top-0 left-0 right-0 bottom-0 t-z-50 surface-ground" :class="{ 'hidden': isCompleted }">
     <div class="flex h-full justify-content-center align-items-center flex-column">
-      <h1>Circle loader with checkmark completed state <small>CSS Animation</small></h1>
+      <h1 class="text-3xl text-center mb-5">
+        {{ message }}
+      </h1>
 
-      <div class="circle-loader">
-        <div class="checkmark draw" />
+      <div class="circle-loader" :class="{ 'load-complete': props.completed }">
+        <div class="checkmark draw" :class="{ 'block': props.completed }" />
       </div>
 
       <p>
