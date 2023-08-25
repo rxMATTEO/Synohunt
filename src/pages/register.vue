@@ -15,15 +15,16 @@ definePageMeta({
 const mediumRegex =
   /^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})/;
 const strongRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/;
+const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
 const { handleSubmit, resetForm } = useForm();
 const { value: password, errorMessage } = useField(
   'password',
-  value => validateWeakness(value, 'Password', mediumRegex, strongRegex)
+  value => validateWeakness(value, 'Password', 'Password is weak', mediumRegex, strongRegex)
 );
 const { value: email, errorMessage: errorMailMessage } = useField(
   'email',
-  value => validateWeakness(value, 'Email')
+  value => validateWeakness(value, 'Email', 'Email is not valid', emailRegex)
 );
 const { value: username, errorMessage: errorUsernameMessage } = useField(
   'username',
@@ -32,7 +33,7 @@ const { value: username, errorMessage: errorUsernameMessage } = useField(
 
 type FieldName = 'Password' | 'Email' | 'Username';
 
-function validateWeakness (password: string, inputName: FieldName, ...regexp: RegExp[]) {
+function validateWeakness (password: string, inputName: FieldName, notValidMsg?: string, ...regexp: RegExp[]) {
   if (!password) {
     return `${inputName} is required.`;
   }
@@ -40,7 +41,7 @@ function validateWeakness (password: string, inputName: FieldName, ...regexp: Re
     if (regexp.find(reg => password.match(reg))) {
       return true;
     } else {
-      return `${inputName} is weak`;
+      return notValidMsg;
     }
   }
   return true;
