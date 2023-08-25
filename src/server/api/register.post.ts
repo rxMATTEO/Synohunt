@@ -6,7 +6,7 @@ export default eventHandler(async (event) => {
     data: {
       email,
       name: username, // todo add default image
-      points: 0,
+      points: 1,
       registrationDate: Date.now()
     }
   });

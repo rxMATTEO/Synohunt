@@ -43,15 +43,14 @@ async function authViaProvider (
       const encrypted = JSON.stringify(await rsa.encrypt(buffer, parsedPublicKey));
 
       await signIn(provider, {
-        callbackUrl: import.meta.env.VITE_AUTH_ORIGIN + '/dashboard',
+        callbackUrl: import.meta.env.VITE_AUTH_ORIGIN + 'dashboard',
         email: email.value,
         creds: encrypted
       });
     }
   } else {
     await signIn(provider, {
-      callbackUrl: import.meta.env.VITE_AUTH_ORIGIN + '/dashboard',
-      ...extraOptions
+      callbackUrl: import.meta.env.VITE_AUTH_ORIGIN + 'dashboard'
     });
   }
 }
@@ -131,9 +130,9 @@ async function authViaProvider (
               />
               <label for="rememberme1">Remember me</label>
             </div>
-            <a
-              class="font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer"
-            >Forgot password?</a>
+            <!--            <a-->
+            <!--              class="font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer"-->
+            <!--            >Forgot password?</a>-->
           </div>
 
           <Button

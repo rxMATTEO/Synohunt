@@ -18,9 +18,12 @@ export default NuxtAuthHandler({
   pages: {
     signIn: '/login'
   },
-  secret: '2f193d57f83e046dfcecabefcb7ad03c', //
-  // todo replace with random
-  // adapter: PrismaAdapter(prisma),
+  secret: process.env.AUTH_SECRET,
+  adapter: PrismaAdapter(prisma),
+  // todo figure out page redirections and shit
+  session: {
+    strategy: 'jwt'
+  },
   callbacks: {
     session: async ({ session, token }) => {
       const user = await getUser(session);
@@ -47,7 +50,6 @@ export default NuxtAuthHandler({
           }
         });
         if (verified.isCredentialsValid) {
-          const prisma = new PrismaClient();
           const user = await prisma.user.update({
             where: { email },
             data: {

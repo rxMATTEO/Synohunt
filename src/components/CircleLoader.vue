@@ -10,7 +10,6 @@ type CircleLoaderProps = {
   onCompleteMessage: LoaderMessage,
   completed: boolean,
   visible: boolean,
-  afterLoad: () => any,
 }
 const props = defineProps<CircleLoaderProps>();
 const isVisibleDelayer = ref(false);
