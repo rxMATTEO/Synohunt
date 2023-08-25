@@ -10,7 +10,7 @@ type CompletedTasksResponse = Task & {
   Tag: Tag,
   _count: { CompletedTask: number }
 }
-
+// todo add message on emty, fix leaderboard like points * lvl
 const createdTasks = ref((await useFetch('/api/task/created', {
   method: 'POST',
   body: {
