@@ -4,6 +4,7 @@ import rsa from 'js-crypto-rsa';
 import { useField, useForm } from 'vee-validate';
 import { definePageMeta } from '#imports';
 import type { JwkResponse } from '@/server/api/jwk.post';
+import validateWeakness from '@/composables/validator';
 
 definePageMeta({
   auth: {
@@ -36,28 +37,6 @@ const { value: username, errorMessage: errorUsernameMessage } = useField(
   'username',
   value => validateWeakness(value, 'Username')
 );
-
-type FieldName = 'Password' | 'Email' | 'Username';
-
-function validateWeakness (
-  password: string,
-  inputName: FieldName,
-  notValidMsg?: string,
-  ...regexp: RegExp[]
-) {
-  if (!password) {
-    return `${inputName} is required.`;
-  }
-  if (regexp.length) {
-    if (regexp.find(reg => password.match(reg))) {
-      return true;
-    } else {
-      return notValidMsg;
-    }
-  }
-  return true;
-}
-
 const isCompleted = ref(false);
 const isVisible = ref(false);
 const registerUser = handleSubmit(async ({ email, password, username }) => {
