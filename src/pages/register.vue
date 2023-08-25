@@ -19,36 +19,34 @@ const strongRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/;
 const { handleSubmit, resetForm } = useForm();
 const { value: password, errorMessage } = useField(
   'password',
-  validateWeakness
+  value => validateWeakness(value, 'Password', mediumRegex, strongRegex)
 );
 const { value: email, errorMessage: errorMailMessage } = useField(
   'email',
-  value => validateEmpty(value, 'Email')
+  value => validateWeakness(value, 'Email')
 );
 const { value: username, errorMessage: errorUsernameMessage } = useField(
   'username',
-  value => validateEmpty(value, 'Username')
+  value => validateWeakness(value, 'Username')
 );
 
 type FieldName = 'Password' | 'Email' | 'Username';
 
-function validateEmpty (value: string, fieldName: FieldName) {
-  return !value ? `${fieldName} is required` : true;
-}
-
-function validateWeakness (password: string) {
+function validateWeakness (password: string, inputName: FieldName, ...regexp: RegExp[]) {
   if (!password) {
-    return 'Password is required.';
+    return `${inputName} is required.`;
   }
-  if (password.match(mediumRegex) || password.match(strongRegex)) {
-    return true;
-  } else {
-    return 'Password is weak';
+  if (regexp.length) {
+    if (regexp.find(reg => password.match(reg))) {
+      return true;
+    } else {
+      return `${inputName} is weak`;
+    }
   }
+  return true;
 }
 
 const registerUser = handleSubmit(async ({ email, password, username }) => {
-  console.log('registering !');
   const result = (await $fetch('/api/jwk', {
     method: 'POST'
   })) as Awaited<JwkResponse>;
