@@ -1,35 +1,46 @@
 <script setup lang="ts">
 import { watch, ref, onMounted } from 'vue';
 
+type LoaderMessage = {
+  header: string,
+  bottomText: string
+}
 type CircleLoaderProps = {
-  message: string,
-  completed: boolean
+  onLoadMessage: LoaderMessage,
+  onCompleteMessage: LoaderMessage,
+  completed: boolean,
+  visible: boolean,
+  afterLoad: () => any,
 }
 const props = defineProps<CircleLoaderProps>();
-const isCompleted = ref(false);
+const isVisibleDelayer = ref(false);
+
+const emit = defineEmits(['complete']);
 
 onMounted(() => {
+  isVisibleDelayer.value = props.visible;
   watch(props, (newLoadingState) => {
-    setTimeout(() => { isCompleted.value = newLoadingState.completed; }, 2000);
+    isVisibleDelayer.value = true;
+    if (newLoadingState.completed) {
+      setTimeout(() => { isVisibleDelayer.value = false; emit('complete'); }, 5000);
+    }
   });
 });
 </script>
 
 <template>
-  <div class="absolute top-0 left-0 right-0 bottom-0 t-z-50 surface-ground" :class="{ 'hidden': isCompleted }">
+  <div class="absolute top-0 left-0 right-0 bottom-0 t-z-50 surface-ground" :class="{ 'hidden': !isVisibleDelayer }">
     <div class="flex h-full justify-content-center align-items-center flex-column">
       <h1 class="text-3xl text-center mb-5">
-        {{ message }}
+        {{ completed ? onCompleteMessage.header: onLoadMessage.header }}
       </h1>
 
       <div class="circle-loader" :class="{ 'load-complete': props.completed }">
         <div class="checkmark draw" :class="{ 'block': props.completed }" />
       </div>
 
-      <p>
-        <button id="toggle" type="button" class="btn btn-success">
-          Toggle Completed
-        </button>
+      <p class="text-center">
+        {{ completed ? onCompleteMessage.bottomText: onLoadMessage.bottomText }}
       </p>
     </div>
   </div>

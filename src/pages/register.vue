@@ -12,15 +12,21 @@ definePageMeta({
   }
 });
 
+const router = useRouter();
 const mediumRegex =
   /^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})/;
 const strongRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/;
 const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
 const { handleSubmit, resetForm } = useForm();
-const { value: password, errorMessage } = useField(
-  'password',
-  value => validateWeakness(value, 'Password', 'Password is weak', mediumRegex, strongRegex)
+const { value: password, errorMessage } = useField('password', value =>
+  validateWeakness(
+    value,
+    'Password',
+    'Password is weak',
+    mediumRegex,
+    strongRegex
+  )
 );
 const { value: email, errorMessage: errorMailMessage } = useField(
   'email',
@@ -33,7 +39,12 @@ const { value: username, errorMessage: errorUsernameMessage } = useField(
 
 type FieldName = 'Password' | 'Email' | 'Username';
 
-function validateWeakness (password: string, inputName: FieldName, notValidMsg?: string, ...regexp: RegExp[]) {
+function validateWeakness (
+  password: string,
+  inputName: FieldName,
+  notValidMsg?: string,
+  ...regexp: RegExp[]
+) {
   if (!password) {
     return `${inputName} is required.`;
   }
@@ -47,7 +58,10 @@ function validateWeakness (password: string, inputName: FieldName, notValidMsg?:
   return true;
 }
 
+const isCompleted = ref(false);
+const isVisible = ref(false);
 const registerUser = handleSubmit(async ({ email, password, username }) => {
+  isVisible.value = true;
   const result = (await $fetch('/api/jwk', {
     method: 'POST'
   })) as Awaited<JwkResponse>;
@@ -62,16 +76,26 @@ const registerUser = handleSubmit(async ({ email, password, username }) => {
       id: result.id,
       email
     }
+  }).then(() => {
+    isCompleted.value = true;
   });
 });
-const isLoading = ref(false);
-setTimeout(() => { isLoading.value = true; }, 5000);
+
+function afterComplete () {
+  router.push('/login');
+}
 </script>
 
 <template>
   <div class="t-h-screen flex justify-content-center align-items-center">
     <div class="surface-card p-4 shadow-2 border-round w-full lg:w-4 relative">
-      <CircleLoader message="W8 lil bit" :completed="isLoading" />
+      <LazyCircleLoader
+        :on-complete-message="{ bottomText:'You will be redirected to login page', header: 'Success' }"
+        :on-load-message="{ bottomText:'Wait a bit', header: 'Processing' }"
+        :visible="isVisible"
+        :completed="isCompleted"
+        @complete="afterComplete"
+      />
       <div class="text-center mb-5">
         <div class="t-h-32 relative top-0 flex justify-content-center">
           <img
@@ -101,7 +125,7 @@ setTimeout(() => { isLoading.value = true; }, 5000);
           <InputText
             id="username"
             v-model="username"
-            :class="{ 'p-invalid': errorMessage }"
+            :class="{ 'p-invalid': errorUsernameMessage }"
             type="text"
             class="w-full"
           />
