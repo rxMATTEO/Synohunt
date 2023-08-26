@@ -113,7 +113,7 @@ function changeTab (e) {
           <div v-else>
             <TabMenu v-model:activeIndex="selectedTabIndex" :model="items" @tab-change="changeTab" />
           </div>
-          <div class="surface-ground">
+          <div class="surface-ground border-round-bottom-xl">
             <component :is="tabs[selectedTabIndex]" />
           </div>
         </div>
