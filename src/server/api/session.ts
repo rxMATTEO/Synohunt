@@ -35,7 +35,8 @@ export default eventHandler(async (event) => {
           create: ({
             value: 1
           })
-        }
+        },
+        image: '/img/user-placeholder.png'
       }
     });
     const acc = await event.context.prisma.user.findFirst({

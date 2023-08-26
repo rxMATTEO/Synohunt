@@ -10,7 +10,10 @@ const langs = reactive({ value: [] as ServerLang[] });
 const selectedDiff = reactive<{value: ServerDiff}>({ value: {} as ServerDiff });
 const selectedLanguage = reactive<{value: ServerLang}>({ value: {} as ServerLang });
 const word = reactive({ value: '' });
-const synonyms = reactive({ value: [[], []] });
+type Synonyms = {
+  value: [ Array<Synonym>, Array<Synonym> ]
+}
+const synonyms = reactive<Synonyms>({ value: [[], []] });
 const taskFetched = ref({});
 const context = ref('');
 useFetch('/api/diffs').then((res) => {
@@ -48,6 +51,8 @@ async function randomGenerateTask () {
 
 const isDialogVisible = ref(false);
 async function createTask () {
+  // todo add validation
+  taskFetched.value.synos = synonyms.value[1];
   taskFetched.value.task.description = context.value;
   taskFetched.value.task.isVisible = true;
   taskFetched.value.word.word = word.value;
@@ -61,6 +66,12 @@ async function createTask () {
 }
 function gotoMyChallenges () {
   router.push('/profile/challenges');
+}
+
+const addingSynonym = ref('');
+
+function addSynonym () {
+  synonyms.value[1].push('a');
 }
 </script>
 
@@ -187,17 +198,24 @@ function gotoMyChallenges () {
             <div class="relative">
               <i v-tooltip.left="'The synonyms which is players will be guessing'" class="pi pi-info-circle absolute t-right-0 t-top-0" />
             </div>
-            <div class="mt-5">
+            <div class="">
+              <div class="t-p-5 flex">
+                <div class="p-float-label">
+                  <InputText id="syno" v-model="addingSynonym" />
+                  <label for="syno" class="p-float-label">Enter synonym</label>
+                  <Button :type="null" label="+" class="ml-3" @click="addSynonym" />
+                </div>
+              </div>
               <PickList
                 v-model="synonyms.value"
                 data-key="id"
                 class="pick-list"
               >
                 <template #sourceheader>
-                  Possible
+                  Not included
                 </template>
                 <template #targetheader>
-                  Selected
+                  Included
                 </template>
                 <template #item="slotProps : {item: Synonym}">
                   <div class="flex flex-wrap p-2 align-items-center gap-3 pick-list">
@@ -205,7 +223,7 @@ function gotoMyChallenges () {
                       <span class="font-bold">{{ slotProps.item.value }}</span>
                       <div class="flex align-items-center gap-2">
                         <Badge v-tooltip="{value: `<p>Player will get <b>${slotProps.item.pointsForGuess} points</b> for guessing this synonym</p`, escape: true}" :value="slotProps.item.pointsForGuess" :severity="'info'" />
-                        <Badge v-tooltip="{value: `<p>Player will get <b>${slotProps.item.moneyForGuess} points</b> for guessing this synonym</p`, escape: true}" :value="slotProps.item.moneyForGuess" :severity="'warning'" />
+                        <Badge v-tooltip="{value: `<p>Player will get <b>${slotProps.item.moneyForGuess} coins</b> for guessing this synonym</p`, escape: true}" :value="slotProps.item.moneyForGuess" :severity="'warning'" />
                       </div>
                     </div>
                   </div>

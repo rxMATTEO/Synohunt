@@ -7,7 +7,8 @@ export default eventHandler(async (event) => {
       email,
       name: username, // todo add default image
       points: 1,
-      registrationDate: Date.now()
+      registrationDate: Date.now(),
+      image: '/img/user-placeholder.png'
     }
   });
   return { account };
