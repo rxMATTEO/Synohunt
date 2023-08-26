@@ -7,6 +7,7 @@ export default defineEventHandler(async (event) => {
     include: {
       Task: {
         include: {
+          Difficulity: true,
           Word: {
             include: {
               Synonym: true

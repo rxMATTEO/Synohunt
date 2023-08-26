@@ -10,26 +10,34 @@ const completedTasks = (await useFetch('/api/task/completed', {
 
 <template>
   <DataView
-      :value="completedTasks"
-      paginator
-      :rows="5"
+    :value="completedTasks"
+    paginator
+    :rows="5"
   >
     <template #list="slotProps">
-      <div class="col-12">
-        <div class="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
-          <div class="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
-            <div class="flex flex-column align-items-center sm:align-items-start gap-3">
-              <div class="text-2xl font-bold text-900">
-                <p v-html="slotProps.data.Task.description"></p>
+      <GradientBox :gradient-name="slotProps.data.Task.Difficulity.name.toLowerCase()" class="mb-5">
+        <template #left-side>
+          <div class="col-12">
+            <div class="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
+              <div class="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
+                <div class="flex flex-column align-items-center sm:align-items-start gap-3">
+                  <div class="text-2xl font-bold text-900">
+                    <p v-html="slotProps.data.Task.description" />
+                  </div>
+                  <Rating :model-value="slotProps.data.rating" readonly :cancel="false" />
+                </div>
               </div>
-              <Rating :model-value="slotProps.data.rating" readonly :cancel="false" />
-              <div class="flex align-items-center gap-3">
-                        <span class="flex align-items-center gap-2">
-                          <i class="pi pi-tag" />
-                          <span class="font-semibold">{{ slotProps.data.Task.Word.word }}</span>
-                        </span>
-                <Tag :value="slotProps.data" severity="" />
-              </div>
+            </div>
+          </div>
+        </template>
+        <template #right-side>
+          <div class="p-4">
+            <div class="flex align-items-center gap-3">
+              <span class="flex align-items-center gap-2">
+                <i class="pi pi-tag" />
+                <span class="font-semibold">{{ slotProps.data.Task.Word.word }}</span>
+              </span>
+              <Tag :value="slotProps.data" severity="" />
             </div>
             <div class="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
               <div v-for="syno in slotProps.data.Task.Word.Synonym">
@@ -37,8 +45,8 @@ const completedTasks = (await useFetch('/api/task/completed', {
               </div>
             </div>
           </div>
-        </div>
-      </div>
+        </template>
+      </GradientBox>
     </template>
   </DataView>
 </template>
