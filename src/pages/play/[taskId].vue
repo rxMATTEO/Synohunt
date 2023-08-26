@@ -138,6 +138,7 @@ async function checkBookmark () {
 }
 
 const isDialogVisible = ref(false);
+// todo add word
 </script>
 
 <template>

@@ -22,13 +22,19 @@ export default defineEventHandler(async (event) => {
     }
   });
 
-  const synos = synonyms.synonyms.map(async (syno) => {
-    return await event.context.prisma.synonym.create({
-      data: {
-        wordId: word.id,
-        value: syno.synonym
-      }
-    });
+  // const synos = synonyms.synonyms.map(async (syno) => {
+  //   return await event.context.prisma.synonym.create({
+  //     data: {
+  //       wordId: word.id,
+  //       value: syno.synonym
+  //     }
+  //   });
+  // });
+
+  const synos = synonyms.synonyms.map((syno) => {
+    syno.value = syno.synonym;
+    syno.wordId = word.id;
+    return syno;
   });
 
   const task = await event.context.prisma.task.create({
@@ -41,5 +47,5 @@ export default defineEventHandler(async (event) => {
     }
   });
 
-  return { word, synos: await Promise.all(synos), task };
+  return { word, task, synos };
 });

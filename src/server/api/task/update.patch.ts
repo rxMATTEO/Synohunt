@@ -14,6 +14,27 @@ export default defineEventHandler(async (event) => {
     }
   });
 
+  function awaiter () {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => resolve(), 500);
+    });
+  }
+
+  updatingTask.synos.map((syno) => {
+    awaiter().then(
+      async () => {
+        return await event.context.prisma.synonym.create({
+          data: {
+            wordId: syno.wordId,
+            value: syno.value,
+            pointsForGuess: syno.pointsForGuess,
+            moneyForGuess: syno.moneyForGuess
+          }
+        });
+      }
+    );
+  });
+
   const prismaUpdatedWord = await event.context.prisma.task.update({
     where: {
       id: updatingTask.task.id

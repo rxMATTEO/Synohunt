@@ -32,7 +32,7 @@ onMounted(async () => {
 const router = useRouter();
 const isRandomTaskGenerating = ref(false);
 
-async function randomGenerateTask () {
+async function randomGenerateTask (bindValues = true) {
   isRandomTaskGenerating.value = true;
   const task = await $fetch('/api/word/random', {
     method: 'POST',
@@ -42,9 +42,11 @@ async function randomGenerateTask () {
       userId: account.id
     }
   });
-  word.value = task.word.word;
-  synonyms.value[0] = task.synos;
-  context.value = task.task.description;
+  if (bindValues) {
+    word.value = task.word.word;
+    synonyms.value[0] = task.synos;
+    context.value = task.task.description;
+  }
   taskFetched.value = task;
   isRandomTaskGenerating.value = false;
 }
@@ -52,16 +54,23 @@ async function randomGenerateTask () {
 const isDialogVisible = ref(false);
 async function createTask () {
   // todo add validation
-  taskFetched.value.synos = synonyms.value[1];
+  if (Object.keys(taskFetched.value).length === 0) {
+    await randomGenerateTask(false);
+    taskFetched.value.synos = synonyms.value[1].map((syno) => {
+      syno.wordId = taskFetched.value.word.id;
+      return syno;
+    });
+  }
   taskFetched.value.task.description = context.value;
-  taskFetched.value.task.isVisible = true;
   taskFetched.value.word.word = word.value;
+  taskFetched.value.task.isVisible = true;
   const created = await $fetch('/api/task/update', {
     method: 'PATCH',
     body: {
       updatingTask: taskFetched.value
     }
   });
+  console.log(created);
   isDialogVisible.value = true;
 }
 function gotoMyChallenges () {
@@ -71,8 +80,15 @@ function gotoMyChallenges () {
 const addingSynonym = ref('');
 
 function addSynonym () {
-  synonyms.value[1].push('a');
+  if (!addingSynonym.value) { return; }
+  synonyms.value[1].push({
+    value: addingSynonym.value,
+    moneyForGuess: 10,
+    pointsForGuess: 10
+  });
+  addingSynonym.value = '';
 }
+// todo add button loader and shake button up
 </script>
 
 <template>
@@ -217,7 +233,7 @@ function addSynonym () {
                 <template #targetheader>
                   Included
                 </template>
-                <template #item="slotProps : {item: Synonym}">
+                <template #item="slotProps : {item: {synonym: string}}">
                   <div class="flex flex-wrap p-2 align-items-center gap-3 pick-list">
                     <div class="flex-1 flex flex-column gap-2">
                       <span class="font-bold">{{ slotProps.item.value }}</span>
