@@ -72,6 +72,12 @@ async function completeTask () {
   });
 }
 
+const contextHtml = computed({
+  get () {
+    return (task.value.description as string).replaceAll(task.value.Word.word, `<span class="bg-primary-500">${task.value.Word.word}</span>`);
+  }
+});
+
 const isShaking = reactive({ value: false });
 function shake () {
   isShaking.value = true;
@@ -185,9 +191,9 @@ const isDialogVisible = ref(false);
       <div class="lg:px-8 lg:mx-8 px-3" @keyup="solveUserSyno">
         <div class="surface-ground t-rounded-md p-5 h-fit">
           <div class="relative">
-            <Button v-tooltip="'Goto next task'" class="absolute right-0 text-right" icon="pi pi-arrow-right" unstyled @click="gotoRandomTask(task.value.Difficulity.name, task.value.Language.langFull, task.value.id)" />
+            <Button v-tooltip="'Goto next challenge'" class="absolute right-0 text-right" icon="pi pi-arrow-right" unstyled @click="gotoRandomTask(task.value.Difficulity.name, task.value.Language.langFull, task.value.id)" />
             <NuxtLink to="/create/task">
-              <Button v-tooltip="'Create new task'" class="mt-3 absolute t-top-5 right-0 text-right" icon="pi pi-plus" unstyled />
+              <Button v-tooltip="'Create new challenge'" class="mt-3 absolute t-top-5 right-0 text-right" icon="pi pi-plus" unstyled />
             </NuxtLink>
             <Button class="absolute right-0 mt-5 t-top-10 text-right" :icon="isBookmarked.value ? 'pi pi-star-fill': 'pi pi-star'" unstyled @click="toggleBookmarkTask" />
           </div>
@@ -199,10 +205,7 @@ const isDialogVisible = ref(false);
               Context:
             </p>
             <div class="mt-3">
-              <span v-for="word in task.value.description.split(' ')">
-                <span :class="{'bg-primary-500': word.toLowerCase().includes(task.value.Word.word.toLowerCase())}" v-html="word" />
-                {{ }}
-              </span>
+              <span v-html="contextHtml" />
             </div>
           </div>
 

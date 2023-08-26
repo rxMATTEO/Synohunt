@@ -1,4 +1,5 @@
 import { readBody } from 'h3';
+import { Synonym } from '@prisma/client';
 
 export default defineEventHandler(async (event) => {
   const { lang, diff, userId } = await readBody(event);
@@ -31,9 +32,11 @@ export default defineEventHandler(async (event) => {
   //   });
   // });
 
-  const synos = synonyms.synonyms.map((syno) => {
+  const synos = synonyms.synonyms.map((syno: Synonym) => {
     syno.value = syno.synonym;
     syno.wordId = word.id;
+    syno.pointsForGuess = 10;
+    syno.moneyForGuess = 10;
     return syno;
   });
 

@@ -20,7 +20,7 @@ type Synonyms = {
 }
 
 const { handleSubmit, resetForm, setErrors } = useForm();
-let { value: word, errorMessage: wordErrorMessage } = useField('word', value => validateWeakness(value, 'Word'));
+const { value: word, errorMessage: wordErrorMessage } = useField('word', value => validateWeakness(value, 'Word'));
 const { value: context, errorMessage: contextErrorMessage } = useField('context', value => validateWeakness(value, 'Context'));
 const { value: synos, errorMessage: synosErrorMessage } = useField('synos', () => synonyms.value[1].length > 0 ? true : 'Included synonyms is empty');
 
@@ -53,22 +53,24 @@ async function randomGenerateTask (bindValues = true) {
     }
   });
   if (bindValues) {
-    word = task.word.word;
+    word.value = task.word.word;
     synonyms.value[0] = task.synos;
-    context = task.task.description;
+    context.value = task.task.description;
   }
   taskFetched.value = task;
   isRandomTaskGenerating.value = false;
 }
 
 const isDialogVisible = ref(false);
+const isLoading = ref(false);
 const createTask = handleSubmit(async () => {
-  if (synonyms.value[1].length > 0) {
+  if (synonyms.value[1].length === 0) {
     setErrors({
       synos: 'Included synonyms is empty'
     });
     return;
   }
+  isLoading.value = true;
   if (Object.keys(taskFetched.value).length === 0) {
     await randomGenerateTask(false);
     taskFetched.value.synos = synonyms.value[1].map((syno) => {
@@ -258,8 +260,8 @@ const isAddSynoShake = ref(false);
                 }}</small>
                 <PickList
                   id="synos"
+                  key=""
                   v-model="synonyms.value"
-                  data-key="id"
                   class="pick-list"
                   :class="{ 'border-red-300 border-solid border-1': synosErrorMessage }"
                 >
@@ -270,7 +272,7 @@ const isAddSynoShake = ref(false);
                     Included
                   </template>
                   <template #item="slotProps : {item: Synonym}">
-                    <div class="flex flex-wrap p-2 align-items-center gap-3 pick-list">
+                    <div :key="slotProps.item.id" class="flex flex-wrap p-2 align-items-center gap-3 pick-list">
                       <div class="flex-1 flex flex-column gap-2">
                         <span class="font-bold">{{ slotProps.item.value }}</span>
                         <div class="flex align-items-center gap-2">
@@ -284,7 +286,7 @@ const isAddSynoShake = ref(false);
               </div>
             </Fieldset>
             <div class="mt-5 prevent-tw">
-              <Button label="Create challenge" type="submit" class="mx-auto block" @click="createTask" />
+              <Button label="Create challenge" type="submit" class="mx-auto block" :loading="isLoading" @click="createTask" />
             </div>
           </form>
         </div>
