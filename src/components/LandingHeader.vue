@@ -2,6 +2,8 @@
 import StickyElement from 'vue-sticky-element';
 import { onMounted, ref } from 'vue';
 
+const { status } = useAuth();
+
 const top = ref(0);
 onMounted(() => {
   window.addEventListener('scroll', () => {
@@ -24,7 +26,7 @@ onMounted(() => {
           <div>
             <NuxtLink to="/" class="font-bold t-tracking-wider h-full">
               <div class="md:w-3rem md:h-3rem w-5rem h-full flex align-items-center max-md:t-flex-col">
-                <img class="w-full h-full" src="/favicon.ico">
+                <img class="w-full h-full" src="/favicon.ico" alt="logo">
                 <p>SynoHunt</p>
               </div>
             </NuxtLink>
@@ -61,20 +63,33 @@ onMounted(() => {
           </div>
           <div class="flex max-md:t-flex-col">
             <ChangeThemeButton class="mr-5 vertical-align-middle max-md:t-mb-2" />
-            <NuxtLink to="/login" class="block md:mr-3">
-              <Button
-                class="text-white t-border-0 bg-blue-400 w-full"
-                label="Login"
-                :type="null"
-              />
-            </NuxtLink>
-            <NuxtLink to="/register" class="block">
-              <Button
-                class="text-white max-md:t-mt-2 t-border-0 bg-indigo-500"
-                label="Register"
-                :type="null"
-              />
-            </NuxtLink>
+            <div class="">
+              <div v-if="status === 'unauthenticated'" class="flex max-md:t-flex-col">
+                <NuxtLink to="/login" class="block md:mr-3">
+                  <Button
+                    class="text-white t-border-0 bg-blue-400 w-full"
+                    label="Login"
+                    :type="null"
+                  />
+                </NuxtLink>
+                <NuxtLink to="/register" class="block">
+                  <Button
+                    class="text-white max-md:t-mt-2 t-border-0 bg-indigo-500"
+                    label="Register"
+                    :type="null"
+                  />
+                </NuxtLink>
+              </div>
+              <div v-else>
+                <NuxtLink to="/dashboard" class="block">
+                  <Button
+                    class="text-white max-md:t-mt-2 t-border-0 bg-indigo-500"
+                    label="Play"
+                    :type="null"
+                  />
+                </NuxtLink>
+              </div>
+            </div>
           </div>
         </div>
       </div>
