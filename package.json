@@ -54,7 +54,8 @@
     "sass": "^1.64.1",
     "vue": "^3.3.4",
     "vue-3d-loader": "^2.1.7",
-    "vue-3d-model": "^1.4.1"
+    "vue-3d-model": "^1.4.1",
+    "vue-sticky-element": "^1.7.0"
   },
   "prisma": {
     "schema": "./src/server/prisma/schema.prisma",

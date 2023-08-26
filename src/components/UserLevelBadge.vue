@@ -1,10 +1,5 @@
 <script setup lang="ts">
-import { storeToRefs } from 'pinia';
-import { useLevelStore } from '@/stores/levelStore';
-
 const props = defineProps<{ value: number }>();
-const levelStore = useLevelStore();
-const { level } = storeToRefs(levelStore);
 const lvlBreakPoints = [[0, 'bg-bluegray-600'], [10, 'bg-orange-500'], [20, 'bg-indigo-400']];
 const userLvlColor = lvlBreakPoints.reverse().find(([breakPoint, color]) => breakPoint <= props.value);
 </script>

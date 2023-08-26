@@ -31,6 +31,7 @@ import Fieldset from 'primevue/fieldset';
 import ConfirmationService from 'primevue/confirmationservice';
 import Skeleton from 'primevue/skeleton';
 import Password from 'primevue/password';
+import VStickyElement from 'vue-sticky-element';
 import { defineNuxtPlugin } from '#imports';
 export default defineNuxtPlugin({
   parallel: true,
@@ -48,6 +49,7 @@ export default defineNuxtPlugin({
       }
     });
     nuxtApp.vueApp.use(ToastService);
+    nuxtApp.vueApp.use(VStickyElement);
     nuxtApp.vueApp.use(ConfirmationService);
     nuxtApp.vueApp.directive('badge', BadgeDirective);
     nuxtApp.vueApp.directive('tooltip', Tooltip);
