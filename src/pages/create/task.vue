@@ -126,7 +126,7 @@ const isAddSynoShake = ref(false);
       </template>
     </Dialog>
     <NuxtLayout name="header-n-sidebar">
-      <div class="lg:px-8 lg:mx-8 px-3">
+      <PaddingBox>
         <div class="surface-ground t-rounded-md p-5 h-fit">
           <div class="relative">
             <div class="absolute right-0">
@@ -290,7 +290,7 @@ const isAddSynoShake = ref(false);
             </div>
           </form>
         </div>
-      </div>
+      </PaddingBox>
     </NuxtLayout>
   </div>
 </template>

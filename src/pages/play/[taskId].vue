@@ -188,7 +188,7 @@ const isDialogVisible = ref(false);
         </template>
       </Dialog>
 
-      <div class="lg:px-8 lg:mx-8 px-3" @keyup="solveUserSyno">
+      <PaddingBox @keyup="solveUserSyno">
         <div class="surface-ground t-rounded-md p-5 h-fit">
           <div class="relative">
             <Button v-tooltip="'Goto next challenge'" class="absolute right-0 text-right" icon="pi pi-arrow-right" unstyled @click="gotoRandomTask(task.value.Difficulity.name, task.value.Language.langFull, task.value.id)" />
@@ -258,7 +258,7 @@ const isDialogVisible = ref(false);
             </div>
           </div>
         </div>
-      </div>
+      </PaddingBox>
       <keep-alive>
         <component :is="Hints" :key="'Hints'" />
       </keep-alive>

@@ -10,7 +10,7 @@ useHead({
 <template>
   <div>
     <NuxtLayout name="header-n-sidebar">
-      <div class="lg:px-8 lg:mx-8 px-3">
+      <PaddingBox>
         <ChallengeBox />
         <div class="mt-5">
           <div class="flex t-flex-col md:flex-row align-items-stretch">
@@ -54,7 +54,7 @@ useHead({
           </p>
           <Leaderboard :limit="5" />
         </div>
-      </div>
+      </PaddingBox>
     </NuxtLayout>
   </div>
 </template>

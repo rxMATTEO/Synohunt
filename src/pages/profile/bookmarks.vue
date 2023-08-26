@@ -15,7 +15,7 @@ useHead({
 <template>
   <div>
     <NuxtLayout name="header-n-sidebar">
-      <div class="lg:px-8 lg:mx-8 px-3">
+      <PaddingBox>
         <div
           class="surface-ground t-rounded-md p-5"
         >
@@ -51,7 +51,7 @@ useHead({
             </template>
           </DataView>
         </div>
-      </div>
+      </PaddingBox>
     </NuxtLayout>
   </div>
 </template>
