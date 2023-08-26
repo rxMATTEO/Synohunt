@@ -24,8 +24,8 @@ onMounted(() => {
       <div class="lg:!t-px-64 lg:t-mx-20 t-px-3">
         <div class="flex t-place-content-between t-items-center gap-1 h-full">
           <div>
-            <NuxtLink to="/" class="font-bold t-tracking-wider h-full">
-              <div class="md:w-3rem md:h-3rem w-5rem h-full flex align-items-center max-md:t-flex-col">
+            <NuxtLink to="/" class="font-bold t-tracking-wider h-full w-full">
+              <div class="h-3rem max-md:t-w-16 flex align-items-center max-md:t-flex-col">
                 <img class="w-full h-full" src="/favicon.ico" alt="logo">
                 <p>SynoHunt</p>
               </div>

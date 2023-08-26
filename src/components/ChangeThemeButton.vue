@@ -18,7 +18,7 @@ function changeTheme () {
 </script>
 
 <template>
-  <Button unstyled class="ml-5 flex justify-center align-items-center" @click="changeTheme">
+  <Button unstyled class="flex justify-center align-items-center" @click="changeTheme">
     <i v-if="theme.theme.dark" class="pi pi-moon text-xl cursor-pointer t-fill-black" />
     <i v-else-if="theme.theme.light" class="pi pi-moon text-xl cursor-pointer t-fill-black" />
   </Button>

@@ -142,7 +142,7 @@ const { messages } = storeToRefs(messagesStore);
         <div class="badges">
           <UserLevel :on-mouse-leave="onMouseLeave" :on-mouse-over="onMouseOver" :overlays="overlays" />
         </div>
-        <ChangeThemeButton />
+        <ChangeThemeButton class="ml-5" />
       </div>
     </div>
   </div>
