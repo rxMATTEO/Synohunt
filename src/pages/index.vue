@@ -7,7 +7,10 @@
         >
           <div>
             <NuxtLink to="/" class="font-bold t-tracking-wider">
-              SynoHunt
+              <div class="md:w-3rem md:h-3rem w-5rem h-5rem flex align-items-center max-md:t-flex-col">
+                <img class="w-full h-full" src="/favicon.ico">
+                <p>SynoHunt</p>
+              </div>
             </NuxtLink>
           </div>
           <div class="md:flex">
@@ -41,7 +44,7 @@
             </div>
           </div>
           <div class="flex max-md:t-flex-col">
-            <ChangeThemeButton class="mr-5 vertical-align-middle" />
+            <ChangeThemeButton class="mr-5 vertical-align-middle max-md:t-mb-2" />
             <NuxtLink to="/login" class="block md:mr-3">
               <Button
                 class="text-white t-border-0 bg-blue-400 w-full"
@@ -154,11 +157,11 @@
         >
           <div class="md:t-w-1/2">
             <img
-              class="block t-max-w-[66%] max-h-full"
+              class="block w-full md:t-max-w-[66%] max-h-full"
               src="/img/biglogo.png"
             >
           </div>
-          <div class="md:t-w-1/2">
+          <div class="md:t-w-1/2 max-md:t-text-center">
             <p class="uppercase text-primary font-bold">
               Explore latest vision!
             </p>
@@ -166,7 +169,7 @@
               <span class="gradient-primary text">Launch your</span> brand to
               new heights.
             </p>
-            <div class="mt-5">
+            <div class="mt-5 text-left">
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                 Aspernatur autem consectetur harum incidunt libero quis
@@ -198,7 +201,7 @@
           >Our challenge!</span>
           <span class="block sm:w-5 sm:text-6xl text-4xl font-bold text-center">SynoHunt: The <span class="gradient-primary">Ultimate</span> Word
             Challenge!</span>
-          <span class="block sm:w-5 text-lg mt-5 text-center">Get ready to embark on a thrilling journey through the world of
+          <span class="block sm:w-5 text-lg mt-5 md:text-center">Get ready to embark on a thrilling journey through the world of
             synonyms and unleash your inner linguist, and dive into a realm of
             words and wonders with SynoHunt.</span>
         </div>
