@@ -21,7 +21,7 @@ onMounted(() => {
         't-bg-black t-bg-opacity-10 t-backdrop-blur-3xl': top > 0
       }"
     >
-      <div class="lg:!t-px-64 lg:t-mx-40 t-px-3">
+      <div class="lg:!t-px-64 lg:t-mx-20 t-px-3">
         <div class="flex t-place-content-between t-items-center gap-1 h-full">
           <div>
             <NuxtLink to="/" class="font-bold t-tracking-wider h-full">
