@@ -20,13 +20,6 @@ pointsStore.calculatePercentOfPointsProgress();
 const { data: pointsToNextLvl } = await useAsyncData('ptsNextLvl', () => getPointsToNextLvl.value);
 const levelStore = useLevelStore();
 const { level } = storeToRefs(levelStore);
-
-watch(currentPoints, async (newPoints, oldPoints) => { // todo move in store and add toast
-  progress.value = await pointsStore.calculatePercentOfPointsProgress();
-  if (oldPoints + 5 >= pointsToNextLvl.need) {
-    levelStore.upgradeLvl();
-  }
-});
 </script>
 
 <template>

@@ -1,5 +1,6 @@
-import { reactive } from 'vue';
+import { reactive, watch } from 'vue';
 import { defineStore, useAuth, useFetch } from '#imports';
+import { useLevelStore } from '@/stores/levelStore';
 
 export const usePointsStore = defineStore('pointsStore', {
   state: () => {
@@ -41,6 +42,11 @@ export const usePointsStore = defineStore('pointsStore', {
       });
       this.currentPoints = fetch.data.value.points;
       this.progress = await this.calculatePercentOfPointsProgress();
+
+      if (this.progress >= 100) {
+        const levelStore = useLevelStore();
+        levelStore.upgradeLvl();
+      }
       return fetch.data;
     }
   }

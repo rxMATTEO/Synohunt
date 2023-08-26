@@ -179,7 +179,7 @@ const isDialogVisible = ref(false);
       </ConfirmDialog>
       <CoinSpin ref="coinSpin" />
       <img v-if="isDialogVisible" src="/img/salute_v2.gif" class="w-full h-full" alt="salute">
-      <Dialog v-model:visible="isDialogVisible" modal header="Header" :style="{ width: '50vw' }">
+      <Dialog v-model:visible="isDialogVisible" modal header="Congratulations" :style="{ width: '50vw' }">
         <p>
           You completed this task!
         </p>
