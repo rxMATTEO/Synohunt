@@ -8,6 +8,7 @@ import { useAuth } from '#imports';
 import { Theme, ThemesNames } from '@/app.config';
 import { useThemeStore } from '@/stores/themeStore';
 import { useSidebarStore } from '@/stores/sidebarStore';
+import ChangeThemeButton from '@/components/ChangeThemeButton.vue';
 
 const { isExpanded } = useSidebarStore();
 defineProps({
@@ -25,9 +26,7 @@ defineProps({
 // });
 
 // add half opacity shit
-const { getCurrentTheme, setCurrentTheme, currentTheme } = useThemeStore();
 const selected = ref({} as OverlayPanel);
-const theme: {theme: Theme} = reactive({ theme: { dark: true } });
 const { data: { value: { user: { account } } }, signOut } = useAuth();
 const overlaysNames = ['messagesOp', 'profileOp', 'levelOp'] as const;
 type OverlaysNames = typeof overlaysNames[number]
@@ -38,11 +37,6 @@ const overlays: Overlay = overlaysNames.reduce((obj, name) => {
   obj[name] = ref()!<OverlayPanel>;
   return obj;
 }, {} as Overlay);
-
-onMounted(() => {
-  getCurrentTheme();
-  theme.theme = currentTheme;
-});
 
 function onMouseOver (e: MouseEvent, overlayName: OverlaysNames) {
   selected.value.hide?.();
@@ -63,13 +57,6 @@ function onMouseLeave (overlayName: OverlaysNames, e?: MouseEvent) {
 }
 async function signOutMe () {
   await signOut();
-}
-
-function changeTheme () {
-  const light = ThemesNames.light;
-  const dark = ThemesNames.dark;
-  const [currentTheme, newTheme] = theme.theme.dark ? [dark, light] : [light, dark];
-  setCurrentTheme(currentTheme, newTheme);
 }
 const moneyStore = useMoneyStore();
 const { currentMoney } = storeToRefs(moneyStore);
@@ -155,10 +142,7 @@ const { messages } = storeToRefs(messagesStore);
         <div class="badges">
           <UserLevel :on-mouse-leave="onMouseLeave" :on-mouse-over="onMouseOver" :overlays="overlays" />
         </div>
-        <Button unstyled class="ml-5" @click="changeTheme">
-          <i v-if="theme.theme.dark" class="pi pi-moon text-xl cursor-pointer t-fill-black" />
-          <i v-else-if="theme.theme.light" class="pi pi-moon text-xl cursor-pointer t-fill-black" />
-        </Button>
+        <ChangeThemeButton />
       </div>
     </div>
   </div>

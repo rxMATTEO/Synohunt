@@ -41,6 +41,7 @@
             </div>
           </div>
           <div class="flex max-md:t-flex-col">
+            <ChangeThemeButton class="mr-5 vertical-align-middle" />
             <NuxtLink to="/login" class="block md:mr-3">
               <Button
                 class="text-white t-border-0 bg-blue-400 w-full"
