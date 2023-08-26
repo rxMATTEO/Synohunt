@@ -12,6 +12,7 @@ useHead({
   titleTemplate: (chunk) => {
     return chunk ? `${chunk} - Synohunt` : 'Synohunt';
   }
+
 });
 const appConfig = useAppConfig();
 const { setCurrentTheme, getCurrentTheme } = useThemeStore();
@@ -23,7 +24,7 @@ if (process.client) {
     }, 300);
   }
 }
-onMounted(async () => {
+onMounted(() => {
   if (window.document.documentElement.offsetWidth >= 768) {
     appConfig.platform = Platforms.pc;
   } else {
