@@ -1,9 +1,9 @@
 <template>
   <div class="surface-ground">
     <div class="h-screen t-max-h-screen">
-      <LandingHeader />
       <div class="text-color py-3 absolute right-0 left-0" />
-      <div class="lg:!t-px-52 lg:mx-10 t-px-3 max-w-full h-full">
+      <LandingHeader />
+      <div class="lg:!t-px-52 lg:mx-10 t-px-3 max-w-full h-full surface-ground">
         <div class="h-full">
           <div class="flex h-full align-items-center">
             <div class="md:t-w-1/2 relative z-1">
