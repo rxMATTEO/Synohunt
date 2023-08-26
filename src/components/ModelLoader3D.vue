@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { vue3dLoader } from 'vue-3d-loader';
 import { onMounted } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useThemeStore } from '@/stores/themeStore';
 
 const rotation = ref();
 rotation.value = {
@@ -39,11 +41,20 @@ const height = ref(0);
 const width = ref(0);
 
 const background = ref('');
-onMounted(() => {
+
+function setBackground (delay: number) {
   setTimeout(() => {
     const globalStyle = getComputedStyle(document.body);
     background.value = globalStyle.getPropertyValue('--surface-b');
-  }, 200);
+  }, delay);
+}
+
+const themeStore = useThemeStore();
+const { currentTheme } = storeToRefs(themeStore);
+
+onMounted(() => {
+  setBackground(200);
+  watch(currentTheme.value, () => setBackground(50));
   width.value = window.innerWidth / 2;
   height.value = window.innerHeight / 2;
   window.addEventListener('mousemove', (e: MouseEvent) => {
