@@ -24,7 +24,7 @@ export default eventHandler(async (event): Promise<Response> => {
       email
     },
     select: {
-      publicKey: true // todo look at this and think what i need mb status
+      publicKey: true
     }
   });
   return updateCreds;

@@ -1,7 +1,9 @@
 <script lang="ts" setup>
 import { ref, onMounted, reactive } from 'vue';
 import { Synonym } from '@prisma/client';
+import { useField, useForm } from 'vee-validate';
 import type { ServerDiff, ServerLang } from '../dashboard.vue';
+import validateWeakness from '@/composables/validator';
 
 useHead({
   title: 'Create task'
@@ -13,13 +15,16 @@ const langs = reactive({ value: [] as ServerLang[] });
 
 const selectedDiff = reactive<{value: ServerDiff}>({ value: {} as ServerDiff });
 const selectedLanguage = reactive<{value: ServerLang}>({ value: {} as ServerLang });
-const word = reactive({ value: '' });
 type Synonyms = {
   value: [ Array<Synonym>, Array<Synonym> ]
 }
+
+const { handleSubmit, resetForm } = useForm();
+const { value: word, errorMessage: wordErrorMessage } = useField('word', value => validateWeakness(value, 'Word'));
+const { value: context, errorMessage: contextErrorMessage } = useField('context', value => validateWeakness(value, 'Context'));
+
 const synonyms = reactive<Synonyms>({ value: [[], []] });
 const taskFetched = ref({});
-const context = ref('');
 useFetch('/api/diffs').then((res) => {
   diffs.value = res.data.value;
   selectedDiff.value = diffs.value[0];
@@ -47,7 +52,7 @@ async function randomGenerateTask (bindValues = true) {
     }
   });
   if (bindValues) {
-    word.value = task.word.word;
+    word = task.word.word;
     synonyms.value[0] = task.synos;
     context.value = task.task.description;
   }
@@ -56,8 +61,7 @@ async function randomGenerateTask (bindValues = true) {
 }
 
 const isDialogVisible = ref(false);
-async function createTask () {
-  // todo add validation
+const createTask = handleSubmit(async () => {
   if (Object.keys(taskFetched.value).length === 0) {
     await randomGenerateTask(false);
     taskFetched.value.synos = synonyms.value[1].map((syno) => {
@@ -66,7 +70,7 @@ async function createTask () {
     });
   }
   taskFetched.value.task.description = context.value;
-  taskFetched.value.word.word = word.value;
+  taskFetched.value.word.word = word;
   taskFetched.value.task.isVisible = true;
   const created = await $fetch('/api/task/update', {
     method: 'PATCH',
@@ -74,9 +78,8 @@ async function createTask () {
       updatingTask: taskFetched.value
     }
   });
-  console.log(created);
   isDialogVisible.value = true;
-}
+});
 function gotoMyChallenges () {
   router.push('/profile/challenges');
 }
@@ -117,143 +120,153 @@ function addSynonym () {
               </Button>
             </div>
           </div>
-          <h1 class="text-4xl">
-            Create new challenge
-          </h1>
-          <div class="mt-6">
+          <form>
+            <h1 class="text-4xl">
+              Create new challenge
+            </h1>
+            <div class="mt-6">
+              <Fieldset>
+                <template #legend>
+                  <div class="flex align-items-center text-primary">
+                    <span class="pi pi-language mr-2" />
+                    <span class="font-bold text-lg">Language & difficulty</span>
+                  </div>
+                </template>
+                <div class="p-float-label relative mt-3">
+                  <Dropdown
+                    v-model="selectedDiff.value"
+                    input-id="dd-diff"
+                    :options="diffs.value"
+                    option-label="name"
+                    placeholder="Select difficulty"
+                    class="w-full"
+                  >
+                    <template #value="slotProps">
+                      <div v-if="slotProps.value" class="flex align-items-center">
+                        <div>{{ slotProps.value.name }}</div>
+                      </div>
+                      <span v-else>
+                        {{ slotProps.placeholder }}
+                      </span>
+                    </template>
+                    <template #option="slotProps">
+                      <div class="flex align-items-center">
+                        <div>{{ slotProps.option.name }}</div>
+                      </div>
+                    </template>
+                  </Dropdown>
+                  <label for="dd-diff" class="">Select difficulty</label>
+                  <i v-tooltip.left="'Define challenge difficulty so players can choose it depends them skill'" class="pi pi-info-circle absolute t-top-[-20px] right-0" />
+                </div>
+                <div class="p-float-label mt-5">
+                  <Dropdown
+                    v-model="selectedLanguage.value"
+                    input-id="dd-lang"
+                    :options="langs.value"
+                    option-label="name"
+                    placeholder="Select language"
+                    class="w-full"
+                  >
+                    <template #value="slotProps">
+                      <div v-if="slotProps.value" class="flex align-items-center">
+                        <div>{{ slotProps.value.langFull }}</div>
+                      </div>
+                      <span v-else>
+                        {{ slotProps.placeholder }}
+                      </span>
+                    </template>
+                    <template #option="slotProps">
+                      <div class="flex align-items-center">
+                        <div>{{ slotProps.option.langFull }}</div>
+                      </div>
+                    </template>
+                  </Dropdown>
+                  <label for="dd-lang" class="">Select Language</label>
+                  <i v-tooltip.left="'Select language of word and synonyms'" class="pi pi-info-circle absolute t-top-[-20px] right-0" />
+                </div>
+              </Fieldset>
+            </div>
+            <Fieldset class="my-5">
+              <template #legend>
+                <div class="flex align-items-center text-primary">
+                  <span class="pi pi-book mr-2" />
+                  <span class="font-bold text-lg">Word & context</span>
+                </div>
+              </template>
+              <div class="mt-0">
+                <div class="flex t-place-content-between">
+                  <p>Word</p>
+                  <i v-tooltip.left="'The word which synonyms players will be guessing'" class="pi pi-info-circle" />
+                </div>
+                <InputText id="word" v-model="word" type="text" class="w-full" :class="{ 'p-invalid': wordErrorMessage }" />
+                <small id="text-error" class="p-error">{{
+                  wordErrorMessage || "&nbsp;"
+                }}</small>
+              </div>
+              <div class="mt-5">
+                <div class="flex t-place-content-between">
+                  <p>Context</p>
+                  <i v-tooltip.left="'Enter the context of word. You can use html tags'" class="pi pi-info-circle" />
+                </div>
+                <Editor
+                  id="context"
+                  v-model="context"
+                  :class="{ 'border-red-300 border-solid border-1': contextErrorMessage }"
+                  :modules="{
+                  }"
+                />
+                <small id="text-error" class="p-error">{{
+                  contextErrorMessage || "&nbsp;"
+                }}</small>
+              </div>
+            </Fieldset>
             <Fieldset>
               <template #legend>
                 <div class="flex align-items-center text-primary">
-                  <span class="pi pi-language mr-2" />
-                  <span class="font-bold text-lg">Language & difficulty</span>
+                  <span class="pi pi-file-import mr-2" />
+                  <span class="font-bold text-lg">Synonyms</span>
                 </div>
               </template>
-              <div class="p-float-label relative mt-3">
-                <Dropdown
-                  v-model="selectedDiff.value"
-                  input-id="dd-diff"
-                  :options="diffs.value"
-                  option-label="name"
-                  placeholder="Select difficulty"
-                  class="w-full"
-                >
-                  <template #value="slotProps">
-                    <div v-if="slotProps.value" class="flex align-items-center">
-                      <div>{{ slotProps.value.name }}</div>
-                    </div>
-                    <span v-else>
-                      {{ slotProps.placeholder }}
-                    </span>
-                  </template>
-                  <template #option="slotProps">
-                    <div class="flex align-items-center">
-                      <div>{{ slotProps.option.name }}</div>
-                    </div>
-                  </template>
-                </Dropdown>
-                <label for="dd-diff" class="">Select difficulty</label>
-                <i v-tooltip.left="'Define challenge difficulty so players can choose it depends them skill'" class="pi pi-info-circle absolute t-top-[-20px] right-0" />
+              <div class="relative">
+                <i v-tooltip.left="'The synonyms which is players will be guessing'" class="pi pi-info-circle absolute t-right-0 t-top-0" />
               </div>
-              <div class="p-float-label mt-5">
-                <Dropdown
-                  v-model="selectedLanguage.value"
-                  input-id="dd-lang"
-                  :options="langs.value"
-                  option-label="name"
-                  placeholder="Select language"
-                  class="w-full"
-                >
-                  <template #value="slotProps">
-                    <div v-if="slotProps.value" class="flex align-items-center">
-                      <div>{{ slotProps.value.langFull }}</div>
-                    </div>
-                    <span v-else>
-                      {{ slotProps.placeholder }}
-                    </span>
-                  </template>
-                  <template #option="slotProps">
-                    <div class="flex align-items-center">
-                      <div>{{ slotProps.option.langFull }}</div>
-                    </div>
-                  </template>
-                </Dropdown>
-                <label for="dd-lang" class="">Select Language</label>
-                <i v-tooltip.left="'Select language of word and synonyms'" class="pi pi-info-circle absolute t-top-[-20px] right-0" />
-              </div>
-            </Fieldset>
-          </div>
-          <Fieldset class="my-5">
-            <template #legend>
-              <div class="flex align-items-center text-primary">
-                <span class="pi pi-book mr-2" />
-                <span class="font-bold text-lg">Word & context</span>
-              </div>
-            </template>
-            <div class="mt-0">
-              <div class="flex t-place-content-between">
-                <p>Word</p>
-                <i v-tooltip.left="'The word which synonyms players will be guessing'" class="pi pi-info-circle" />
-              </div>
-              <InputText v-model="word.value" type="text" class="w-full" />
-            </div>
-            <div class="mt-5">
-              <div class="flex t-place-content-between">
-                <p>Context</p>
-                <i v-tooltip.left="'Enter the context of word. You can use html tags'" class="pi pi-info-circle" />
-              </div>
-              <Editor
-                v-model="context"
-                :modules="{
-                }"
-              />
-            </div>
-          </Fieldset>
-          <Fieldset>
-            <template #legend>
-              <div class="flex align-items-center text-primary">
-                <span class="pi pi-file-import mr-2" />
-                <span class="font-bold text-lg">Synonyms</span>
-              </div>
-            </template>
-            <div class="relative">
-              <i v-tooltip.left="'The synonyms which is players will be guessing'" class="pi pi-info-circle absolute t-right-0 t-top-0" />
-            </div>
-            <div class="">
-              <div class="t-p-5 flex">
-                <div class="p-float-label">
-                  <InputText id="syno" v-model="addingSynonym" />
-                  <label for="syno" class="p-float-label">Enter synonym</label>
-                  <Button :type="null" label="+" class="ml-3" @click="addSynonym" />
+              <div class="">
+                <div class="t-p-5 flex">
+                  <div class="p-float-label">
+                    <InputText id="syno" v-model="addingSynonym" />
+                    <label for="syno" class="p-float-label">Enter synonym</label>
+                    <Button :type="null" label="+" class="ml-3" @click="addSynonym" />
+                  </div>
                 </div>
-              </div>
-              <PickList
-                v-model="synonyms.value"
-                data-key="id"
-                class="pick-list"
-              >
-                <template #sourceheader>
-                  Not included
-                </template>
-                <template #targetheader>
-                  Included
-                </template>
-                <template #item="slotProps : {item: {synonym: string}}">
-                  <div class="flex flex-wrap p-2 align-items-center gap-3 pick-list">
-                    <div class="flex-1 flex flex-column gap-2">
-                      <span class="font-bold">{{ slotProps.item.value }}</span>
-                      <div class="flex align-items-center gap-2">
-                        <Badge v-tooltip="{value: `<p>Player will get <b>${slotProps.item.pointsForGuess} points</b> for guessing this synonym</p`, escape: true}" :value="slotProps.item.pointsForGuess" :severity="'info'" />
-                        <Badge v-tooltip="{value: `<p>Player will get <b>${slotProps.item.moneyForGuess} coins</b> for guessing this synonym</p`, escape: true}" :value="slotProps.item.moneyForGuess" :severity="'warning'" />
+                <PickList
+                  v-model="synonyms.value"
+                  data-key="id"
+                  class="pick-list"
+                >
+                  <template #sourceheader>
+                    Not included
+                  </template>
+                  <template #targetheader>
+                    Included
+                  </template>
+                  <template #item="slotProps : {item: {synonym: string}}">
+                    <div class="flex flex-wrap p-2 align-items-center gap-3 pick-list">
+                      <div class="flex-1 flex flex-column gap-2">
+                        <span class="font-bold">{{ slotProps.item.value }}</span>
+                        <div class="flex align-items-center gap-2">
+                          <Badge v-tooltip="{value: `<p>Player will get <b>${slotProps.item.pointsForGuess} points</b> for guessing this synonym</p`, escape: true}" :value="slotProps.item.pointsForGuess" :severity="'info'" />
+                          <Badge v-tooltip="{value: `<p>Player will get <b>${slotProps.item.moneyForGuess} coins</b> for guessing this synonym</p`, escape: true}" :value="slotProps.item.moneyForGuess" :severity="'warning'" />
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </template>
-              </PickList>
+                  </template>
+                </PickList>
+              </div>
+            </Fieldset>
+            <div class="mt-5">
+              <Button label="Create challenge" type="null" class="mx-auto block" @click="createTask" />
             </div>
-          </Fieldset>
-          <div class="mt-5">
-            <Button label="Create challenge" type="null" class="mx-auto block" @click="createTask" />
-          </div>
+          </form>
         </div>
       </div>
     </NuxtLayout>

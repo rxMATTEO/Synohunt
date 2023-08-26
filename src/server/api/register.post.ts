@@ -5,7 +5,7 @@ export default eventHandler(async (event) => {
   const account = await event.context.prisma.user.create({
     data: {
       email,
-      name: username, // todo add default image
+      name: username,
       points: 1,
       registrationDate: Date.now(),
       image: '/img/user-placeholder.png'
