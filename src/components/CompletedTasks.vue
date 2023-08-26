@@ -23,7 +23,7 @@ const completedTasks = (await useFetch('/api/task/completed', {
         <GradientBox :gradient-name="slotProps.data.Task.Difficulity.name.toLowerCase()" class="mb-5">
           <template #left-side>
             <div class="col-12 relative">
-              <div class="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
+              <div class="flex flex-column xl:flex-row xl:align-items-start px-4 py-2 gap-4">
                 <div class="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
                   <div class="flex flex-column align-items-center sm:align-items-start gap-3">
                     <div class="text-2xl font-bold text-900">
@@ -41,9 +41,11 @@ const completedTasks = (await useFetch('/api/task/completed', {
           </template>
           <template #right-side>
             <div class="p-4">
-              <div class="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
+              <div class="flex max-lg:t-flex-col align-items-center sm:align-items-end gap-3 sm:gap-2">
                 <div v-for="syno in slotProps.data.Task.Word.Synonym">
-                  <p>{{ syno.value }}</p>
+                  <Tag class="bg-gray-300 hover:bg-gray-500 transition-all animation-ease-in-out transition-duration-300">
+                    {{ syno.value }}
+                  </Tag>
                 </div>
               </div>
             </div>
