@@ -1,15 +1,26 @@
 <script setup lang="ts">
 import StickyElement from 'vue-sticky-element';
-if (process.client) {
-  await import('vue-sticky-element');
-}
+import { onMounted, ref } from 'vue';
+
+const top = ref(0);
+onMounted(() => {
+  window.addEventListener('scroll', () => {
+    setTimeout(() => {
+      top.value = (window.scrollY);
+    });
+  });
+});
 </script>
 
 <template>
   <StickyElement>
-    <div>
+    <div
+      :class="{
+        't-bg-black t-bg-opacity-10 t-backdrop-blur-3xl': top > 0
+      }"
+    >
       <!--  <div class="t-z-50 fixed left-0 right-0 top-10">-->
-      <div class="flex t-place-content-between t-items-center lg:!t-px-52 lg:mx-10 gap-3">
+      <div class="flex t-place-content-between t-items-center lg:!t-px-52 lg:mx-10 gap-3 py-1">
         <div>
           <NuxtLink to="/" class="font-bold t-tracking-wider">
             <div class="md:w-3rem md:h-3rem w-5rem h-5rem flex align-items-center max-md:t-flex-col">

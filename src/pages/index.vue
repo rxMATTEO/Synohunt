@@ -1,9 +1,8 @@
 <template>
   <div class="surface-ground">
     <div class="h-screen t-max-h-screen">
-      <div class="text-color py-3 absolute right-0 left-0">
-        <LandingHeader />
-      </div>
+      <LandingHeader />
+      <div class="text-color py-3 absolute right-0 left-0" />
       <div class="lg:!t-px-52 lg:mx-10 t-px-3 max-w-full h-full">
         <div class="h-full">
           <div class="flex h-full align-items-center">
