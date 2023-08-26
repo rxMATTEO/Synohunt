@@ -17,15 +17,15 @@ export const usePointsStore = defineStore('pointsStore', {
       state.toNextLvl = (await useFetch('/api/points/toNextLevel', {
         method: 'POST',
         body: {
-          userId: account.userId
+          userId: account.id
         }
       })).data.value;
       return state.toNextLvl;
     }
   },
   actions: {
-    calculatePercentOfPointsProgress () {
-      const pointsToNextLvl = this.toNextLvl;
+    async calculatePercentOfPointsProgress () {
+      const pointsToNextLvl = await this.getPointsToNextLvl;
       const currentPoints = this.currentPoints;
       const nextLvlPoints = pointsToNextLvl.need;
       this.progress = +((currentPoints / nextLvlPoints) * 100).toFixed(1);
@@ -40,13 +40,14 @@ export const usePointsStore = defineStore('pointsStore', {
           amount
         }
       });
-      this.currentPoints = fetch.data.value.points;
-      this.progress = await this.calculatePercentOfPointsProgress();
 
-      if (this.progress >= 100) {
+      if (this.currentPoints + 5 >= this.toNextLvl.need) {
         const levelStore = useLevelStore();
         levelStore.upgradeLvl();
       }
+      this.currentPoints = fetch.data.value.points;
+      console.log(this.currentPoints, this.toNextLvl.need);
+      this.progress = await this.calculatePercentOfPointsProgress();
       return fetch.data;
     }
   }
