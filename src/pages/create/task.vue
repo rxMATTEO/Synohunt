@@ -19,9 +19,10 @@ type Synonyms = {
   value: [ Array<Synonym>, Array<Synonym> ]
 }
 
-const { handleSubmit, resetForm } = useForm();
-const { value: word, errorMessage: wordErrorMessage } = useField('word', value => validateWeakness(value, 'Word'));
+const { handleSubmit, resetForm, setErrors } = useForm();
+let { value: word, errorMessage: wordErrorMessage } = useField('word', value => validateWeakness(value, 'Word'));
 const { value: context, errorMessage: contextErrorMessage } = useField('context', value => validateWeakness(value, 'Context'));
+const { value: synos, errorMessage: synosErrorMessage } = useField('synos', () => synonyms.value[1].length > 0 ? true : 'Included synonyms is empty');
 
 const synonyms = reactive<Synonyms>({ value: [[], []] });
 const taskFetched = ref({});
@@ -54,7 +55,7 @@ async function randomGenerateTask (bindValues = true) {
   if (bindValues) {
     word = task.word.word;
     synonyms.value[0] = task.synos;
-    context.value = task.task.description;
+    context = task.task.description;
   }
   taskFetched.value = task;
   isRandomTaskGenerating.value = false;
@@ -62,6 +63,12 @@ async function randomGenerateTask (bindValues = true) {
 
 const isDialogVisible = ref(false);
 const createTask = handleSubmit(async () => {
+  if (synonyms.value[1].length > 0) {
+    setErrors({
+      synos: 'Included synonyms is empty'
+    });
+    return;
+  }
   if (Object.keys(taskFetched.value).length === 0) {
     await randomGenerateTask(false);
     taskFetched.value.synos = synonyms.value[1].map((syno) => {
@@ -69,7 +76,7 @@ const createTask = handleSubmit(async () => {
       return syno;
     });
   }
-  taskFetched.value.task.description = context.value;
+  taskFetched.value.task.description = context;
   taskFetched.value.word.word = word;
   taskFetched.value.task.isVisible = true;
   const created = await $fetch('/api/task/update', {
@@ -87,7 +94,14 @@ function gotoMyChallenges () {
 const addingSynonym = ref('');
 
 function addSynonym () {
-  if (!addingSynonym.value) { return; }
+  if (!addingSynonym.value) {
+    isAddSynoShake.value = true;
+    setTimeout(() => isAddSynoShake.value = false, 2000);
+    return;
+  }
+  setErrors({
+    synos: ''
+  });
   synonyms.value[1].push({
     value: addingSynonym.value,
     moneyForGuess: 10,
@@ -96,6 +110,7 @@ function addSynonym () {
   addingSynonym.value = '';
 }
 // todo add button loader and shake button up
+const isAddSynoShake = ref(false);
 </script>
 
 <template>
@@ -120,7 +135,7 @@ function addSynonym () {
               </Button>
             </div>
           </div>
-          <form>
+          <form @submit.prevent>
             <h1 class="text-4xl">
               Create new challenge
             </h1>
@@ -235,13 +250,18 @@ function addSynonym () {
                   <div class="p-float-label">
                     <InputText id="syno" v-model="addingSynonym" />
                     <label for="syno" class="p-float-label">Enter synonym</label>
-                    <Button :type="null" label="+" class="ml-3" @click="addSynonym" />
+                    <Button :type="null" label="+" class="ml-3" :class="{ 'shake': isAddSynoShake }" @click="addSynonym" />
                   </div>
                 </div>
+                <small id="text-error" class="p-error">{{
+                  synosErrorMessage || "&nbsp;"
+                }}</small>
                 <PickList
+                  id="synos"
                   v-model="synonyms.value"
                   data-key="id"
                   class="pick-list"
+                  :class="{ 'border-red-300 border-solid border-1': synosErrorMessage }"
                 >
                   <template #sourceheader>
                     Not included
@@ -249,7 +269,7 @@ function addSynonym () {
                   <template #targetheader>
                     Included
                   </template>
-                  <template #item="slotProps : {item: {synonym: string}}">
+                  <template #item="slotProps : {item: Synonym}">
                     <div class="flex flex-wrap p-2 align-items-center gap-3 pick-list">
                       <div class="flex-1 flex flex-column gap-2">
                         <span class="font-bold">{{ slotProps.item.value }}</span>
@@ -263,8 +283,8 @@ function addSynonym () {
                 </PickList>
               </div>
             </Fieldset>
-            <div class="mt-5">
-              <Button label="Create challenge" type="null" class="mx-auto block" @click="createTask" />
+            <div class="mt-5 prevent-tw">
+              <Button label="Create challenge" type="submit" class="mx-auto block" @click="createTask" />
             </div>
           </form>
         </div>
