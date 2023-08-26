@@ -8,10 +8,11 @@ useHead({
   <div>
     <NuxtLayout name="header-n-sidebar">
       <PaddingBox>
-        <div class="py-3 text-4xl">
-          Your created challenges
+        <div
+          class="surface-ground t-rounded-md p-5"
+        >
+          <CreatedTasks />
         </div>
-        <CreatedTasks />
       </PaddingBox>
     </NuxtLayout>
   </div>
