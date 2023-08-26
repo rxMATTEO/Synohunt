@@ -23,8 +23,9 @@ import ChallengeBox from '@/components/ChallengeBox.vue';
               </div>
             </div>
             <div class="w-full max-md:t-mt-3 md:t-w-1/4 md:t-pl-5">
-              <div class="p-3 surface-ground t-rounded-md h-full" />
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium animi atque autem cum eos est eum exercitationem expedita explicabo labore maxime, nobis quasi sit suscipit ut. Accusamus culpa perspiciatis quisquam.
+              <div class="p-3 surface-ground t-rounded-md h-full">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium animi atque autem cum eos est eum exercitationem expedita explicabo labore maxime, nobis quasi sit suscipit ut. Accusamus culpa perspiciatis quisquam.
+              </div>
             </div>
           </div>
 
