@@ -8,6 +8,10 @@ const msg = (await useFetch('/api/messages/getbyid', {
     messageId: id
   }
 })).data.value as Message;
+
+useHead({
+  title: `${msg.value}`
+});
 </script>
 
 <template>

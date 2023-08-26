@@ -79,6 +79,11 @@ function shake () {
 }
 
 const task = reactive<{value: TaskResponse}>({ value: (await useFetch(`/api/task/${route.params.taskId}`)).data });
+
+useHead({
+  title: `${task.value.Word.word}`
+});
+
 const synonyms = reactive({ value: task.value.Word.Synonym });
 const solvedSynonyms = reactive({ value: [] });
 const userSyno = ref('');

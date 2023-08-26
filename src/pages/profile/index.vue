@@ -1,8 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import ProfileStats from '../../components/ProfileStats.vue';
-import CompletedTasks from '../../components/CompletedTasks.vue'; // to lazy
-import TabmenuLoader from '../../components/loading/TabmenuLoader.vue';
+import CompletedTasks from '../../components/CompletedTasks.vue';
+import TabmenuLoader from '../../components/loading/TabmenuLoader.vue'; // to lazy
+
+useHead({
+  title: 'My profile'
+});
 
 const tabs = [
   ProfileStats,

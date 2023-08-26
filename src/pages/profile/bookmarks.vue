@@ -6,6 +6,10 @@ const completedTasks = (await useFetch('/api/task/allBookmarks', {
     userId: account.id
   }
 })).data.value;
+
+useHead({
+  title: 'Bookmarks'
+});
 </script>
 
 <template>

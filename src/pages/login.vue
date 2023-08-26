@@ -7,6 +7,10 @@ import { useField, useForm } from 'vee-validate';
 import type { PublicKeyResponse } from '@/server/api/publicKey.post';
 import validateWeakness, { emailRegex } from '@/composables/validator';
 
+useHead({
+  title: 'Login'
+});
+
 const { signIn, status, data } = useAuth();
 
 definePageMeta({

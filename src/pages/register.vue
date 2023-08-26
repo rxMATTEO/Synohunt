@@ -6,6 +6,10 @@ import { definePageMeta } from '#imports';
 import type { JwkResponse } from '@/server/api/jwk.post';
 import validateWeakness, { emailRegex } from '@/composables/validator';
 
+useHead({
+  title: 'Register'
+});
+
 definePageMeta({
   auth: {
     unauthenticatedOnly: true,

@@ -1,4 +1,7 @@
 <script setup lang="ts">
+useHead({
+  title: 'Leaderboard'
+});
 // leaderbord 4 point creator most tasks, coins and shit
 </script>
 

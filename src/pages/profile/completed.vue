@@ -1,5 +1,7 @@
 <script lang="ts" setup>
-
+useHead({
+  title: 'Completed challenges'
+});
 </script>
 
 <template>

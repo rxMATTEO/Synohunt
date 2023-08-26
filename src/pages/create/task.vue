@@ -3,6 +3,10 @@ import { ref, onMounted, reactive } from 'vue';
 import { Synonym } from '@prisma/client';
 import type { ServerDiff, ServerLang } from '../dashboard.vue';
 
+useHead({
+  title: 'Create task'
+});
+
 const { data: { value: { user: { account } } } } = useAuth();
 const diffs = reactive({ value: [] as ServerDiff[] });
 const langs = reactive({ value: [] as ServerLang[] });
