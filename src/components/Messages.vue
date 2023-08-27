@@ -11,11 +11,13 @@ const messageStore = useMessageStore();
 const { messages } = storeToRefs(messageStore);
 const logoSpin = ref(false);
 const router = useRouter();
+// todo add message on notification set all readed or smrthmng
 const buttonItems = [
   {
     label: 'Update',
     icon: 'pi pi-refresh',
     command: (e) => {
+      update();
     }
   },
   {
@@ -24,14 +26,7 @@ const buttonItems = [
     command: async () => {
       await messageStore.removeMessage(messages.value.value);
     }
-  },
-  {
-    label: 'Vue Website',
-    icon: 'pi pi-external-link',
-    command: () => {
-    }
-  },
-  { label: 'Upload', icon: 'pi pi-upload' }
+  }
 ];
 
 const selectedMsg = ref({});

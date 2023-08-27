@@ -46,7 +46,6 @@ export const usePointsStore = defineStore('pointsStore', {
         levelStore.upgradeLvl();
       }
       this.currentPoints = fetch.data.value.points;
-      console.log(this.currentPoints, this.toNextLvl.need);
       this.progress = await this.calculatePercentOfPointsProgress();
       return fetch.data;
     }
