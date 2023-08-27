@@ -22,6 +22,28 @@ const bookmarked = ref(
     })
   ).data.value
 );
+
+const completed = ref(
+  (
+    await useFetch('/api/task/completed', {
+      method: 'POST',
+      body: {
+        userId: account.value.id
+      }
+    })
+  ).data.value
+);
+
+const created = ref(
+  (
+    await useFetch('/api/task/created', {
+      method: 'POST',
+      body: {
+        userId: account.value.id
+      }
+    })
+  ).data.value
+);
 </script>
 
 <template>
@@ -45,41 +67,9 @@ const bookmarked = ref(
               <span>{{ account.points }}</span>
             </div>
             <div>
-              <b>Total completed challenge: </b>
-              <span>{{ account.Level.value }}</span>
+              <b>Money: </b>
+              <span>{{ account.Money.value }}</span>
             </div>
-          </div>
-        </div>
-      </div>
-      <div class="md:t-w-1/3 max-md:t-mt-3">
-        <div>
-          <div>
-            <b>Rank: </b>
-            <span>{{ account.Level.value }}</span>
-          </div>
-          <div>
-            <b>Points: </b>
-            <span>{{ account.points }}</span>
-          </div>
-          <div>
-            <b>Total completed challenge: </b>
-            <span>{{ account.Level.value }}</span>
-          </div>
-        </div>
-      </div>
-      <div class="t-w-1/3 max-md:t-mt-3">
-        <div>
-          <div>
-            <b>Rank: </b>
-            <span>{{ account.Level.value }}</span>
-          </div>
-          <div>
-            <b>Points: </b>
-            <span>{{ account.points }}</span>
-          </div>
-          <div>
-            <b>Total completed challenge: </b>
-            <span>{{ account.Level.value }}</span>
           </div>
         </div>
       </div>
@@ -91,20 +81,12 @@ const bookmarked = ref(
         </p>
         <div class="flex mt-3">
           <div class="t-w-12 max-md:t-hidden">
-            <i class="pi-chart-pie pi" style="font-size: 2.5rem" />
+            <i class="pi-chart-line pi" style="font-size: 2.5rem" />
           </div>
           <div>
             <div>
-              <b>Rank: </b>
-              <span>{{ account.Level.value }}</span>
-            </div>
-            <div>
-              <b>Points: </b>
-              <span>{{ account.points }}</span>
-            </div>
-            <div>
               <b>Total completed challenge: </b>
-              <span>{{ account.Level.value }}</span>
+              <span>{{ completed.length }}</span>
             </div>
           </div>
         </div>
@@ -127,28 +109,28 @@ const bookmarked = ref(
         </div>
       </div>
     </div>
-    <div class="flex relative mt-5 max-md:t-flex-col">
+    <div class="flex relative max-md:mt-5 max-md:t-flex-col">
       <div class="t-w-1/2">
         <p class="relative md:t-left-12 text-xl mt-3">
           Contributions
         </p>
         <div class="flex">
           <div class="t-w-12 max-md:t-hidden">
-            <i class="pi-chart-pie pi" style="font-size: 2.5rem" />
+            <i class="pi-th-large pi" style="font-size: 2.5rem" />
           </div>
           <div>
             <div>
-              <b>Comments: </b>
-              <span>{{ 0 }}</span>
+              <b>Created tasks: </b>
+              <span>{{ created.length }}</span>
             </div>
             <div>
               <b>Bookmarks: </b>
               <span>{{ bookmarked.length }}</span>
             </div>
-            <!--            <div>-->
-            <!--              <b>Mb created challenge: </b>-->
-            <!--              <span>{{ account.Level.value }}</span>-->
-            <!--            </div>-->
+          <!--            <div>-->
+          <!--              <b>Mb created challenge: </b>-->
+          <!--              <span>{{ account.Level.value }}</span>-->
+          <!--            </div>-->
           </div>
         </div>
       </div>
