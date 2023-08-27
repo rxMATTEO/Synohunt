@@ -32,7 +32,7 @@ const { level } = storeToRefs(levelStore);
         <div>
           <p>У вас <span class="text-primary">{{ currentPoints }}</span> очков</p>
           <p class="mt-3">
-            Для следующего уровня нужно: {{ pointsToNextLvl.need }} очковl
+            Для следующего уровня нужно: {{ pointsToNextLvl.need }} очков
           </p>
         </div>
         <div class="flex flex-row mt-1">
