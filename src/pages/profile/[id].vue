@@ -1,12 +1,18 @@
 <script setup lang="ts">
+import { useRoute } from '#imports';
 
+const { params: { id: name } } = useRoute();
+const account = (await useFetch('/api/user', {
+  method: 'POST',
+  body: {
+    name
+  }
+})).data.value.account;
 </script>
 
 <template>
   <NuxtLayout name="header-n-sidebar">
-    <PaddingBox>
-      a
-    </PaddingBox>
+    <Profile :account="account" />
   </NuxtLayout>
 </template>
 

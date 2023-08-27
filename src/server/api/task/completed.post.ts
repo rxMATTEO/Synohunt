@@ -9,11 +9,11 @@ export default defineEventHandler(async (event): Promise<CompletedTaskResponse> 
 
   const completedTasks = await event.context.prisma.completedTask.findMany({
     include: {
-      User: true,
       Task: {
         include: {
           Difficulity: true,
           Language: true,
+          User: true,
           Word: {
             include: {
               Synonym: true
