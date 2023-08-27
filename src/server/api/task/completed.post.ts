@@ -1,7 +1,7 @@
 import { readBody } from 'h3';
-import type { CompletedTask, Task, Word } from '@prisma/client';
+import type { CompletedTask, Task, Word, User } from '@prisma/client';
 
-export type CompletedTaskResponse = CompletedTask & { Task: Task & { Word: Word } }& {
+export type CompletedTaskResponse = CompletedTask & { User: User } & { Task: Task & { Word: Word } }& {
   timesComplete: number
 }
 export default defineEventHandler(async (event): Promise<CompletedTaskResponse> => {
@@ -9,6 +9,7 @@ export default defineEventHandler(async (event): Promise<CompletedTaskResponse> 
 
   const completedTasks = await event.context.prisma.completedTask.findMany({
     include: {
+      User: true,
       Task: {
         include: {
           Difficulity: true,
