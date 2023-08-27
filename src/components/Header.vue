@@ -67,7 +67,7 @@ const { messages } = storeToRefs(messagesStore);
 </script>
 
 <template>
-  <StickyElement stuck-class="vue-sticky-element--stuck width-reset">
+  <StickyElement stuck-class="vue-sticky-element--stuck width-reset" :force-show="isExpanded.value">
     <div :class="{'!t-left-56': isExpanded.value, 'left-0': !isExpanded.value}" class=" t-z-10 px-2 max-md:!t-left-0 t-transition-all t-ease-in-out t-duration-200 fixed surface-card shadow-8 right-0 header">
       <div class="flex align-items-center justify-content-between w-full t-py-[.7rem]">
         <div>
