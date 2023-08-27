@@ -18,6 +18,7 @@ const completedTasks = (await useFetch('/api/task/completed', {
     :rows="5"
   >
     <!--    todo remember solved synonyms on plaay page pls-->
+    <!--    todo user page profile-->
     <template #list="slotProps">
       <NuxtLink :to="`/play/${slotProps.data.Task.id}`" class="block w-full">
         <GradientBox :gradient-name="slotProps.data.Task.Difficulity.name.toLowerCase()" class="mb-5">
@@ -33,7 +34,7 @@ const completedTasks = (await useFetch('/api/task/completed', {
                   </div>
                 </div>
               </div>
-              <div class="relative t-bottom-0 t-left-5">
+              <div class="relative t-bottom-0 t-left-6">
                 <Tag :value="slotProps.data.Task.Language.langFull" />
                 <Tag class="ml-3" :value="slotProps.data.Task.Difficulity.name" />
               </div>
@@ -41,7 +42,13 @@ const completedTasks = (await useFetch('/api/task/completed', {
           </template>
           <template #right-side>
             <div class="p-4">
-              <div class="flex max-lg:t-flex-col align-items-center sm:align-items-end gap-3 sm:gap-2">
+              <div class="flex align-items-center">
+                <div class="flex align-items-center">
+                  <i class="pi pi-bookmark-fill block h-full" />
+                  <span class="pl-1">3</span>
+                </div>
+              </div>
+              <div class="flex max-lg:t-flex-col align-items-center sm:align-items-end gap-3 sm:gap-2 absolute t-bottom-5">
                 <div v-for="syno in slotProps.data.Task.Word.Synonym">
                   <Tag class="bg-gray-300 hover:bg-gray-500 transition-all animation-ease-in-out transition-duration-300">
                     {{ syno.value }}
