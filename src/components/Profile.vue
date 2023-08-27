@@ -29,14 +29,6 @@ const items = ref([
     icon: 'pi pi-fw pi-calendar'
   },
   {
-    label: 'Comments',
-    icon: 'pi pi-fw pi-pencil'
-  },
-  {
-    label: 'Documentation',
-    icon: 'pi pi-fw pi-file'
-  },
-  {
     label: 'Settings',
     icon: 'pi pi-fw pi-cog'
   }

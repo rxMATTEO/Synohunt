@@ -117,12 +117,6 @@ const { messages } = storeToRefs(messagesStore);
                 </div>
                 <Divider />
                 <div class="link flex t-items-center">
-                  <NuxtLink to="/">
-                    <Button icon="pi p-text-secondary pi-comments mr-1" unstyled class="t-pl-1 " label="Commented challenges" />
-                  </NuxtLink>
-                </div>
-                <Divider />
-                <div class="link flex t-items-center">
                   <NuxtLink to="/profile/completed">
                     <Button icon="pi p-text-secondary pi-check-circle mr-1" label="Completed challenges" unstyled />
                   </NuxtLink>
