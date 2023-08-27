@@ -12,7 +12,7 @@ const account = (await useFetch('/api/user', {
 
 <template>
   <NuxtLayout name="header-n-sidebar">
-    <Profile :account="account" />
+    <Profile :account="account" :foreign="true" />
   </NuxtLayout>
 </template>
 

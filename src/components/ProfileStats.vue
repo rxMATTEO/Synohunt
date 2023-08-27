@@ -12,13 +12,6 @@ const { data: percs, pending } = await useAsyncData('points', () => {
   const pointsStore = usePointsStore();
   return pointsStore.calculatePercentOfPointsProgress();
 }, { server: false, lazy: true });
-// const {
-//   data: {
-//     value: {
-//       user: { account }
-//     }
-//   }
-// } = useAuth();
 const bookmarked = ref(
   (
     await useFetch('/api/task/allBookmarks', {
@@ -32,13 +25,13 @@ const bookmarked = ref(
 </script>
 
 <template>
-  <div class="p-5 relative">
+  <div class="md:p-5 p-3 relative">
     <div class="flex mt-3 max-md:t-flex-col">
-      <div class="t-w-1/3">
-        <p class="text-xl absolute t-top-3 t-left-20">
+      <div class="md:t-w-1/3">
+        <p class="text-xl absolute t-top-3 md:t-left-20">
           Progress
         </p>
-        <div class="flex">
+        <div class="flex mt-3">
           <div class="t-w-12 max-md:t-hidden">
             <i class="pi-chart-pie pi" style="font-size: 2.5rem" />
           </div>
@@ -58,7 +51,7 @@ const bookmarked = ref(
           </div>
         </div>
       </div>
-      <div class="t-w-1/3 max-md:t-mt-3">
+      <div class="md:t-w-1/3 max-md:t-mt-3">
         <div>
           <div>
             <b>Rank: </b>
@@ -93,10 +86,10 @@ const bookmarked = ref(
     </div>
     <div class="flex relative mt-5 max-md:t-flex-col">
       <div class="t-w-1/2">
-        <p class="relative t-left-12">
+        <p class="relative md:t-left-12 text-xl">
           Honor breakdown
         </p>
-        <div class="flex">
+        <div class="flex mt-3">
           <div class="t-w-12 max-md:t-hidden">
             <i class="pi-chart-pie pi" style="font-size: 2.5rem" />
           </div>
@@ -116,7 +109,7 @@ const bookmarked = ref(
           </div>
         </div>
       </div>
-      <div class="t-w-1/2">
+      <div class="md:t-w-1/2 mt-3">
         <p>Rank breakdown</p>
         <div>
           <div v-if="pending">
@@ -136,7 +129,7 @@ const bookmarked = ref(
     </div>
     <div class="flex relative mt-5 max-md:t-flex-col">
       <div class="t-w-1/2">
-        <p class="relative t-left-12">
+        <p class="relative md:t-left-12 text-xl mt-3">
           Contributions
         </p>
         <div class="flex">
@@ -146,16 +139,16 @@ const bookmarked = ref(
           <div>
             <div>
               <b>Comments: </b>
-              <span>{{ account.Level.value }}</span>
+              <span>{{ 0 }}</span>
             </div>
             <div>
               <b>Bookmarks: </b>
               <span>{{ bookmarked.length }}</span>
             </div>
-            <div>
-              <b>Mb created challenge: </b>
-              <span>{{ account.Level.value }}</span>
-            </div>
+            <!--            <div>-->
+            <!--              <b>Mb created challenge: </b>-->
+            <!--              <span>{{ account.Level.value }}</span>-->
+            <!--            </div>-->
           </div>
         </div>
       </div>

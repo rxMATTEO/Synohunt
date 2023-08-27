@@ -5,7 +5,8 @@ import CompletedTasks from '@/components/CompletedTasks.vue';
 import TabmenuLoader from '@/components/loading/TabmenuLoader.vue'; // to lazy
 
 type ProfileProps = {
-  account: object
+  account: object,
+  foreign: boolean
 }
 const props = defineProps<ProfileProps>();
 
@@ -113,7 +114,7 @@ function changeTab (e) {
         <div v-if="pending">
           <TabmenuLoader />
         </div>
-        <div v-else>
+        <div v-else-if="!foreign">
           <TabMenu v-model:activeIndex="selectedTabIndex" :model="items" @tab-change="changeTab" />
         </div>
         <div class="surface-ground border-round-bottom-xl">
