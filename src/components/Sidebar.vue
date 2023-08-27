@@ -29,7 +29,7 @@ const navLinks = ref([
       {
         title: 'Play',
         description: 'Complete challenges & practice',
-        logoPath: 'a',
+        logoPath: 'pi-angle-double-right pi',
         to: '/play/random'
       },
       {
@@ -47,7 +47,7 @@ const navLinks = ref([
         title: 'Create challenge',
         description: 'Create your own challenge for players and get coins',
         to: '/create/task',
-        logoPath: 'a'
+        logoPath: 'pi-plus-circle pi'
       }
     ]
   },
@@ -58,18 +58,18 @@ const navLinks = ref([
         title: 'Leaderboard',
         to: '/leaderboard',
         description: 'Achieve honor and move up the global leaderboards',
-        logoPath: 'a'
+        logoPath: 'pi pi-fw pi-chart-bar'
       },
       {
         title: 'Completed challenges',
         description: 'Watch your solutions',
-        logoPath: 'a',
+        logoPath: 'pi-check-circle pi',
         to: '/profile/completed'
       },
       {
         title: 'My challenges',
         description: 'Check out your challenges',
-        logoPath: 'a',
+        logoPath: 'pi-chart-line pi',
         to: '/profile/challenges'
       }
     ]
@@ -80,7 +80,7 @@ const navLinks = ref([
       {
         title: 'About',
         description: 'Check out our advantages',
-        logoPath: 'a',
+        logoPath: 'pi-question-circle pi',
         to: '/about'
       }
     ]
@@ -111,8 +111,8 @@ function onLinkClick () {
           <div class="mt-1">
             <NuxtLink v-for="link in navItem.links" :to="link.to" class="hover:surface-200 block transition-colors t-ease-in-out t-duration-200" @click="onLinkClick">
               <div class="flex px-1">
-                <div class="t-w-1/6">
-                  {{ link.logoPath }}
+                <div class="t-w-1/6 flex align-items-center">
+                  <i :class="link.logoPath" />
                 </div>
                 <div class="t-w-5/6">
                   <p class="t-font-bold">
