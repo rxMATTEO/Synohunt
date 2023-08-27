@@ -1,11 +1,13 @@
 <script setup lang="ts">
+import type { CompletedTaskResponse } from '@/server/api/task/completed.post';
+
 const { data: { value: { user: { account } } } } = useAuth();
-const completedTasks = (await useFetch('/api/task/completed', {
+const completedTasks = ref<CompletedTaskResponse>((await useFetch('/api/task/completed', {
   method: 'POST',
   body: {
     userId: account.id
   }
-})).data.value;
+})).data.value);
 </script>
 
 <template>
@@ -19,7 +21,7 @@ const completedTasks = (await useFetch('/api/task/completed', {
   >
     <!--    todo remember solved synonyms on plaay page pls-->
     <!--    todo user page profile-->
-    <template #list="slotProps">
+    <template #list="slotProps: {data: CompletedTaskResponse}">
       <NuxtLink :to="`/play/${slotProps.data.Task.id}`" class="block w-full">
         <GradientBox :gradient-name="slotProps.data.Task.Difficulity.name.toLowerCase()" class="mb-5">
           <template #left-side>
@@ -42,10 +44,14 @@ const completedTasks = (await useFetch('/api/task/completed', {
           </template>
           <template #right-side>
             <div class="p-4">
-              <div class="flex align-items-center">
+              <div class="flex align-items-center gap-3 absolute t-right-5">
                 <div class="flex align-items-center">
                   <i class="pi pi-bookmark-fill block h-full" />
                   <span class="pl-1">3</span>
+                </div>
+                <div class="flex align-items-center">
+                  <i class="pi pi-check block h-full" />
+                  <span class="pl-1">{{ slotProps.data.timesComplete }}</span>
                 </div>
               </div>
               <div class="flex max-lg:t-flex-col align-items-center sm:align-items-end gap-3 sm:gap-2 absolute t-bottom-5">

@@ -55,7 +55,7 @@ const createdTasks = ref((await useFetch('/api/task/created', {
             </div>
           </template>
           <template #right-side>
-            <div v-if="slotProps.data.Word.Synonym.length > 1" class="p-4">
+            <div v-if="slotProps.data.Word.Synonym.length > 1" class="p-4 overflow-hidden">
               <div class="flex max-lg:t-flex-col align-items-center sm:align-items-end gap-3 sm:gap-2">
                 <div v-for="syno in slotProps.data.Word.Synonym" :key="syno.id">
                   <Tag class="bg-gray-300 hover:bg-gray-500 transition-all animation-ease-in-out transition-duration-300">

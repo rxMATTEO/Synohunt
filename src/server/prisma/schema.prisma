@@ -116,8 +116,8 @@ model CompletedTask {
   userId String
   taskId Int
 
-  User User @relation(fields: [userId], references: [id])
-  Task Task @relation(fields: [taskId], references: [id])
+  User User[]
+  Task Task   @relation(fields: [taskId], references: [id])
 }
 
 model BookmarkedTask {
