@@ -7,7 +7,7 @@ import TabmenuLoader from '@/components/loading/TabmenuLoader.vue'; // to lazy
 type ProfileProps = {
   account: object
 }
-defineProps<ProfileProps>();
+const props = defineProps<ProfileProps>();
 
 useHead({
   title: 'My profile'
@@ -67,6 +67,7 @@ function changeTab (e) {
             </div>
             <div>
               <b>Last seen: </b>
+              <!--              todo do this-->
               <span class="white-space-nowrap">{{ 'Aug 2023' }}</span>
             </div>
           </div>
@@ -116,7 +117,7 @@ function changeTab (e) {
           <TabMenu v-model:activeIndex="selectedTabIndex" :model="items" @tab-change="changeTab" />
         </div>
         <div class="surface-ground border-round-bottom-xl">
-          <component :is="tabs[selectedTabIndex]" />
+          <component :is="tabs[selectedTabIndex]" v-bind="props" />
         </div>
       </div>
     </PaddingBox>

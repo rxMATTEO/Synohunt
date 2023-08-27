@@ -20,7 +20,6 @@ const completedTasks = ref<CompletedTaskResponse>((await useFetch('/api/task/com
     :rows="5"
   >
     <!--    todo remember solved synonyms on plaay page pls-->
-    <!--    todo user page profile-->
     <template #list="slotProps: {data: CompletedTaskResponse}">
       <NuxtLink :to="`/play/${slotProps.data.Task.id}`" class="block w-full">
         <GradientBox :gradient-name="slotProps.data.Task.Difficulity.name.toLowerCase()" class="mb-5">

@@ -1,25 +1,30 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { usePointsStore } from '../stores/pointsStore';
+type ProfileStatsProps = {
+  account: object
+}
+const props = defineProps<ProfileStatsProps>();
+const account = ref(props.account);
 const pointsStore = usePointsStore();
 const percents = ref(0);
 const { data: percs, pending } = await useAsyncData('points', () => {
   const pointsStore = usePointsStore();
   return pointsStore.calculatePercentOfPointsProgress();
 }, { server: false, lazy: true });
-const {
-  data: {
-    value: {
-      user: { account }
-    }
-  }
-} = useAuth();
+// const {
+//   data: {
+//     value: {
+//       user: { account }
+//     }
+//   }
+// } = useAuth();
 const bookmarked = ref(
   (
     await useFetch('/api/task/allBookmarks', {
       method: 'POST',
       body: {
-        userId: account.id
+        userId: account.value.id
       }
     })
   ).data.value
