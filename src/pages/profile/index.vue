@@ -51,7 +51,7 @@ function changeTab (e) {
 <template>
   <div>
     <NuxtLayout name="header-n-sidebar">
-      <Profile :account="account" />
+      <Profile :account="account" :foreign="false" />
     </NuxtLayout>
   </div>
 </template>

@@ -61,16 +61,16 @@ const navLinks = ref([
         logoPath: 'a'
       },
       {
-        title: 'Practice',
-        description: 'Complete challenges & shit',
+        title: 'Completed challenges',
+        description: 'Watch your solutions',
         logoPath: 'a',
-        to: '/'
+        to: '/profile/completed'
       },
       {
-        title: 'Practice',
-        description: 'Complete challenges & shit',
+        title: 'My challenges',
+        description: 'Check out your challenges',
         logoPath: 'a',
-        to: '/'
+        to: '/profile/challenges'
       }
     ]
   },
