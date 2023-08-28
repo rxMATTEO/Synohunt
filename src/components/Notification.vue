@@ -32,12 +32,14 @@ const notificationsStore = useNotificationsStore();
 const unsubscribe = notificationsStore.$onAction(({ name, args }) => {
   if (name === 'addNotification') {
     const dispatched: NotificationProps = args[0];
-    toast.add({ life: 9999, detail: 'a', summary: 'b', notif: dispatched });
+    toast.add({ life: 5000, detail: 'a', summary: 'b', notif: dispatched });
     notification.value[dispatched.image] = dispatched;
   }
 });
 
 const hiddenIds = ref({});
+
+// todo delete toasts from object and do some id idk
 </script>
 
 <template>
