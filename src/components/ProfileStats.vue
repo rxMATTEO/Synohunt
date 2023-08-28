@@ -20,7 +20,7 @@ const bookmarked = ref(
         userId: account.value.id
       }
     })
-  ).data.value
+  ).data.value || []
 );
 
 const completed = ref(
@@ -31,7 +31,7 @@ const completed = ref(
         userId: account.value.id
       }
     })
-  ).data.value
+  ).data.value || []
 );
 
 const created = ref(
@@ -42,22 +42,22 @@ const created = ref(
         userId: account.value.id
       }
     })
-  ).data.value
+  ).data.value || []
 );
 </script>
 
 <template>
-  <div class="md:p-5 p-3 relative">
+  <div class="relative">
     <div class="flex mt-3 max-md:t-flex-col">
       <div class="md:t-w-1/3">
-        <p class="text-xl absolute t-top-3 md:t-left-20">
+        <p class="text-xl absolute md:t-left-12">
           Progress
         </p>
-        <div class="flex mt-3">
+        <div class="flex mt-5">
           <div class="t-w-12 max-md:t-hidden">
             <i class="pi-chart-pie pi" style="font-size: 2.5rem" />
           </div>
-          <div>
+          <div class="mt-3">
             <div>
               <b>Rank: </b>
               <span>{{ account.Level.value }}</span>
@@ -75,7 +75,7 @@ const created = ref(
       </div>
     </div>
     <div class="flex relative mt-5 max-md:t-flex-col">
-      <div class="t-w-1/2">
+      <div class="md:t-w-1/2">
         <p class="relative md:t-left-12 text-xl">
           Honor breakdown
         </p>
@@ -110,7 +110,7 @@ const created = ref(
       </div>
     </div>
     <div class="flex relative max-md:mt-5 max-md:t-flex-col">
-      <div class="t-w-1/2">
+      <div class="md:t-w-1/2">
         <p class="relative md:t-left-12 text-xl mt-3">
           Contributions
         </p>
@@ -119,7 +119,7 @@ const created = ref(
             <i class="pi-th-large pi" style="font-size: 2.5rem" />
           </div>
           <div>
-            <div>
+            <div class="mt-3">
               <b>Created tasks: </b>
               <span>{{ created.length }}</span>
             </div>

@@ -152,7 +152,9 @@ function changeTab () {
             <Skeleton height="300px" />
           </div>
           <div v-else>
-            <component :is="tabs[selectedTabIndex]" v-bind="props" />
+            <div class="md:p-5 p-3">
+              <component :is="tabs[selectedTabIndex]" v-bind="props" />
+            </div>
           </div>
         </div>
       </div>

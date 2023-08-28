@@ -128,7 +128,7 @@ const onChangeTheme = (currentTheme: ThemeName, theme: ThemeName) => {
 
 <template>
   <div class="">
-    <h1 class="text-4xl font-bold my-5">
+    <h1 class="text-4xl font-bold">
       Appearance
     </h1>
     <div class="flex flex-column">
