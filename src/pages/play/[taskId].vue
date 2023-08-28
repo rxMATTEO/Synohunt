@@ -202,6 +202,14 @@ const isDialogVisible = ref(false);
           </h1>
           <div class="my-5">
             <p class="text-2xl">
+              Word:
+            </p>
+            <div class="mt-3">
+              {{ task.value.Word.word }}
+            </div>
+          </div>
+          <div class="my-5">
+            <p class="text-2xl">
               Context:
             </p>
             <div class="mt-3">
