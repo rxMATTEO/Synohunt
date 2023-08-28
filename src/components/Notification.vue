@@ -5,15 +5,20 @@ import { useNotificationsStore } from '@/stores/notificationsStore';
 
 const toast = useToast();
 type NotificationType = 'notification' | 'message'
-//
+// todo messages add mb
+type NotificationAction = {
+  onAccept: () => unknown,
+  onReject: () => unknown,
+}
 export type NotificationProps = {
+  id: string | number
   title: string,
   description: string,
-  icon?: string,
   image?: string
   notificationType?: NotificationType,
-  secondaryText: string
+  actions: NotificationAction
 }
+// todo add theme change on like ALL page built
 // withDefaults(defineProps<NotificationProps>(), {
 //   icon: 'pi pi-bell',
 //   closeIcon: 'pi pi-check',
@@ -25,18 +30,22 @@ const notification = ref<NotificationProps>({
   title: '',
   description: '',
   notificationType: 'notification',
-  secondaryText: '',
   image: '',
-  icon: ''
+  actions: {
+    onAccept: () => null,
+    onReject: () => null
+  }
 });
 
 const notificationsStore = useNotificationsStore();
 const unsubscribe = notificationsStore.$onAction(({ name, args }) => {
   if (name === 'addNotification') {
-    toast.add({ life: 5000, detail: 'a', summary: 'b' });
+    toast.add({ life: 9999, detail: 'a', summary: 'b' });
     notification.value = args[0];
   }
 });
+
+const hiddenIds = ref({});
 </script>
 
 <template>
@@ -55,8 +64,13 @@ const unsubscribe = notificationsStore.$onAction(({ name, args }) => {
       }
     }"
   >
-    <template #message>
-      <div class="relative left-0 right-0 w-full p-2">
+    <template #message="{ message: {id} }">
+      <div
+        class="relative left-0 right-0 w-full p-2"
+        :class="{
+          'hidden': hiddenIds[id]
+        }"
+      >
         <div class="absolute t-top-0 t-left-0 t-right-0 t-bottom-[80%] t-background-blur-sm t-bg-white t-bg-opacity-20 t-rounded-t-2xl" />
         <div class="w-full">
           <div class="t-h-[20%]">
@@ -65,7 +79,6 @@ const unsubscribe = notificationsStore.$onAction(({ name, args }) => {
                 <p class="mr-3 text-gray-700">
                   {{ notification.notificationType }}
                 </p>
-                <i :class="icon" />
               </div>
             </div>
           </div>
@@ -96,8 +109,15 @@ const unsubscribe = notificationsStore.$onAction(({ name, args }) => {
                         class: ['p-0']
                       }
                     }"
+                    @click="notification.actions.onAccept(hiddenIds, id)"
                   />
-                  <Button size="small" type="null" class="t-w-1/2 t-rounded-lg t-text-black bg-white t-border-0" label="Reject" />
+                  <Button
+                    size="small"
+                    type="null"
+                    class="t-w-1/2 t-rounded-lg t-text-black bg-white t-border-0"
+                    label="Reject"
+                    @click="() => notification.actions.onReject(hiddenIds, id)"
+                  />
                 </div>
               </div>
             </div>
@@ -105,8 +125,8 @@ const unsubscribe = notificationsStore.$onAction(({ name, args }) => {
         </div>
       </div>
     </template>
-    <template #closeicon>
-      <div class="relative t-right-0 t-top-0">
+    <template>
+      <div v-if="hiddenIds[id]" class="relative t-right-0 t-top-0">
         <i class="pi pi-times" />
       </div>
     </template>

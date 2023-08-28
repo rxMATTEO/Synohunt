@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
 import { ref } from 'vue';
+import Toast, { ToastProps, ToastState } from 'primevue/toast';
 import { useThemeStore } from '@/stores/themeStore';
 import { useNotificationsStore } from '@/stores/notificationsStore';
 
@@ -120,7 +121,15 @@ const onChangeTheme = (currentTheme: ThemeName, theme: ThemeName) => {
     title: 'Success',
     secondaryText: 'Cool',
     description: 'You changed theme',
-    image: '/layout/images/themes/nova.png'
+    image: '/layout/images/themes/nova.png',
+    actions: {
+      onAccept (hidden, id:number) {
+        hidden[id] = true;
+      },
+      onReject (hidden, id:number) {
+        hidden[id] = true;
+      }
+    }
   });
   themeStore.setCurrentTheme(currentTheme, theme);
 };
