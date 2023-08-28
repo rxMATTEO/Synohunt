@@ -332,12 +332,12 @@ const beautyLinks = ref<BeatyLink[]>([
   transition: all ease-in-out .3s
 .beauty-link:hover::before
   transform: scale(1.1)
-  box-shadow: 0 0 15px #ffee10
+  box-shadow: 0 0 15px var(--primary-500)
 
 .beauty-link:hover
-  color: #ffee10
-  box-shadow: 0 0 15px #ffee10
-  text-shadow: 0 0 5px #ffee10
+  color: var(--primary-200)
+  box-shadow: 0 0 15px var(--primary-500)
+  text-shadow: 0 0 5px var(--primary-500)
   & .beauty-icon
     background-color: violet !important
 
