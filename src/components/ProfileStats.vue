@@ -48,7 +48,10 @@ const created = ref(
 
 <template>
   <div class="relative">
-    <div class="flex mt-3 max-md:t-flex-col">
+    <h1 class="text-4xl font-bold">
+      Stats
+    </h1>
+    <div class="flex mt-5 max-md:t-flex-col">
       <div class="md:t-w-1/3">
         <p class="text-xl absolute md:t-left-12">
           Progress
