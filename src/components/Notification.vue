@@ -26,22 +26,17 @@ export type NotificationProps = {
 //   notificationType: 'notification'
 // });
 
-const notification = ref<NotificationProps>({
-  title: '',
-  description: '',
-  notificationType: 'notification',
-  image: '',
-  actions: {
-    onAccept: () => null,
-    onReject: () => null
-  }
-});
+const notifications = ref<NotificationProps[]>([]);
 
 const notificationsStore = useNotificationsStore();
 const unsubscribe = notificationsStore.$onAction(({ name, args }) => {
   if (name === 'addNotification') {
+    notifications.value = [];
     toast.add({ life: 5000, detail: 'a', summary: 'b' });
-    notification.value = args[0];
+    notifications.value.push(args[0]);
+    console.log(notifications.value);
+    const length = notifications.value.length;
+    setTimeout(() => notifications.value.splice(length, 1), 5000);
   }
 });
 
@@ -50,6 +45,8 @@ const hiddenIds = ref({});
 
 <template>
   <Toast
+    v-for="notification in notifications"
+    :key="notification.id"
     position="top-right"
     class="t-z-[9999] fixed max-md:!t-w-full max-md:!t-right-0"
     :pt="{
