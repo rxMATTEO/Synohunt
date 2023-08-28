@@ -14,7 +14,11 @@ type ProfileProps = {
 };
 const props = defineProps<ProfileProps>();
 
-const tabItems = ref([
+type TabItem = {
+  label: string,
+  icon: string,
+};
+const tabItems = ref<TabItem[]>([
   {
     label: 'Stats',
     icon: 'pi pi-fw pi-chart-bar'
@@ -28,10 +32,11 @@ const tabItems = ref([
     icon: 'pi pi-fw pi-cog'
   }
 ]);
-const { hash }: string = useRoute();
+const { hash } = useRoute();
+const router = useRouter();
 const indexByHash = hash ? tabItems.value.findIndex(tab => tab.label.toLowerCase() === hash.slice(1)) : 0;
 const tabs = [ProfileStats, CompletedTasks, ProfileSettings];
-const selectedTabIndex = ref(0);
+const selectedTabIndex = ref<number>(0);
 
 const pending = ref(true);
 onMounted(() => {
@@ -39,7 +44,10 @@ onMounted(() => {
   selectedTabIndex.value = indexByHash;
 });
 
-function changeTab (e) {}
+function changeTab () {
+  const selectedTabHash = tabItems.value[selectedTabIndex.value];
+  router.push({ hash: '#' + selectedTabHash.label.toLowerCase() });
+}
 </script>
 
 <template>
