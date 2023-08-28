@@ -131,7 +131,7 @@ const onChangeTheme = (currentTheme: ThemeName, theme: ThemeName) => {
     <h1 class="text-4xl font-bold">
       Appearance
     </h1>
-    <div class="flex flex-column">
+    <div class="flex flex-column mt-5">
       <div v-for="themeGroup in themes">
         <h5>{{ themeGroup.kind }}</h5>
         <div class="flex flex-wrap">
