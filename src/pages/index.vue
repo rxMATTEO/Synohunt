@@ -136,8 +136,10 @@
             </div>
           </div>
 
-          <div class="flex relative justify-content-between">
-            <CardExpandingGlow />
+          <div class="flex gap-5 relative justify-content-between md:flex-row flex-column align-items-center">
+            <CardExpandingGlow header="Advantages" main-text="loremlorasddddd dddddddddddddddd demloremloreml oremloremloloremlo remloremremlorem" button-text="Click" button-href="/" />
+            <CardExpandingGlow header="Advantages" main-text="loremlorasddddd dddddddddddddddd demloremloreml oremloremloloremlo remloremremlorem" button-text="Click" button-href="/" />
+            <CardExpandingGlow header="Advantages" main-text="loremlorasddddd dddddddddddddddd demloremloreml oremloremloloremlo remloremremlorem" button-text="Click" button-href="/" />
           </div>
 
           <div

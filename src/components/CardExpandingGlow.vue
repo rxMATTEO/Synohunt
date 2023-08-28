@@ -1,5 +1,11 @@
 <script setup lang="ts">
-
+type CardExpandingGlowProps = {
+  header: string,
+  mainText: string,
+  buttonText: string,
+  buttonHref: string,
+};
+defineProps<CardExpandingGlowProps>();
 </script>
 
 <template>
@@ -8,13 +14,13 @@
       <div class="face face1">
         <div class="content">
           <i class="fab fa-apple" />
-          <h3>Apple</h3>
+          <h3>{{ header }}</h3>
         </div>
       </div>
       <div class="face face2">
         <div class="content">
-          <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde ab repudiandae, explicabo voluptate et hic cum ratione a. Officia delectus illum perferendis maiores quia molestias vitae fugiat aspernatur alias corporis?</p>
-          <a href="#" type="button">Read More</a>
+          <p>{{ mainText }}</p>
+          <a :href="buttonHref" type="button">{{ buttonText }}</a>
         </div>
       </div>
     </div>
@@ -24,8 +30,9 @@
 <style scoped lang="sass">
 .card
   position: relative
+  margin-bottom: -100px
   .face
-    width: 300px
+    width: 100%
     height: 200px
     transition: .4s
     &.face2
