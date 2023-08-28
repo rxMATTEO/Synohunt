@@ -1,29 +1,29 @@
 <script setup lang="ts">
-import { onMounted, reactive } from 'vue';
-import { Theme, ThemesNames } from '@/app.config';
+import { onMounted } from 'vue';
+import { storeToRefs } from 'pinia';
+import { ThemesNames } from '@/app.config';
 import { useThemeStore } from '@/stores/themeStore';
-const theme: {theme: Theme} = reactive({ theme: { dark: true } });
 
-const { getCurrentTheme, setCurrentTheme, currentTheme } = useThemeStore();
-onMounted(() => {
-  getCurrentTheme();
-  theme.theme = currentTheme;
-});
+const themeStore = useThemeStore();
+let { currentTheme } = storeToRefs(useThemeStore());
 function changeTheme () {
-  const light = ThemesNames.light;
-  const dark = ThemesNames.dark;
-  const [currentTheme, newTheme] = theme.theme.dark ? [dark, light] : [light, dark];
-  setCurrentTheme(currentTheme, newTheme);
+  currentTheme = themeStore.getCurrentTheme();
+  const newTheme = currentTheme.includes('dark')
+    ? ThemesNames.light
+    : ThemesNames.dark;
+  themeStore.setCurrentTheme(currentTheme, newTheme);
 }
 </script>
 
 <template>
-  <Button unstyled class="flex justify-center align-items-center" @click="changeTheme">
-    <i v-if="theme.theme.dark" class="pi pi-moon text-xl cursor-pointer t-fill-black" />
-    <i v-else-if="theme.theme.light" class="pi pi-moon text-xl cursor-pointer t-fill-black" />
+  <Button
+    unstyled
+    class="flex justify-center align-items-center"
+    @click="changeTheme"
+  >
+    <i class="pi pi-moon text-xl cursor-pointer t-fill-black" />
+    <!--    <i v-else-if="theme.theme.light" class="pi pi-moon text-xl cursor-pointer t-fill-black" />-->
   </Button>
 </template>
 
-<style scoped lang="sass">
-
-</style>
+<style scoped lang="sass"></style>
