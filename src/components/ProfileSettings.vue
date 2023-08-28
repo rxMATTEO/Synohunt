@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  $END$
+  im settings, hi
 </template>
 
 <style scoped lang="sass">

@@ -2,7 +2,8 @@
 import { ref } from 'vue';
 import ProfileStats from '@/components/ProfileStats.vue';
 import CompletedTasks from '@/components/CompletedTasks.vue';
-import TabmenuLoader from '@/components/loading/TabmenuLoader.vue'; // to lazy
+import TabmenuLoader from '@/components/loading/TabmenuLoader.vue';
+import ProfileSettings from '@/components/ProfileSettings.vue'; // to lazy
 
 type ProfileProps = {
   account: object,
@@ -16,7 +17,8 @@ useHead({
 
 const tabs = [
   ProfileStats,
-  CompletedTasks
+  CompletedTasks,
+  ProfileSettings
 ];
 const selectedTabIndex = ref(0);
 const items = ref([
