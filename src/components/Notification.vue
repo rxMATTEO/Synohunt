@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useToast } from 'primevue/usetoast';
+import { ToastMessageOptions } from 'primevue/toast';
 import { useNotificationsStore } from '@/stores/notificationsStore';
-
 const toast = useToast();
 type NotificationType = 'notification' | 'message'
 // todo messages add mb
@@ -14,7 +14,7 @@ export type NotificationProps = {
   id: string | number
   title: string,
   description: string,
-  image?: string
+  image: string
   notificationType?: NotificationType,
   actions: NotificationAction
 }
@@ -26,13 +26,13 @@ export type NotificationProps = {
 //   notificationType: 'notification'
 // });
 
-const notification = ref<NotificationProps>({});
+const notification = ref<{ [k: string]: NotificationProps }>({});
 
 const notificationsStore = useNotificationsStore();
-const unsubscribe = notificationsStore.$onAction(({ name, args }) => {
+const unsubscribe = notificationsStore.$onAction(({ name, args }: { name: string, args: [NotificationProps] }) => {
   if (name === 'addNotification') {
     const dispatched: NotificationProps = args[0];
-    toast.add({ life: 5000, detail: 'a', summary: 'b', notif: dispatched });
+    toast.add({ life: 5000, detail: 'a', summary: 'b', content: dispatched });
     notification.value[dispatched.image] = dispatched;
   }
 });
@@ -58,7 +58,7 @@ const hiddenIds = ref({});
       }
     }"
   >
-    <template #message="{message: {notif}}">
+    <template #message="{message: {content}}">
       <div
         class="relative left-0 right-0 w-full p-2"
         :class="{
@@ -80,16 +80,16 @@ const hiddenIds = ref({});
           <div class="t-h-[70%] t-mt-[5%] flex">
             <div class="t-max-w-[33%]">
               <div class="h-full flex">
-                <img :src="notification[notif.image].image" alt="logo" class="block t-w-[100px] t-h-[100px] t-rounded-full t-my-auto">
+                <img :src="notification[content.image].image" alt="logo" class="block t-w-[100px] t-h-[100px] t-rounded-full t-my-auto">
               </div>
             </div>
             <div class="t-w-2/3 pl-3 pt-2">
               <div>
                 <p class="font-bold text-2xl">
-                  <span class="vertical-align-bottom line-height-1 t-text-black">{{ notification[notif.image].title }}</span>
+                  <span class="vertical-align-bottom line-height-1 t-text-black">{{ notification[content.image].title }}</span>
                 </p>
                 <p class="text- my-2 text-gray-800">
-                  {{ notification[notif.image].description }}
+                  {{ notification[content.image].description }}
                 </p>
                 <div class="flex gap-3 t-place-content-between">
                   <Button
@@ -103,14 +103,14 @@ const hiddenIds = ref({});
                         class: ['p-0']
                       }
                     }"
-                    @click="notification[notif.image].actions.onAccept(hiddenIds, id)"
+                    @click="notification[content.image].actions.onAccept(hiddenIds, id)"
                   />
                   <Button
                     size="small"
                     type="null"
                     class="t-w-1/2 t-rounded-lg t-text-black bg-white t-border-0"
                     label="Reject"
-                    @click="() => notification[notif.image].actions.onReject(hiddenIds, id)"
+                    @click="() => notification[content.image].actions.onReject(hiddenIds, id)"
                   />
                 </div>
               </div>
