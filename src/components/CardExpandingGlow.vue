@@ -54,7 +54,7 @@ defineProps<CardExpandingGlowProps>();
         text-decoration: none
         color: black
         box-sizing: border-box
-        outline : 1px dashed #333
+        outline : 1px solid #333
         padding: 10px
         margin: 15px 0 0
         display: inline-block
