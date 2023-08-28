@@ -106,7 +106,7 @@ const { messages } = storeToRefs(messagesStore);
                 </div>
                 <Divider />
                 <div class="link flex t-items-center">
-                  <NuxtLink to="/">
+                  <NuxtLink to="/profile#settings">
                     <Button icon="pi p-text-secondary pi-cog mr-1" unstyled class="t-pl-1 " label="Account Settings" />
                   </NuxtLink>
                 </div>
