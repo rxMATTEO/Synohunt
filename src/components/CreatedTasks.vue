@@ -16,7 +16,7 @@ const createdTasks = ref((await useFetch('/api/task/created', {
   body: {
     userId: account.id
   }
-})).data.value as CompletedTasksResponse[]);
+})).data.value as CompletedTasksResponse[] || []);
 // todo mb add coins that was spent on task and creator can loot them
 </script>
 <template>

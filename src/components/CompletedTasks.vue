@@ -7,7 +7,7 @@ const completedTasks = ref<CompletedTaskResponse[]>((await useFetch('/api/task/c
   body: {
     userId: account.id
   }
-})).data.value);
+})).data.value || []);
 </script>
 
 <template>
