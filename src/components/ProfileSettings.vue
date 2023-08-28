@@ -116,13 +116,16 @@ const themes = ref<Theme[]>([
 </script>
 
 <template>
-  <div class="">
+  <div class="flex flex-column">
     <div v-for="themeGroup in themes">
       <h5>{{ themeGroup.kind }}</h5>
-      <div v-for="theme in themeGroup.themes">
-        <div class="col-3">
-          <button class="p-link w-2rem h-2rem" @click="onChangeTheme(currentTheme,theme)" />
-          <img :src="`/layout/images/themes/${theme}.${themeGroup.fileType}`" class="w-2rem h-2rem" alt="Bootstrap Light Blue">
+      <div class="flex">
+        <div v-for="theme in themeGroup.themes">
+          <div class="col-3">
+            <button class="t-w-10 t-h-10" @click="onChangeTheme(currentTheme,theme)">
+              <img class="h-full w-full" :src="`/layout/images/themes/${theme}.${themeGroup.fileType}`" :alt="theme">
+            </button>
+          </div>
         </div>
       </div>
     </div>
