@@ -11,7 +11,7 @@ const completedTasks = ref<CompletedTaskResponse>((await useFetch('/api/task/com
 </script>
 
 <template>
-  <div class="p-3">
+  <div class="">
     <h1 class="text-4xl font-bold mb-5">
       Completed tasks
     </h1>
