@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
 import { ref } from 'vue';
+import { infer } from 'zod';
 import { useThemeStore } from '@/stores/themeStore';
 import { useNotificationsStore } from '@/stores/notificationsStore';
 
@@ -116,25 +117,25 @@ const themes = ref<Theme[]>([
   }
 ]);
 
-const onChangeTheme = (currentTheme: ThemeName, theme: ThemeName, imagePath) => {
+const onChangeTheme = (currentTheme: ThemeName, theme: ThemeName, imagePath: ReturnType<typeof getImagePath>) => {
   notificationsStore.addNotification({
     title: 'Success',
     secondaryText: 'Cool',
     description: 'You changed theme',
     image: imagePath,
     actions: {
-      onAccept (hidden, id:number) {
-        hidden[id] = true;
+      onAccept (notifcation) {
+        delete notifcation[imagePath];
       },
-      onReject (hidden, id:number) {
-        hidden[id] = true;
+      onReject (notifcation) {
+        delete notifcation[imagePath];
       }
     }
   });
   themeStore.setCurrentTheme(currentTheme, theme);
 };
 
-function getImagePath (themeName: ThemeName, themeGroup: ThemeKindName) {
+function getImagePath (themeName: ThemeName, themeGroup: Theme) {
   return `/layout/images/themes/${themeName}.${themeGroup.fileType}`;
 }
 </script>

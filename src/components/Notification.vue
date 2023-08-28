@@ -1,15 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useToast } from 'primevue/usetoast';
-import { ToastMessageOptions } from 'primevue/toast';
 import { useNotificationsStore } from '@/stores/notificationsStore';
 const toast = useToast();
 type NotificationType = 'notification' | 'message'
 // todo messages add mb
-type NotificationAction = {
-  onAccept: () => unknown,
-  onReject: () => unknown,
-}
 export type NotificationProps = {
   id: string | number
   title: string,
@@ -17,6 +12,11 @@ export type NotificationProps = {
   image: string
   notificationType?: NotificationType,
   actions: NotificationAction
+}
+type NotificationsObject = { [k: string]: NotificationProps };
+type NotificationAction = {
+  onAccept: (notification: NotificationsObject) => unknown,
+  onReject: (notification: NotificationsObject) => unknown,
 }
 // todo add theme change on like ALL page built
 // withDefaults(defineProps<NotificationProps>(), {
@@ -26,7 +26,7 @@ export type NotificationProps = {
 //   notificationType: 'notification'
 // });
 
-const notification = ref<{ [k: string]: NotificationProps }>({});
+const notification = ref<NotificationsObject>({});
 
 const notificationsStore = useNotificationsStore();
 const unsubscribe = notificationsStore.$onAction(({ name, args }: { name: string, args: [NotificationProps] }) => {
@@ -36,8 +36,6 @@ const unsubscribe = notificationsStore.$onAction(({ name, args }: { name: string
     notification.value[dispatched.image] = dispatched;
   }
 });
-
-const hiddenIds = ref({});
 
 // todo delete toasts from object and do some id idk and types PLS
 </script>
@@ -60,10 +58,8 @@ const hiddenIds = ref({});
   >
     <template #message="{message: {content}}">
       <div
+        v-if="notification[content.image]"
         class="relative left-0 right-0 w-full p-2"
-        :class="{
-          'hidden': hiddenIds[id]
-        }"
       >
         <div class="absolute t-top-0 t-left-0 t-right-0 t-bottom-[80%] t-background-blur-sm t-bg-white t-bg-opacity-20 t-rounded-t-2xl" />
         <div class="w-full">
@@ -103,14 +99,14 @@ const hiddenIds = ref({});
                         class: ['p-0']
                       }
                     }"
-                    @click="notification[content.image].actions.onAccept(hiddenIds, id)"
+                    @click="() => notification[content.image].actions.onAccept(notification)"
                   />
                   <Button
                     size="small"
                     type="null"
                     class="t-w-1/2 t-rounded-lg t-text-black bg-white t-border-0"
                     label="Reject"
-                    @click="() => notification[content.image].actions.onReject(hiddenIds, id)"
+                    @click="() => notification[content.image].actions.onReject(notification)"
                   />
                 </div>
               </div>
@@ -120,7 +116,7 @@ const hiddenIds = ref({});
       </div>
     </template>
     <template>
-      <div v-if="hiddenIds[id]" class="relative t-right-0 t-top-0">
+      <div class="relative t-right-0 t-top-0">
         <i class="pi pi-times" />
       </div>
     </template>
