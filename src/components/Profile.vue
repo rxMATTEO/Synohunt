@@ -5,23 +5,16 @@ import CompletedTasks from '@/components/CompletedTasks.vue';
 import TabmenuLoader from '@/components/loading/TabmenuLoader.vue';
 import ProfileSettings from '@/components/ProfileSettings.vue'; // to lazy
 
-type ProfileProps = {
-  account: object,
-  foreign: boolean
-}
-const props = defineProps<ProfileProps>();
-
 useHead({
   title: 'My profile'
 });
+type ProfileProps = {
+  account: object;
+  foreign: boolean;
+};
+const props = defineProps<ProfileProps>();
 
-const tabs = [
-  ProfileStats,
-  CompletedTasks,
-  ProfileSettings
-];
-const selectedTabIndex = ref(0);
-const items = ref([
+const tabItems = ref([
   {
     label: 'Stats',
     icon: 'pi pi-fw pi-chart-bar'
@@ -35,15 +28,18 @@ const items = ref([
     icon: 'pi pi-fw pi-cog'
   }
 ]);
+const { hash }: string = useRoute();
+const indexByHash = hash ? tabItems.value.findIndex(tab => tab.label.toLowerCase() === hash.slice(1)) : 0;
+const tabs = [ProfileStats, CompletedTasks, ProfileSettings];
+const selectedTabIndex = ref(0);
 
 const pending = ref(true);
 onMounted(() => {
   pending.value = false;
+  selectedTabIndex.value = indexByHash;
 });
 
-function changeTab (e) {
-
-}
+function changeTab (e) {}
 </script>
 
 <template>
@@ -58,12 +54,14 @@ function changeTab (e) {
           <div class="max-md:mt-3">
             <div>
               <b>Member since: </b>
-              <span class="white-space-nowrap">{{ new Date(+account.registrationDate).toLocaleString() }}</span>
+              <span class="white-space-nowrap">{{
+                new Date(+account.registrationDate).toLocaleString()
+              }}</span>
             </div>
             <div>
               <b>Last seen: </b>
               <!--              todo do this-->
-              <span class="white-space-nowrap">{{ 'Aug 2023' }}</span>
+              <span class="white-space-nowrap">{{ "Aug 2023" }}</span>
             </div>
           </div>
 
@@ -87,19 +85,45 @@ function changeTab (e) {
               <img src="/img/placeholder.png" class="block h-full" alt="todo">
             </div>
             <div class="t-w-2/3 md:t-w-4/5 t-pl-2">
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium animi atque autem cum eos est eum exercitationem expedita explicabo labore maxime, nobis quasi sit suscipit ut. Accusamus culpa perspiciatis quisquam.</p>
-              <div><Button label="LEARN MORE" severity="secondary" type="null" class="p-1 text-sm t-mt-3" /></div>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Accusantium animi atque autem cum eos est eum exercitationem
+                expedita explicabo labore maxime, nobis quasi sit suscipit ut.
+                Accusamus culpa perspiciatis quisquam.
+              </p>
+              <div>
+                <Button
+                  label="LEARN MORE"
+                  severity="secondary"
+                  type="null"
+                  class="p-1 text-sm t-mt-3"
+                />
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="t-w-full md:t-w-1/3 p-3 surface-ground t-rounded-md h-full flex">
+        <div
+          class="t-w-full md:t-w-1/3 p-3 surface-ground t-rounded-md h-full flex"
+        >
           <div class="t-w-1/3 md:t-w-1/5">
             <img src="/img/placeholder.png" class="block h-full" alt="todo">
           </div>
           <div class="t-w-2/3 md:t-w-4/5 t-pl-2">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium animi atque autem cum eos est eum exercitationem expedita explicabo labore maxime, nobis quasi sit suscipit ut. Accusamus culpa perspiciatis quisquam.</p>
-            <div><Button label="LEARN MORE" severity="secondary" type="null" class="p-1 text-sm t-mt-3" /></div>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              Accusantium animi atque autem cum eos est eum exercitationem
+              expedita explicabo labore maxime, nobis quasi sit suscipit ut.
+              Accusamus culpa perspiciatis quisquam.
+            </p>
+            <div>
+              <Button
+                label="LEARN MORE"
+                severity="secondary"
+                type="null"
+                class="p-1 text-sm t-mt-3"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -109,10 +133,19 @@ function changeTab (e) {
           <TabmenuLoader />
         </div>
         <div v-else-if="!foreign">
-          <TabMenu v-model:activeIndex="selectedTabIndex" :model="items" @tab-change="changeTab" />
+          <TabMenu
+            v-model:activeIndex="selectedTabIndex"
+            :model="tabItems"
+            @tab-change="changeTab"
+          />
         </div>
         <div class="surface-ground border-round-bottom-xl">
-          <component :is="tabs[selectedTabIndex]" v-bind="props" />
+          <div v-if="pending">
+            <Skeleton height="300px" />
+          </div>
+          <div v-else>
+            <component :is="tabs[selectedTabIndex]" v-bind="props" />
+          </div>
         </div>
       </div>
     </PaddingBox>
