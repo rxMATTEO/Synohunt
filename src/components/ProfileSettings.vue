@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
 import { ref } from 'vue';
-import Toast, { ToastProps, ToastState } from 'primevue/toast';
 import { useThemeStore } from '@/stores/themeStore';
 import { useNotificationsStore } from '@/stores/notificationsStore';
 
 const themeStore = useThemeStore();
+const { data: { value: { user: { account } } } } = useAuth();
 const { currentTheme } = storeToRefs(useThemeStore());
 const notificationsStore = useNotificationsStore();
 
@@ -116,12 +116,12 @@ const themes = ref<Theme[]>([
   }
 ]);
 
-const onChangeTheme = (currentTheme: ThemeName, theme: ThemeName) => {
+const onChangeTheme = (currentTheme: ThemeName, theme: ThemeName, imagePath) => {
   notificationsStore.addNotification({
     title: 'Success',
     secondaryText: 'Cool',
     description: 'You changed theme',
-    image: '/layout/images/themes/nova.png',
+    image: imagePath,
     actions: {
       onAccept (hidden, id:number) {
         hidden[id] = true;
@@ -133,22 +133,38 @@ const onChangeTheme = (currentTheme: ThemeName, theme: ThemeName) => {
   });
   themeStore.setCurrentTheme(currentTheme, theme);
 };
-</script>
 
+function getImagePath (themeName: ThemeName, themeGroup: ThemeKindName) {
+  return `/layout/images/themes/${themeName}.${themeGroup.fileType}`;
+}
+</script>
+<!--todo fix footer-->
 <template>
   <div class="">
-    <h1 class="text-4xl font-bold">
-      Appearance
-    </h1>
-    <div class="flex flex-column mt-5">
-      <div v-for="themeGroup in themes">
-        <h5>{{ themeGroup.kind }}</h5>
-        <div class="flex flex-wrap">
-          <div v-for="theme in themeGroup.themes">
-            <div class="col-3">
-              <button :title="theme" class="t-w-10 t-h-10" @click="onChangeTheme(currentTheme,theme)">
-                <img class="h-full w-full" :src="`/layout/images/themes/${theme}.${themeGroup.fileType}`" :alt="theme">
-              </button>
+    <div class="flex flex-column md:flex-row mt-5 gap-5">
+      <div class="relative md:t-w-1/2">
+        <h1 class="md-3 text-4xl font-bold md:mb-5">
+          User
+        </h1>
+        <div class="absolute right-0 t-w-1/4 t-h-1/2">
+          <img class="cursor-pointer t-rounded-3xl" :src="account.image" alt="avatar">
+        </div>
+        a
+      </div>
+      <Divider align="top" layout="vertical" class="max-md:!t-hidden" />
+      <div class="md:t-w-1/2">
+        <h1 class="text-4xl font-bold mb-3 md:mb-5">
+          Appearance
+        </h1>
+        <div v-for="themeGroup in themes">
+          <h5>{{ themeGroup.kind }}</h5>
+          <div class="flex flex-wrap">
+            <div v-for="theme in themeGroup.themes">
+              <div class="col-3">
+                <button :title="theme" class="t-w-10 t-h-10" @click="onChangeTheme(currentTheme,theme,getImagePath(theme, themeGroup))">
+                  <img class="h-full w-full" :src="getImagePath(theme, themeGroup)" :alt="theme">
+                </button>
+              </div>
             </div>
           </div>
         </div>

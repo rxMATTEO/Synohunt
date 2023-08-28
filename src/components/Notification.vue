@@ -40,7 +40,7 @@ const notification = ref<NotificationProps>({
 const notificationsStore = useNotificationsStore();
 const unsubscribe = notificationsStore.$onAction(({ name, args }) => {
   if (name === 'addNotification') {
-    toast.add({ life: 9999, detail: 'a', summary: 'b' });
+    toast.add({ life: 5000, detail: 'a', summary: 'b' });
     notification.value = args[0];
   }
 });
