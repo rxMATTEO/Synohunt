@@ -3,7 +3,8 @@ import { ref } from 'vue';
 import ProfileStats from '@/components/ProfileStats.vue';
 import CompletedTasks from '@/components/CompletedTasks.vue';
 import TabmenuLoader from '@/components/loading/TabmenuLoader.vue';
-import ProfileSettings from '@/components/ProfileSettings.vue'; // to lazy
+import ProfileSettings from '@/components/ProfileSettings.vue';
+import CreatedTasks from '@/components/CreatedTasks.vue'; // to lazy
 
 useHead({
   title: 'My profile'
@@ -28,6 +29,10 @@ const tabItems = ref<TabItem[]>([
     icon: 'pi pi-fw pi-calendar'
   },
   {
+    label: 'Created challenges',
+    icon: 'pi-file-edit pi'
+  },
+  {
     label: 'Settings',
     icon: 'pi pi-fw pi-cog'
   }
@@ -35,7 +40,7 @@ const tabItems = ref<TabItem[]>([
 const { hash } = useRoute();
 const router = useRouter();
 const indexByHash = hash ? tabItems.value.findIndex(tab => tab.label.toLowerCase() === hash.slice(1)) : 0;
-const tabs = [ProfileStats, CompletedTasks, ProfileSettings];
+const tabs = [ProfileStats, CompletedTasks, CreatedTasks, ProfileSettings];
 const selectedTabIndex = ref<number>(0);
 
 const pending = ref(true);

@@ -23,7 +23,16 @@ const createdTasks = ref((await useFetch('/api/task/created', {
   <h1 class="text-4xl font-bold mb-5">
     Created tasks
   </h1>
+  <div v-if="createdTasks.length === 0">
+    <div>
+      <span>No created challenges yet.</span>
+      <NuxtLink to="/create/task" class="text-primary">
+        Create your own!
+      </NuxtLink>
+    </div>
+  </div>
   <DataView
+    v-else
     :value="createdTasks"
     paginator
     :rows="5"

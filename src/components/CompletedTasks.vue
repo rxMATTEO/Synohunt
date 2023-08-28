@@ -2,7 +2,7 @@
 import type { CompletedTaskResponse } from '@/server/api/task/completed.post';
 
 const { data: { value: { user: { account } } } } = useAuth();
-const completedTasks = ref<CompletedTaskResponse>((await useFetch('/api/task/completed', {
+const completedTasks = ref<CompletedTaskResponse[]>((await useFetch('/api/task/completed', {
   method: 'POST',
   body: {
     userId: account.id
@@ -15,7 +15,16 @@ const completedTasks = ref<CompletedTaskResponse>((await useFetch('/api/task/com
     <h1 class="text-4xl font-bold mb-5">
       Completed tasks
     </h1>
+    <div v-if="completedTasks.length === 0">
+      <div>
+        <span>No completed challenges yet.</span>
+        <NuxtLink to="/play/random" class="text-primary">
+          Complete them all!
+        </NuxtLink>
+      </div>
+    </div>
     <DataView
+      v-else
       :value="completedTasks"
       paginator
       :rows="5"
