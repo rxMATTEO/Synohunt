@@ -135,6 +135,51 @@
               </div>
             </div>
           </div>
+
+          <div class="container">
+            <div class="card">
+              <div class="face face1">
+                <div class="content">
+                  <i class="fab fa-windows" />
+                  <h3>Windows</h3>
+                </div>
+              </div>
+              <div class="face face2">
+                <div class="content">
+                  <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde ab repudiandae, explicabo voluptate et hic cum ratione a. Officia delectus illum perferendis maiores quia molestias vitae fugiat aspernatur alias corporis?</p>
+                  <a href="#" type="button">Read More</a>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="face face1">
+                <div class="content">
+                  <i class="fab fa-android" />               <h3>Android</h3>
+                </div>
+              </div>
+              <div class="face face2">
+                <div class="content">
+                  <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde ab repudiandae, explicabo voluptate et hic cum ratione a. Officia delectus illum perferendis maiores quia molestias vitae fugiat aspernatur alias corporis?</p>
+                  <a href="#" type="button">Read More</a>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="face face1">
+                <div class="content">
+                  <i class="fab fa-apple" />
+                  <h3>Apple</h3>
+                </div>
+              </div>
+              <div class="face face2">
+                <div class="content">
+                  <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde ab repudiandae, explicabo voluptate et hic cum ratione a. Officia delectus illum perferendis maiores quia molestias vitae fugiat aspernatur alias corporis?</p>
+                  <a href="#" type="button">Read More</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div
             class="flex sm:justify-content-between flex-column align-items-center t-py-24"
           >
@@ -148,66 +193,25 @@
               words and wonders with SynoHunt.</span>
           </div>
 
-          <div
-            class="col-12 md:col-12 lg:col-12 p-0 lg:pr-5 lg:pb-5 mt-2 lg:mt-0"
-          >
-            <div style="padding: 2px; border-radius: 10px">
-              <div
-                class="p-3 surface-card h-full flex align-items-center"
-                style="border-radius: 8px"
-              >
+          <div v-for="(link) in beautyLinks">
+            <div
+              class="col-12 md:col-12 lg:col-12 p-0 lg:pr-5 lg:pb-5 mt-2 lg:mt-0"
+            >
+              <div style="padding: 2px; border-radius: 10px" class="beauty-link">
                 <div
-                  class="flex align-items-center justify-content-center bg-yellow-200"
-                  style="width: 3.5rem; height: 3.5rem; border-radius: 10px"
+                  class="p-3 surface-card h-full flex align-items-center"
+                  style="border-radius: 8px"
                 >
-                  <i class="pi pi-fw pi-users text-2xl" />
-                </div>
-                <div class="flex-column ml-4">
-                  <span class="text-900 block">Epic Synonyms</span>
-                  <span class="text-600">Conquer word battles</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            class="col-12 md:col-12 lg:col-12 p-0 lg:pr-5 lg:pb-5 mt-2 lg:mt-0"
-          >
-            <div style="padding: 2px; border-radius: 10px">
-              <div
-                class="p-3 surface-card h-full flex align-items-center"
-                style="border-radius: 8px"
-              >
-                <div
-                  class="flex align-items-center justify-content-center bg-yellow-200"
-                  style="width: 3.5rem; height: 3.5rem; border-radius: 10px"
-                >
-                  <i class="pi pi-fw pi-users text-2xl" />
-                </div>
-                <div class="flex-column ml-4">
-                  <span class="text-900 block">Epic Synonyms</span>
-                  <span class="text-600">Conquer word battles</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div
-            class="col-12 md:col-12 lg:col-12 p-0 lg:pr-5 lg:pb-5 mt-2 lg:mt-0"
-          >
-            <div style="padding: 2px; border-radius: 10px">
-              <div
-                class="p-3 surface-card h-full flex align-items-center"
-                style="border-radius: 8px"
-              >
-                <div
-                  class="flex align-items-center justify-content-center bg-yellow-200"
-                  style="width: 3.5rem; height: 3.5rem; border-radius: 10px"
-                >
-                  <i class="pi pi-fw pi-users text-2xl" />
-                </div>
-                <div class="flex-column ml-4">
-                  <span class="text-900 block">Epic Synonyms</span>
-                  <span class="text-600">Conquer word battles</span>
+                  <div
+                    class="flex align-items-center justify-content-center bg-yellow-200 beauty-icon"
+                    style="width: 3.5rem; height: 3.5rem; border-radius: 10px"
+                  >
+                    <i :class="`pi pi-fw pi-${link.picon} text-2xl`" />
+                  </div>
+                  <div class="flex-column ml-4">
+                    <span class="text-900 block">{{ link.mainText }}</span>
+                    <span class="text-600">{{ link.header }}</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -294,12 +298,49 @@
 </template>
 
 <script setup lang="ts">
+import type { PrimeIconsOptions } from 'primevue/api';
 import LandingHeader from '@/components/LandingHeader.vue';
 
 definePageMeta({ auth: false });
+
+type BeatyLink = {
+  header: string,
+  mainText: string,
+  picon: Lowercase<keyof PrimeIconsOptions>
+}
+const beautyLinks = ref<BeatyLink[]>([
+  {
+    header: 'Epic Synonyms',
+    mainText: 'Conquer word battles',
+    picon: 'amazon'
+  },
+  {
+    header: 'Epic Synonyms',
+    mainText: 'Conquer word battles',
+    picon: 'users'
+  },
+  {
+    header: 'Epic Synonyms',
+    mainText: 'Conquer word battles',
+    picon: 'camera'
+  }
+]);
 </script>
 
 <style scoped lang="sass">
+.beauty-link, .beauty-icon
+  transition: all ease-in-out .3s
+.beauty-link:hover::before
+  transform: scale(1.1)
+  box-shadow: 0 0 15px #ffee10
+
+.beauty-link:hover
+  color: #ffee10
+  box-shadow: 0 0 15px #ffee10
+  text-shadow: 0 0 5px #ffee10
+  & .beauty-icon
+    background-color: violet !important
+
 .main div
   flex-basis: max-content
 
@@ -311,4 +352,132 @@ definePageMeta({ auth: false });
     display: inline-block
     object-fit: contain
     object-position: center
+</style>
+
+<style scoped>
+body{
+  display:flex;
+  margin:0;
+  padding:0;
+  min-height: 100vh;
+  background: #444;
+  justify-content: center;
+  align-items: center;
+  font-family: arial;
+}
+
+.container{
+  width: 1000px;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap:wrap;
+
+}
+
+.container .card{
+  position: relative;
+}
+
+.container .card .face{
+  width:300px;
+  height: 200px;
+  transition:.4s;
+
+}
+
+.container .card .face.face1{
+  position: relative;
+  background: #333;
+  display: flex;
+  justify-content: center;
+  align-content:center;
+  align-items: center;
+  z-index: 1;
+  transform: translateY(100px);
+}
+
+.container .card:hover .face.face1{
+  transform: translateY(0);
+  box-shadow:
+      inset 0 0 60px whitesmoke,
+      inset 20px 0 80px #f0f,
+      inset -20px 0 80px #0ff,
+      inset 20px 0 300px #f0f,
+      inset -20px 0 300px #0ff,
+      0 0 50px #fff,
+      -10px 0 80px #f0f,
+      10px 0 80px #0ff;
+
+}
+
+.container .card .face.face1 .content{
+  opacity: .2;
+  transition:  0.5s;
+  text-align: center;
+
+}
+
+.container .card:hover .face.face1 .content{
+  opacity: 1;
+
+}
+
+.container .card .face.face1 .content i{
+  font-size: 3em;
+  color: white;
+  display: inline-block;
+
+}
+
+.container .card .face.face1 .content h3{
+  font-size: 1em;
+  color: white;
+  text-align: center;
+
+}
+
+.container .card .face.face1 .content a{
+  transition: .5s;
+}
+
+.container .card .face.face2{
+  position: relative;
+  background: whitesmoke;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+  box-shadow: 0 20px 50px rgba(0,0,0,.8);
+  transform: translate(0, -100px);
+}
+
+.container .card:hover .face.face2{
+  transform: translate(300px, -100px);
+}
+
+.container .card .face.face2 .content p, a{
+  font-size: 10pt;
+  margin: 0 ;
+  padding: 0;
+  color:#333;
+}
+
+.container .card .face.face2 .content a{
+  text-decoration:none;
+  color: black;
+  box-sizing: border-box;
+  outline : 1px dashed #333;
+  padding: 10px;
+  margin: 15px 0 0;
+  display: inline-block;
+}
+
+.container .card .face.face2 .content a:hover{
+  background: #333 ;
+  color: whitesmoke;
+  box-shadow: inset 0px 0px 10px rgba(0,0,0,0.5);
+}
+
 </style>
