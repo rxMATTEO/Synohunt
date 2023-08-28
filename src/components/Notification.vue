@@ -39,7 +39,7 @@ const unsubscribe = notificationsStore.$onAction(({ name, args }) => {
 
 const hiddenIds = ref({});
 
-// todo delete toasts from object and do some id idk
+// todo delete toasts from object and do some id idk and types PLS
 </script>
 
 <template>
@@ -103,14 +103,14 @@ const hiddenIds = ref({});
                         class: ['p-0']
                       }
                     }"
-                    @click="notification.actions.onAccept(hiddenIds, id)"
+                    @click="notification[notif.image].actions.onAccept(hiddenIds, id)"
                   />
                   <Button
                     size="small"
                     type="null"
                     class="t-w-1/2 t-rounded-lg t-text-black bg-white t-border-0"
                     label="Reject"
-                    @click="() => notification.actions.onReject(hiddenIds, id)"
+                    @click="() => notification[notif.image].actions.onReject(hiddenIds, id)"
                   />
                 </div>
               </div>
