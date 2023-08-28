@@ -203,7 +203,7 @@
                   style="border-radius: 8px"
                 >
                   <div
-                    class="flex align-items-center justify-content-center bg-yellow-200 beauty-icon"
+                    class="flex align-items-center justify-content-center bg-indigo-200 beauty-icon"
                     style="width: 3.5rem; height: 3.5rem; border-radius: 10px"
                   >
                     <i :class="`pi pi-fw pi-${link.picon} text-2xl`" />
@@ -336,7 +336,7 @@ const beautyLinks = ref<BeatyLink[]>([
 
 .beauty-link:hover
   color: var(--primary-200)
-  box-shadow: 0 0 15px var(--primary-500)
+  box-shadow: 0 0 50px var(--primary-500)
   text-shadow: 0 0 5px var(--primary-500)
   & .beauty-icon
     background-color: violet !important
