@@ -26,17 +26,14 @@ export type NotificationProps = {
 //   notificationType: 'notification'
 // });
 
-const notifications = ref<NotificationProps[]>([]);
+const notification = ref<NotificationProps>({});
 
 const notificationsStore = useNotificationsStore();
 const unsubscribe = notificationsStore.$onAction(({ name, args }) => {
   if (name === 'addNotification') {
-    notifications.value = [];
-    toast.add({ life: 5000, detail: 'a', summary: 'b' });
-    notifications.value.push(args[0]);
-    console.log(notifications.value);
-    const length = notifications.value.length;
-    setTimeout(() => notifications.value.splice(length, 1), 5000);
+    const dispatched: NotificationProps = args[0];
+    toast.add({ life: 9999, detail: 'a', summary: 'b', notif: dispatched });
+    notification.value[dispatched.image] = dispatched;
   }
 });
 
@@ -45,8 +42,6 @@ const hiddenIds = ref({});
 
 <template>
   <Toast
-    v-for="notification in notifications"
-    :key="notification.id"
     position="top-right"
     class="t-z-[9999] fixed max-md:!t-w-full max-md:!t-right-0"
     :pt="{
@@ -61,7 +56,7 @@ const hiddenIds = ref({});
       }
     }"
   >
-    <template #message="{ message: {id} }">
+    <template #message="{message: {notif}}">
       <div
         class="relative left-0 right-0 w-full p-2"
         :class="{
@@ -74,7 +69,7 @@ const hiddenIds = ref({});
             <div class="">
               <div class="relative t-right-0 flex text- t-place-content-end align-items-center">
                 <p class="mr-3 text-gray-700">
-                  {{ notification.notificationType }}
+                  <!--                  {{ notification[notif.image].notificationType }}-->
                 </p>
               </div>
             </div>
@@ -83,16 +78,16 @@ const hiddenIds = ref({});
           <div class="t-h-[70%] t-mt-[5%] flex">
             <div class="t-max-w-[33%]">
               <div class="h-full flex">
-                <img :src="notification.image" alt="logo" class="block t-w-[100px] t-h-[100px] t-rounded-full t-my-auto">
+                <img :src="notification[notif.image].image" alt="logo" class="block t-w-[100px] t-h-[100px] t-rounded-full t-my-auto">
               </div>
             </div>
             <div class="t-w-2/3 pl-3 pt-2">
               <div>
                 <p class="font-bold text-2xl">
-                  <span class="vertical-align-bottom line-height-1 t-text-black">{{ notification.title }}</span>
+                  <span class="vertical-align-bottom line-height-1 t-text-black">{{ notification[notif.image].title }}</span>
                 </p>
                 <p class="text- my-2 text-gray-800">
-                  {{ notification.description }}
+                  {{ notification[notif.image].description }}
                 </p>
                 <div class="flex gap-3 t-place-content-between">
                   <Button
