@@ -7,15 +7,6 @@ import { useNotificationsStore } from '@/stores/notificationsStore';
 const themeStore = useThemeStore();
 const { currentTheme } = storeToRefs(useThemeStore());
 const notificationsStore = useNotificationsStore();
-const onChangeTheme = (currentTheme, theme) => {
-  notificationsStore.addNotification({
-    title: 'Success',
-    secondaryText: 'Cool',
-    description: 'You changed theme'
-
-  });
-  themeStore.setCurrentTheme(currentTheme, theme);
-};
 
 const themeNames = ['arya-blue',
   'arya-green',
@@ -123,6 +114,16 @@ const themes = ref<Theme[]>([
     ]
   }
 ]);
+
+const onChangeTheme = (currentTheme: ThemeName, theme: ThemeName) => {
+  notificationsStore.addNotification({
+    title: 'Success',
+    secondaryText: 'Cool',
+    description: 'You changed theme',
+    image: '/layout/images/themes/nova.png'
+  });
+  themeStore.setCurrentTheme(currentTheme, theme);
+};
 </script>
 
 <template>
@@ -133,7 +134,7 @@ const themes = ref<Theme[]>([
     <div class="flex flex-column">
       <div v-for="themeGroup in themes">
         <h5>{{ themeGroup.kind }}</h5>
-        <div class="flex">
+        <div class="flex flex-wrap">
           <div v-for="theme in themeGroup.themes">
             <div class="col-3">
               <button :title="theme" class="t-w-10 t-h-10" @click="onChangeTheme(currentTheme,theme)">
