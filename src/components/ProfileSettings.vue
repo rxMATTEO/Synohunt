@@ -2,10 +2,20 @@
 import { storeToRefs } from 'pinia';
 import { ref } from 'vue';
 import { useThemeStore } from '@/stores/themeStore';
+import { useNotificationsStore } from '@/stores/notificationsStore';
 
 const themeStore = useThemeStore();
 const { currentTheme } = storeToRefs(useThemeStore());
-const onChangeTheme = themeStore.setCurrentTheme;
+const notificationsStore = useNotificationsStore();
+const onChangeTheme = (currentTheme, theme) => {
+  notificationsStore.addNotification({
+    title: 'Success',
+    secondaryText: 'Cool',
+    description: 'You changed theme'
+
+  });
+  themeStore.setCurrentTheme(currentTheme, theme);
+};
 
 const themeNames = ['arya-blue',
   'arya-green',

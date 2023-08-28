@@ -86,7 +86,7 @@ function changeTab () {
         </div>
       </div>
 
-      <div class="flex gap-5 mt-5 h-max max-md:t-flex-wrap">
+      <div class="flex gap-5 mt-5 t-max-h-full block max-md:t-flex-wrap overflow-hidden">
         <div class="t-w-full md:t-w-2/3">
           <div class="p-3 t-min-h-full gradient-black-white t-rounded-md flex">
             <div class="t-w-1/3 md:t-w-1/5">
