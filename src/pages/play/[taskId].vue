@@ -74,7 +74,7 @@ async function completeTask () {
 
 const contextHtml = computed({
   get () {
-    return (task.value.description as string).replaceAll(task.value.Word.word, `<span class="bg-primary-500">${task.value.Word.word}</span>`);
+    return (task.value.description as string).replaceAll(task.value.Word.word, `<span class="bg-primary-500 text-white">${task.value.Word.word}</span>`);
   }
 });
 
