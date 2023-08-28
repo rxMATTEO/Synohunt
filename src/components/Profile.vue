@@ -40,7 +40,9 @@ const tabItems = ref<TabItem[]>([
 const { hash } = useRoute();
 const router = useRouter();
 const indexByHash = hash ? tabItems.value.findIndex(tab => tab.label.toLowerCase() === hash.slice(1)) : 0;
-const tabs = [ProfileStats, CompletedTasks, CreatedTasks, ProfileSettings];
+const allowedToGuest = [ProfileStats];
+const allowedToOwner = [ProfileStats, CompletedTasks, CreatedTasks, ProfileSettings];
+const tabs = props.foreign ? allowedToGuest : allowedToOwner;
 const selectedTabIndex = ref<number>(0);
 
 const pending = ref(true);
@@ -149,6 +151,7 @@ function changeTab () {
           <TabMenu
             v-model:activeIndex="selectedTabIndex"
             :model="tabItems"
+            class="whitespace-nowrap"
             @tab-change="changeTab"
           />
         </div>
