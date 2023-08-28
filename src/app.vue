@@ -18,11 +18,9 @@ const appConfig = useAppConfig();
 const { setCurrentTheme, getCurrentTheme } = useThemeStore();
 if (process.client) {
   const currentTheme = getCurrentTheme();
-  if (currentTheme === 'light') {
-    setTimeout(() => {
-      setCurrentTheme('dark', 'light');
-    }, 300);
-  }
+  setTimeout(() => {
+    setCurrentTheme('bootstrap4-dark-purple', currentTheme);
+  }, 300);
 }
 onMounted(() => {
   if (window.document.documentElement.offsetWidth >= 768) {
