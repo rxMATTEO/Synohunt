@@ -105,7 +105,7 @@ function update () {
           <template #list="{data: slotProps}">
             <div class="col-12 relative">
               <div class="flex flex-row xl:align-items-start p-2 gap-4">
-                <img class="w-3 sm:w-10rem xl:w-10rem shadow-2 block xl:block mx-auto border-round" :src="slotProps.imgPath" :alt="slotProps.name">
+                <img class="max-md:t-h-1/2 w-3 sm:w-10rem xl:w-10rem shadow-2 block xl:block mx-auto border-round" :src="slotProps.imgPath" :alt="slotProps.name">
                 <div class="flex flex-column sm:flex-row justify-content-between xl:align-items-start flex-1 gap-4">
                   <div class="flex flex-column sm:align-items-start gap-3">
                     <div class="text-2xl font-bold text-900">

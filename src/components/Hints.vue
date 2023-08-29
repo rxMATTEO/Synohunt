@@ -11,18 +11,8 @@ function hideHintsPanel () {
   hidden.value = true;
 }
 const confirmPurchaseDialog = useConfirm();
-
-const x = ref(0);
-const y = ref(0);
-
-onActivated(() => {
-  console.log(x, y);
-});
 function showHintsPanel (e: MouseEvent) {
   hidden.value = false;
-  x.value = e.x;
-  y.value = e.y;
-  console.log(x, y);
 }
 
 type Hint = { label: string; icon: string; cost: number };
@@ -76,7 +66,7 @@ const items = ref<Hint[]>([
     :class="{ '!t-mb-[-140px]': hidden }"
     :pt="{
       root: {
-        class: [hidden? 't-bottom-[-140px] !t-top-[unset]' : '', 'absolute', 'overflow-hidden', 't-rounded-xl']
+        class: [hidden? 't-bottom-[-140px] !t-top-[unset]' : '', 'absolute', 'overflow-hidden', 'w-full','t-rounded-xl']
       },
       closeButton: {
         'onclick': hideHintsPanel
@@ -95,7 +85,7 @@ const items = ref<Hint[]>([
           <Dock
             :model="items"
             position="bottom"
-            :class="`t-left-[${x}] right-[${y}] relative`"
+            class="relative"
             :pt="{
               container: {
                 class: ['surface-ground'],

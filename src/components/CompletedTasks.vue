@@ -29,15 +29,15 @@ const completedTasks = ref<CompletedTaskResponse[]>((await useFetch('/api/task/c
       paginator
       :rows="5"
     >
-      <!--    todo remember solved synonyms on plaay page pls-->
+      <!--    todo remember solved synonyms on plaay page pls 404 page-->
       <template #list="slotProps: {data: CompletedTaskResponse}">
         <NuxtLink :to="`/play/${slotProps.data.Task.id}`" class="block w-full">
           <GradientBox :gradient-name="slotProps.data.Task.Difficulity.name.toLowerCase()" class="mb-5">
             <template #left-side>
               <div class="col-12 relative">
                 <div class="flex flex-column xl:flex-row xl:align-items-start px-4 py-2 gap-4">
-                  <div class="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
-                    <div class="flex flex-column align-items-center sm:align-items-start gap-3">
+                  <div class="flex flex-column sm:flex-row justify-content-between xl:align-items-start flex-1 gap-4">
+                    <div class="flex flex-column sm:align-items-start gap-3">
                       <div class="text-2xl font-bold text-900">
                         <p>{{ slotProps.data.Task.Word.word }}</p>
                       </div>
@@ -69,11 +69,13 @@ const completedTasks = ref<CompletedTaskResponse[]>((await useFetch('/api/task/c
                     </div>
                   </div>
                 </div>
-                <div class="flex max-lg:t-flex-col align-items-center sm:align-items-end gap-3 sm:gap-2 absolute t-bottom-5">
-                  <div v-for="syno in slotProps.data.Task.Word.Synonym">
-                    <Tag class="bg-gray-300 hover:bg-gray-500 transition-all animation-ease-in-out transition-duration-300">
-                      {{ syno.value }}
-                    </Tag>
+                <div class="w-2rem h-2rem">
+                  <div class="flex flex-row max-lg:t-flex-col align-items-center sm:align-items-end gap-3 sm:gap-2 absolute md:t-bottom-5 t-bottom-1">
+                    <div v-for="syno in slotProps.data.Task.Word.Synonym">
+                      <Tag class="bg-gray-300 hover:bg-gray-500 transition-all animation-ease-in-out transition-duration-300">
+                        {{ syno.value }}
+                      </Tag>
+                    </div>
                   </div>
                 </div>
               </div>

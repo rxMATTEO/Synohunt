@@ -117,7 +117,7 @@ const isAddSynoShake = ref(false);
 
 <template>
   <div>
-    <Dialog v-model:visible="isDialogVisible" modal header="Congratulations" :style="{ width: '50vw' }">
+    <Dialog v-model:visible="isDialogVisible" modal header="Congratulations" class="t-w-full md:!t-w-1/2">
       <p>
         You created new task!
       </p>
@@ -127,7 +127,7 @@ const isAddSynoShake = ref(false);
     </Dialog>
     <NuxtLayout name="header-n-sidebar">
       <PaddingBox>
-        <div class="surface-ground t-rounded-md p-5 h-fit">
+        <div class="surface-ground t-rounded-md p-3 md:p-5 h-fit">
           <div class="relative">
             <div class="absolute right-0">
               <Button v-tooltip="'Generate randomly'" unstyled @click="randomGenerateTask">
@@ -137,7 +137,7 @@ const isAddSynoShake = ref(false);
               </Button>
             </div>
           </div>
-          <form @submit.prevent>
+          <form class="flex flex-column" @submit.prevent>
             <h1 class="text-4xl">
               Create new challenge
             </h1>
@@ -173,7 +173,7 @@ const isAddSynoShake = ref(false);
                     </template>
                   </Dropdown>
                   <label for="dd-diff" class="">Select difficulty</label>
-                  <i v-tooltip.left="'Define challenge difficulty so players can choose it depends them skill'" class="pi pi-info-circle absolute t-top-[-20px] right-0" />
+                  <Button v-tooltip.focus.left="'Define challenge difficulty so players can choose it depends them skill'" icon="pi pi-info-circle" :unstyled="true" class="absolute t-top-[-20px] right-0" />
                 </div>
                 <div class="p-float-label mt-5">
                   <Dropdown
@@ -199,7 +199,7 @@ const isAddSynoShake = ref(false);
                     </template>
                   </Dropdown>
                   <label for="dd-lang" class="">Select Language</label>
-                  <i v-tooltip.left="'Select language of word and synonyms'" class="pi pi-info-circle absolute t-top-[-20px] right-0" />
+                  <Button v-tooltip.focus.left="'Select language of word and synonyms'" icon="pi pi-info-circle" :unstyled="true" class="absolute t-top-[-20px] right-0" />
                 </div>
               </Fieldset>
             </div>
@@ -213,7 +213,7 @@ const isAddSynoShake = ref(false);
               <div class="mt-0">
                 <div class="flex t-place-content-between">
                   <p>Word</p>
-                  <i v-tooltip.left="'The word which synonyms players will be guessing'" class="pi pi-info-circle" />
+                  <Button v-tooltip.focus.left="'The word which synonyms players will be guessing'" icon="pi pi-info-circle" :unstyled="true" class="" />
                 </div>
                 <InputText id="word" v-model="word" type="text" class="w-full" :class="{ 'p-invalid': wordErrorMessage }" />
                 <small id="text-error" class="p-error">{{
@@ -223,7 +223,7 @@ const isAddSynoShake = ref(false);
               <div class="mt-5">
                 <div class="flex t-place-content-between">
                   <p>Context</p>
-                  <i v-tooltip.left="'Enter the context of word. You can use html tags'" class="pi pi-info-circle" />
+                  <Button v-tooltip.focus.left="'Enter the context of word. You can use html tags'" icon="pi pi-info-circle" :unstyled="true" class="" />
                 </div>
                 <Editor
                   id="context"
@@ -237,53 +237,61 @@ const isAddSynoShake = ref(false);
                 }}</small>
               </div>
             </Fieldset>
-            <Fieldset>
+            <Fieldset
+              :pt="{
+                content: {
+                  class: ['!t-max-w-full p-0']
+                }
+              }"
+            >
               <template #legend>
                 <div class="flex align-items-center text-primary">
                   <span class="pi pi-file-import mr-2" />
                   <span class="font-bold text-lg">Synonyms</span>
                 </div>
               </template>
-              <div class="relative">
-                <i v-tooltip.left="'The synonyms which is players will be guessing'" class="pi pi-info-circle absolute t-right-0 t-top-0" />
-              </div>
-              <div class="">
-                <div class="t-p-5 flex">
-                  <div class="p-float-label">
-                    <InputText id="syno" v-model="addingSynonym" />
-                    <label for="syno" class="p-float-label">Enter synonym</label>
-                    <Button :type="null" label="+" class="ml-3" :class="{ 'shake': isAddSynoShake }" @click="addSynonym" />
-                  </div>
+              <template #default>
+                <div class="relative">
+                  <Button v-tooltip.focus.left="'The synonyms which is players will be guessing'" icon="pi pi-info-circle" :unstyled="true" class="absolute t-top-[-20px] right-0" />
                 </div>
-                <small id="text-error" class="p-error">{{
-                  synosErrorMessage || "&nbsp;"
-                }}</small>
-                <PickList
-                  id="synos"
-                  key=""
-                  v-model="synonyms.value"
-                  class="pick-list"
-                  :class="{ 'border-red-300 border-solid border-1': synosErrorMessage }"
-                >
-                  <template #sourceheader>
-                    Not included
-                  </template>
-                  <template #targetheader>
-                    Included
-                  </template>
-                  <template #item="slotProps : {item: Synonym}">
-                    <div :key="slotProps.item.id" class="flex flex-wrap p-2 align-items-center gap-3 pick-list">
-                      <div class="flex-1 flex flex-column gap-2">
-                        <span class="font-bold">{{ slotProps.item.value }}</span>
-                        <div class="flex align-items-center gap-2">
-                          <Badge v-tooltip="{value: `<p>Player will get <b>${slotProps.item.pointsForGuess} points</b> for guessing this synonym</p`, escape: true}" :value="slotProps.item.pointsForGuess" :severity="'info'" />
-                          <Badge v-tooltip="{value: `<p>Player will get <b>${slotProps.item.moneyForGuess} coins</b> for guessing this synonym</p`, escape: true}" :value="slotProps.item.moneyForGuess" :severity="'warning'" />
+                <div class="!t-max-w-full">
+                  <div class="t-p-5 flex">
+                    <div class="p-float-label max-md:!t-flex max-md:!t-flex-col align-items-center">
+                      <InputText id="syno" v-model="addingSynonym" />
+                      <label for="syno" class="max-md:!t-mt-[-1.5rem] p-float-label">Enter synonym</label>
+                      <Button :type="null" label="+" class="ml-3" :class="{ 'shake': isAddSynoShake }" @click="addSynonym" />
+                    </div>
+                  </div>
+                  <small id="text-error" class="p-error">{{
+                    synosErrorMessage || "&nbsp;"
+                  }}</small>
+                  <PickList
+                    id="synos"
+                    key=""
+                    v-model="synonyms.value"
+                    class="pick-list"
+                    :class="{ 'border-red-300 border-solid border-1': synosErrorMessage }"
+                  >
+                    <template #sourceheader>
+                      Not included
+                    </template>
+                    <template #targetheader>
+                      Included
+                    </template>
+                    <template #item="slotProps : {item: Synonym}">
+                      <div :key="slotProps.item.id" class="flex flex-wrap p-2 align-items-center gap-3 pick-list">
+                        <div class="flex-1 flex flex-column gap-2">
+                          <span class="font-bold">{{ slotProps.item.value }}</span>
+                          <div class="flex align-items-center gap-2">
+                            <Badge v-tooltip="{value: `<p>Player will get <b>${slotProps.item.pointsForGuess} points</b> for guessing this synonym</p`, escape: true}" :value="slotProps.item.pointsForGuess" :severity="'info'" />
+                            <Badge v-tooltip="{value: `<p>Player will get <b>${slotProps.item.moneyForGuess} coins</b> for guessing this synonym</p`, escape: true}" :value="slotProps.item.moneyForGuess" :severity="'warning'" />
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </template>
-                </PickList>
-              </div>
+                    </template>
+                  </PickList>
+                </div>
+              </template>
             </Fieldset>
             <div class="mt-5 prevent-tw">
               <Button label="Create challenge" type="submit" class="mx-auto block" :loading="isLoading" @click="createTask" />

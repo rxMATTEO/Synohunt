@@ -79,7 +79,7 @@ const { messages } = storeToRefs(messagesStore);
           <div class="mr-3" @mouseover="(e: MouseEvent) => onMouseOver(e, 'messagesOp')">
             <i v-if="messages && messages.value.length" v-badge.danger class="pi pi-envelope p-text-secondary" />
             <i v-else class="pi pi-envelope p-text-secondary" />
-            <OverlayPanel :ref="overlays.messagesOp" class="md:!t-w-1/2 max-md:t-w-full max-md:!t-left-0" dismissable @mouseleave="(e) => onMouseLeave('messagesOp', e)">
+            <OverlayPanel :ref="overlays.messagesOp" class="md:!t-w-1/2 max-md:t-w-full max-md:!t-left-0 max-md:!t-top-10" dismissable @mouseleave="(e) => onMouseLeave('messagesOp', e)">
               <Messages />
             </OverlayPanel>
           </div>

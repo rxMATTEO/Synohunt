@@ -9,7 +9,7 @@ useHead({
     <NuxtLayout name="header-n-sidebar">
       <PaddingBox>
         <div
-          class="surface-ground t-rounded-md p-5"
+          class="surface-ground t-rounded-md md:p-5 p-2"
         >
           <CompletedTasks />
         </div>
