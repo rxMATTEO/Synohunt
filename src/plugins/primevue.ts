@@ -31,6 +31,7 @@ import Fieldset from 'primevue/fieldset';
 import ConfirmationService from 'primevue/confirmationservice';
 import Skeleton from 'primevue/skeleton';
 import Password from 'primevue/password';
+import FileUpload from 'primevue/fileupload';
 import { defineNuxtPlugin } from '#imports';
 export default defineNuxtPlugin({
   parallel: true,
@@ -80,5 +81,6 @@ export default defineNuxtPlugin({
     nuxtApp.vueApp.component('Fieldset', Fieldset);
     nuxtApp.vueApp.component('Skeleton', Skeleton);
     nuxtApp.vueApp.component('Password', Password);
+    nuxtApp.vueApp.component('FileUpload', FileUpload);
   }
 });

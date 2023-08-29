@@ -201,14 +201,14 @@ async function onSave () {
         <h1 class="md-3 text-4xl font-bold md:mb-5">
           User
         </h1>
-        <div class="absolute t-top-5 t-right-5 t-w-1/4 t-h-1/2">
-          <img title="Change avatar" class="cursor-pointer t-rounded-3xl t-outline-3 t-outline t-outline-primary" :src="account.image" alt="avatar">
+        <div class="absolute t-top-5 t-right-5 t-w-1/4 t-h-1/3">
+          <img title="Change avatar" class="z-1 absolute cursor-pointer t-rounded-3xl t-outline-3 t-outline t-outline-primary" :src="account.image" alt="avatar">
         </div>
-        <div v-for="group in inputGroup">
-          <div v-for="input in group.input">
+        <div v-for="group in inputGroup" class="mt-3">
+          <div v-for="input in group.input" class="t-max-w-full flex flex-column">
             <span class="p-input-icon-left my-3 p-float-label">
               <i :class="`pi pi-${input.icon}`" />
-              <InputText v-model="input.vmodel" :input-id="input.name" :placeholder="input.name" />
+              <InputText v-model="input.vmodel" class="t-max-w-full" :input-id="input.name" :placeholder="input.name" />
               <label :for="input.name">{{ `Your ${input.name}` }}</label>
             </span>
           </div>
