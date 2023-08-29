@@ -38,16 +38,16 @@ const nuxtConfig: NuxtConfig = {
     ]
   },
   app: {
-    baseURL: baseUrl,
-    head: {
-      link: [
-        {
-          id: themeId,
-          rel: 'stylesheet',
-          href: baseUrl + 'themes/bootstrap4-dark-purple/theme.css'
-        }
-      ]
-    }
+    // baseURL: baseUrl,
+    // head: {
+    //   link: [
+    //     {
+    //       id: themeId,
+    //       rel: 'stylesheet',
+    //       href: baseUrl + 'themes/bootstrap4-dark-purple/theme.css'
+    //     }
+    //   ]
+    // }
   },
   runtimeConfig: {
     public: {

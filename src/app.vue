@@ -4,9 +4,12 @@
 
 <script setup lang="ts">
 import { onMounted } from 'vue';
+import { usePrimeVue } from 'primevue/config';
 import { Platforms } from './app.config.ts';
 import { useAppConfig } from '#imports';
 import { useThemeStore } from '@/stores/themeStore';
+
+const cookieTheme = useCookie('theme');
 
 useHead({
   titleTemplate: (chunk) => {
@@ -15,13 +18,24 @@ useHead({
 
 });
 const appConfig = useAppConfig();
-const { setCurrentTheme, getCurrentTheme } = useThemeStore();
-if (process.client) {
-  const currentTheme = getCurrentTheme();
-  setTimeout(() => {
-    setCurrentTheme('bootstrap4-dark-purple', currentTheme);
-  }, 300);
-}
+// const primeVue = usePrimeVue();
+useHead({
+  link: [
+    {
+      rel: 'stylesheet',
+      href: `/themes/${cookieTheme.value}/theme.css`
+    }
+  ]
+});
+const { public: { themeId } }: string = useRuntimeConfig();
+
+// const { setCurrentTheme, getCurrentTheme } = useThemeStore();
+// if (process.client) {
+//   const currentTheme = getCurrentTheme();
+//   setTimeout(() => {
+//     setCurrentTheme('bootstrap4-dark-purple', currentTheme);
+//   }, 300);
+// }
 onMounted(() => {
   if (window.document.documentElement.offsetWidth >= 768) {
     appConfig.platform = Platforms.pc;

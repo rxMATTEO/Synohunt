@@ -15,7 +15,7 @@ export const useThemeStore = defineStore('themeStore', () => {
     let mode: ThemesNames = localStorage.getItem(modeKey) as ThemesNames;
     if (!mode) {
       mode = appConfig.theme as ThemesNames;
-      localStorage.setItem(modeKey, 'bootstrap4-dark-purple');
+      document.setItem(modeKey, 'bootstrap4-dark-purple');
     }
     currentTheme.value = mode;
     return mode;
