@@ -16,7 +16,7 @@ definePageMeta({
   <!--  <NuxtLayout name="header-n-sidebar">-->
   <div>
     <LandingHeader />
-    <div class="lg:!t-px-64 lg:t-mx-40 t-px-3">
+    <div class="xl:!t-px-64 xl:t-mx-20 t-px-3">
       <div class="mt-5">
         <h1 class="text-4xl font-bold text-center">
           About us
