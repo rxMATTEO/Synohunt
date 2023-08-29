@@ -133,7 +133,7 @@ function update () {
                     <div class="relative inline-block" />
                     <div class="flex align-items-center gap-3">
                       <span class="flex align-items-center gap-2">
-                        <span class="">{{ slotProps.value }}</span>
+                        <span class="t-line-clamp-1 overflow-hidden">{{ slotProps.value }}</span>
                       </span>
                     </div>
                   </div>
