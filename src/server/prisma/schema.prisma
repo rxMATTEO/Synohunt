@@ -100,6 +100,7 @@ model Message {
   userId   String
   topic    String        @default("")
   value    String
+  imgPath  String        @default("/img/biglogo.png")
   statusId Int
   Status   MessageStatus @relation(fields: [statusId], references: [id])
   User     User          @relation(fields: [userId], references: [id])

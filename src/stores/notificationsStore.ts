@@ -22,7 +22,8 @@ export const useNotificationsStore: NotificationsStore = defineStore('notificati
       const msgStore = useMessageStore();
       msgStore.addMessage({
         value: notification.title,
-        topic: notification.description
+        topic: notification.description,
+        imgPath: notification.image
       });
       this.notifications[notification.id] = notification;
       return notification;
