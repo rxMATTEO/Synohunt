@@ -6,13 +6,11 @@
 import { onMounted } from 'vue';
 import { Platforms } from './app.config.ts';
 import { useAppConfig } from '#imports';
-import { useThemeStore } from '@/stores/themeStore';
 
 useHead({
   titleTemplate: (chunk) => {
     return chunk ? `${chunk} - Synohunt` : 'Synohunt';
   }
-
 });
 
 const { themeId, themeCookieKey } = useAppConfig();
@@ -28,13 +26,6 @@ useHead({
   ]
 });
 
-const { setCurrentTheme, getCurrentTheme } = useThemeStore();
-if (process.client) {
-  const currentTheme = getCurrentTheme();
-  // setTimeout(() => {
-  // setCurrentTheme('bootstrap4-dark-purple', currentTheme);
-  // }, 300);
-}
 onMounted(() => {
   if (window.document.documentElement.offsetWidth >= 768) {
     appConfig.platform = Platforms.pc;
