@@ -66,7 +66,7 @@ const items = ref<Hint[]>([
     :class="{ '!t-mb-[-140px]': hidden }"
     :pt="{
       root: {
-        class: [hidden? 't-bottom-[-140px] !t-top-[unset]' : '', 'absolute', 'overflow-hidden', 'w-full','t-rounded-xl']
+        class: [hidden? 't-bottom-[-140px] !t-top-[unset]' : '', 'absolute', 'overflow-hidden', 'max-md:t-w-full','t-rounded-xl']
       },
       closeButton: {
         'onclick': hideHintsPanel

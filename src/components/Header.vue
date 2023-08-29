@@ -47,7 +47,6 @@ function onMouseOver (e: MouseEvent, overlayName: OverlaysNames) {
 }
 
 function onMouseLeave (overlayName: OverlaysNames, e?: MouseEvent) {
-  return false; // todo remove when end header
   if (e && e.relatedTarget) {
     if ((e.relatedTarget<Element>)!.className === 'p-tieredmenu p-component p-tieredmenu-overlay') {
       e.relatedTarget.addEventListener('mouseleave', () => onMouseLeave(overlayName));

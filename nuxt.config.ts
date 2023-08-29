@@ -6,7 +6,7 @@ const nuxtConfig: NuxtConfig = {
   devtools: { enabled: true, enableTimeline: true },
   buildModules: ['@nuxt/typescript-build'],
   css: [
-    // 'primeflex/primeflex.css', it's imported in _main tho
+    'primeflex/primeflex.css',
     'primeicons/primeicons.css'
   ],
   build: {
@@ -47,5 +47,6 @@ const nuxtConfig: NuxtConfig = {
   },
   srcDir: './src'
 };
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 export default defineNuxtConfig(nuxtConfig);
