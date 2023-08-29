@@ -1,6 +1,7 @@
 import { ref } from 'vue';
 import { defineStore, useAuth, useFetch } from '#imports';
 import type { NotificationProps, NotificationsObject } from '@/components/Notification.vue';
+import { useMessageStore } from '@/stores/messageStore';
 
 type NotificationsStore = {
   () :{
@@ -18,6 +19,11 @@ export const useNotificationsStore: NotificationsStore = defineStore('notificati
   },
   actions: {
     addNotification (notification: NotificationProps) {
+      const msgStore = useMessageStore();
+      msgStore.addMessage({
+        value: notification.title,
+        topic: notification.description
+      });
       this.notifications[notification.id] = notification;
       return notification;
     },

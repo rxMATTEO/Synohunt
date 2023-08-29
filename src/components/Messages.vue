@@ -33,12 +33,6 @@ const selectedMsg = ref({});
 
 const messageActions = ref([
   {
-    label: 'Add',
-    icon: 'pi pi-pencil',
-    callback: () => {
-    }
-  },
-  {
     label: 'Delete',
     icon: 'pi pi-trash',
     command: async () => {
