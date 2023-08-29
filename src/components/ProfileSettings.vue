@@ -4,10 +4,10 @@ import { ref } from 'vue';
 import { infer } from 'zod';
 import { useThemeStore } from '@/stores/themeStore';
 import { useNotificationsStore } from '@/stores/notificationsStore';
+import type { PrimeIcon } from '@/pages/index.vue';
 
 const themeStore = useThemeStore();
 const { data: { value: { user: { account } } } } = useAuth();
-const { currentTheme } = storeToRefs(useThemeStore());
 const notificationsStore = useNotificationsStore();
 
 const themeNames = ['arya-blue',
@@ -142,22 +142,30 @@ function getImagePath (themeName: ThemeName, themeGroup: Theme) {
 }
 
 type Input = {
-  icon: string,
-  vmodel: object
+  icon: PrimeIcon,
+  vmodel: object,
+  name: string
 };
 
 type InputGroup = {
   name: string,
   input: Input[],
 }
-const username = ref('ya eblan');
+const username = ref(account.name);
+const email = ref(account.email);
 const inputGroup = ref<InputGroup[]>([
   {
     name: 'User',
     input: [
       {
-        icon: 'pi pi-user',
+        name: 'username',
+        icon: 'user',
         vmodel: username
+      },
+      {
+        name: 'email',
+        icon: 'inbox',
+        vmodel: email
       }
     ]
   }
@@ -176,9 +184,10 @@ const inputGroup = ref<InputGroup[]>([
         </div>
         <div v-for="group in inputGroup">
           <div v-for="input in group.input">
-            <span class="p-input-icon-left">
-              <i class="pi pi-user" />
-              <InputText v-model="input.vmodel" placeholder="Username" />
+            <span class="p-input-icon-left my-3 p-float-label">
+              <i :class="`pi pi-${input.icon}`" />
+              <InputText v-model="input.vmodel" :input-id="input.name" :placeholder="input.name" />
+              <label :for="input.name">{{ `Your ${input.name}` }}</label>
             </span>
           </div>
         </div>

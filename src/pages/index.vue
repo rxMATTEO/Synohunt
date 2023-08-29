@@ -265,10 +265,12 @@ import LandingHeader from '@/components/LandingHeader.vue';
 
 definePageMeta({ auth: false });
 
+export type PrimeIcon = Lowercase<keyof PrimeIconsOptions>;
+
 type BeatyLink = {
   header: string,
   mainText: string,
-  picon: Lowercase<keyof PrimeIconsOptions>
+  picon: PrimeIcon
 }
 const beautyLinks = ref<BeatyLink[]>([
   {
