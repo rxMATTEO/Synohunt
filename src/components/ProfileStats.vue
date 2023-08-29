@@ -69,10 +69,14 @@ const created = ref(
               <b>Points: </b>
               <span>{{ account.points }}</span>
             </div>
-            <div>
-              <b>Money: </b>
-              <span>{{ account.Money.value }}</span>
-            </div>
+          </div>
+        </div>
+      </div>
+      <div class="t-w-1/3 max-md:t-mt-3">
+        <div>
+          <div>
+            <b>Rank name: </b>
+            <span>{{ account.Level.Group.name }}</span>
           </div>
         </div>
       </div>
