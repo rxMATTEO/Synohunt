@@ -3,7 +3,7 @@
     <div class="h-screen t-max-h-screen">
       <div class="text-color py-3 absolute right-0 left-0" />
       <LandingHeader class="fixed left-0 right-0 top-0 t-z-50" />
-      <div class="lg:!t-px-64 lg:t-mx-20 t-px-3 max-w-full h-full surface-ground">
+      <div class="2xl:!t-px-64 2xl:t-mx-20 t-px-3 max-w-full h-full surface-ground">
         <div class="h-full">
           <div class="flex h-full align-items-center">
             <div class="md:t-w-1/2 relative t-z-30">
@@ -49,8 +49,8 @@
           </div>
         </div>
       </div>
-      <div class=" t-px-3 max-w-full surface-ground">
-        <div class="lg:!t-px-64 lg:t-mx-20">
+      <div class="t-px-3 max-w-full surface-ground">
+        <div class="2xl:!t-px-64 2xl:t-mx-20">
           <div class="flex gap-5 max-md:t-flex-wrap">
             <div
               class="shadow-6 w-full surface-card px-5 py-3 t-rounded-lg relative up-hover"

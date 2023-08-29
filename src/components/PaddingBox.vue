@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <div class="lg:t-px-44 lg:t-mx-44 px-3">
+  <div class="xl:t-px-44 xl:t-mx-44 px-3">
     <slot />
   </div>
 </template>

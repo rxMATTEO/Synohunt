@@ -21,11 +21,11 @@ onMounted(() => {
         't-bg-black t-bg-opacity-10 t-backdrop-blur-3xl': top > 0
       }"
     >
-      <div class="lg:!t-px-64 lg:t-mx-20 t-px-3">
+      <div class="2xl:!t-px-64 2xl:t-mx-20 t-px-3">
         <div class="flex t-place-content-between t-items-center gap-1 h-full">
           <div>
             <NuxtLink to="/" class="font-bold t-tracking-wider h-full w-full">
-              <div class="h-3rem max-md:t-w-16 flex align-items-center max-md:t-flex-col">
+              <div class="md:w-3rem h-full max-md:t-w-16 flex align-items-center max-md:t-flex-col">
                 <img class="w-full h-full" src="/favicon.ico" alt="logo">
                 <p>SynoHunt</p>
               </div>
