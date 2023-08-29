@@ -4,21 +4,18 @@ import { Theme, ThemesNames } from '@/app.config';
 import { useAppConfig, useRuntimeConfig } from '#imports';
 
 export const useThemeStore = defineStore('themeStore', () => {
-  const { public: { themeId } }: string = useRuntimeConfig();
-  const modeKey = 'colorMode';
+  const { themeId, themeCookieKey } = useAppConfig();
   const primeVue = usePrimeVue();
   const appConfig = useAppConfig();
-
   const currentTheme = ref(appConfig.theme);
 
+  const themeCookie = useCookie(themeCookieKey);
   function getCurrentTheme (): ThemesNames {
-    let mode: ThemesNames = localStorage.getItem(modeKey) as ThemesNames;
-    if (!mode) {
-      mode = appConfig.theme as ThemesNames;
-      document.setItem(modeKey, 'bootstrap4-dark-purple');
+    if (!themeCookie.value) {
+      themeCookie.value = appConfig.theme as ThemesNames;
     }
-    currentTheme.value = mode;
-    return mode;
+    currentTheme.value = themeCookie.value;
+    return themeCookie.value;
   }
 
   function setPrimeTheme (currentTheme, newTheme) {
@@ -27,10 +24,7 @@ export const useThemeStore = defineStore('themeStore', () => {
 
   function setCurrentTheme (currentThemeName: ThemesNames, newThemeName: ThemesNames) {
     setPrimeTheme(currentThemeName, newThemeName);
-    appConfig.theme = newThemeName;
-    localStorage.setItem(modeKey, newThemeName);
-
-    currentTheme.value = newThemeName;
+    themeCookie.value = currentTheme.value = newThemeName;
   }
   return ({
     getCurrentTheme,

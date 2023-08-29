@@ -2,7 +2,6 @@
 import { NuxtConfig } from '@nuxt/types';
 
 const baseUrl = '/';
-const themeId = 'theme-link';
 const nuxtConfig: NuxtConfig = {
   devtools: { enabled: true, enableTimeline: true },
   buildModules: ['@nuxt/typescript-build'],
@@ -49,11 +48,6 @@ const nuxtConfig: NuxtConfig = {
     //   ]
     // }
   },
-  runtimeConfig: {
-    public: {
-      themeId
-    }
-  },
   vite: {
     css: {
       preprocessorOptions: {
@@ -67,4 +61,3 @@ const nuxtConfig: NuxtConfig = {
 };
 // @ts-ignore
 export default defineNuxtConfig(nuxtConfig);
-export { themeId };

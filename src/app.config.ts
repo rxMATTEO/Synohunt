@@ -28,5 +28,7 @@ declare module 'nuxt/schema' {
 export default defineAppConfig({
   title: 'Translate-app',
   theme: ThemesNames.dark,
-  platform: ''
+  platform: '',
+  themeCookieKey: 'theme',
+  themeId: 'theme-link'
 });
