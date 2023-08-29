@@ -140,6 +140,28 @@ const onChangeTheme = (theme: ThemeName, imagePath: ReturnType<typeof getImagePa
 function getImagePath (themeName: ThemeName, themeGroup: Theme) {
   return `/layout/images/themes/${themeName}.${themeGroup.fileType}`;
 }
+
+type Input = {
+  icon: string,
+  vmodel: object
+};
+
+type InputGroup = {
+  name: string,
+  input: Input[],
+}
+const username = ref('ya eblan');
+const inputGroup = ref<InputGroup[]>([
+  {
+    name: 'User',
+    input: [
+      {
+        icon: 'pi pi-user',
+        vmodel: username
+      }
+    ]
+  }
+]);
 </script>
 <!--todo fix footer-->
 <template>
@@ -152,7 +174,18 @@ function getImagePath (themeName: ThemeName, themeGroup: Theme) {
         <div class="absolute right-0 t-w-1/4 t-h-1/2">
           <img class="cursor-pointer t-rounded-3xl" :src="account.image" alt="avatar">
         </div>
-        a
+        <div v-for="group in inputGroup">
+          <div v-for="input in group.input">
+            <span class="p-input-icon-left">
+              <i class="pi pi-user" />
+              <InputText v-model="input.vmodel" placeholder="Username" />
+            </span>
+          </div>
+        </div>
+        <!--        <span class="p-input-icon-left">-->
+        <!--          <i class="pi pi-user" />-->
+        <!--          <InputText placeholder="Username" />-->
+        <!--        </span>-->
       </div>
       <Divider align="top" layout="vertical" class="max-md:!t-hidden" />
       <div class="md:t-w-1/2">
