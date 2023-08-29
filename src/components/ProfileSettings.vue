@@ -197,7 +197,7 @@ const inputGroup = ref<InputGroup[]>([
         <!--        </span>-->
       </div>
       <Divider align="top" layout="vertical" class="max-md:!t-hidden" />
-      <div class="md:t-w-1/2">
+      <div class="relative md:t-w-1/2 surface-200 t-p-5 t-rounded-xl">
         <h1 class="text-4xl font-bold mb-3 md:mb-5">
           Appearance
         </h1>
