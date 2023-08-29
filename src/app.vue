@@ -6,25 +6,17 @@
 import { onMounted } from 'vue';
 import { Platforms } from './app.config.ts';
 import { useAppConfig } from '#imports';
+import { useThemeStore } from '@/stores/themeStore';
+
+const themeStore = useThemeStore();
+themeStore.applyFromCookie();
 
 useHead({
   titleTemplate: (chunk) => {
     return chunk ? `${chunk} - Synohunt` : 'Synohunt';
   }
 });
-
-const { themeId, themeCookieKey } = useAppConfig();
-const cookieTheme = useCookie(themeCookieKey);
 const appConfig = useAppConfig();
-useHead({
-  link: [
-    {
-      id: themeId,
-      rel: 'stylesheet',
-      href: `/themes/${cookieTheme.value}/theme.css`
-    }
-  ]
-});
 
 onMounted(() => {
   if (window.document.documentElement.offsetWidth >= 768) {

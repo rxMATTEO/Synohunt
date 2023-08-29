@@ -18,6 +18,19 @@ export const useThemeStore = defineStore('themeStore', () => {
     return themeCookie.value;
   }
 
+  function applyFromCookie () {
+    useHead({
+      link: [
+        {
+          id: themeId,
+          rel: 'stylesheet',
+          href: `/themes/${themeCookie.value}/theme.css`
+        }
+      ]
+    });
+    currentTheme.value = themeCookie.value;
+  }
+
   function setPrimeTheme (currentTheme, newTheme) {
     return primeVue.changeTheme(currentTheme, newTheme, themeId);
   }
@@ -29,6 +42,7 @@ export const useThemeStore = defineStore('themeStore', () => {
   return ({
     getCurrentTheme,
     setCurrentTheme,
+    applyFromCookie,
     currentTheme
   });
 });
