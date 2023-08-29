@@ -175,12 +175,12 @@ const inputGroup = ref<InputGroup[]>([
 <template>
   <div class="">
     <div class="flex flex-column md:flex-row mt-5 gap-5">
-      <div class="relative md:t-w-1/2">
+      <div class="relative md:t-w-1/2 surface-200 t-p-5 t-rounded-xl">
         <h1 class="md-3 text-4xl font-bold md:mb-5">
           User
         </h1>
-        <div class="absolute right-0 t-w-1/4 t-h-1/2">
-          <img class="cursor-pointer t-rounded-3xl" :src="account.image" alt="avatar">
+        <div class="absolute t-top-5 t-right-5 t-w-1/4 t-h-1/2">
+          <img title="Change avatar" class="cursor-pointer t-rounded-3xl t-outline-3 t-outline t-outline-primary" :src="account.image" alt="avatar">
         </div>
         <div v-for="group in inputGroup">
           <div v-for="input in group.input">

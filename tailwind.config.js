@@ -5,6 +5,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      outlineColor: {
+        primary: 'var(--primary-500)'
+      },
       lineHeight: {
         1: '0.25rem'
       },
