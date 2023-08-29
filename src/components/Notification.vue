@@ -11,7 +11,6 @@ export type NotificationProps = {
   title: string;
   description: string;
   image: string;
-  notificationType?: NotificationType;
   actions: NotificationAction;
 };
 export type NotificationsObject = { [k: string]: NotificationProps };
@@ -75,11 +74,7 @@ const unsubscribe = notificationsStore.$onAction(
             <div class="">
               <div
                 class="relative t-right-0 flex text- t-place-content-end align-items-center"
-              >
-                <p class="mr-3 text-gray-700">
-                  <!--                  {{ notification[notif.image].notificationType }}-->
-                </p>
-              </div>
+              />
             </div>
           </div>
 

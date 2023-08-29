@@ -4,7 +4,6 @@ import type { NotificationProps, NotificationsObject } from '@/components/Notifi
 
 type NotificationsStore = {
   () :{
-    notifications: NotificationProps[],
     addNotification<T extends NotificationProps>(notification: T): T
     deleteNotification<T extends NotificationProps>(id: NotificationProps['id']): T
   }

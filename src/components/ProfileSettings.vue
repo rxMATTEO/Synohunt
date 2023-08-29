@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { storeToRefs } from 'pinia';
 import { ref } from 'vue';
-import { infer } from 'zod';
+import { v4 as uuidv4 } from 'uuid';
 import { useThemeStore } from '@/stores/themeStore';
 import { useNotificationsStore } from '@/stores/notificationsStore';
 import type { PrimeIcon } from '@/pages/index.vue';
@@ -118,7 +117,7 @@ const themes = ref<Theme[]>([
 ]);
 
 const onChangeTheme = (theme: ThemeName, imagePath: ReturnType<typeof getImagePath>, indexes: [number, number]) => {
-  const id = indexes.join('.');
+  const id = uuidv4();
   notificationsStore.addNotification({
     id,
     title: 'Success',
@@ -151,6 +150,8 @@ type InputGroup = {
   name: string,
   input: Input[],
 }
+
+// todo mb change password
 const username = ref(account.name);
 const email = ref(account.email);
 const inputGroup = ref<InputGroup[]>([
@@ -170,6 +171,26 @@ const inputGroup = ref<InputGroup[]>([
     ]
   }
 ]);
+const notificationStore = useNotificationsStore();
+async function onSave () {
+  const sendData = {
+    user: {
+      id: account.id,
+      email: email.value,
+      name: username.value
+    }
+  };
+  const request = await $fetch('/api/user', {
+    method: 'PATCH',
+    body: sendData
+  });
+  notificationStore.addNotification({
+    id: uuidv4(),
+    image: '/img/check.png',
+    title: 'Success',
+    description: 'You changed your profile information'
+  });
+}
 </script>
 <!--todo fix footer-->
 <template>
@@ -191,10 +212,9 @@ const inputGroup = ref<InputGroup[]>([
             </span>
           </div>
         </div>
-        <!--        <span class="p-input-icon-left">-->
-        <!--          <i class="pi pi-user" />-->
-        <!--          <InputText placeholder="Username" />-->
-        <!--        </span>-->
+        <div class="mt-5">
+          <Button label="Save" :type="null" @click="onSave" />
+        </div>
       </div>
       <Divider align="top" layout="vertical" class="max-md:!t-hidden" />
       <div class="relative md:t-w-1/2 surface-200 t-p-5 t-rounded-xl">
