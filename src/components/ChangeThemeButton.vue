@@ -11,7 +11,7 @@ function changeTheme () {
   const newTheme = currentTheme.includes('dark')
     ? ThemesNames.light
     : ThemesNames.dark;
-  themeStore.setCurrentTheme(currentTheme, newTheme);
+  themeStore.setCurrentTheme(newTheme);
 }
 </script>
 

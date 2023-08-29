@@ -1,7 +1,7 @@
 import { usePrimeVue } from 'primevue/config';
-import { reactive, ref } from 'vue';
+import { ref } from 'vue';
 import { Theme, ThemesNames } from '@/app.config';
-import { useAppConfig, useRuntimeConfig } from '#imports';
+import { useAppConfig } from '#imports';
 
 export const useThemeStore = defineStore('themeStore', () => {
   const { themeId, themeCookieKey } = useAppConfig();
@@ -36,8 +36,8 @@ export const useThemeStore = defineStore('themeStore', () => {
     return primeVue.changeTheme(currentTheme, newTheme, themeId);
   }
 
-  function setCurrentTheme (currentThemeName: ThemesNames, newThemeName: ThemesNames) {
-    setPrimeTheme(currentThemeName, newThemeName);
+  function setCurrentTheme (newThemeName: ThemesNames) {
+    setPrimeTheme(currentTheme.value, newThemeName);
     themeCookie.value = currentTheme.value = newThemeName;
   }
   return ({

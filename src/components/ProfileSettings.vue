@@ -117,8 +117,8 @@ const themes = ref<Theme[]>([
   }
 ]);
 
-const onChangeTheme = (currentTheme: ThemeName, theme: ThemeName, imagePath: ReturnType<typeof getImagePath>) => {
-  const id = Math.random();
+const onChangeTheme = (theme: ThemeName, imagePath: ReturnType<typeof getImagePath>, indexes: [number, number]) => {
+  const id = indexes.join('.');
   notificationsStore.addNotification({
     id,
     title: 'Success',
@@ -126,15 +126,15 @@ const onChangeTheme = (currentTheme: ThemeName, theme: ThemeName, imagePath: Ret
     description: 'You changed theme',
     image: imagePath,
     actions: {
-      onAccept (notifcation) {
+      onAccept () {
         notificationsStore.deleteNotification(id);
       },
-      onReject (notifcation) {
-        delete notifcation[imagePath];
+      onReject () {
+        notificationsStore.deleteNotification(id);
       }
     }
   });
-  themeStore.setCurrentTheme(currentTheme, theme);
+  themeStore.setCurrentTheme(theme);
 };
 
 function getImagePath (themeName: ThemeName, themeGroup: Theme) {
@@ -159,12 +159,12 @@ function getImagePath (themeName: ThemeName, themeGroup: Theme) {
         <h1 class="text-4xl font-bold mb-3 md:mb-5">
           Appearance
         </h1>
-        <div v-for="themeGroup in themes">
+        <div v-for="(themeGroup, groupIndex) in themes">
           <h5>{{ themeGroup.kind }}</h5>
           <div class="flex flex-wrap">
-            <div v-for="theme in themeGroup.themes">
+            <div v-for="(theme, index) in themeGroup.themes">
               <div class="col-3">
-                <button :title="theme" class="t-w-10 t-h-10" @click="onChangeTheme(currentTheme,theme,getImagePath(theme, themeGroup))">
+                <button :title="theme" class="t-w-10 t-h-10" @click="onChangeTheme(theme,getImagePath(theme, themeGroup), [groupIndex, index])">
                   <img class="h-full w-full" :src="getImagePath(theme, themeGroup)" :alt="theme">
                 </button>
               </div>
