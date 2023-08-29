@@ -118,14 +118,16 @@ const themes = ref<Theme[]>([
 ]);
 
 const onChangeTheme = (currentTheme: ThemeName, theme: ThemeName, imagePath: ReturnType<typeof getImagePath>) => {
+  const id = Math.random();
   notificationsStore.addNotification({
+    id,
     title: 'Success',
     secondaryText: 'Cool',
     description: 'You changed theme',
     image: imagePath,
     actions: {
       onAccept (notifcation) {
-        delete notifcation[imagePath];
+        notificationsStore.deleteNotification(id);
       },
       onReject (notifcation) {
         delete notifcation[imagePath];
