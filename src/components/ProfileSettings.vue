@@ -183,12 +183,13 @@ async function onSave () {
   const request = await $fetch('/api/user', {
     method: 'PATCH',
     body: sendData
-  });
-  notificationStore.addNotification({
-    id: uuidv4(),
-    image: '/img/check.png',
-    title: 'Success',
-    description: 'You changed your profile information'
+  }).then(() => {
+    notificationStore.addNotification({
+      id: uuidv4(),
+      image: '/img/check.png',
+      title: 'Success',
+      description: 'You changed your profile information'
+    });
   });
 }
 </script>
