@@ -4,32 +4,12 @@ import { storeToRefs } from 'pinia';
 import { useMessageStore } from '@/stores/messageStore';
 
 const { params: { id } } = useRoute();
-const msg = (await useFetch('/api/messages/getbyid', {
-  method: 'POST',
-  body: {
-    messageId: id
-  }
-})).data.value as Message;
-
-// const { data: { value: { user: { account } } } } = useAuth();
-// // const data = (await useLazyFetch('/api/messages/get', {
-// //   server: false,
-// //   method: 'POST',
-// //   body: {
-// //     userId: account.id
-// //   }
-// // }));
-// const pending = ref(data.pending);
-// const msgs = ref<{Message: Message[]}>(data.data.value);
-// watch(data.pending, () => {
-//   msgs.value = data.data.value;
-// });
 
 const messageStore = useMessageStore();
 const { messages: { value: msgs } } = storeToRefs(messageStore);
-console.log(msgs.value);
+const selected = ref(msgs.value.find(msg => msg.id === +id));
 useHead({
-  title: `${msg.topic}`
+  title: selected.value.topic
 });
 </script>
 
@@ -41,9 +21,9 @@ useHead({
           <div class="t-w-1/3">
             <div>
               <div v-for="message in msgs.value">
-                <div class="surface-200 t-rounded-2xl shadow-6 mb-4">
+                <div class="surface-200 t-rounded-2xl shadow-6 mb-4 p-3">
                   <div class="flex t-h-20 align-items-center">
-                    <img class="h-full t-rounded-full" :src="message.imgPath">
+                    <img class="h-full t-rounded-full" :src="message.imgPath" :alt="message.topic">
                     <div>
                       <p class="ml-3 text-xl font-bold">
                         {{ message.topic }}
@@ -53,12 +33,15 @@ useHead({
                       </p>
                     </div>
                   </div>
+                  <div class="mt-3">
+                    {{ message.value }}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
           <div class="t-w-2/3">
-            b
+            {{ selected }}
           </div>
         </div>
       </PaddingBox>
