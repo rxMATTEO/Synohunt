@@ -19,6 +19,7 @@ export const useThemeStore = defineStore('themeStore', () => {
   }
 
   function applyFromCookie () {
+    if (!themeCookie.value) { themeCookie.value = currentTheme.value; }
     useHead({
       link: [
         {

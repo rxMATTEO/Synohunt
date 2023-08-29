@@ -36,18 +36,6 @@ const nuxtConfig: NuxtConfig = {
       ['defineStore', 'definePiniaStore']
     ]
   },
-  app: {
-    // baseURL: baseUrl,
-    // head: {
-    //   link: [
-    //     {
-    //       id: themeId,
-    //       rel: 'stylesheet',
-    //       href: baseUrl + 'themes/bootstrap4-dark-purple/theme.css'
-    //     }
-    //   ]
-    // }
-  },
   vite: {
     css: {
       preprocessorOptions: {
