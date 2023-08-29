@@ -21,6 +21,13 @@ const buttonItems = [
     }
   },
   {
+    label: 'View all',
+    icon: 'pi pi-inbox',
+    command: async () => {
+      // await messageStore.removeMessage(messages.value.value);
+    }
+  },
+  {
     label: 'Delete all',
     icon: 'pi pi-times',
     command: async () => {

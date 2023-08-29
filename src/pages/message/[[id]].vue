@@ -8,7 +8,7 @@ const { params: { id } } = useRoute();
 
 const messageStore = useMessageStore();
 const { messages: { value: msgs } } = storeToRefs(messageStore);
-const selected = ref(msgs.value.find(msg => msg.id === +id));
+const selected = id ? ref(msgs.value.find(msg => msg.id === +id)) : ref(msgs.value[0]);
 
 function selectMessage (msg: Message) {
   selected.value = msg;
@@ -29,7 +29,7 @@ useHead({
           <div class="t-w-1/3">
             <div>
               <div v-for="message in msgs.value">
-                <div class="relative surface-200 t-rounded-2xl shadow-6 mb-4 p-3 cursor-pointer" @click="selectMessage(message)">
+                <div :class="message.id == selected.id ? 'bg-primary-500': 'surface-300'" class="relative surface-200 t-rounded-2xl shadow-6 mb-4 p-3 cursor-pointer" @click="selectMessage(message)">
                   <div class="flex t-h-20 align-items-center">
                     <img class="h-full t-rounded-full" :src="message.imgPath" :alt="message.topic">
                     <div>
@@ -62,7 +62,6 @@ useHead({
                 </p>
               </div>
             </div>
-            {{ selected }}
           </div>
         </div>
       </PaddingBox>

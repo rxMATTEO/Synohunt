@@ -95,7 +95,7 @@ const unsubscribe = notificationsStore.$onAction(
                     class="vertical-align-bottom line-height-1 t-text-black"
                   >{{ notification[content.id].title }}</span>
                 </p>
-                <p class="text- my-2 text-gray-800">
+                <p class="text- my-2 text-gray-800 t-line-clamp-2 overflow-hidden">
                   {{ notification[content.id].description }}
                 </p>
                 <div class="flex gap-3 t-place-content-between">

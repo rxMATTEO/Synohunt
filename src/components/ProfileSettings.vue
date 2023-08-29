@@ -122,7 +122,7 @@ const onChangeTheme = (theme: ThemeName, imagePath: ReturnType<typeof getImagePa
     id,
     title: 'Success',
     secondaryText: 'Cool',
-    description: 'You changed theme',
+    description: 'You changed theme You changed theme You changed theme',
     image: imagePath,
     actions: {
       onAccept () {
