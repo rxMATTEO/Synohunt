@@ -30,19 +30,19 @@ useHead({
             <div>
               <div v-for="message in msgs.value">
                 <div :class="message.id == selected.id ? 'bg-primary-500': 'surface-300'" class="relative surface-200 t-rounded-2xl shadow-6 mb-4 p-3 cursor-pointer" @click="selectMessage(message)">
-                  <div class="flex t-h-20 align-items-center">
+                  <div class="flex t-h-20 align-items-center max-md:t-flex-col max-md:t-h-full">
                     <img class="h-full t-rounded-full" :src="message.imgPath" :alt="message.topic">
                     <div>
-                      <p class="ml-3 text-xl font-bold">
+                      <p class="md:ml-3 md:text-xl font-bold">
                         {{ message.topic }}
                       </p>
-                      <p class="ml-3 text-sm text-color-secondary">
+                      <p class="ml-3 text-sm text-color-secondary max-md:t-hidden">
                         Notification
                       </p>
                       <Badge class="absolute right-0 t-top-5" value="" :severity="messageStore.getSeverity(message)" />
                     </div>
                   </div>
-                  <div class="mt-3 t-line-clamp-1 overflow-hidden">
+                  <div class="mt-3 t-line-clamp-1 overflow-hidden max-md:t-hidden">
                     {{ message.value }}
                   </div>
                 </div>
@@ -50,8 +50,8 @@ useHead({
             </div>
           </div>
           <div class="t-w-2/3">
-            <div>
-              <div>
+            <div class="fixed t-h-[90vh]">
+              <div class="">
                 <p class="text-4xl font-semibold py-3">
                   {{ selected.topic }}
                 </p>
@@ -60,6 +60,9 @@ useHead({
                 <p>
                   {{ selected.value }}
                 </p>
+              </div>
+              <div class="absolute bottom-0">
+                a
               </div>
             </div>
           </div>

@@ -23,8 +23,8 @@ const buttonItems = [
   {
     label: 'View all',
     icon: 'pi pi-inbox',
-    command: async () => {
-      // await messageStore.removeMessage(messages.value.value);
+    command: () => {
+      router.push('/message');
     }
   },
   {
