@@ -45,10 +45,12 @@ function onMouseOver (e: MouseEvent, overlayName: OverlaysNames) {
   overlay.show(e);
   selected.value = overlay;
 }
-
+// todo this is ugly
 function onMouseLeave (overlayName: OverlaysNames, e?: MouseEvent) {
   if (e && e.relatedTarget) {
-    if ((e.relatedTarget<Element>)!.className === 'p-tieredmenu p-component p-tieredmenu-overlay') {
+    if (Array.prototype.find.call((e.relatedTarget as HTMLElement)!.children, (item: HTMLElement) => {
+      return item.dataset.pcSection === 'menu';
+    })) {
       e.relatedTarget.addEventListener('mouseleave', () => onMouseLeave(overlayName));
       return false;
     }
