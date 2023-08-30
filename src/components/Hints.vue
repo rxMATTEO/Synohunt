@@ -19,7 +19,10 @@ type Hint = { label: string; icon: string; cost: number };
 function onHintClick (hint: Hint) {
   confirmPurchaseDialog.require({
     group: 'buyHintDialog',
-    message: hint.cost,
+    message: {
+      value: `You will able to ${hint.label}`,
+      cost: hint.cost
+    },
     header: 'Purchase confirmation',
     position: 'bottom',
     accept: () => {
@@ -35,24 +38,19 @@ function onHintClick (hint: Hint) {
 }
 const items = ref<Hint[]>([
   {
-    label: 'Complete',
-    icon: 'https://primefaces.org/cdn/primevue/images/dock/finder.svg',
-    cost: 5
+    label: 'Complete one synonym',
+    icon: '/img/tip.png',
+    cost: 15
   },
   {
-    label: 'App Store',
-    icon: 'https://primefaces.org/cdn/primevue/images/dock/appstore.svg',
-    cost: 5
+    label: 'Complete the challenge',
+    icon: '/img/check.png',
+    cost: 50
   },
   {
-    label: 'Photos',
-    icon: 'https://primefaces.org/cdn/primevue/images/dock/photos.svg',
-    cost: 5
-  },
-  {
-    label: 'Trash',
-    icon: 'https://primefaces.org/cdn/primevue/images/dock/trash.png',
-    cost: 5
+    label: 'Refresh context',
+    icon: '/img/reload.png',
+    cost: 10
   }
 ]);
 </script>
@@ -95,7 +93,7 @@ const items = ref<Hint[]>([
             <template #item="data: { item: Hint }">
               <a href="#" class="p-dock-link" @click="onHintClick(data.item)">
                 <img
-                  v-tooltip.top="`Cost is ${data.item.cost}`"
+                  v-tooltip.top="`Cost is ${data.item.cost} coins.\nYou will able to ${data.item.label.toLowerCase()}.`"
                   :alt="data.item.label"
                   :src="data.item.icon"
                   style="width: 100%"

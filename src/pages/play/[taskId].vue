@@ -149,7 +149,7 @@ async function checkBookmark () {
 }
 
 const isDialogVisible = ref(false);
-// todo add word
+
 </script>
 
 <template>
@@ -172,9 +172,17 @@ const isDialogVisible = ref(false);
       >
         <template #message="msg">
           <div>
-            Do you want buy this hint for
+            <div class="flex align-items-center">
+              <span>
+                Do you want buy this hint for
+              </span>
+              <TinyCoin :value="msg.message.message.cost" />
+            </div>
+
+            <div class="text-primary-500 p-1">
+              {{ msg.message.message.value }}
+            </div>
           </div>
-          <TinyCoin :value="msg.message.message" />
         </template>
       </ConfirmDialog>
       <CoinSpin ref="coinSpin" />
@@ -202,7 +210,7 @@ const isDialogVisible = ref(false);
           </h1>
           <div class="my-5">
             <p class="text-2xl">
-              Word:
+              For word:
             </p>
             <div class="mt-3">
               {{ task.value.Word.word }}
