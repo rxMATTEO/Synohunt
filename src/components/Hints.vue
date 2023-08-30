@@ -44,28 +44,10 @@ function onHintClick (hint: Hint) {
     reject: () => {}
   });
 }
-const items = ref<Hint[]>([
-  {
-    label: 'Complete one synonym',
-    icon: '/img/tip.png',
-    cost: 15,
-    effect: (userSyno: Ref<string>, wantedSyno: string) => {
-      userSyno.value = wantedSyno;
-    }
-  },
-  {
-    label: 'Complete the challenge',
-    icon: '/img/check.png',
-    cost: 50
-  },
-  {
-    label: 'Refresh context',
-    icon: '/img/reload.png',
-    cost: 10
-  }
-]);
-
 const emit = defineEmits(['select']);
+const props = defineProps<{
+  items: []
+}>();
 </script>
 
 <template>

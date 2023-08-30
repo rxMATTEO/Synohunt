@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue';
+import { Ref } from 'vue/dist/vue';
 import { usePointsStore } from '../../stores/pointsStore';
 import { useMoneyStore } from '@/stores/moneyStore';
 import Hints from '@/components/Hints.vue';
@@ -60,8 +61,46 @@ async function solveUserSyno (e?: KeyboardEvent) {
   }
 }
 
+const items = ref<Hint[]>([
+  {
+    label: 'Complete one synonym',
+    icon: '/img/tip.png',
+    cost: 15,
+    effect: (wantedSyno) => {
+      userSyno.value = wantedSyno;
+    }
+  },
+  {
+    label: 'Complete the challenge',
+    icon: '/img/check.png',
+    cost: 50
+  },
+  {
+    label: 'Refresh context',
+    icon: '/img/reload.png',
+    cost: 10
+  }
+]);
+
+const isListening = ref(false);
+const hovered = ref();
+const currentEffect = ref();
+const click = function (syno) {
+  if (isListening.value) {
+    isListening.value = false;
+    hovered.value = null;
+    currentEffect.value(syno.value);
+  }
+};
+function mouseOverSyno (syno) {
+  if (isListening.value) {
+    hovered.value = syno;
+  }
+}
+
 function onSelect ({ effect }) {
-  effect(userSyno, 'visible');
+  isListening.value = true;
+  currentEffect.value = effect;
 }
 
 // TODO ADD HINTS, FILTER NOT COMPLETED TASKS ONLY, COMMENTS
@@ -235,7 +274,7 @@ const isDialogVisible = ref(false);
                 All synonyms:
               </p>
               <div class="mt-5">
-                <p v-for="(syno) in synonyms.value">
+                <p v-for="(syno) in synonyms.value" :class="{ 'bg-primary-500 cursor-pointer': syno.id === hovered?.id }" @mouseover="mouseOverSyno(syno)" @click="click(syno)">
                   {{ syno.value }}
                 </p>
               </div>
@@ -280,7 +319,7 @@ const isDialogVisible = ref(false);
         </div>
       </PaddingBox>
       <keep-alive>
-        <component :is="Hints" :key="'Hints'" @select="onSelect" />
+        <component :is="Hints" :key="'Hints'" :items="items" @select="onSelect" />
       </keep-alive>
     </NuxtLayout>
   </div>
