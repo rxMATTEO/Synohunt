@@ -52,7 +52,6 @@ async function solveUserSyno (e?: KeyboardEvent) {
       await pointsStore.setPoints(pointsForGuess);
 
       if (synonyms.value.length === 0) {
-        isDialogVisible.value = true;
         completeTask();
       }
     } else {
@@ -66,6 +65,9 @@ const items = ref<Hint[]>([
     label: 'Complete one synonym',
     icon: '/img/tip.png',
     cost: 15,
+    preffect: () => {
+      isListening.value = true;
+    },
     effect: (wantedSyno) => {
       userSyno.value = wantedSyno;
     }
@@ -73,7 +75,10 @@ const items = ref<Hint[]>([
   {
     label: 'Complete the challenge',
     icon: '/img/check.png',
-    cost: 50
+    cost: 50,
+    preffect: () => {
+      completeTask();
+    }
   },
   {
     label: 'Refresh context',
@@ -98,14 +103,15 @@ function mouseOverSyno (syno) {
   }
 }
 
-function onSelect ({ effect }) {
-  isListening.value = true;
+function onSelect ({ effect, preffect }) {
+  if (preffect) { preffect(); }
   currentEffect.value = effect;
 }
 
 // TODO ADD HINTS, FILTER NOT COMPLETED TASKS ONLY, COMMENTS
 
 async function completeTask () {
+  isDialogVisible.value = true;
   return await $fetch('/api/task/complete', {
     method: 'POST',
     body: {
