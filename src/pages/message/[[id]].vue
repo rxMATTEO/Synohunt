@@ -16,6 +16,11 @@ function selectMessage (msg: Message) {
   messageStore.updateMessage([msg]);
 }
 
+function deleteMessage (msg: Message) {
+  selected.value = msgs.value[0];
+  messageStore.removeMessage([msg]);
+}
+
 useHead({
   title: selected.value.topic
 });
@@ -50,19 +55,19 @@ useHead({
             </div>
           </div>
           <div class="t-w-2/3">
-            <div class="fixed t-h-[90vh]">
+            <div class="t-h-[90vh] sticky t-top-5 surface-300 t-rounded-xl p-3">
               <div class="">
-                <p class="text-4xl font-semibold py-3">
+                <p class="text-4xl font-semibold">
                   {{ selected.topic }}
                 </p>
               </div>
-              <div>
+              <div class="t-mt-10">
                 <p>
                   {{ selected.value }}
                 </p>
               </div>
-              <div class="absolute bottom-0">
-                a
+              <div class="absolute t-bottom-5 t-right-5">
+                <Button v-tooltip.left="'Delete notification'" icon="pi pi-times-circle" type="null" @click="deleteMessage(selected)" />
               </div>
             </div>
           </div>
