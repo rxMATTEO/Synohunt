@@ -33,10 +33,10 @@ const navLinks = ref([
         to: '/play/random'
       },
       {
-        title: 'Practice',
-        description: 'Complete challenges & shit',
-        logoPath: 'a',
-        to: '/'
+        title: 'Messages',
+        description: 'Check out your messages & notifications',
+        logoPath: 'pi pi-inbox',
+        to: '/message'
       }
     ]
   },
