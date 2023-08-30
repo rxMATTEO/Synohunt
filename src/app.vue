@@ -7,6 +7,7 @@ import { onMounted } from 'vue';
 import { Platforms } from './app.config.ts';
 import { useAppConfig } from '#imports';
 import { useThemeStore } from '@/stores/themeStore';
+const config = useRuntimeConfig();
 
 const themeStore = useThemeStore();
 themeStore.applyFromCookie();

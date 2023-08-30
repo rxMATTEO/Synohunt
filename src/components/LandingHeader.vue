@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import StickyElement from 'vue-sticky-element';
-import { onMounted, ref } from 'vue';
+import { defineAsyncComponent, onMounted, ref } from 'vue';
 
 const { status } = useAuth();
 
+const StickyElement = defineAsyncComponent(() => import('vue-sticky-element'));
 const top = ref(0);
-onMounted(() => {
+onMounted(async () => {
   window.addEventListener('scroll', () => {
     setTimeout(() => {
       top.value = (window.scrollY);

@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { onMounted, reactive, ref, watch } from 'vue';
+import { defineAsyncComponent, onMounted, reactive, ref, watch } from 'vue';
 import OverlayPanel from 'primevue/overlaypanel';
 import { storeToRefs } from 'pinia';
-import StickyElement from 'vue-sticky-element';
 import { useMoneyStore } from '../stores/moneyStore';
 import { useMessageStore } from '../stores/messageStore';
 import { useAuth } from '#imports';
@@ -11,6 +10,7 @@ import { useThemeStore } from '@/stores/themeStore';
 import { useSidebarStore } from '@/stores/sidebarStore';
 import ChangeThemeButton from '@/components/ChangeThemeButton.vue';
 
+const StickyElement = defineAsyncComponent(() => import('vue-sticky-element'));
 const { isExpanded } = useSidebarStore();
 defineProps({
   expanded: Function

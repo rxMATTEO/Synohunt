@@ -45,6 +45,11 @@ const nuxtConfig: NuxtConfig = {
       }
     }
   },
+  runtimeConfig: {
+    public: {
+      AUTH_ORIGIN: process.env.AUTH_ORIGIN
+    }
+  },
   srcDir: './src'
 };
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment

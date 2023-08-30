@@ -23,31 +23,34 @@ model Account {
   id_token          String?
   session_state     String?
   subscribed        Boolean @default(false)
-  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
 
 model Notification {
-  id     Int              @id @default(autoincrement())
+  id     Int    @id @default(autoincrement())
   typeId Int
   userId String
-  Type   NotificationType @relation(fields: [id], references: [id])
-  User   User             @relation(fields: [userId], references: [id])
+
+  User User             @relation(fields: [userId], references: [id])
+  Type NotificationType @relation(fields: [id], references: [id])
 }
 
 model NotificationType {
-  id           Int           @id @default(autoincrement())
+  id           Int            @id @default(autoincrement())
   value        String
-  Notification Notification?
+  Notification Notification[]
 }
 
 model Level {
   id       Int    @id @default(autoincrement())
   value    String
   groupdId Int
-  Group    Group  @relation(fields: [groupdId], references: [id])
-  User     User[]
+
+  Group Group  @relation(fields: [groupdId], references: [id])
+  User  User[]
 }
 
 model Group {
@@ -55,7 +58,7 @@ model Group {
   min        Int
   max        Int
   name       String
-  multiplier Int     @default(10)
+  multiplier Int     @default(10) // formula: multiplier * nextLevel
   Level      Level[]
 }
 
@@ -68,22 +71,24 @@ model Session {
 }
 
 model User {
-  id             String           @id @default(cuid())
-  name           String?
-  email          String?          @unique
-  emailVerified  DateTime?
-  image          String?
-  levelId        Int?
-  points         Int              @default(1)
-  moneyId        Int?
-  account        Account?
-  BookmarkedTask BookmarkedTask[]
-  CompletedTask  CompletedTask[]
-  Message        Message[]
-  Notification   Notification[]
-  sessions       Session[]
-  Level          Level?           @relation(fields: [levelId], references: [id])
-  Money          Money?           @relation(fields: [moneyId], references: [id])
+  id               String           @id @default(cuid())
+  name             String?          @unique
+  email            String?          @unique
+  emailVerified    DateTime?
+  image            String?
+  levelId          Int?
+  Level            Level?           @relation(fields: [levelId], references: [id])
+  points           Int              @default(1)
+  moneyId          Int?
+  registrationDate BigInt?
+  account          Account[]
+  sessions         Session[]
+  Notification     Notification[]
+  CompletedTask    CompletedTask[]
+  BookmarkedTask   BookmarkedTask[]
+  Message          Message[]
+  Money            Money?           @relation(fields: [moneyId], references: [id])
+  Task             Task[]
 }
 
 model Money {
@@ -97,6 +102,7 @@ model Message {
   userId   String
   topic    String        @default("")
   value    String
+  imgPath  String        @default("/img/biglogo.png")
   statusId Int
   Status   MessageStatus @relation(fields: [statusId], references: [id])
   User     User          @relation(fields: [userId], references: [id])
@@ -112,16 +118,18 @@ model CompletedTask {
   id     Int    @id @default(autoincrement())
   userId String
   taskId Int
-  Task   Task   @relation(fields: [taskId], references: [id])
-  User   User   @relation(fields: [userId], references: [id])
+
+  User User @relation(fields: [userId], references: [id])
+  Task Task @relation(fields: [taskId], references: [id])
 }
 
 model BookmarkedTask {
   id     Int    @id @default(autoincrement())
   userId String
   taskId Int
-  Task   Task   @relation(fields: [taskId], references: [id])
-  User   User   @relation(fields: [userId], references: [id])
+
+  User User @relation(fields: [userId], references: [id])
+  Task Task @relation(fields: [taskId], references: [id])
 }
 
 model Task {
@@ -130,12 +138,15 @@ model Task {
   langId         Int
   description    String
   wordId         Int
-  BookmarkedTask BookmarkedTask[]
-  CompletedTask  CompletedTask[]
-  Tag            Tag[]
+  userId         String
+  isVisible      Boolean          @default(false)
+  Word           Word             @relation(fields: [wordId], references: [id])
   Difficulity    Difficulity      @relation(fields: [diffId], references: [id])
   Language       Language         @relation(fields: [langId], references: [id])
-  Word           Word             @relation(fields: [wordId], references: [id])
+  User           User             @relation(fields: [userId], references: [id])
+  Tag            Tag[]
+  CompletedTask  CompletedTask[]
+  BookmarkedTask BookmarkedTask[]
 }
 
 model Difficulity {
@@ -148,7 +159,8 @@ model Tag {
   id     Int    @id @default(autoincrement())
   name   String
   taskId Int
-  Task   Task   @relation(fields: [taskId], references: [id])
+
+  Task Task @relation(fields: [taskId], references: [id])
 }
 
 model Language {
@@ -159,8 +171,9 @@ model Language {
 }
 
 model Word {
-  id      Int       @id @default(autoincrement())
-  word    String
+  id   Int    @id @default(autoincrement())
+  word String
+
   Synonym Synonym[]
   Task    Task[]
 }
@@ -171,7 +184,7 @@ model Synonym {
   value          String
   pointsForGuess Int    @default(5)
   moneyForGuess  Int    @default(5)
-  Word           Word   @relation(fields: [wordId], references: [id])
+  Word           Word   @relation(references: [id], fields: [wordId])
 }
 
 model VerificationToken {
@@ -180,4 +193,12 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model Credentials {
+  id         String  @id @default(uuid())
+  email      String?
+  publicKey  String
+  privateKey String
+  data       String?
 }
