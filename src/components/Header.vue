@@ -11,7 +11,8 @@ import { useThemeStore } from '@/stores/themeStore';
 import { useSidebarStore } from '@/stores/sidebarStore';
 import ChangeThemeButton from '@/components/ChangeThemeButton.vue';
 
-const { isExpanded } = useSidebarStore();
+const sidebarStore = useSidebarStore();
+const { isExpanded } = storeToRefs(sidebarStore);
 defineProps({
   expanded: Function
 });
@@ -69,13 +70,13 @@ const { messages } = storeToRefs(messagesStore);
 const forceStuck = computed(() => {
   const appConfig = useAppConfig();
   const platform = appConfig.platform;
-  return platform === Platforms.mobile && isExpanded.value;
+  return platform === Platforms.mobile && isExpanded;
 });
 </script>
 
 <template>
   <StickyElement stuck-class="vue-sticky-element--stuck width-reset" :force-show="forceStuck">
-    <div :class="{'!t-left-56': isExpanded.value, 'left-0': !isExpanded.value}" class=" t-z-10 px-2 max-md:!t-left-0 t-transition-all t-ease-in-out t-duration-200 fixed surface-card shadow-8 right-0 header">
+    <div :class="{'!t-left-56': isExpanded, 'left-0': !isExpanded}" class=" t-z-10 px-2 max-md:!t-left-0 t-transition-all t-ease-in-out t-duration-200 fixed surface-card shadow-8 right-0 header">
       <div class="flex align-items-center justify-content-between w-full t-py-[.7rem]">
         <div>
           <Button unstyled @click="expanded">
