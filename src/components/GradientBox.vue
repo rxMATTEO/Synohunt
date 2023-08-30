@@ -1,23 +1,26 @@
-<script lang="tsx">
-import { defineComponent, createElementVNode } from 'vue';
-
+<script lang="ts">
+import { defineComponent, PropType } from 'vue';
+type GradientName = 'indigo' | 'black-white' | 'primary' | 'easy' | 'medium' | 'hard';
 export default defineComponent({
   name: 'GradientBox',
   props: {
-    gradientName: String
-  },
-  setup (props, { slots }) {
-    return () => (
-      createElementVNode('div', {
-        class: [
-          `gradient-${props.gradientName} t-rounded p-1`
-        ]
-      }, [createElementVNode('div', {
-        class: ['t-rounded t-background-blur-sm t-bg-black t-bg-opacity-30']
-      }, slots.default())])
-    );
+    gradientName: String as PropType<GradientName>
   }
 });
 </script>
+<template>
+  <div :class="{ [`gradient-${gradientName}`]: true }" class="col-12 t-rounded p-1">
+    <slot name="default">
+      <div class="flex flex-column md:flex-row t-text-white t-rounded t-background-blur-sm t-bg-black t-bg-opacity-30">
+        <div class="t-w-full md:t-w-1/3">
+          <slot name="left-side" />
+        </div>
+        <div class="t-w-full md:t-w-2/3 t-backdrop-blur-sm t-bg-black t-bg-opacity-50">
+          <slot name="right-side" />
+        </div>
+      </div>
+    </slot>
+  </div>
+</template>
 <style scoped>
 </style>

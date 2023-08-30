@@ -1,41 +1,49 @@
 import { usePrimeVue } from 'primevue/config';
-import { reactive } from 'vue';
+import { ref } from 'vue';
 import { Theme, ThemesNames } from '@/app.config';
-import { useAppConfig, useRuntimeConfig } from '#imports';
+import { useAppConfig } from '#imports';
 
 export const useThemeStore = defineStore('themeStore', () => {
-  const { public: { themeId } }: string = useRuntimeConfig();
-  const modeKey = import.meta.env.VITE_COLOR_MODE_KEY;
+  const { themeId, themeCookieKey } = useAppConfig();
   const primeVue = usePrimeVue();
   const appConfig = useAppConfig();
+  const currentTheme = ref(appConfig.theme);
 
-  let currentTheme: Theme = reactive(appConfig.theme);
-
+  const themeCookie = useCookie(themeCookieKey);
   function getCurrentTheme (): ThemesNames {
-    let mode: ThemesNames = localStorage.getItem(modeKey) as ThemesNames;
-    if (!mode) {
-      mode = Object.keys(appConfig.theme)[0] as ThemesNames;
-      localStorage.setItem(modeKey, ThemesNames.dark);
+    if (!themeCookie.value) {
+      themeCookie.value = appConfig.theme as ThemesNames;
     }
-    currentTheme = { [mode]: true };
-    return mode;
+    currentTheme.value = themeCookie.value;
+    return themeCookie.value;
+  }
+
+  function applyFromCookie () {
+    if (!themeCookie.value) { themeCookie.value = currentTheme.value; }
+    useHead({
+      link: [
+        {
+          id: themeId,
+          rel: 'stylesheet',
+          href: `/themes/${themeCookie.value}/theme.css`
+        }
+      ]
+    });
+    currentTheme.value = themeCookie.value;
   }
 
   function setPrimeTheme (currentTheme, newTheme) {
     return primeVue.changeTheme(currentTheme, newTheme, themeId);
   }
 
-  function setCurrentTheme (currentThemeName: ThemesNames, newThemeName: ThemesNames) {
-    appConfig.theme[currentThemeName] = false;
-    appConfig.theme[newThemeName] = true;
-    localStorage.setItem(modeKey, newThemeName);
-
-    currentTheme = { [newThemeName]: true };
-    setPrimeTheme(currentThemeName, newThemeName);
+  function setCurrentTheme (newThemeName: ThemesNames) {
+    setPrimeTheme(currentTheme.value, newThemeName);
+    themeCookie.value = currentTheme.value = newThemeName;
   }
   return ({
     getCurrentTheme,
     setCurrentTheme,
+    applyFromCookie,
     currentTheme
   });
 });

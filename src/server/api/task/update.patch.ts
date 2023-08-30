@@ -1,5 +1,4 @@
 import { readBody } from 'h3';
-
 export default defineEventHandler(async (event) => {
   const { updatingTask } = await readBody(event);
 
@@ -11,8 +10,29 @@ export default defineEventHandler(async (event) => {
       Word: true
     },
     data: {
-      ...updatingTask.task,
+      ...Object.fromEntries(Object.entries(updatingTask.task).filter(([key, value]) => key !== 'id'))
     }
+  });
+
+  function awaiter () {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => resolve(), 500);
+    });
+  }
+
+  updatingTask.synos.map((syno) => {
+    awaiter().then(
+      async () => {
+        return await event.context.prisma.synonym.create({
+          data: {
+            wordId: syno.wordId,
+            value: syno.value,
+            pointsForGuess: syno.pointsForGuess,
+            moneyForGuess: syno.moneyForGuess
+          }
+        });
+      }
+    );
   });
 
   const prismaUpdatedWord = await event.context.prisma.task.update({
@@ -28,10 +48,11 @@ export default defineEventHandler(async (event) => {
           data: {
             ...updatingTask.word
 
-          }})
+          }
+        })
       }
     }
   });
 
-  return {prismaUpdated, prismaUpdatedWord};
+  return { prismaUpdated, prismaUpdatedWord };
 });

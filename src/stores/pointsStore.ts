@@ -1,34 +1,31 @@
-import { reactive } from 'vue';
+import { reactive, watch } from 'vue';
 import { defineStore, useAuth, useFetch } from '#imports';
+import { useLevelStore } from '@/stores/levelStore';
 
 export const usePointsStore = defineStore('pointsStore', {
   state: () => {
     const { data: { value: { user: { account } } } } = useAuth();
     return {
       currentPoints: account.points,
-      progress: 0
+      progress: 0,
+      toNextLvl: 0
     };
   },
   getters: {
-    async getPointsToNextLvl () {
+    async getPointsToNextLvl (state) {
       const { data: { value: { user: { account } } } } = useAuth();
-      return (await useFetch('/api/points/toNextLevel', {
-        method: 'POST',
-        body: {
-          userId: account.userId
-        }
-      })).data.value;
-    }
-  },
-  actions: {
-    async calculatePercentOfPointsProgress () {
-      const { data: { value: { user: { account } } } } = useAuth();
-      const pointsToNextLvl = await $fetch('/api/points/toNextLevel', {
+      state.toNextLvl = (await useFetch('/api/points/toNextLevel', {
         method: 'POST',
         body: {
           userId: account.id
         }
-      });
+      })).data.value;
+      return state.toNextLvl;
+    }
+  },
+  actions: {
+    async calculatePercentOfPointsProgress () {
+      const pointsToNextLvl = await this.getPointsToNextLvl;
       const currentPoints = this.currentPoints;
       const nextLvlPoints = pointsToNextLvl.need;
       this.progress = +((currentPoints / nextLvlPoints) * 100).toFixed(1);
@@ -42,7 +39,12 @@ export const usePointsStore = defineStore('pointsStore', {
           userId: account.id,
           amount
         }
-      }); // todo add toast
+      });
+
+      if (this.currentPoints + 5 >= this.toNextLvl.need) {
+        const levelStore = useLevelStore();
+        levelStore.upgradeLvl();
+      }
       this.currentPoints = fetch.data.value.points;
       this.progress = await this.calculatePercentOfPointsProgress();
       return fetch.data;

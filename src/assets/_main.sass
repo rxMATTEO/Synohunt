@@ -7,10 +7,22 @@ $surfaces: 100, 200, 300, 400, 500, 600, 700, 800, 900
     &-#{$surface}
       color: var(--surface-#{$surface}) !important
 
-.gradient
+@mixin setGradient($isImportant)
   @each $name, $color in $gradient
     &-#{$name}
-      background-image: -webkit-linear-gradient(left, $color) !important
+      @if($isImportant)
+        background-image: -webkit-linear-gradient(left, $color) !important
+      @else
+        background-image: -webkit-linear-gradient(left, $color)
+      &.text
+        -webkit-background-clip: text
+        -webkit-text-fill-color: transparent
+
+.gradient
+  @include setGradient(true)
+
+.gradient-non
+  @include setGradient(false)
 
 .animated-gradient
   @each $name, $color in $animated-gradient
@@ -30,7 +42,6 @@ $surfaces: 100, 200, 300, 400, 500, 600, 700, 800, 900
 .shake
   animation: shake .2s ease-in-out 3 alternate-reverse !important
 
-
 @keyframes shake
   0%
     left: 0
@@ -42,3 +53,21 @@ $surfaces: 100, 200, 300, 400, 500, 600, 700, 800, 900
 body
   position: absolute
   width: 100%
+
+@mixin apply-default-button($color: var(--primary-color))
+  &
+    button, [type="button"]
+      background-color: $color !important
+    .transparent
+      background-color: transparent !important
+
+.prevent-tw
+  @include apply-default-button()
+
+.up-hover
+  bottom: 0
+  transition-property: all
+  transition-duration: 200ms
+  transition-timing-function: ease-in-out
+  &:hover
+    bottom: 0.75rem !important

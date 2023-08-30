@@ -1,6 +1,6 @@
 import { reactive, ref } from 'vue';
 import type { Message, MessageStatus } from '@prisma/client';
-import type { MessageStatuses } from '../server/prisma/seed';
+import type { MessageStatuses } from '@/server/prisma/seed';
 import { defineStore, useAuth, useFetch } from '#imports';
 
 export const useMessageStore = defineStore('messageStore', () => {
@@ -36,12 +36,14 @@ export const useMessageStore = defineStore('messageStore', () => {
     const status = message.Status.value as MessageStatuses;
     return severities[status];
   }
-  async function addMessage (msgText: string) {
+  async function addMessage (message: Pick<Message, 'topic' | 'value' | 'imgPath'>) {
     const postedMessage = await $fetch('/api/messages/create', {
       method: 'POST',
       body: {
         userId: account.id,
-        text: msgText
+        text: message.value,
+        topic: message.topic,
+        imgPath: message.imgPath
       }
     });
     messages.value = [...messages.value, postedMessage];

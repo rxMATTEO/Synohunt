@@ -10,7 +10,7 @@ async function getUser (session) {
   return await $fetch('/api/session', {
     method: 'POST',
     body: {
-      email: session?.user?.email,
+      email: session?.user?.email
     }
   });
 }
@@ -18,9 +18,12 @@ export default NuxtAuthHandler({
   pages: {
     signIn: '/login'
   },
-  secret: '2f193d57f83e046dfcecabefcb7ad03c', //
-  // todo replace with random
+  secret: process.env.AUTH_SECRET,
   adapter: PrismaAdapter(prisma),
+  // todo figure out page redirections and shit
+  session: {
+    strategy: 'jwt'
+  },
   callbacks: {
     session: async ({ session, token }) => {
       const user = await getUser(session);
@@ -37,13 +40,25 @@ export default NuxtAuthHandler({
     // @ts-expect-error You need to use .default here for it to work during SSR. May be fixed via Vite at some point
     CredentialsProvider.default({
       name: 'Credentials',
-      authorize (credentials: any) {
-        const user = {
-          email: 'test@mail.com',
-          password: 'password'
-        };
-        if (credentials?.email === user.email && credentials?.password === user.password) {
+      async authorize (credentials: any) {
+        const { email, creds } = credentials;
+        const verified = await $fetch('/api/verify', {
+          method: 'POST',
+          body: {
+            email,
+            creds
+          }
+        });
+        if (verified.isCredentialsValid) {
+          const user = await prisma.user.update({
+            where: { email },
+            data: {
+              name: verified.username
+            }
+          });
           return user;
+        } else {
+          return null;
         }
       }
     })

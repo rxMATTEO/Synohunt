@@ -2,20 +2,29 @@
 import { onMounted, reactive, ref } from 'vue';
 import { Message, MessageStatus } from '@prisma/client';
 import { storeToRefs } from 'pinia';
+import arg from 'arg';
 import { useMessageStore } from '@/stores/messageStore';
-import {useNotificationsStore} from "@/stores/notificationsStore";
-import arg from "arg";
-import {useRouter} from "#imports";
+import { useNotificationsStore } from '@/stores/notificationsStore';
+import { useRouter } from '#imports';
 
 const messageStore = useMessageStore();
 const { messages } = storeToRefs(messageStore);
 const logoSpin = ref(false);
 const router = useRouter();
+// todo add message on notification set all readed or smrthmng
 const buttonItems = [
   {
     label: 'Update',
     icon: 'pi pi-refresh',
     command: (e) => {
+      update();
+    }
+  },
+  {
+    label: 'View all',
+    icon: 'pi pi-inbox',
+    command: () => {
+      router.push('/message');
     }
   },
   {
@@ -24,25 +33,12 @@ const buttonItems = [
     command: async () => {
       await messageStore.removeMessage(messages.value.value);
     }
-  },
-  {
-    label: 'Vue Website',
-    icon: 'pi pi-external-link',
-    command: () => {
-    }
-  },
-  { label: 'Upload', icon: 'pi pi-upload' }
+  }
 ];
 
 const selectedMsg = ref({});
 
 const messageActions = ref([
-  {
-    label: 'Add',
-    icon: 'pi pi-pencil',
-    callback: () => {
-    }
-  },
   {
     label: 'Delete',
     icon: 'pi pi-trash',
@@ -105,12 +101,11 @@ function update () {
             У вас нет сообщений!
           </p>
         </div>
-        <!--        todo add status badge-->
         <DataView v-else :value="messages.value" class="t-max-w-full">
           <template #list="{data: slotProps}">
             <div class="col-12 relative">
               <div class="flex flex-row xl:align-items-start p-2 gap-4">
-                <img class="w-3 sm:w-10rem xl:w-10rem shadow-2 block xl:block mx-auto border-round" src="/img/biglogo.png" :alt="slotProps.name">
+                <img class="max-md:t-h-1/2 w-3 sm:w-10rem xl:w-10rem shadow-2 block xl:block mx-auto border-round" :src="slotProps.imgPath" :alt="slotProps.name">
                 <div class="flex flex-column sm:flex-row justify-content-between xl:align-items-start flex-1 gap-4">
                   <div class="flex flex-column sm:align-items-start gap-3">
                     <div class="text-2xl font-bold text-900">
@@ -145,7 +140,7 @@ function update () {
                     <div class="relative inline-block" />
                     <div class="flex align-items-center gap-3">
                       <span class="flex align-items-center gap-2">
-                        <span class="">{{ slotProps.value }}</span>
+                        <span class="t-line-clamp-1 overflow-hidden">{{ slotProps.value }}</span>
                       </span>
                     </div>
                   </div>

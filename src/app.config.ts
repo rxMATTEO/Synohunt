@@ -4,8 +4,8 @@ export enum Platforms {
 } // todo move this shit to index.d.ts or stmfhdshcdndc
 
 export enum ThemesNames {
-  dark = 'dark',
-  light = 'light'
+  dark = 'bootstrap4-dark-purple',
+  light = 'bootstrap4-light-purple'
 }
 
 export type Theme = {
@@ -27,8 +27,8 @@ declare module 'nuxt/schema' {
 
 export default defineAppConfig({
   title: 'Translate-app',
-  theme: {
-    dark: true,
-  },
-  platform: ''
+  theme: ThemesNames.dark,
+  platform: '',
+  themeCookieKey: 'theme',
+  themeId: 'theme-link'
 });

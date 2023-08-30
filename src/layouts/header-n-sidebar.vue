@@ -6,22 +6,31 @@ import { Platforms } from '@/app.config';
 
 const { toggleMenu, setMenuVisibility, isExpanded: expanded } = useSidebarStore();
 
-onMounted(() => {
+function hideMenuMobile () {
   const { platform } = useAppConfig();
-  if (platform == Platforms.pc) {
+  if (platform === Platforms.pc) {
     setMenuVisibility(true);
+  } else {
+    setMenuVisibility(false);
   }
+}
+
+onMounted(() => {
+  hideMenuMobile();
 });
+
+function onNavigate () {
+  hideMenuMobile();
+}
 </script>
 
 <template>
   <div class="flex">
-    <Notification />
-    <Sidebar :is-expanded="expanded" :toggle="toggleMenu" />
-    <!--      todo add suspense sceletone or some load shit cuz it's loading too long-->
+    <LazyNotification />
+    <LazySidebar :is-expanded="expanded" :toggle="toggleMenu" @navigate="onNavigate" />
     <div class="w-full flex-1">
       <div class="t-ml-0 h-4rem">
-        <Header :expanded="toggleMenu" />
+        <LazyHeader :expanded="toggleMenu" />
       </div>
       <div class="max-w-full relative">
         <NuxtLayout name="footer">

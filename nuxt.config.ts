@@ -1,15 +1,24 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import { NuxtConfig } from '@nuxt/types';
+
 const baseUrl = '/';
-const themeId = 'theme-link';
-const nuxtConfig = {
-  // devtools: { enabled: true },
+const nuxtConfig: NuxtConfig = {
+  devtools: { enabled: true, enableTimeline: true },
   buildModules: ['@nuxt/typescript-build'],
   css: [
     'primeflex/primeflex.css',
     'primeicons/primeicons.css'
   ],
   build: {
-    transpile: ['primevue']
+    transpile: ['primevue'],
+    postcss: {
+      postcssOptions: {
+        plugins: {
+          tailwindcss: {},
+          autoprefixer: {}
+        }
+      }
+    }
   },
   modules: [
     '@nuxtjs/tailwindcss',
@@ -27,26 +36,6 @@ const nuxtConfig = {
       ['defineStore', 'definePiniaStore']
     ]
   },
-  tailwindcss: {},
-  app: {
-    pageTransition: { name: 'page', mode: 'out-in' },
-    layoutTransition: { name: 'layout', mode: 'out-in' },
-    baseURL: baseUrl,
-    head: {
-      link: [
-        {
-          id: themeId,
-          rel: 'stylesheet',
-          href: baseUrl + 'themes/bootstrap4-dark-purple/theme.css'
-        }
-      ]
-    }
-  },
-  runtimeConfig: {
-    public: {
-      themeId
-    }
-  },
   vite: {
     css: {
       preprocessorOptions: {
@@ -58,6 +47,6 @@ const nuxtConfig = {
   },
   srcDir: './src'
 };
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 export default defineNuxtConfig(nuxtConfig);
-export { themeId };

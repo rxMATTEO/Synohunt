@@ -9,7 +9,10 @@ export default defineEventHandler(async (event) => {
       name: true,
       image: true,
       points: true,
-      Level: true
+      Level: true,
+      _count: {
+        select: { CompletedTask: true }
+      }
     },
     orderBy: [
       {

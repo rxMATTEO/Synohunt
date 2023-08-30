@@ -9,6 +9,7 @@ export const useMoneyStore = defineStore('moneyStore', {
   },
   actions: {
     async setMoney (amount: number) {
+      if (this.currentMoney - amount < 0) { return false; }
       const { data: { value: { user: { account } } } } = useAuth();
       const fetch = await useFetch('/api/money/add', {
         method: 'POST',
@@ -16,7 +17,7 @@ export const useMoneyStore = defineStore('moneyStore', {
           userId: account.id,
           amount
         }
-      }); // todo add toast
+      });
       this.currentMoney = fetch.data.value.Money.value;
       return fetch.data;
     }

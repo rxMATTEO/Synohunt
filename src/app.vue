@@ -3,29 +3,27 @@
 </template>
 
 <script setup lang="ts">
-import {onMounted} from 'vue';
-import {usePrimeVue} from 'primevue/config';
-import {Platforms} from './app.config.ts';
-import {useAppConfig} from '#imports';
-import {useThemeStore} from '@/stores/themeStore';
+import { onMounted } from 'vue';
+import { Platforms } from './app.config.ts';
+import { useAppConfig } from '#imports';
+import { useThemeStore } from '@/stores/themeStore';
 
+const themeStore = useThemeStore();
+themeStore.applyFromCookie();
+
+useHead({
+  titleTemplate: (chunk) => {
+    return chunk ? `${chunk} - Synohunt` : 'Synohunt';
+  }
+});
 const appConfig = useAppConfig();
-const primeVue = usePrimeVue();
-onMounted(async () => {
+
+onMounted(() => {
   if (window.document.documentElement.offsetWidth >= 768) {
     appConfig.platform = Platforms.pc;
   } else {
     appConfig.platform = Platforms.mobile;
   }
-  const { setCurrentTheme, getCurrentTheme } = useThemeStore();
-
-  setTimeout(() => {
-    if (getCurrentTheme() === 'light') {
-      setCurrentTheme('dark', 'light');
-    }
-  }, 0); // TODO idk pls fix
-
-  const editor = await import('quill');
 });
 </script>
 

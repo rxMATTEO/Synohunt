@@ -1,4 +1,5 @@
 export default eventHandler(async (event) => {
+  BigInt.prototype.toJSON = function () { return this.toString(); };
   const body = await readBody(event);
   const account = await event.context.prisma.user.findFirst({
     where: {
@@ -18,10 +19,12 @@ export default eventHandler(async (event) => {
       }
     }
   });
+  // todo remember me do
   if (!account.levelId) {
     const createLvl = await event.context.prisma.user.update({
       where: { id: account.id },
       data: {
+        registrationDate: Date.now(),
         Level: {
           create: ({
             value: '1',
@@ -32,7 +35,8 @@ export default eventHandler(async (event) => {
           create: ({
             value: 1
           })
-        }
+        },
+        image: '/img/user-placeholder.png'
       }
     });
     const acc = await event.context.prisma.user.findFirst({
