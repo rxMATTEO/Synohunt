@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { Ref, ref } from 'vue';
 import { useConfirm } from 'primevue/useconfirm/useconfirm.esm';
+import type { Synonym } from '@prisma/client';
 import { useNotificationsStore } from '@/stores/notificationsStore';
 import { useMoneyStore } from '@/stores/moneyStore';
+import type { TaskResponse } from '@/pages/play/[taskId].vue';
 
 const notificationsStore = useNotificationsStore();
 const moneyStore = useMoneyStore();
@@ -15,7 +17,12 @@ function showHintsPanel (e: MouseEvent) {
   hidden.value = false;
 }
 
-type Hint = { label: string; icon: string; cost: number };
+type Hint = {
+  label: string;
+  icon: string;
+  cost: number;
+  effect: (task: TaskResponse) => unknown
+};
 function onHintClick (hint: Hint) {
   confirmPurchaseDialog.require({
     group: 'buyHintDialog',
@@ -26,6 +33,7 @@ function onHintClick (hint: Hint) {
     header: 'Purchase confirmation',
     position: 'bottom',
     accept: () => {
+      emit('select', hint);
       moneyStore.setMoney(-hint.cost);
       notificationsStore.addNotification({
         title: 'Hi',
@@ -40,7 +48,10 @@ const items = ref<Hint[]>([
   {
     label: 'Complete one synonym',
     icon: '/img/tip.png',
-    cost: 15
+    cost: 15,
+    effect: (userSyno: Ref<string>, wantedSyno: string) => {
+      userSyno.value = wantedSyno;
+    }
   },
   {
     label: 'Complete the challenge',
@@ -53,6 +64,8 @@ const items = ref<Hint[]>([
     cost: 10
   }
 ]);
+
+const emit = defineEmits(['select']);
 </script>
 
 <template>

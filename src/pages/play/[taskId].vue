@@ -25,7 +25,7 @@ type Task = {
   description: string,
   wordId: 3,
 }
-type TaskResponse = {
+export type TaskResponse = {
   Word: {
     id: number,
     word: string,
@@ -58,6 +58,10 @@ async function solveUserSyno (e?: KeyboardEvent) {
       shake();
     }
   }
+}
+
+function onSelect ({ effect }) {
+  effect(userSyno, 'visible');
 }
 
 // TODO ADD HINTS, FILTER NOT COMPLETED TASKS ONLY, COMMENTS
@@ -276,7 +280,7 @@ const isDialogVisible = ref(false);
         </div>
       </PaddingBox>
       <keep-alive>
-        <component :is="Hints" :key="'Hints'" />
+        <component :is="Hints" :key="'Hints'" @select="onSelect" />
       </keep-alive>
     </NuxtLayout>
   </div>
