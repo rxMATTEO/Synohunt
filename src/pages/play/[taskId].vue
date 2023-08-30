@@ -86,7 +86,6 @@ const items = ref<Hint[]>([
     preffect: async () => {
       const context = await $fetch(`/api/word/context?word=${task.value.Word.word}&lang=${task.value.Language.langFull}`);
       task.value.description = context.examples.map(item => item.source).join('\n');
-      console.log(task.value.description);
     },
     cost: 10
   }
@@ -253,7 +252,7 @@ const isDialogVisible = ref(false);
       </Dialog>
 
       <PaddingBox @keyup="solveUserSyno">
-        <div class="surface-ground t-rounded-md p-5 h-fit">
+        <div class="surface-ground t-rounded-md p-3 md:p-5 h-fit">
           <div class="relative">
             <Button v-tooltip="'Goto next challenge'" class="absolute right-0 text-right" icon="pi pi-arrow-right" unstyled @click="gotoRandomTask(task.value.Difficulity.name, task.value.Language.langFull, task.value.id)" />
             <NuxtLink to="/create/task">
@@ -303,7 +302,7 @@ const isDialogVisible = ref(false);
               </div>
             </div>
             <div class="t-w-full t-w-flex md:t-w-3/5 md:t-order-1 max-md:t-h-full">
-              <div class="text-8xl text-center t-min-h-[200px] t-max-h-[200px] t-h-[200px] overflow-hidden">
+              <div class="md:text-8xl text-6xl text-center t-min-h-[200px] t-max-h-[200px] t-h-[200px] overflow-hidden">
                 {{ userSyno || " " }}
               </div>
               <p class="p-float-label w-full">
