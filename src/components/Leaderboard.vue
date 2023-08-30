@@ -62,26 +62,26 @@ const positionSeverities = {
   </div>
   <div v-else>
     <DataTable :value="pointLeaders">
-      <Column style="width: 25%;" header="Position" class="max-md:!t-p-0">
+      <Column style="width: 25%;" header="Position" class="max-md:!t-p-1">
         <template #body="data: {index: number, data: Leader}">
           <Badge :value="data.index + 1" :severity=" positionSeverities[data.index + 1] " :class="{'surface-500': !positionSeverities[data.index + 1]}" />
         </template>
       </Column>
-      <Column header="User" style="width: 100%;" class="max-md:!t-p-0">
+      <Column header="User" style="width: 100%;" class="max-md:!t-p-1">
         <template #body="data: { data: Leader}">
           <div class="flex align-items-center">
             <div class="mr-3 t-w-[30px]">
               <UserLevelBadge :value="+data.data.Level.value" />
             </div>
-            <span class="mr-3 max-md:t-block">{{ data.data.name }}</span>
-            <div>
+            <span class="mr-3 max-md:t-block t-w-[20%]">{{ data.data.name }}</span>
+            <div class="">
               <img class="t-w-[30px] t-h-[30px]" :src="data.data.image" :alt="data.data.name">
             </div>
           </div>
         </template>
       </Column>
-      <Column header="Challenges complete" field="_count.CompletedTask" style="width: 25%;" class="max-md:!t-p-0" />
-      <Column header="Points" style="width: 25%;" class="max-md:!t-p-0">
+      <Column header="Challenges complete" field="_count.CompletedTask" style="width: 25%;" class="max-md:!t-p-1" />
+      <Column header="Points" style="width: 25%;" class="max-md:!t-p-1">
         <template #body="data: { data: Leader}">
           <span>{{ data.data.points }}</span>
         </template>
