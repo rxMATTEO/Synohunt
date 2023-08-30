@@ -83,9 +83,16 @@ const items = ref<Hint[]>([
   {
     label: 'Refresh context',
     icon: '/img/reload.png',
+    preffect: async () => {
+      const context = await $fetch(`/api/word/context?word=${task.value.Word.word}&lang=${task.value.Language.langFull}`);
+      task.value.description = context.examples.map(item => item.source).join('\n');
+      console.log(task.value.description);
+    },
     cost: 10
   }
 ]);
+
+// todo move this into store
 
 const isListening = ref(false);
 const hovered = ref();

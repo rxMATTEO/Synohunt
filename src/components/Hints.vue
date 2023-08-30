@@ -32,20 +32,27 @@ function onHintClick (hint: Hint) {
     },
     header: 'Purchase confirmation',
     position: 'bottom',
-    accept: () => {
-      emit('select', hint);
-      moneyStore.setMoney(-hint.cost);
-      notificationsStore.addNotification({
-        title: 'Hi',
-        secondaryText: 'Hooray',
-        description: `You buyed this shit for ${hint.cost}`
-      });
+    accept: async () => {
+      const setMoneyResult = await moneyStore.setMoney(-hint.cost);
+      if (setMoneyResult) {
+        notificationsStore.addNotification({
+          title: 'Hi',
+          description: `You bought this hint for ${hint.cost}`
+        });
+        emit('select', hint);
+      } else {
+        notificationsStore.addNotification({
+          title: 'Denied',
+          description: 'You have not that much coins'
+        });
+      }
+      return setMoneyResult;
     },
     reject: () => {}
   });
 }
 const emit = defineEmits(['select']);
-const props = defineProps<{
+defineProps<{
   items: []
 }>();
 </script>
