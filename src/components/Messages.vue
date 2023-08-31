@@ -88,7 +88,7 @@ function update () {
             :model="buttonItems"
             @click="update"
           >
-            <template #icon="icon">
+            <template #icon>
               <i v-if="logoSpin" class="pi pi-refresh mr-2 pi-spin" />
               <i v-else class="pi pi-refresh mr-2" />
             </template>

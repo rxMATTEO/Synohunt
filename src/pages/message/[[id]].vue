@@ -12,8 +12,11 @@ const selected = id ? ref(msgs.value.find(msg => msg.id === +id)) : ref(msgs.val
 
 function selectMessage (msg: Message) {
   selected.value = msg;
-  selected.value.statusId = 3;
-  messageStore.updateMessage([msg]);
+  if (msg.statusId !== 3) {
+    msg.statusId = selected.value.statusId = 3;
+    msgs.value.map(message => message.id == msg.id ? msg : message);
+    messageStore.updateMessage([msg]);
+  }
 }
 
 function deleteMessage (msg: Message) {
