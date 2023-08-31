@@ -99,7 +99,7 @@ function onLinkClick () {
     <div class="z-1 md:t-block lg:flex-auto flex-none left-0 md:t-top-0 t-top-10 bottom-0 fixed surface-card shadow-8 sidebar">
       <div class="logo">
         <!--         todo center this shit */-->
-        <NuxtLink to="/dashboard" class="w-6 mx-auto block">
+        <NuxtLink to="/dashboard" class="w-6 mx-auto block" @click="onLinkClick">
           <img src="/img/download.webp" class="block mx-auto w-full" alt="logo" draggable="false">
         </NuxtLink>
       </div>

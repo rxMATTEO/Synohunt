@@ -5,6 +5,7 @@ import { storeToRefs } from 'pinia';
 import StickyElement from 'vue-sticky-element';
 import { useMoneyStore } from '../stores/moneyStore';
 import { useMessageStore } from '../stores/messageStore';
+import { usePlatformStore } from '../stores/platformStore';
 import { useAuth } from '#imports';
 import { Platforms, Theme, ThemesNames } from '@/app.config';
 import { useThemeStore } from '@/stores/themeStore';
@@ -67,10 +68,10 @@ const { currentMoney } = storeToRefs(moneyStore);
 const messagesStore = useMessageStore();
 const { messages } = storeToRefs(messagesStore);
 
+const platformStore = usePlatformStore();
+const { platform } = storeToRefs(platformStore);
 const forceStuck = computed(() => {
-  const appConfig = useAppConfig();
-  const platform = appConfig.platform;
-  return platform === Platforms.mobile && isExpanded;
+  return platform.value === Platforms.mobile && isExpanded;
 });
 </script>
 

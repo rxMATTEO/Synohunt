@@ -37,10 +37,8 @@ export const useSidebarStore = defineStore('sidebarStore', {
     hideMenuMobile () {
       const platformStore = usePlatformStore();
       const { platform } = storeToRefs(platformStore);
-      if (platform === Platforms.pc) {
-        setMenuVisibility(true);
-      } else {
-        setMenuVisibility(false);
+      if (platform !== Platforms.pc) {
+        this.isExpanded = false;
       }
     }
   }

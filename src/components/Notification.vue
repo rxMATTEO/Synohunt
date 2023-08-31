@@ -19,9 +19,9 @@ type NotificationAction = {
   onReject: (notification: NotificationsObject) => unknown;
 };
 // todo add theme change on like ALL page built
-withDefaults(defineProps<NotificationProps>(), {
-  image: '/img/placeholder.png'
-});
+// withDefaults(defineProps<NotificationProps>(), {
+//   image: '/img/placeholder.png'
+// });
 
 const notificationsStore = useNotificationsStore();
 const { notifications: notification } = storeToRefs(notificationsStore);
