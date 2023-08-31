@@ -19,6 +19,7 @@ useHead({
     return chunk ? `${chunk} - Synohunt` : 'Synohunt';
   }
 });
+
 const appConfig = useAppConfig();
 
 onMounted(() => {
