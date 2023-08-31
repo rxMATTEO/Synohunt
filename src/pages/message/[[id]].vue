@@ -14,7 +14,6 @@ function selectMessage (msg: Message) {
   selected.value = msg;
   if (msg.statusId !== 3) {
     msg.statusId = selected.value.statusId = 3;
-    msgs.value.map(message => message.id == msg.id ? msg : message);
     messageStore.updateMessage([msg]);
   }
 }

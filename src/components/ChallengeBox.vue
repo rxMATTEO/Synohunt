@@ -31,15 +31,11 @@ const { pending: langsPending, data: langsFetched } = useLazyFetch(
 );
 const taskPending = ref(true);
 
-watch(diffsFetched, (newDiffs) => {
-  diffs.value = newDiffs;
-  selectedDiff.value = newDiffs[0];
-  onChangeTaskOption();
-});
-
-watch(langsFetched, (newLangs) => {
+watch([langsFetched, diffsFetched], ([newLangs, newDiffs]) => {
   langs.value = newLangs;
+  diffs.value = newDiffs;
   selectedLanguage.value = newLangs[0];
+  selectedDiff.value = newDiffs[0];
   onChangeTaskOption();
 });
 //     .then((res) => {
@@ -55,6 +51,7 @@ const gradient = reactive<{ value: GradientNames }>({ value: 'easy' });
 
 function onChangeTaskOption (id = -1) {
   setTimeout(async () => {
+    taskPending.value = true;
     if (selectedLanguage.value.langFull && selectedDiff.value.name) {
       gradient.value = selectedDiff.value.name.toLowerCase() as GradientNames;
       const { data: tasksFetched, pending } = await useAsyncData('task', () => $fetch('/api/task/random', {
