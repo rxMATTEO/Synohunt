@@ -11,7 +11,6 @@ useHead({
   title: 'Login'
 });
 
-const config = useRuntimeConfig();
 const { signIn, status, data } = useAuth();
 
 definePageMeta({
@@ -58,19 +57,19 @@ async function authViaProvider (
       const encrypted = JSON.stringify(await rsa.encrypt(buffer, parsedPublicKey));
 
       await signIn(provider, {
-        callbackUrl: config.public.AUTH_ORIGIN + 'dashboard',
+        callbackUrl: import.meta.env.VITE_AUTH_ORIGIN + 'dashboard',
         email: email.value,
         creds: encrypted
       });
     }
   } else {
     await signIn(provider, {
-      callbackUrl: config.public.AUTH_ORIGIN + 'dashboard'
+      callbackUrl: import.meta.env.VITE_AUTH_ORIGIN + 'dashboard'
     });
   }
   isLoading.value = false;
 }
-// todo WTH IS THAT BRUH
+
 const a = handleSubmit((e, params) => {
   params.evt.callback();
 });
