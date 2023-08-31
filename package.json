@@ -10,7 +10,8 @@
     "db:migrate": "npx prisma migrate dev",
     "db:generate": "npx prisma generate",
     "db:seed": "npx prisma db seed",
-    "db:migrate:prod": "dotenv -e .env.production -- npx prisma migrate dev"
+    "db:migrate:prod": "dotenv -e .env.production -- npx prisma migrate dev",
+    "db:migrate:dev": "dotenv -e .env.development -- npx prisma migrate dev"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.22.9",
