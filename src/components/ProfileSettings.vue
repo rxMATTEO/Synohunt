@@ -121,7 +121,6 @@ const onChangeTheme = (theme: ThemeName, imagePath: ReturnType<typeof getImagePa
   notificationsStore.addNotification({
     id,
     title: 'Success',
-    secondaryText: 'Cool',
     description: 'You changed theme You changed theme You changed theme',
     image: imagePath,
     actions: {

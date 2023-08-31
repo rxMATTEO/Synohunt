@@ -19,12 +19,9 @@ type NotificationAction = {
   onReject: (notification: NotificationsObject) => unknown;
 };
 // todo add theme change on like ALL page built
-// withDefaults(defineProps<NotificationProps>(), {
-//   icon: 'pi pi-bell',
-//   closeIcon: 'pi pi-check',
-//   image: '/img/placeholder.png',
-//   notificationType: 'notification'
-// });
+withDefaults(defineProps<NotificationProps>(), {
+  image: '/img/placeholder.png'
+});
 
 const notificationsStore = useNotificationsStore();
 const { notifications: notification } = storeToRefs(notificationsStore);
@@ -82,7 +79,7 @@ const unsubscribe = notificationsStore.$onAction(
             <div class="t-max-w-[33%]">
               <div class="h-full flex">
                 <img
-                  :src="notification[content.id].image"
+                  :src="notification[content.id].image || '/img/denied.png'"
                   alt="logo"
                   class="block t-w-[100px] t-h-[100px] t-rounded-full t-my-auto"
                 >

@@ -1,6 +1,6 @@
 import { reactive } from 'vue';
 import { defineStore, useAuth, useFetch } from '#imports';
-import {useNotificationsStore} from "@/stores/notificationsStore";
+import { useNotificationsStore } from '@/stores/notificationsStore';
 
 export const useLevelStore = defineStore('levelStore', () => {
   const { data: { value: { user: { account } } } } = useAuth();
@@ -11,7 +11,7 @@ export const useLevelStore = defineStore('levelStore', () => {
     return level.value;
   }
   function upgradeLvl () {
-    notificationsStore.addNotification({description: 'Congratz', title: 'Hi', secondaryText: 'u like level upgrade and shit'});
+    notificationsStore.addNotification({ description: 'You upgraded your level', title: 'Congratulations', image: '/img/check.png' });
     level.value = +level.value + 1;
   }
   return ({

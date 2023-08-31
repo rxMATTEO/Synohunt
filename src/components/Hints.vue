@@ -34,9 +34,11 @@ function onHintClick (hint: Hint) {
     position: 'bottom',
     accept: async () => {
       const setMoneyResult = await moneyStore.setMoney(-hint.cost);
+      console.log(setMoneyResult);
       if (setMoneyResult) {
         notificationsStore.addNotification({
-          title: 'Hi',
+          title: 'Congratulations',
+          image: '/img/check.png',
           description: `You bought this hint for ${hint.cost}`
         });
         emit('select', hint);
