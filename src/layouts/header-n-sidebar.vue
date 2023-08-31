@@ -1,24 +1,36 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
-import { storeToRefs } from 'pinia';
 import { useSidebarStore } from '@/stores/sidebarStore';
 import { useAppConfig } from '#imports';
 import { Platforms } from '@/app.config';
 
-const sidebarStore = useSidebarStore();
-const { isExpanded } = storeToRefs(sidebarStore);
+const { toggleMenu, setMenuVisibility, isExpanded: expanded } = useSidebarStore();
+
+function hideMenuMobile () {
+  const { platform } = useAppConfig();
+  if (platform === Platforms.pc) {
+    setMenuVisibility(true);
+  } else {
+    setMenuVisibility(false);
+  }
+}
+
+onMounted(() => {
+  hideMenuMobile();
+});
+
 function onNavigate () {
-  sidebarStore.hideMenuMobile();
+  hideMenuMobile();
 }
 </script>
 
 <template>
   <div class="flex">
     <LazyNotification />
-    <LazySidebar :is-expanded="isExpanded" :toggle="sidebarStore.toggleMenu" @navigate="onNavigate" />
+    <LazySidebar :is-expanded="expanded" :toggle="toggleMenu" @navigate="onNavigate" />
     <div class="w-full flex-1">
       <div class="t-ml-0 h-4rem">
-        <LazyHeader :expanded="sidebarStore.toggleMenu" />
+        <LazyHeader :expanded="toggleMenu" />
       </div>
       <div class="max-w-full relative">
         <NuxtLayout name="footer">

@@ -2,7 +2,7 @@
 import { Ref, UnwrapRef } from 'vue';
 
 const props = defineProps({
-  isExpanded: Boolean,
+  isExpanded: Object,
   toggle: Function
 });
 
@@ -95,7 +95,7 @@ function onLinkClick () {
 </script>
 
 <template>
-  <div class="t-relative t-top-10 t-z-[11] t-transition-[width] t-ease-in-out t-duration-200" :class="{'md:t-w-56 t-w-full': isExpanded, 't-w-0': !isExpanded}">
+  <div class="t-relative t-top-10 t-z-[11] t-transition-[width] t-ease-in-out t-duration-200" :class="{'md:t-w-56 t-w-full': isExpanded.value, 't-w-0': !isExpanded.value}">
     <div class="z-1 md:t-block lg:flex-auto flex-none left-0 md:t-top-0 t-top-10 bottom-0 fixed surface-card shadow-8 sidebar">
       <div class="logo">
         <!--         todo center this shit */-->
@@ -103,7 +103,7 @@ function onLinkClick () {
           <img src="/img/download.webp" class="block mx-auto w-full" alt="logo" draggable="false">
         </NuxtLink>
       </div>
-      <div v-if="isExpanded" class="mt-5 text-secondary t-text-sm t-w-1/">
+      <div v-if="isExpanded.value" class="mt-5 text-secondary t-text-sm t-w-1/">
         <div v-for="navItem in navLinks">
           <p class="px-2 uppercase text-color-secondary">
             {{ navItem.title }}

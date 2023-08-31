@@ -2,14 +2,16 @@
   "name": "nuxt-app",
   "private": true,
   "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
+    "build": "nuxi build --dotenv .env.production",
+    "dev": "nuxi dev --dotenv .env.development",
     "generate": "nuxt generate",
-    "preview": "nuxt preview",
+    "preview": "nuxi preview --dotenv .env.production",
     "postinstall": "prisma generate && nuxt prepare",
     "db:migrate": "npx prisma migrate dev",
     "db:generate": "npx prisma generate",
-    "db:seed": "npx prisma db seed"
+    "db:seed": "npx prisma db seed",
+    "db:migrate:prod": "dotenv -e .env.production -- npx prisma migrate dev",
+    "db:migrate:dev": "dotenv -e .env.development -- npx prisma migrate dev"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.22.9",

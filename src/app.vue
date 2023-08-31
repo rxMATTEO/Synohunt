@@ -4,12 +4,10 @@
 
 <script setup lang="ts">
 import { onMounted } from 'vue';
-import { storeToRefs } from 'pinia';
 import { Platforms } from './app.config.ts';
 import { useAppConfig } from '#imports';
 import { useThemeStore } from '@/stores/themeStore';
-import { usePlatformStore } from '@/stores/platformStore';
-import { useSidebarStore } from '@/stores/sidebarStore';
+const config = useRuntimeConfig();
 
 const themeStore = useThemeStore();
 themeStore.applyFromCookie();
@@ -22,16 +20,10 @@ useHead({
 const appConfig = useAppConfig();
 
 onMounted(() => {
-  const platformStore = usePlatformStore();
-  const { platform } = storeToRefs(platformStore);
-  if (platform.value === 'unknown') {
-    const sidebarStore = useSidebarStore();
-    if (window.document.documentElement.offsetWidth >= 768) {
-      platformStore.setCurrentPlatform(Platforms.pc);
-      sidebarStore.toggleMenu();
-    } else {
-      platformStore.setCurrentPlatform(Platforms.mobile);
-    }
+  if (window.document.documentElement.offsetWidth >= 768) {
+    appConfig.platform = Platforms.pc;
+  } else {
+    appConfig.platform = Platforms.mobile;
   }
 });
 </script>
