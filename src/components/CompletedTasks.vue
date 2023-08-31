@@ -13,7 +13,7 @@ const completedTasks = ref<CompletedTaskResponse[]>((await useFetch('/api/task/c
 <template>
   <div class="">
     <h1 class="text-4xl font-bold mb-5">
-      Completed tasks
+      Completed challenges
     </h1>
     <div v-if="completedTasks.length === 0">
       <div>
