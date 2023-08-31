@@ -77,7 +77,7 @@ function onChangeTaskOption (id = -1) {
   });
 }
 
-const loading = ref(diffsPending || langsPending);
+const loading = computed(() => diffsPending.value || langsPending.value);
 </script>
 
 <template>
