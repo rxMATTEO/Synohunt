@@ -21,3 +21,7 @@ logs
 .env.development
 .env.*
 !.env.example
+
+#prisma
+src/server/prisma/migrations
+src/server/prisma/dev.db
