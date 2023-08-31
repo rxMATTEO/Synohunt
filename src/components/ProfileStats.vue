@@ -5,7 +5,7 @@ type ProfileStatsProps = {
   account: object
 }
 const props = defineProps<ProfileStatsProps>();
-const account = ref(props.account);
+const account = props.account;
 const pointsStore = usePointsStore();
 const percents = ref(0);
 const { data: percs, pending } = await useAsyncData('points', () => {
@@ -17,7 +17,7 @@ const bookmarked = ref(
     await useFetch('/api/task/allBookmarks', {
       method: 'POST',
       body: {
-        userId: account.value.id
+        userId: account.id
       }
     })
   ).data.value || []
@@ -28,7 +28,7 @@ const completed = ref(
     await useFetch('/api/task/completed', {
       method: 'POST',
       body: {
-        userId: account.value.id
+        userId: account.id
       }
     })
   ).data.value || []
@@ -39,7 +39,7 @@ const created = ref(
     await useFetch('/api/task/created', {
       method: 'POST',
       body: {
-        userId: account.value.id
+        userId: account.id
       }
     })
   ).data.value || []
