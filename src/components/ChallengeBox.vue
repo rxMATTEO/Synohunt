@@ -11,8 +11,12 @@ const diffs = reactive({ value: [] as ServerDiff[] });
 const langs = reactive({ value: [] as ServerLang[] });
 const task = reactive<{ value: Task }>({ value: {} as Task });
 
-const selectedDiff = computed(() => diffs.value ? diffs.value[0] : null);
-const selectedLanguage = computed(() => langs.value ? langs.value[0] : null);
+const selectedDiff = reactive<{ value: ServerDiff }>({
+  value: {} as ServerDiff
+});
+const selectedLanguage = reactive<{ value: ServerLang }>({
+  value: {} as ServerLang
+});
 const { pending: diffsPending, data: diffsFetched } = useLazyFetch(
   '/api/diffs',
   {
@@ -27,11 +31,25 @@ const { pending: langsPending, data: langsFetched } = useLazyFetch(
 );
 const taskPending = ref(true);
 
-watch([langsFetched, diffsFetched], ([newLangs, newDiffs]) => {
-  langs.value = newLangs;
+watch(diffsFetched, (newDiffs) => {
   diffs.value = newDiffs;
+  selectedDiff.value = newDiffs[0];
   onChangeTaskOption();
 });
+
+watch(langsFetched, (newLangs) => {
+  langs.value = newLangs;
+  selectedLanguage.value = newLangs[0];
+  onChangeTaskOption();
+});
+//     .then((res) => {
+//   diffs.value = res.data.value;
+//   selectedDiff.value = diffs.value[0];
+// });
+//     .then((res) => {
+//   langs.value = res.data.value;
+//   selectedLanguage.value = langs.value[0];
+// });
 type GradientNames = 'easy' | 'medium' | 'hard';
 const gradient = reactive<{ value: GradientNames }>({ value: 'easy' });
 
@@ -76,7 +94,7 @@ const loading = ref(diffsPending || langsPending);
           <div class="mt-5">
             <div class="p-float-label">
               <Dropdown
-                v-model="selectedDiff"
+                v-model="selectedDiff.value"
                 input-id="dd-diff"
                 :options="diffs.value"
                 option-label="name"
@@ -102,7 +120,7 @@ const loading = ref(diffsPending || langsPending);
             </div>
             <div class="p-float-label mt-5">
               <Dropdown
-                v-model="selectedLanguage"
+                v-model="selectedLanguage.value"
                 input-id="dd-lang"
                 :options="langs.value"
                 option-label="name"
