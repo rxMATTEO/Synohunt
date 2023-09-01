@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <div class="pointer-events-none absolute z-2 t-right-[0] left-0 overflow-hidden bottom-0 top-0" style="float: right">
+  <div class="pointer-events-none absolute z-2 t-right-[0] left-0 overflow-hidden top-0 bottom-0" style="float: right">
     <div class="gradient">
       <slot />
     </div>
@@ -26,7 +26,7 @@
   width: var(--size)
   height: var(--size)
   filter: blur(calc(var(--size) / 5))
-  background-image: linear-gradient(hsl(158, 82%, 57%, 85%), hsl(252, 82%, 57%))
+  @extend .gradient-primary
   animation: rotate var(--speed) var(--easing) alternate infinite
   border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%
   transition: all 0.1s ease-out
