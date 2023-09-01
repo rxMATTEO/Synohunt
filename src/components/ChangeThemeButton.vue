@@ -17,6 +17,7 @@ function changeTheme () {
 
 <template>
   <Button
+    aria-label="Change theme"
     unstyled
     class="flex justify-center align-items-center"
     @click="changeTheme"
