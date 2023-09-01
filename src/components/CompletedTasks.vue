@@ -39,7 +39,9 @@ const completedTasks = ref<CompletedTaskResponse[]>((await useFetch('/api/task/c
                   <div class="flex flex-column sm:flex-row justify-content-between xl:align-items-start flex-1 gap-4">
                     <div class="flex flex-column sm:align-items-start gap-3">
                       <div class="text-2xl font-bold text-900">
-                        <p>{{ slotProps.data.Task.Word.word }}</p>
+                        <p class="text-white">
+                          {{ slotProps.data.Task.Word.word }}
+                        </p>
                       </div>
                       <p v-html="slotProps.data.Task.description" />
                     </div>
@@ -72,7 +74,7 @@ const completedTasks = ref<CompletedTaskResponse[]>((await useFetch('/api/task/c
                 <div class="mt-5">
                   <div class="flex flex-row flex-wrap align-items-center gap-3 sm:gap-2">
                     <div v-for="syno in slotProps.data.Task.Word.Synonym">
-                      <Tag class="bg-gray-300 hover:bg-gray-500 transition-all animation-ease-in-out transition-duration-300">
+                      <Tag class="text-white bg-gray-500 hover:bg-gray-800 transition-all animation-ease-in-out transition-duration-300">
                         {{ syno.value }}
                       </Tag>
                     </div>

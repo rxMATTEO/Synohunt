@@ -47,7 +47,9 @@ const createdTasks = ref((await useFetch('/api/task/created', {
                 <div class="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
                   <div class="flex flex-column align-items-center sm:align-items-start gap-3">
                     <div class="text-2xl font-bold text-900">
-                      <p>{{ slotProps.data.Word.word }}</p>
+                      <p class="text-white">
+                        {{ slotProps.data.Word.word }}
+                      </p>
                     </div>
                     <p v-html="slotProps.data.description" />
                   </div>
@@ -67,7 +69,7 @@ const createdTasks = ref((await useFetch('/api/task/created', {
             <div v-if="slotProps.data.Word.Synonym.length > 1" class="p-4 overflow-hidden">
               <div class="flex flex-wrap align-items-center sm:align-items-end gap-3 sm:gap-2">
                 <div v-for="syno in slotProps.data.Word.Synonym" :key="syno.id">
-                  <Tag class="bg-gray-300 hover:bg-gray-500 transition-all animation-ease-in-out transition-duration-300">
+                  <Tag class="text-white bg-gray-500 hover:bg-gray-800 transition-all animation-ease-in-out transition-duration-300">
                     {{ syno.value }}
                   </Tag>
                 </div>
