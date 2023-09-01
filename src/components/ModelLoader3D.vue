@@ -1,18 +1,22 @@
 <script setup lang="ts">
-import { vue3dLoader } from 'vue-3d-loader';
-import { onMounted } from 'vue';
+import { defineAsyncComponent, onMounted } from 'vue';
 import { storeToRefs } from 'pinia';
+import useMouse from '../composables/useMouse';
 import { useThemeStore } from '@/stores/themeStore';
 
-const rotation = ref();
-rotation.value = {
+const vue3dloader = defineAsyncComponent(async () => (await import('vue-3d-loader')).vue3dLoader);
+const rotation = ref({
   x: 220,
   y: 0,
   z: 0
-};
+});
 
+const loaded = ref(false);
 function onLoad () {
-  rotate();
+  if (!loaded.value) {
+    rotate();
+    loaded.value = true;
+  }
 }
 const lights = [
 
@@ -49,45 +53,49 @@ function setBackground (delay: number) {
   }, delay);
 }
 
+const { x, y } = useMouse();
+
+watch([x, y], ([newX, newY]: [number, number]) => {
+  lights[0].position.x = newX;
+  lights[0].position.y = newY;
+});
 const themeStore = useThemeStore();
 const { currentTheme } = storeToRefs(themeStore);
 
 onMounted(() => {
   setBackground(200);
-  watch(currentTheme.value, () => setBackground(50));
+  watch(currentTheme, () => setBackground(50));
   width.value = window.innerWidth / 2;
   height.value = window.innerHeight / 2;
-  window.addEventListener('mousemove', (e: MouseEvent) => {
-    const { x, y } = e;
-    lights[0].position.x = x;
-    lights[0].position.y = y;
-  });
 });
-// [{ type: 'DirectionalLight', position: { x: 1, y: 1, z: 1 }, color: '#FF3630', intensity: 1, }]
 function rotate () {
   rotation.value.y -= 0.007;
   requestAnimationFrame(() => rotate());
 }
+
+const filePath = computed(() => '/img/models/synohunt.obj');
 </script>
 
 <template>
-  <vue3d-loader
-    :height="height"
-    :width="width"
-    :camera-position="{ x: 10, y: 10, z: 100 }"
-    :background-color="background"
-    :web-g-l-renderer-options="{ antialias: true, alpha: true }"
-    file-path="/img/models/synohunt.obj"
-    file-type="obj"
-    :rotation="rotation"
-    :lights="lights"
-    output-encoding="linear"
-    :controls-options="
-      {
-        enableZoom: false
-      }"
-    @load="onLoad"
-  />
+  <div>
+    <vue3dloader
+      :height="height"
+      :width="width"
+      :camera-position="{ x: 10, y: 10, z: 100 }"
+      :background-color="background"
+      :web-g-l-renderer-options="{ antialias: true, alpha: true }"
+      :file-path="filePath"
+      file-type="obj"
+      :rotation="rotation"
+      :lights="lights"
+      output-encoding="linear"
+      :controls-options="
+        {
+          enableZoom: false
+        }"
+      @load="onLoad"
+    />
+  </div>
 </template>
 
 <style scoped lang="sass">
