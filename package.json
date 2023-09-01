@@ -2,7 +2,7 @@
   "name": "synohunt",
   "private": true,
   "scripts": {
-    "build": "rd /s /q .output && nuxi build --dotenv .env.production",
+    "build": "nuxi build --dotenv .env.production",
     "dev": "nuxi dev --dotenv .env.development",
     "generate": "nuxt generate",
     "preview": "nuxi preview --dotenv .env.production",
