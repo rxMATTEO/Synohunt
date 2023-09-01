@@ -3,6 +3,9 @@
     <div class="h-screen t-max-h-screen">
       <div class="text-color py-3 absolute right-0 left-0" />
       <LandingHeader class="fixed left-0 right-0 top-0 t-z-50" />
+      <GradientBlur>
+        a
+      </GradientBlur>
       <div class="2xl:!t-px-64 2xl:t-mx-20 t-px-3 max-w-full h-full surface-ground">
         <div class="h-full">
           <div class="flex h-full align-items-center">
@@ -44,7 +47,7 @@
             <div
               class="logo-holder absolute inline-block z-1 max-w-full overflow-hidden right-0"
             >
-              <LazyModelLoader3D class="t-z-[20] relative right-0 top-20" />
+              <LazyModelLoader3D v-if="!isMobile" class="t-z-[20] relative right-0 top-20" />
             </div>
           </div>
         </div>
@@ -261,9 +264,15 @@
 
 <script setup lang="ts">
 import type { PrimeIconsOptions } from 'primevue/api';
+import { storeToRefs } from 'pinia';
+import { usePlatformStore } from '../stores/platformStore';
 import LandingHeader from '@/components/LandingHeader.vue';
 
 definePageMeta({ auth: false });
+
+const platformStore = usePlatformStore();
+const { platform } = storeToRefs(platformStore);
+const isMobile = computed(() => platform.value === 'mobile');
 
 export type PrimeIcon = Lowercase<keyof PrimeIconsOptions>;
 
