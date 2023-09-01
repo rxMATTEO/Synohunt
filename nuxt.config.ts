@@ -1,5 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import { NuxtConfig } from '@nuxt/types';
+import ViteMinifyPlugin from 'vite-plugin-minify';
+import { createHtmlPlugin } from 'vite-plugin-html';
 
 const baseUrl = '/';
 const nuxtConfig: NuxtConfig = {
@@ -37,7 +39,7 @@ const nuxtConfig: NuxtConfig = {
     ]
   },
   vite: {
-
+    plugins: [ViteMinifyPlugin({})]
   },
   runtimeConfig: {
     public: {
