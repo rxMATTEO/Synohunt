@@ -168,7 +168,7 @@ function changeTab () {
           <TabMenu
             v-model:activeIndex="selectedTabIndex"
             :model="tabItems"
-            class="whitespace-nowrap"
+            class="t-whitespace-nowrap"
             @tab-change="changeTab"
           />
         </div>
