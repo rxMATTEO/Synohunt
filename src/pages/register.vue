@@ -2,6 +2,7 @@
 import * as Buffer from 'buffer/';
 import rsa from 'js-crypto-rsa';
 import { useField, useForm } from 'vee-validate';
+import { OAuthProviderType } from 'next-auth/providers/oauth-types';
 import { definePageMeta } from '#imports';
 import type { JwkResponse } from '@/server/api/jwk.post';
 import validateWeakness, { emailRegex } from '@/composables/validator';
@@ -66,6 +67,18 @@ const registerUser = handleSubmit(async ({ email, password, username }) => {
 function afterComplete () {
   router.push('/login');
 }
+
+const { signIn } = useAuth();
+const isLoading = ref(false);
+async function authViaProvider (
+  provider: OAuthProviderType
+) {
+  isLoading.value = true;
+  await signIn(provider, {
+    callbackUrl: import.meta.env.VITE_AUTH_ORIGIN + 'dashboard'
+  });
+  isLoading.value = false;
+}
 </script>
 
 <template>
@@ -97,6 +110,20 @@ function afterComplete () {
           Login now!
         </NuxtLink>
       </div>
+
+      <div class="auth-method">
+        <Button
+          label="Register via Github"
+          icon="pi pi-github"
+          type="null"
+          :loading="isLoading"
+          @click="authViaProvider('github')"
+        />
+      </div>
+
+      <Divider align="center">
+        <b>OR</b>
+      </Divider>
 
       <div>
         <form @submit="registerUser">
@@ -187,4 +214,7 @@ function afterComplete () {
   </div>
 </template>
 
-<style scoped lang="sass"></style>
+<style scoped lang="sass">
+@use '../assets/main' as main
+
+</style>

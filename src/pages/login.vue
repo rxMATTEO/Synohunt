@@ -177,4 +177,6 @@ const isLoading = ref(false);
   </div>
 </template>
 
-<style scoped lang="sass"></style>
+<style scoped lang="sass">
+@use '../assets/main' as main
+</style>
