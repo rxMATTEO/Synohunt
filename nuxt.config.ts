@@ -8,7 +8,7 @@ const nuxtConfig: NuxtConfig = {
   devtools: { enabled: true, enableTimeline: true },
   buildModules: ['@nuxt/typescript-build'],
   css: [
-    'primeflex/primeflex.css',
+    'primeflex/primeflex.min.css',
     'primeicons/primeicons.css'
   ],
   build: {
@@ -25,7 +25,8 @@ const nuxtConfig: NuxtConfig = {
   modules: [
     '@nuxtjs/tailwindcss',
     '@pinia/nuxt',
-    '@sidebase/nuxt-auth'
+    '@sidebase/nuxt-auth',
+    '@nuxt/image'
   ],
   auth: {
     isEnabled: true,
@@ -45,6 +46,9 @@ const nuxtConfig: NuxtConfig = {
     public: {
       AUTH_ORIGIN: process.env.AUTH_ORIGIN
     }
+  },
+  nitro: {
+    compressPublicAssets: true
   },
   srcDir: './src'
 };

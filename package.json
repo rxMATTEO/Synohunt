@@ -46,6 +46,7 @@
   },
   "dependencies": {
     "@next-auth/prisma-adapter": "^1.0.7",
+    "@nuxt/image": "^1.0.0-rc.1",
     "@pinia/nuxt": "^0.4.11",
     "@prisma/client": "^5.1.0",
     "buffer": "^6.0.3",

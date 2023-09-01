@@ -26,7 +26,14 @@ onMounted(() => {
           <div>
             <NuxtLink to="/" class="font-bold t-tracking-wider h-full w-full">
               <div class="md:w-3rem h-full max-md:t-w-16 t-flex justify-content-center align-items-center max-md:t-flex-col">
-                <img class="" src="/favicon.ico" alt="logo">
+                <NuxtImg
+                  format="webp"
+                  class=""
+                  src="/favicon.ico"
+                  alt="logo"
+                  width="40"
+                  height="40"
+                />
                 <p class="max-md:!t-hidden">
                   SynoHunt
                 </p>

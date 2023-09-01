@@ -96,14 +96,17 @@
           </div>
 
           <div
-            class="flex gap-5 t-mt-40 t-place-content-between flex-column md:flex-row"
+            class="flex gap-5 t-mt-40 t-place-content-between flex-column md:flex-row max-md:t-items-center"
           >
-            <div class="md:t-w-1/2">
-              <img
+            <div class="t-w-1/2">
+              <NuxtImg
+                format="webp"
                 alt="Logo"
                 class="block w-full md:t-max-w-[66%] max-h-full"
                 src="/img/biglogo.png"
-              >
+                width="380"
+                height="380"
+              />
             </div>
             <div class="md:t-w-1/2 max-md:t-text-center">
               <p class="uppercase text-primary font-bold">
@@ -185,11 +188,14 @@
             <div class="inline-block sm:w-6 sm:pr-1">
               <div class="w-full surface-card border-round-3xl pb-1">
                 <div class="img overflow-hidden h-16rem relative">
-                  <img
+                  <NuxtImg
+                    format="webp"
                     class="aspect-1/1 block w-full border-round-3xl absolute"
                     src="/img/words.png"
                     alt="words"
-                  >
+                    width="200"
+                    height="200"
+                  />
                 </div>
                 <div class="desc px-3">
                   <h1 class="text-900 text-4xl font-bold">
@@ -202,11 +208,14 @@
             <div class="inline-block sm:w-6 sm:pl-1 mt-3 sm:mt-0">
               <div class="w-full surface-card border-round-3xl pb-1">
                 <div class="img overflow-hidden h-16rem relative">
-                  <img
+                  <NuxtImg
+                    format="webp"
                     class="aspect-1/1 block w-full border-round-3xl absolute"
                     src="/img/words.png"
                     alt="words"
-                  >
+                    width="200"
+                    height="200"
+                  />
                 </div>
                 <div class="desc px-3">
                   <h1 class="text-900 text-4xl font-bold">
