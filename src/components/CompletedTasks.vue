@@ -53,7 +53,7 @@ const completedTasks = ref<CompletedTaskResponse[]>((await useFetch('/api/task/c
             </template>
             <template #right-side>
               <div class="p-4">
-                <div class="flex align-items-center gap-3 absolute t-place-content-between t-left-5 t-right-5">
+                <div class="flex align-items-center gap-3 t-place-content-between t-left-5 t-right-5">
                   <NuxtLink :to="`/profile/${slotProps.data.Task.User.name}`" class="hover:text-primary transition-colors animation-ease-in-out transition-duration-300">
                     <i class="pi pi-user vertical-align-middle" />
                     <span class="pl-1 vertical-align-">{{ slotProps.data.Task.User.name }}</span>
@@ -69,8 +69,8 @@ const completedTasks = ref<CompletedTaskResponse[]>((await useFetch('/api/task/c
                     </div>
                   </div>
                 </div>
-                <div class="w-2rem h-2rem">
-                  <div class="flex flex-row max-lg:t-flex-col align-items-center sm:align-items-end gap-3 sm:gap-2 absolute md:t-bottom-5 t-bottom-1">
+                <div class="mt-5">
+                  <div class="flex flex-row flex-wrap align-items-center gap-3 sm:gap-2">
                     <div v-for="syno in slotProps.data.Task.Word.Synonym">
                       <Tag class="bg-gray-300 hover:bg-gray-500 transition-all animation-ease-in-out transition-duration-300">
                         {{ syno.value }}
