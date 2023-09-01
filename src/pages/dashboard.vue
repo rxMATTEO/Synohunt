@@ -3,7 +3,10 @@ import { Difficulity, Language, Task } from '@prisma/client';
 import { reactive, ref } from 'vue';
 import ChallengeBox from '@/components/ChallengeBox.vue';
 useHead({
-  title: 'Dashboard'
+  title: 'Dashboard',
+  meta: [
+    { name: 'description', content: 'It\'s dashboard ' }
+  ]
 });
 </script>
 

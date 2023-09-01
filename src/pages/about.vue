@@ -3,7 +3,10 @@ import { definePageMeta } from '#imports';
 import Footer from '@/layouts/footer.vue';
 
 useHead({
-  title: 'About us'
+  title: 'About us',
+  meta: [
+    { name: 'description', content: 'About Synohunt' }
+  ]
 });
 
 definePageMeta({

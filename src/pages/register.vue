@@ -8,7 +8,16 @@ import type { JwkResponse } from '@/server/api/jwk.post';
 import validateWeakness, { emailRegex } from '@/composables/validator';
 
 useHead({
-  title: 'Register'
+  title: 'Registration'
+});
+
+useSeoMeta({
+  title: 'Registration',
+  ogTitle: 'Registration',
+  description: 'Register a new account on Synohunt',
+  ogDescription: 'Register a new account on Synohunt',
+  ogImage: 'https://example.com/image.png',
+  twitterCard: 'summary_large_image'
 });
 
 definePageMeta({

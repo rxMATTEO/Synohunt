@@ -5,7 +5,10 @@ import CompletedTasks from '../../components/CompletedTasks.vue';
 import TabmenuLoader from '../../components/loading/TabmenuLoader.vue'; // to lazy
 
 useHead({
-  title: 'My profile'
+  title: 'My profile',
+  meta: [
+    { name: 'description', content: 'Register a new account on Synohunt' }
+  ]
 });
 
 const tabs = [

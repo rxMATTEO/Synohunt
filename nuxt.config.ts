@@ -40,7 +40,10 @@ const nuxtConfig: NuxtConfig = {
     ]
   },
   vite: {
-    plugins: [ViteMinifyPlugin({})]
+    plugins: [ViteMinifyPlugin({})],
+    esbuild: {
+      drop: ['console', 'debugger']
+    }
   },
   runtimeConfig: {
     public: {
@@ -52,6 +55,9 @@ const nuxtConfig: NuxtConfig = {
   },
   app: {
     head: {
+      meta: [
+        { name: 'description', content: 'Synohunt is ultimate word challenge that will test your knowledge of the language' }
+      ],
       htmlAttrs: {
         lang: 'en'
       },

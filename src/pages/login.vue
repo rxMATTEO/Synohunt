@@ -8,7 +8,10 @@ import type { PublicKeyResponse } from '@/server/api/publicKey.post';
 import validateWeakness, { emailRegex } from '@/composables/validator';
 
 useHead({
-  title: 'Login'
+  title: 'Login',
+  meta: [
+    { name: 'description', content: 'Login your account on Synohunt' }
+  ]
 });
 
 const { signIn, status, data } = useAuth();

@@ -1,6 +1,9 @@
 <script setup lang="ts">
 useHead({
-  title: 'Leaderboard'
+  title: 'Leaderboard',
+  meta: [
+    { name: 'description', content: 'Leaderboard of Synohunt player' }
+  ]
 });
 // leaderbord 4 point creator most tasks, coins and shit
 </script>
