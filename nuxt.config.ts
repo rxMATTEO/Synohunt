@@ -50,6 +50,19 @@ const nuxtConfig: NuxtConfig = {
   nitro: {
     compressPublicAssets: true
   },
+  app: {
+    head: {
+      script: [
+        {
+          children: `window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', '${process.env.GOOGLE_TAG}');`
+        },
+        {
+          src: `https://www.googletagmanager.com/gtag/js?id=${process.env.GOOGLE_TAG}`,
+          async: true
+        }
+      ]
+    }
+  },
   srcDir: './src'
 };
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
