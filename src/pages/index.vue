@@ -100,6 +100,7 @@
           >
             <div class="md:t-w-1/2">
               <img
+                alt="Logo"
                 class="block w-full md:t-max-w-[66%] max-h-full"
                 src="/img/biglogo.png"
               >

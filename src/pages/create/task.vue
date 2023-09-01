@@ -82,7 +82,6 @@ const createTask = handleSubmit(async () => {
     syno.wordId = taskFetched.value.word.id;
     return syno;
   }));
-  console.log(taskFetched.value.synos);
   taskFetched.value.task.description = context;
   taskFetched.value.word.word = word;
   taskFetched.value.task.isVisible = true;

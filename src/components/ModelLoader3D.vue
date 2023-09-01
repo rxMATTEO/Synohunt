@@ -18,6 +18,7 @@ function onLoad () {
     loaded.value = true;
   }
 }
+onMounted(() => onLoad());
 const lights = [
 
   {
@@ -41,13 +42,14 @@ const lights = [
   }
 ];
 // todo figure out wtf is happenning if theme chaning it's speeding up
-const height = ref(0);
-const width = ref(0);
+const height = computed(() => process.client ? window.innerHeight / 2 : 0);
+const width = computed(() => process.client ? window.innerWidth / 2 : 0);
 
 const background = ref('');
 
 function setBackground (delay: number) {
   setTimeout(() => {
+    mouted.value = true;
     const globalStyle = getComputedStyle(document.body);
     background.value = globalStyle.getPropertyValue('--surface-b');
   }, delay);
@@ -62,14 +64,13 @@ watch([x, y], ([newX, newY]: [number, number]) => {
 const themeStore = useThemeStore();
 const { currentTheme } = storeToRefs(themeStore);
 
+const mouted = ref(false);
 onMounted(() => {
-  setBackground(200);
+  setBackground(0);
   watch(currentTheme, () => setBackground(50));
-  width.value = window.innerWidth / 2;
-  height.value = window.innerHeight / 2;
 });
 function rotate () {
-  rotation.value.y -= 0.007;
+  setTimeout(() => rotation.value.y -= 0.007);
   requestAnimationFrame(() => rotate());
 }
 
@@ -79,6 +80,7 @@ const filePath = computed(() => '/img/models/synohunt.obj');
 <template>
   <div>
     <vue3dloader
+      v-if="mouted"
       :height="height"
       :width="width"
       :camera-position="{ x: 10, y: 10, z: 100 }"
@@ -93,7 +95,6 @@ const filePath = computed(() => '/img/models/synohunt.obj');
         {
           enableZoom: false
         }"
-      @load="onLoad"
     />
   </div>
 </template>
