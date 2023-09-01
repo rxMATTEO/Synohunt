@@ -55,12 +55,6 @@ onMounted(() => {
               >
                 Services
               </NuxtLink>
-              <NuxtLink
-                to="/"
-                class="mr-3 hover:text-primary transition-colors t-duration-300"
-              >
-                Blog
-              </NuxtLink>
             </div>
           </div>
           <div class="flex align-items-center">
@@ -84,7 +78,7 @@ onMounted(() => {
                   />
                 </NuxtLink>
               </div>
-              <div v-else class="flex align-items-center">
+              <div v-else class="flex align-items-center max-md:t-flex-col">
                 <NuxtLink to="/dashboard" class="block">
                   <Button
                     class="text-white max-md:t-mt-2 t-border-0 bg-indigo-500 "
@@ -94,7 +88,7 @@ onMounted(() => {
                 </NuxtLink>
 
                 <Button
-                  class="text-white max-md:t-mt-2 t-border-0 bg-indigo-500 ml-3"
+                  class="text-white max-md:t-mt-2 t-border-0 bg-indigo-500 md:ml-3"
                   label="Sign out"
                   :type="null"
                   @click="signOut"

@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <div class="relative z-2 t-right-[0]">
+  <div class="pointer-events-none absolute z-2 t-right-[0] left-0 overflow-hidden bottom-0 top-0" style="float: right">
     <div class="gradient">
       <slot />
     </div>
@@ -18,9 +18,8 @@
     transform: rotate(360deg)
 
 .gradient
-  position: absolute
-  --size: 600px
-  right: calc(var(--size) / 2)
+  float: right
+  --size: 35rem
   --speed: 120s
   --easing: cubic-bezier(0.8, 0.2, 0.2, 0.8)
 

@@ -1,11 +1,9 @@
 <template>
   <div class="surface-ground">
+    <GradientBlur />
     <div class="h-screen t-max-h-screen">
       <div class="text-color py-3 absolute right-0 left-0" />
       <LandingHeader class="fixed left-0 right-0 top-0 t-z-50" />
-      <GradientBlur>
-        a
-      </GradientBlur>
       <div class="2xl:!t-px-64 2xl:t-mx-20 t-px-3 max-w-full h-full surface-ground">
         <div class="h-full">
           <div class="flex h-full align-items-center">
