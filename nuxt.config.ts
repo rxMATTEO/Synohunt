@@ -1,12 +1,37 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
 import { NuxtConfig } from '@nuxt/types';
 import ViteMinifyPlugin from 'vite-plugin-minify';
-import { createHtmlPlugin } from 'vite-plugin-html';
 
 const baseUrl = '/';
 const nuxtConfig: NuxtConfig = {
   devtools: { enabled: true, enableTimeline: true },
   buildModules: ['@nuxt/typescript-build'],
+  pwa: {
+    registerType: 'autoUpdate',
+    manifest: {
+      name: 'Synohunt',
+      short_name: 'Synohunt',
+      theme_color: '#9800D7FF',
+      description: 'Synohunt is ultimate word challenge that will test your knowledge of the language',
+      icons: [
+        {
+          src: 'img/biglogo.png',
+          sizes: '192x192',
+          type: 'image/png'
+        },
+        {
+          src: 'img/biglogo.png',
+          sizes: '512x512',
+          type: 'image/png'
+        },
+        {
+          src: 'img/biglogo.png',
+          sizes: '512x512',
+          type: 'image/png',
+          purpose: 'any maskable'
+        }
+      ]
+    }
+  },
   css: [
     'primeflex/primeflex.min.css',
     'primeicons/primeicons.css'
@@ -26,7 +51,8 @@ const nuxtConfig: NuxtConfig = {
     '@nuxtjs/tailwindcss',
     '@pinia/nuxt',
     '@sidebase/nuxt-auth',
-    '@nuxt/image'
+    '@nuxt/image',
+    '@vite-pwa/nuxt'
   ],
   auth: {
     isEnabled: true,

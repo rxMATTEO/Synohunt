@@ -1,8 +1,8 @@
 {
-  "name": "nuxt-app",
+  "name": "synohunt",
   "private": true,
   "scripts": {
-    "build": "nuxi build --dotenv .env.production",
+    "build": "rd /s /q .output && nuxi build --dotenv .env.production",
     "dev": "nuxi dev --dotenv .env.development",
     "generate": "nuxt generate",
     "preview": "nuxi preview --dotenv .env.production",
@@ -25,6 +25,7 @@
     "@types/node": "^18.17.4",
     "@typescript-eslint/eslint-plugin": "^6.1.0",
     "@typescript-eslint/parser": "^6.1.0",
+    "@vite-pwa/nuxt": "^0.1.0",
     "@vitejs/plugin-vue": "^4.2.3",
     "babel-plugin-jsx-v-model": "^2.0.3",
     "eslint": "^8.46.0",

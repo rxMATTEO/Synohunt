@@ -25,3 +25,6 @@ logs
 #prisma
 src/server/prisma/migrations
 src/server/prisma/dev.db
+
+#nuxtpwa
+sw.*
