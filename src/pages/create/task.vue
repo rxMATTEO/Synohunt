@@ -78,6 +78,11 @@ const createTask = handleSubmit(async () => {
       return syno;
     });
   }
+  taskFetched.value.synos.push(...synonyms.value[1].map((syno) => {
+    syno.wordId = taskFetched.value.word.id;
+    return syno;
+  }));
+  console.log(taskFetched.value.synos);
   taskFetched.value.task.description = context;
   taskFetched.value.word.word = word;
   taskFetched.value.task.isVisible = true;
@@ -105,7 +110,9 @@ function addSynonym () {
     synos: ''
   });
   synonyms.value[1].push({
+    id: synonyms.value[1].length,
     value: addingSynonym.value,
+    synonym: addingSynonym.value,
     moneyForGuess: 10,
     pointsForGuess: 10
   });
