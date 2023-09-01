@@ -65,7 +65,7 @@ const isOpened = ref(false);
           box-shadow: inset 0px 0px 10px rgba(0,0,0,0.5)
     &.face1
       position: relative
-      background: #333
+      background: var(--gray-800)
       display: flex
       justify-content: center
       align-content: center
