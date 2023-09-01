@@ -11,6 +11,8 @@
 </template>
 
 <style scoped lang="sass">
+@use '../assets/main' as main
+
 @keyframes rotate
   0%
     transform: rotate(0deg)

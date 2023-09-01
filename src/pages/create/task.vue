@@ -310,7 +310,9 @@ const isAddSynoShake = ref(false);
 </template>
 
 <style lang="sass">
+@use '../../assets/main' as main
+
 .pick-list
-  @include apply-default-button
+  //@include main.apply-default-button()
 
 </style>

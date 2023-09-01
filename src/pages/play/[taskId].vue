@@ -338,6 +338,8 @@ const isDialogVisible = ref(false);
 </template>
 
 <style lang="sass">
+@use '../../assets/main' as main
+
 .confirm-purchase
-  @include apply-default-button()
+  @include main.apply-default-button()
 </style>

@@ -300,6 +300,8 @@ const beautyLinks = ref<BeatyLink[]>([
 </script>
 
 <style scoped lang="sass">
+@use '../assets/main' as main
+
 .beauty-link, .beauty-icon
   transition: all ease-in-out .3s
 .beauty-link:hover::before

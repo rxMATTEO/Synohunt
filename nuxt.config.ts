@@ -14,7 +14,7 @@ const nuxtConfig: NuxtConfig = {
     postcss: {
       postcssOptions: {
         plugins: {
-          tailwindcss: {},
+          // tailwindcss: {}, double imports? why though?
           autoprefixer: {}
         }
       }
@@ -37,13 +37,7 @@ const nuxtConfig: NuxtConfig = {
     ]
   },
   vite: {
-    css: {
-      preprocessorOptions: {
-        sass: {
-          additionalData: '@use "./src/assets/_main.sass" as *\n'
-        }
-      }
-    }
+
   },
   runtimeConfig: {
     public: {
