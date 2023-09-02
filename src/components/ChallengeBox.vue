@@ -100,6 +100,7 @@ const loading = computed(() => diffsPending.value || langsPending.value);
                 option-label="name"
                 placeholder="Select difficulty"
                 class="w-full"
+                aria-label="Select difficulty"
                 @change="() => onChangeTaskOption()"
               >
                 <template #value="slotProps">
@@ -116,7 +117,7 @@ const loading = computed(() => diffsPending.value || langsPending.value);
                   </div>
                 </template>
               </Dropdown>
-              <label for="dd-diff" class="">Select difficulty</label>
+              <label for="dd-diff" class="" aria-label="Select difficulty">Select difficulty</label>
             </div>
             <div class="p-float-label mt-5">
               <Dropdown
@@ -126,6 +127,7 @@ const loading = computed(() => diffsPending.value || langsPending.value);
                 option-label="name"
                 placeholder="Select language"
                 class="w-full"
+                aria-label="Select language"
                 @change="() => onChangeTaskOption()"
               >
                 <template #value="slotProps">
@@ -142,7 +144,7 @@ const loading = computed(() => diffsPending.value || langsPending.value);
                   </div>
                 </template>
               </Dropdown>
-              <label for="dd-lang" class="">Select Language</label>
+              <label for="dd-lang" class="" aria-label="Select language">Select Language</label>
             </div>
           </div>
           <div class="mt-5 flex">

@@ -80,7 +80,7 @@ const forceStuck = computed(() => {
     <div :class="{'!t-left-56': isExpanded, 'left-0': !isExpanded}" class=" t-z-10 px-2 max-md:!t-left-0 t-transition-all t-ease-in-out t-duration-200 fixed surface-card shadow-8 right-0 header">
       <div class="flex align-items-center justify-content-between w-full t-py-[.7rem]">
         <div>
-          <Button unstyled @click="expanded">
+          <Button unstyled aria-label="Hide sidebar" @click="expanded">
             <i class="pi pi-align-justify text-2xl vertical-align-middle" />
           </Button>
         </div>
@@ -96,16 +96,11 @@ const forceStuck = computed(() => {
             <Avatar
               v-badge.warning="currentMoney"
               shape="circle"
-              :image="account.image"
-              class="mr-3 "
-              size="normal"
-              :pt="{
-                image: {
-                  class: 't-w-[10px] t-h-[10px]'
-                }
-              }"
+              class="mr-3"
               @mouseover="(e) => onMouseOver(e, 'profileOp')"
-            />
+            >
+              <NuxtImg alt="User avatar" :src="account.image" width="32" height="32" class="block t-w-[10px] t-h-[10px]" />
+            </Avatar>
             <OverlayPanel :ref="overlays.profileOp" dismissable class="!t-p-0" @mouseleave="() => onMouseLeave('profileOp')">
               <div>
                 <div class="link flex t-items-center">

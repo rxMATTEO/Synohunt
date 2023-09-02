@@ -100,7 +100,14 @@ function onLinkClick () {
       <div class="logo">
         <!--         todo center this shit */-->
         <NuxtLink to="/dashboard" class="w-6 mx-auto block" @click="onLinkClick">
-          <img src="/img/download.webp" class="block mx-auto w-full" alt="logo" draggable="false">
+          <NuxtImg
+            src="/img/download.webp"
+            class="block mx-auto w-full"
+            alt="logo"
+            draggable="false"
+            width="500"
+            height="300"
+          />
         </NuxtLink>
       </div>
       <div v-if="isExpanded" class="mt-5 text-secondary t-text-sm t-w-1/">

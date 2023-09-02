@@ -20,7 +20,7 @@ useHead({
             <div class="w-full md:t-w-3/4">
               <div class="p-3 surface-ground t-rounded-md h-full flex">
                 <div class="t-w-1/3 md:t-w-1/5">
-                  <img src="/img/placeholder.png" class="block h-full" alt="todo">
+                  <NuxtImg src="/img/placeholder.png" class="block h-full" alt="synohunt" height="139" width="122" />
                 </div>
                 <div class="t-w-2/3 md:t-w-4/5 t-pl-2">
                   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium animi atque autem cum eos est eum exercitationem expedita explicabo labore maxime, nobis quasi sit suscipit ut. Accusamus culpa perspiciatis quisquam.</p>
