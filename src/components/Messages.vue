@@ -98,7 +98,7 @@ function update () {
       <div class="t-min-w-full md:t-mix-w-[80%] mt-3">
         <div v-if="messages.value.length === 0">
           <p class="text-xl text-center mt-3">
-            У вас нет сообщений!
+            You've got no messages yet!
           </p>
         </div>
         <DataView v-else :value="messages.value" class="t-max-w-full">

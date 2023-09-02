@@ -30,9 +30,9 @@ const { level } = storeToRefs(levelStore);
     <OverlayPanel v-if="!onlyBadge" :ref="overlays.levelOp" dismissable class="t-w-[300px]" @mouseleave="() => onMouseLeave('levelOp')">
       <div class="flex t-flex-col w-full">
         <div>
-          <p>У вас <span class="text-primary">{{ currentPoints }}</span> очков</p>
+          <p>You've got <span class="text-primary">{{ currentPoints }}</span> points</p>
           <p class="mt-3">
-            Для следующего уровня нужно: {{ pointsToNextLvl.need }} очков
+            You need: {{ pointsToNextLvl.need }} points for next level
           </p>
         </div>
         <div class="flex flex-row mt-1">

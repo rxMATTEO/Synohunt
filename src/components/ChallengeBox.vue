@@ -71,7 +71,7 @@ function onChangeTaskOption (id = -1) {
         Object.keys(tasksFetched.value).length > 0
           ? tasksFetched.value
           : {
-            description: 'По данным фильтрам не найдены испытания!'
+            description: 'No challenges found for these filters'
           };
     }
   });
