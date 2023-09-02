@@ -69,30 +69,30 @@
               class="shadow-6 w-full surface-card px-5 py-3 t-rounded-lg relative up-hover"
             >
               <p class="text-center vertical-align-top text-3xl font-bold">
-                100
+                2
               </p>
               <p class="text-center uppercase text-color-secondary">
-                Challenges
+                Languages
               </p>
             </div>
             <div
               class="shadow-6 w-full surface-card px-5 py-3 t-rounded-lg relative up-hover"
             >
               <p class="text-center vertical-align-top text-3xl font-bold">
-                100
+                ~200
               </p>
               <p class="text-center uppercase text-color-secondary">
-                Challenges
+                Players
               </p>
             </div>
             <div
               class="shadow-6 w-full surface-card px-5 py-3 t-rounded-lg relative up-hover"
             >
               <p class="text-center vertical-align-top text-3xl font-bold">
-                100
+                100%
               </p>
               <p class="text-center uppercase text-color-secondary">
-                Challenges
+                Fun
               </p>
             </div>
           </div>
@@ -139,8 +139,8 @@
           </div>
 
           <div class="flex gap-5 relative justify-content-between md:flex-row flex-column align-items-center">
-            <CardExpandingGlow class="flex-1" header="Multilingual" main-text="Allow users to choose from a wide range of languages to play in, enhancing their language skills while enjoying the game." button-text="About us" button-href="/about" />
-            <CardExpandingGlow class="flex-1" header="Points and Coins" main-text="Implement a rewarding system where players earn points and coins for each correctly guessed synonym. These can be used to unlock new features or purchase in-game items." button-text="About us" button-href="/about" />
+            <CardExpandingGlow class="flex-1" header="Multilingual" main-text="We are allow users to choose from a wide range of languages to play in, enhancing their language skills while enjoying the game." button-text="About us" button-href="/about" />
+            <CardExpandingGlow class="flex-1" header="Points and Coins" main-text="We got a rewarding system where players earn points and coins for each correctly guessed synonym. These can be used to unlock new features or purchase in-game items." button-text="About us" button-href="/about" />
             <CardExpandingGlow class="flex-1" header="Challenge Creation" main-text="Enable users to create their own synonym challenges by inputting a word and selecting synonyms from the database. They can then share these challenges with friends or the gaming community." button-text="About us" button-href="/about" />
           </div>
 

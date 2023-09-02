@@ -20,7 +20,9 @@ const isOpened = ref(false);
       </div>
       <div class="face face2">
         <div class="content">
-          <p>{{ mainText }}</p>
+          <p>
+            {{ mainText }}
+          </p>
           <NuxtLink target="_blank" :href="buttonHref" type="button">
             {{ buttonText }}
           </NuxtLink>
@@ -49,7 +51,7 @@ const isOpened = ref(false);
       box-shadow: 0 20px 50px rgba(0,0,0,.8)
       transform: translateY(-100px)
       .content p, a
-        font-size: 10pt
+        font-size: 12pt
         margin: 0
         padding: 0
         color: #333
