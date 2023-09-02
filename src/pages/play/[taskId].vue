@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue';
-import { Ref } from 'vue/dist/vue';
 import { usePointsStore } from '../../stores/pointsStore';
 import { useMoneyStore } from '@/stores/moneyStore';
 import Hints from '@/components/Hints.vue';

@@ -152,7 +152,7 @@ const loading = computed(() => diffsPending.value || langsPending.value);
               <NuxtLink v-if="task.value.id" :to="`/play/${task.value.id}`">
                 <Button
                   type="null"
-                  label="TRAIN"
+                  label="PLAY"
                   class="text-sm p-2 mr-2 bg-blue-300 border-1 border-white hover:bg-blue-800 text-white"
                 />
               </NuxtLink>
