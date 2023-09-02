@@ -119,52 +119,31 @@ function changeTab () {
         </div>
       </div>
 
-      <div class="flex gap-5 mt-5 t-max-h-full block max-md:t-flex-wrap overflow-hidden">
+      <div v-if="!foreign" class="flex gap-5 mt-5 t-max-h-full block max-md:t-flex-wrap overflow-hidden">
         <div class="t-w-full md:t-w-2/3">
-          <div class="p-3 t-min-h-full gradient-black-white t-rounded-md flex">
-            <div class="t-w-1/3 md:t-w-1/5">
-              <img src="/img/placeholder.png" class="block h-full" alt="todo">
-            </div>
-            <div class="t-w-2/3 md:t-w-4/5 t-pl-2">
+          <div class="p-3 t-min-h-full gradient-black-white t-rounded-md flex flex-column">
+            <h1 class="font-bold text-xl mb-3">
+              Welcome to your word playground!
+            </h1>
+            <div class="">
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Accusantium animi atque autem cum eos est eum exercitationem
-                expedita explicabo labore maxime, nobis quasi sit suscipit ut.
-                Accusamus culpa perspiciatis quisquam.
+                We are providing detailed statistics about the player's performance in the game, such as the number of games played, synonyms guessed correctly, and their success rate.
               </p>
-              <div>
-                <Button
-                  label="LEARN MORE"
-                  severity="secondary"
-                  type="null"
-                  class="p-1 text-sm t-mt-3"
-                />
-              </div>
+              <div />
             </div>
           </div>
         </div>
 
         <div
-          class="t-w-full md:t-w-1/3 p-3 surface-ground t-rounded-md h-full flex"
+          class="t-w-full md:t-w-1/3 p-3 surface-ground t-rounded-md h-full flex flex-column"
         >
-          <div class="t-w-1/3 md:t-w-1/5">
-            <img src="/img/placeholder.png" class="block h-full" alt="todo">
-          </div>
-          <div class="t-w-2/3 md:t-w-4/5 t-pl-2">
+          <h1 class="font-bold text-xl mb-3">
+            Apperence
+          </h1>
+          <div class="">
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Accusantium animi atque autem cum eos est eum exercitationem
-              expedita explicabo labore maxime, nobis quasi sit suscipit ut.
-              Accusamus culpa perspiciatis quisquam.
+              You can change couple themes by your choise on <span class="gradient-easy text-white">Settings</span> tab
             </p>
-            <div>
-              <Button
-                label="LEARN MORE"
-                severity="secondary"
-                type="null"
-                class="p-1 text-sm t-mt-3"
-              />
-            </div>
           </div>
         </div>
       </div>
