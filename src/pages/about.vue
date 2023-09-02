@@ -19,48 +19,78 @@ definePageMeta({
   <!--  <NuxtLayout name="header-n-sidebar">-->
   <div>
     <LandingHeader />
-    <div class="xl:!t-px-64 xl:t-mx-20 t-px-3">
+    <div class="2xl:!t-px-64 2xl:t-mx-20 t-px-3 max-w-full h-full">
       <div class="mt-5">
-        <h1 class="text-4xl font-bold text-center">
-          About us
+        <h1 class="text-6xl font-bold text-center">
+          About Synohunt
         </h1>
-        <div>
-          <div>
-            <div class="flex mt-5 gap-3">
-              <div class="t-w-3/4 bg-yellow-500 p-3">
-                <h1 class="text-2xl font-bold">
-                  Mission statement
-                </h1>
-                <div class="mt-5">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab autem commodi consectetur debitis dignissimos doloremque earum iste libero nam pariatur, porro rem, reprehenderit totam. Accusantium enim eos iusto vel voluptatem.</p>
-                </div>
+        <div class="surface-section px-4 py-8 md:px-6 lg:px-8 text-center">
+          <div class="mb-3 font-bold text-2xl">
+            <span class="text-900">One Game, </span>
+            <span class="text-indigo-600">Many Advantages</span>
+          </div>
+          <div class="text-700 text-sm mb-6">
+            This engaging and educational game offers an immersive experience where players can explore the richness of language, enhance their word knowledge, and compete with friends and players from around the world
+          </div>
+          <div class="grid">
+            <div class="col-12 md:col-4 mb-4 px-5">
+              <span class="p-3 shadow-2 mb-3 inline-block surface-card" style="border-radius: 10px">
+                <i class="pi pi-user text-4xl text-indigo-500" />
+              </span>
+              <div class="text-900 mb-3 font-medium">
+                Built for People
               </div>
-              <div class="t-w-1/4 bg-green-400 p-3">
-                <h1 class="text-2xl font-bold">
-                  Vision statement
-                </h1>
-                <div class="mt-5">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                </div>
+              <span class="text-700 text-sm line-height-3">Explore a library of user-generated challenges, where players can post their own creations for others to enjoy. Challenge your friends or take on the best challenges from the SynoHunt community.</span>
+            </div>
+            <div class="col-12 md:col-4 mb-4 px-5">
+              <span class="p-3 shadow-2 mb-3 inline-block surface-card" style="border-radius: 10px">
+                <i class="pi pi-lock text-4xl text-indigo-500" />
+              </span>
+              <div class="text-900 mb-3 font-medium">
+                End-to-End Encryption
               </div>
+              <span class="text-700 text-sm line-height-3">We are providing strong server encryption for your data, so yo can feel save about your data</span>
+            </div>
+            <div class="col-12 md:col-4 mb-4 px-5">
+              <span class="p-3 shadow-2 mb-3 inline-block surface-card" style="border-radius: 10px">
+                <i class="pi pi-check-circle text-4xl text-indigo-500" />
+              </span>
+              <div class="text-900 mb-3 font-medium">
+                Easy to Use
+              </div>
+              <span class="text-700 text-sm line-height-3">With a user-friendly interface and a vast database of words and synonyms, our online browser game offers endless hours of fun and learning. Join a vibrant community of language enthusiasts, compete for the top spot on the leaderboard, and discover just how expansive your vocabulary can be.</span>
+            </div>
+            <div class="col-12 md:col-4 mb-4 px-5">
+              <span class="p-3 shadow-2 mb-3 inline-block surface-card" style="border-radius: 10px">
+                <i class="pi pi-globe text-4xl text-indigo-500" />
+              </span>
+              <div class="text-900 mb-3 font-medium">
+                Fast & Global Support
+              </div>
+              <span class="text-700 text-sm line-height-3">Synohunt supports 2 languages, and we are goin up for more</span>
+            </div>
+            <div class="col-12 md:col-4 mb-4 px-5">
+              <span class="p-3 shadow-2 mb-3 inline-block surface-card" style="border-radius: 10px">
+                <i class="pi pi-github text-4xl text-indigo-500" />
+              </span>
+              <div class="text-900 mb-3 font-medium">
+                Open Source
+              </div>
+              <span class="text-700 text-sm line-height-3">We are opened to your contributions. Feel free to open issues and pull requests via Github</span>
+            </div>
+            <div class="col-12 md:col-4 md:mb-4 mb-0 px-3">
+              <span class="p-3 shadow-2 mb-3 inline-block surface-card" style="border-radius: 10px">
+                <i class="pi pi-book text-4xl text-indigo-500" />
+              </span>
+              <div class="text-900 mb-3 font-medium">
+                Educational gaming
+              </div>
+              <span class="text-700 text-sm line-height-3">In this immersive online gaming experience, you'll have the opportunity to not only enhance your language skills but also showcase your creativity. Create custom challenges with words of your choice and post them for other users to solve. </span>
             </div>
           </div>
-          <div class="flex gap-3 mt-5">
-            <div class="t-w-2/5 bg-blue-100 p-3">
-              a
-            </div>
-            <div class="t-w-3/5">
-              <div class="surface-ground p-3">
-                b
-              </div>
-              <div class="bg-red-400 mt-3 p-3">
-                c
-              </div>
-            </div>
-          </div>
+          <Footer />
         </div>
       </div>
-      <Footer />
     </div>
   </div>
 </template>
