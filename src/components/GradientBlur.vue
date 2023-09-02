@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <div class="pointer-events-none absolute z-2 t-right-[0] left-0 overflow-hidden top-0 bottom-0" style="float: right">
+  <div class="pointer-events-none absolute right-0 left-0 overflow-hidden h-full bottom-0" style="float: right">
     <div class="gradient">
       <slot />
     </div>
@@ -32,6 +32,4 @@
   animation: rotate var(--speed) var(--easing) alternate infinite
   border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%
   transition: all 0.1s ease-out
-
-/* This is just to transition when you change the viewport size. */
 </style>

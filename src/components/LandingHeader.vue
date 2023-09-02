@@ -20,6 +20,7 @@ onMounted(() => {
       :class="{
         't-bg-black t-bg-opacity-10 t-backdrop-blur-3xl': top > 0
       }"
+      class="md:py-1"
     >
       <div class="2xl:!t-px-64 2xl:t-mx-20 t-px-3">
         <div class="flex t-place-content-between align-items-stretch t-items-center gap-1 h-full">
@@ -86,9 +87,9 @@ onMounted(() => {
                 </NuxtLink>
               </div>
               <div v-else class="flex align-items-center max-md:t-flex-col">
-                <NuxtLink to="/dashboard" class="block">
+                <NuxtLink to="/dashboard" class="block max-md:t-w-full">
                   <Button
-                    class="text-white max-md:t-mt-2 t-border-0 bg-indigo-500 "
+                    class="text-white t-border-0 bg-indigo-500 w-full"
                     label="Play"
                     :type="null"
                   />

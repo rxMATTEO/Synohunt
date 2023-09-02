@@ -1,6 +1,6 @@
 <template>
   <div class="surface-ground">
-    <GradientBlur />
+    <GradientBlur class="md:!t-hidden" />
     <div class="h-screen t-max-h-screen">
       <div class="text-color py-3 absolute right-0 left-0" />
       <LandingHeader class="fixed left-0 right-0 top-0 t-z-50" />
@@ -47,7 +47,7 @@
             <div
               class="logo-holder absolute inline-block z-1 max-w-full overflow-hidden right-0"
             >
-              <LazyModelLoader3D v-if="!isMobile" class="t-z-[20] relative right-0 top-20" />
+              <LazyModelLoader3D v-if="!isMobile" class="max-md:!t-hidden t-z-[20] relative right-0 top-20" />
             </div>
           </div>
         </div>
@@ -140,8 +140,8 @@
 
           <div class="flex gap-5 relative justify-content-between md:flex-row flex-column align-items-center">
             <CardExpandingGlow class="flex-1" header="Multilingual" main-text="Allow users to choose from a wide range of languages to play in, enhancing their language skills while enjoying the game." button-text="About us" button-href="/about" />
-            <CardExpandingGlow class="flex-1" header="Points and Coins" main-text="Implement a rewarding system where players earn points and coins for each correctly guessed synonym. These can be used to unlock new features or purchase in-game items." button-text="Click" button-href="/about" />
-            <CardExpandingGlow class="flex-1" header="Challenge Creation" main-text="Enable users to create their own synonym challenges by inputting a word and selecting synonyms from the database. They can then share these challenges with friends or the gaming community." button-text="Click" button-href="/about" />
+            <CardExpandingGlow class="flex-1" header="Points and Coins" main-text="Implement a rewarding system where players earn points and coins for each correctly guessed synonym. These can be used to unlock new features or purchase in-game items." button-text="About us" button-href="/about" />
+            <CardExpandingGlow class="flex-1" header="Challenge Creation" main-text="Enable users to create their own synonym challenges by inputting a word and selecting synonyms from the database. They can then share these challenges with friends or the gaming community." button-text="About us" button-href="/about" />
           </div>
 
           <div
@@ -235,7 +235,7 @@
             <div class="flex justify-content-between flex-column sm:flex-row gap-3">
               <div class="sm:pr-5 border-round-3xl flex-1 surface-overlay p-3">
                 <h1 class="text-900 text-4xl font-bold">
-                  How do i start playing Synohunt?
+                  How do I start playing Synohunt?
                 </h1>
                 <Divider />
                 <p class="mt-3">
