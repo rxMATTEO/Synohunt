@@ -14,7 +14,16 @@ useHead({
   ]
 });
 
-const { signIn, status, data } = useAuth();
+useSeoMeta({
+  title: 'Synohunt login',
+  ogTitle: 'Synohunt login',
+  description: 'Login your account on Synohunt',
+  ogDescription: 'Login your account on Synohunt',
+  ogImage: 'https://www.synohunt.ru/img/biglogo.png',
+  ogUrl: `${import.meta.env.VITE_AUTH_ORIGIN}login`
+});
+
+const { signIn } = useAuth();
 
 definePageMeta({
   auth: {
@@ -25,7 +34,7 @@ definePageMeta({
 
 const isRememberingMe = ref(false);
 
-const { setErrors, handleSubmit, resetForm } = useForm();
+const { setErrors, handleSubmit } = useForm();
 const { value: email, errorMessage: errorMailMessage } = useField(
   'email1',
   value => validateWeakness(value, 'Email')

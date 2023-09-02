@@ -12,7 +12,7 @@
                 class="main z-1 flex flex-column align-items-start justify-content-center"
               >
                 <p class="t-uppercase t-tracking-wider text-indigo-300">
-                  somelabel!
+                  Online browser game
                 </p>
                 <p
                   class="welcome-text text-2xl md:text-6xl text-left font-bold capitalize mt-3"
@@ -33,12 +33,14 @@
                     class="mr-3 gradient-indigo t-border-transparent text-white"
                     @click="() => navigateTo('/dashboard')"
                   />
-                  <Button
-                    label="Learn More"
-                    class="t-border-0"
-                    :type="null"
-                    outlined
-                  />
+                  <NuxtLink to="/about" target="_blank">
+                    <Button
+                      label="Learn More"
+                      class="t-border-0"
+                      :type="null"
+                      outlined
+                    />
+                  </NuxtLink>
                 </div>
               </div>
             </div>
@@ -110,41 +112,36 @@
             </div>
             <div class="md:t-w-1/2 max-md:t-text-center">
               <p class="uppercase text-primary font-bold">
-                Explore latest vision!
+                Explore your word creativity!
               </p>
               <p class="capitalize text-5xl mt-3 font-bold">
-                <span class="gradient-primary text">Launch your</span> brand to
-                new heights.
+                <span class="gradient-primary text">Welcome to</span> the ultimate online browser game for word enthusiasts!
               </p>
               <div class="mt-5 text-left">
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Aspernatur autem consectetur harum incidunt libero quis
-                  voluptates voluptatibus? Alias, aperiam blanditiis deserunt
-                  dolores, ducimus eum natus, optio rem repellat vel voluptatem.
+                  Dive into the world of words and synonyms as you challenge your vocabulary skills in our exciting and engaging game. In this captivating online experience, users can choose from a variety of languages, earn points and coins, and compete on the leaderboard while sharpening their synonym-finding abilities.
                 </p>
                 <br>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Aspernatur autem consectetur harum incidunt libero quis
-                  voluptates voluptatibus? Alias, aperiam blanditiis deserunt
-                  dolores, ducimus eum natus, optio rem repellat vel voluptatem.
+                  Our game is designed to keep you engaged, entertained, and continuously learning as you guess synonyms for words. With a wide range of languages to choose from, you can put your linguistic prowess to the test and earn points and coins to climb to the top of the global leaderboard.
                 </p>
                 <div class="mt-5">
-                  <Button
-                    label="Upcoming sales"
-                    class="animated-gradient-rainbow t-border-0 text-white"
-                    :type="null"
-                  />
+                  <NuxtLink to="/register">
+                    <Button
+                      label="Start playing"
+                      class="animated-gradient-rainbow t-border-0 text-white"
+                      :type="null"
+                    />
+                  </NuxtLink>
                 </div>
               </div>
             </div>
           </div>
 
           <div class="flex gap-5 relative justify-content-between md:flex-row flex-column align-items-center">
-            <CardExpandingGlow header="Advantages" main-text="loremlorasddddd dddddddddddddddd demloremloreml oremloremloloremlo remloremremlorem" button-text="Click" button-href="/" />
-            <CardExpandingGlow header="Advantages" main-text="loremlorasddddd dddddddddddddddd demloremloreml oremloremloloremlo remloremremlorem" button-text="Click" button-href="/" />
-            <CardExpandingGlow header="Advantages" main-text="loremlorasddddd dddddddddddddddd demloremloreml oremloremloloremlo remloremremlorem" button-text="Click" button-href="/" />
+            <CardExpandingGlow class="flex-1" header="Multilingual" main-text="Allow users to choose from a wide range of languages to play in, enhancing their language skills while enjoying the game." button-text="About us" button-href="/about" />
+            <CardExpandingGlow class="flex-1" header="Points and Coins" main-text="Implement a rewarding system where players earn points and coins for each correctly guessed synonym. These can be used to unlock new features or purchase in-game items." button-text="Click" button-href="/about" />
+            <CardExpandingGlow class="flex-1" header="Challenge Creation" main-text="Enable users to create their own synonym challenges by inputting a word and selecting synonyms from the database. They can then share these challenges with friends or the gaming community." button-text="Click" button-href="/about" />
           </div>
 
           <div
@@ -152,7 +149,7 @@
           >
             <span
               class="block sm:w-5 font-bold text-center uppercase text-primary"
-            >Our challenge!</span>
+            >Your ultimate challenge!</span>
             <span class="block sm:w-5 sm:text-6xl text-4xl font-bold text-center">SynoHunt: The <span class="gradient-primary">Ultimate</span> Word
               Challenge!</span>
             <span class="block sm:w-5 text-lg mt-5 md:text-center">Get ready to embark on a thrilling journey through the world of
@@ -160,7 +157,7 @@
               words and wonders with SynoHunt.</span>
           </div>
 
-          <div v-for="(link) in beautyLinks">
+          <div v-for="(link) in beautyLinks" :key="link.mainText">
             <div
               class="col-12 md:col-12 lg:col-12 p-0 lg:pr-5 lg:pb-5 mt-2 lg:mt-0"
             >
@@ -170,7 +167,7 @@
                   style="border-radius: 8px"
                 >
                   <div
-                    class="flex align-items-center justify-content-center bg-indigo-200 beauty-icon"
+                    class="flex align-items-center justify-content-center bg-indigo-200 beauty-icon max-md:t-p-3"
                     style="width: 3.5rem; height: 3.5rem; border-radius: 10px"
                   >
                     <i :class="`pi pi-fw pi-${link.picon} text-2xl`" />
@@ -184,44 +181,48 @@
             </div>
           </div>
 
-          <div class="mt-5">
-            <div class="inline-block sm:w-6 sm:pr-1">
-              <div class="w-full surface-card border-round-3xl pb-1">
-                <div class="img overflow-hidden h-16rem relative">
+          <div class="mt-5 flex md:flex-row flex-column">
+            <div class="sm:w-full sm:pr-1">
+              <div class="w-full surface-card border-round-3xl pb-1 h-full">
+                <div class="img overflow-hidden h-16rem relative border-round-top-3xl">
                   <NuxtImg
                     format="webp"
-                    class="aspect-1/1 block w-full border-round-3xl absolute"
-                    src="/img/words.png"
+                    src="/img/guessword.png"
+                    class="block w-full t-top-[-40px] absolute"
                     alt="words"
-                    width="200"
-                    height="200"
+                    width="512"
+                    height="512"
                   />
                 </div>
                 <div class="desc px-3">
                   <h1 class="text-900 text-4xl font-bold">
-                    Master synonyms
+                    Create your word challenges
                   </h1>
-                  <p>Expand your vocabulary and dominate the leaderboard</p>
+                  <p class="mt-3">
+                    Create custom challenges with words of your choice and post them for other users to solve. Challenge your friends, family, and fellow word enthusiasts to see who can guess the most synonyms correctly and earn bragging rights as the ultimate wordsmith.
+                  </p>
                 </div>
               </div>
             </div>
-            <div class="inline-block sm:w-6 sm:pl-1 mt-3 sm:mt-0">
-              <div class="w-full surface-card border-round-3xl pb-1">
-                <div class="img overflow-hidden h-16rem relative">
+            <div class="sm:w-full sm:pl-1 md:t-mt-0 t-mt-3">
+              <div class="w-full surface-card border-round-3xl pb-1 h-full">
+                <div class="img overflow-hidden h-16rem relative border-round-top-3xl">
                   <NuxtImg
                     format="webp"
-                    class="aspect-1/1 block w-full border-round-3xl absolute"
-                    src="/img/words.png"
+                    class="aspect-1/1 block w-full absolute"
+                    src="/img/coins.png"
                     alt="words"
-                    width="200"
-                    height="200"
+                    width="626"
+                    height="300"
                   />
                 </div>
                 <div class="desc px-3">
                   <h1 class="text-900 text-4xl font-bold">
-                    Master synonyms
+                    Points and Coins
                   </h1>
-                  <p>Expand your vocabulary and dominate the leaderboard</p>
+                  <p class="mt-3">
+                    Solve challenges, get points and coins for correctly guessing synonyms. Points can be used for leveling up, and coins can be spent on in-game items or power-ups.
+                  </p>
                 </div>
               </div>
             </div>
@@ -229,34 +230,38 @@
 
           <div class="mt-5">
             <h1 class="text-900 text-6xl sm:text-7xl font-bold mb-5">
-              Have qustions?
+              Have <span class="gradient-hard text-white">questions?</span>
             </h1>
-            <div class="flex justify-content-between flex-column sm:flex-row">
-              <div class="sm:pr-5 border-round-3xl">
+            <div class="flex justify-content-between flex-column sm:flex-row gap-3">
+              <div class="sm:pr-5 border-round-3xl flex-1 surface-overlay p-3">
                 <h1 class="text-900 text-4xl font-bold">
-                  How do i start playing?
+                  How do i start playing Synohunt?
                 </h1>
-                <p>
-                  Get started by clicking the “Play” button, choose your
-                  difficulty level, and you’re ready to take on SynoHunt.
+                <Divider />
+                <p class="mt-3">
+                  To <span class="gradient-medium text-white">play the game</span>, simply <NuxtLink class="text-primary" to="/register">
+                    register new account
+                  </NuxtLink>, choose a language, and you'll be presented with a word for which you need to guess synonyms. Type in your answers, and if correct, you'll earn points and coins.
                 </p>
               </div>
-              <div class="sm:px-5 border-round-3xl mt-2 sm:mt-0">
+              <div class="sm:px-5 border-round-3xl flex-1 surface-overlay p-3">
                 <h1 class="text-900 text-4xl font-bold">
-                  How do i start playing?
+                  How can I create my own synonym challenge?
                 </h1>
-                <p>
-                  Get started by clicking the “Play” button, choose your
-                  difficulty level, and you’re ready to take on SynoHunt.
+                <Divider />
+                <p class="mt-3">
+                  To <span class="gradient-easy text-white">create a challenge</span>, go to the <NuxtLink to="/create/task" class="text-primary">
+                    Create Challenge
+                  </NuxtLink> section in dashboard, input the word and its synonyms, set the difficulty level, and add any specific instructions. Once created, you can share it with friends or the community.
                 </p>
               </div>
-              <div class="sm:pl-5 border-round-3xl mt-2 sm:mt-0">
+              <div class="sm:pl-5 border-round-3xl flex-1 surface-overlay p-3">
                 <h1 class="text-900 text-4xl font-bold">
-                  How do i start playing?
+                  Can I compete with others in the game?
                 </h1>
-                <p>
-                  Get started by clicking the “Play” button, choose your
-                  difficulty level, and you’re ready to take on SynoHunt.
+                <Divider />
+                <p class="mt-3">
+                  Yes! We have a <span class="gradient-indigo text-white">real-time leaderboard</span> where you can compete with other players based on your total points. Rise through the ranks and earn recognition as one of the top players.
                 </p>
               </div>
             </div>
@@ -278,6 +283,15 @@ import LandingHeader from '@/components/LandingHeader.vue';
 
 definePageMeta({ auth: false });
 
+useSeoMeta({
+  title: 'Ultimate language challenge',
+  ogTitle: 'Synohunt',
+  description: 'Synohunt is ultimate word challenge that will train your knowledge of the languages. Solve challenges and get points',
+  ogDescription: 'Synohunt is ultimate word challenge that will train your knowledge of the languages. Solve challenges and get points',
+  ogImage: 'https://www.synohunt.ru/img/biglogo.png',
+  ogUrl: `${import.meta.env.VITE_AUTH_ORIGIN}`
+});
+
 const platformStore = usePlatformStore();
 const { platform } = storeToRefs(platformStore);
 const isMobile = computed(() => platform.value === 'mobile');
@@ -291,18 +305,18 @@ type BeatyLink = {
 }
 const beautyLinks = ref<BeatyLink[]>([
   {
-    header: 'Epic Synonyms',
-    mainText: 'Conquer word battles',
-    picon: 'amazon'
+    header: 'Include a hint system for players who may find certain challenges too difficult. ',
+    mainText: 'Hints and tips',
+    picon: 'ticket'
   },
   {
-    header: 'Epic Synonyms',
-    mainText: 'Conquer word battles',
+    header: 'Create a competitive element by displaying a leaderboard that ranks players based on their scores',
+    mainText: 'Leaderboard',
     picon: 'users'
   },
   {
-    header: 'Epic Synonyms',
-    mainText: 'Conquer word battles',
+    header: ' Provide players with detailed statistics on their gameplay, such as the number of synonyms guessed correctly, success rates, and progress over time.',
+    mainText: 'Word Statistics',
     picon: 'camera'
   }
 ]);

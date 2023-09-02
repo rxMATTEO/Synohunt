@@ -8,16 +8,19 @@ import type { JwkResponse } from '@/server/api/jwk.post';
 import validateWeakness, { emailRegex } from '@/composables/validator';
 
 useHead({
-  title: 'Registration'
+  title: 'Registration',
+  meta: [
+    { name: 'description', content: 'Register new account on Synohunt' }
+  ]
 });
 
 useSeoMeta({
-  title: 'Registration',
-  ogTitle: 'Registration',
+  title: 'Synohunt registration',
+  ogTitle: 'Synohunt registration',
   description: 'Register a new account on Synohunt',
   ogDescription: 'Register a new account on Synohunt',
-  ogImage: 'https://example.com/image.png',
-  twitterCard: 'summary_large_image'
+  ogImage: 'https://www.synohunt.ru/img/biglogo.png',
+  ogUrl: `${import.meta.env.VITE_AUTH_ORIGIN}register`
 });
 
 definePageMeta({

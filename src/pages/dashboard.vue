@@ -5,8 +5,17 @@ import ChallengeBox from '@/components/ChallengeBox.vue';
 useHead({
   title: 'Dashboard',
   meta: [
-    { name: 'description', content: 'It\'s dashboard ' }
+    { name: 'description', content: 'Synohunt dashboard. Solve synonyms, train your languages skills and get points!' }
   ]
+});
+
+useSeoMeta({
+  title: 'Synohunt',
+  ogTitle: 'Synohunt',
+  description: 'Synohunt dashboard. Solve synonyms, train your languages skills and get points!',
+  ogDescription: 'Synohunt dashboard. Solve synonyms, train your languages skills and get points!',
+  ogImage: 'https://www.synohunt.ru/img/biglogo.png',
+  ogUrl: `${import.meta.env.VITE_AUTH_ORIGIN}`
 });
 </script>
 

@@ -5,6 +5,15 @@ useHead({
     { name: 'description', content: 'Leaderboard of Synohunt player' }
   ]
 });
+
+useSeoMeta({
+  title: 'Synohunt leaderboard',
+  ogTitle: 'Synohunt leaderboard',
+  description: 'Point leaders of Synohunt',
+  ogDescription: 'Point leaders of Synohunt',
+  ogImage: 'https://www.synohunt.ru/img/biglogo.png',
+  ogUrl: `${import.meta.env.VITE_AUTH_ORIGIN}leaderboard`
+});
 // leaderbord 4 point creator most tasks, coins and shit
 </script>
 

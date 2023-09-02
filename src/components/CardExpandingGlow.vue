@@ -21,7 +21,9 @@ const isOpened = ref(false);
       <div class="face face2">
         <div class="content">
           <p>{{ mainText }}</p>
-          <a :href="buttonHref" type="button">{{ buttonText }}</a>
+          <NuxtLink target="_blank" :href="buttonHref" type="button">
+            {{ buttonText }}
+          </NuxtLink>
         </div>
       </div>
     </div>
@@ -31,7 +33,7 @@ const isOpened = ref(false);
 <style scoped lang="sass">
 .card
   position: relative
-  margin-bottom: -100px
+  margin-bottom: -130px
   .face
     width: 100%
     height: 200px
@@ -84,7 +86,7 @@ const isOpened = ref(false);
 
   .face.face1
     .content
-      opacity: .2
+      opacity: .6
       transition:  0.5s
       text-align: center
       i
