@@ -54,7 +54,7 @@ const coinSpin = ref();
 
 async function solveUserSyno (e?: KeyboardEvent) {
   if (!e || e.key === 'Enter') {
-    const foundSynoIndex = synonyms.value.findIndex(syno => syno.value === userSyno.value);
+    const foundSynoIndex = synonyms.value.findIndex(syno => syno.value.toLowerCase() === userSyno.value.toLowerCase());
     if (foundSynoIndex !== -1) {
       solvedSynonyms.value.push(synonyms.value[foundSynoIndex]);
       const { pointsForGuess, moneyForGuess } = synonyms.value[foundSynoIndex];
