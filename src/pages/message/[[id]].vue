@@ -42,7 +42,7 @@ useHead({
               <p class="text-4xl md:text-6xl">
                 You got no messages yet!
               </p>
-              <img class="block md:t-w-1/4 h-20rem" alt="Empty box" src="/img/emptyMailBox.png">
+              <NuxtImg class="block md:t-w-1/4 h-20rem" alt="Empty box" src="/img/emptyMailBox.png" />
             </div>
           </template>
           <template v-else>
@@ -51,7 +51,14 @@ useHead({
                 <div v-for="message in msgs.value">
                   <div :class="message.id == selected.id ? 'bg-primary-500': 'surface-300'" class="relative surface-200 t-rounded-2xl shadow-6 mb-4 p-3 cursor-pointer" @click="selectMessage(message)">
                     <div class="flex t-h-20 align-items-center max-md:t-flex-col max-md:t-h-full">
-                      <img class="h-full t-rounded-full" :src="message.imgPath" :alt="message.topic">
+                      <NuxtImg
+                        format="webp"
+                        class="h-full t-rounded-full"
+                        :src="message.imgPath"
+                        :alt="message.topic"
+                        height="80"
+                        width="80"
+                      />
                       <div>
                         <p class="md:ml-3 md:text-xl font-bold">
                           {{ message.topic }}
@@ -82,7 +89,7 @@ useHead({
                   </p>
                 </div>
                 <div class="absolute t-bottom-5 t-right-5">
-                  <Button v-tooltip.left="'Delete notification'" icon="pi pi-times-circle" type="null" @click="deleteMessage(selected)" />
+                  <Button v-tooltip.left="'Delete notification'" aria-label="Delete notification" icon="pi pi-times-circle" type="null" @click="deleteMessage(selected)" />
                 </div>
               </div>
             </div>

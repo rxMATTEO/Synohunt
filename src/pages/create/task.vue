@@ -136,7 +136,7 @@ const isAddSynoShake = ref(false);
         <div class="surface-ground t-rounded-md p-3 md:p-5 h-fit">
           <div class="relative">
             <div class="absolute right-0">
-              <Button v-tooltip="'Generate randomly'" unstyled @click="randomGenerateTask">
+              <Button v-tooltip="'Generate randomly'" unstyled aria-label="Generate randomly" @click="randomGenerateTask">
                 <template #icon>
                   <i class="pi pi-sync" :class="{'pi-spin' : isRandomTaskGenerating}" />
                 </template>
@@ -163,6 +163,7 @@ const isAddSynoShake = ref(false);
                     option-label="name"
                     placeholder="Select difficulty"
                     class="w-full"
+                    aria-label="Select language"
                   >
                     <template #value="slotProps">
                       <div v-if="slotProps.value" class="flex align-items-center">
@@ -179,7 +180,7 @@ const isAddSynoShake = ref(false);
                     </template>
                   </Dropdown>
                   <label for="dd-diff" class="">Select difficulty</label>
-                  <Button v-tooltip.focus.left="'Define challenge difficulty so players can choose it depends them skill'" icon="pi pi-info-circle" :unstyled="true" class="absolute t-top-[-20px] right-0" />
+                  <Button v-tooltip.focus.left="'Define challenge difficulty so players can choose it depends them skill'" aria-label="Define challenge difficulty so players can choose it depends them skill" icon="pi pi-info-circle" :unstyled="true" class="absolute t-top-[-20px] right-0" />
                 </div>
                 <div class="p-float-label mt-5">
                   <Dropdown
@@ -189,6 +190,7 @@ const isAddSynoShake = ref(false);
                     option-label="name"
                     placeholder="Select language"
                     class="w-full"
+                    aria-label="Select language"
                   >
                     <template #value="slotProps">
                       <div v-if="slotProps.value" class="flex align-items-center">
@@ -205,7 +207,7 @@ const isAddSynoShake = ref(false);
                     </template>
                   </Dropdown>
                   <label for="dd-lang" class="">Select Language</label>
-                  <Button v-tooltip.focus.left="'Select language of word and synonyms'" icon="pi pi-info-circle" :unstyled="true" class="absolute t-top-[-20px] right-0" />
+                  <Button v-tooltip.focus.left="'Select language of word and synonyms'" aria-label="Select language of word and synonyms" icon="pi pi-info-circle" :unstyled="true" class="absolute t-top-[-20px] right-0" />
                 </div>
               </Fieldset>
             </div>
@@ -218,8 +220,8 @@ const isAddSynoShake = ref(false);
               </template>
               <div class="mt-0">
                 <div class="flex t-place-content-between">
-                  <p>Word</p>
-                  <Button v-tooltip.focus.left="'The word which synonyms players will be guessing'" icon="pi pi-info-circle" :unstyled="true" class="" />
+                  <label for="word">Word</label>
+                  <Button v-tooltip.focus.left="'The word which synonyms players will be guessing'" aria-label="The word which synonyms players will be guessing" icon="pi pi-info-circle" :unstyled="true" class="" />
                 </div>
                 <InputText id="word" v-model="word" type="text" class="w-full" :class="{ 'p-invalid': wordErrorMessage }" />
                 <small id="text-error" class="p-error">{{
@@ -228,8 +230,8 @@ const isAddSynoShake = ref(false);
               </div>
               <div class="mt-5">
                 <div class="flex t-place-content-between">
-                  <p>Context</p>
-                  <Button v-tooltip.focus.left="'Enter the context of word. You can use html tags'" icon="pi pi-info-circle" :unstyled="true" class="" />
+                  <label for="context">Context</label>
+                  <Button v-tooltip.focus.left="'Enter the context of word. You can use html tags'" aria-label="Enter the context of word. You can use html tags" icon="pi pi-info-circle" :unstyled="true" class="" />
                 </div>
                 <Editor
                   id="context"
@@ -258,14 +260,21 @@ const isAddSynoShake = ref(false);
               </template>
               <template #default>
                 <div class="relative">
-                  <Button v-tooltip.focus.left="'The synonyms which is players will be guessing'" icon="pi pi-info-circle" :unstyled="true" class="absolute t-top-[-20px] right-0" />
+                  <Button v-tooltip.focus.left="'The synonyms which is players will be guessing'" aria-label="The synonyms which is players will be guessing" icon="pi pi-info-circle" :unstyled="true" class="absolute t-top-[-20px] right-0" />
                 </div>
                 <div class="!t-max-w-full">
                   <div class="t-p-5 flex">
                     <div class="p-float-label max-md:!t-flex max-md:!t-flex-col align-items-center">
                       <InputText id="syno" v-model="addingSynonym" />
                       <label for="syno" class="max-md:!t-mt-[-1.5rem] p-float-label">Enter synonym</label>
-                      <Button :type="null" label="+" class="ml-3" :class="{ 'shake': isAddSynoShake }" @click="addSynonym" />
+                      <Button
+                        aria-label="Add synonym"
+                        :type="null"
+                        label="+"
+                        class="ml-3"
+                        :class="{ 'shake': isAddSynoShake }"
+                        @click="addSynonym"
+                      />
                     </div>
                   </div>
                   <small id="text-error" class="p-error">{{
@@ -277,6 +286,7 @@ const isAddSynoShake = ref(false);
                     v-model="synonyms.value"
                     class="pick-list"
                     :class="{ 'border-red-300 border-solid border-1': synosErrorMessage }"
+                    aria-label="Select language"
                   >
                     <template #sourceheader>
                       Not included
@@ -313,6 +323,6 @@ const isAddSynoShake = ref(false);
 @use '../../assets/main' as main
 
 .pick-list
-  //@include main.apply-default-button()
+  @include main.apply-default-button()
 
 </style>
