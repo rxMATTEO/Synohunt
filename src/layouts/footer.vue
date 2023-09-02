@@ -5,15 +5,15 @@
 <template>
   <div>
     <slot />
-    <div class="flex t-items-center t-justify-center mt-5 flex-wrap">
+    <div class="flex t-items-center t-justify-center mt-5 flex-wrap gap-3">
       <a href="https://github.com/rxMATTEO/Synohunt/" class=" hover:text-primary transition-colors t-duration-200 t-ease-in-out" target="_blank">
         <span>Contribute on Github</span>
         <i class="pi pi-fw pi-github" />
       </a>
-      <NuxtLink to="/about" class="mx-3 hover:text-primary transition-colors t-duration-200 t-ease-in-out">
+      <NuxtLink to="/about" class="hover:text-primary transition-colors t-duration-200 t-ease-in-out">
         About
       </NuxtLink>
-      <a href="/" class="mx-3  hover:text-primary transition-colors t-duration-200 t-ease-in-out">Privacy</a>
+      <a href="/" class="hover:text-primary transition-colors t-duration-200 t-ease-in-out">Privacy</a>
       <a href="/" class=" hover:text-primary transition-colors t-duration-200 t-ease-in-out">Contact</a>
     </div>
   </div>

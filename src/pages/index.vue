@@ -35,7 +35,7 @@
                   />
                   <NuxtLink to="/about" target="_blank">
                     <Button
-                      label="Learn More"
+                      label="More about us"
                       class="t-border-0"
                       :type="null"
                       outlined
