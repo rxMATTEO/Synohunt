@@ -9,11 +9,20 @@ import CircleLoader from '@/components/CircleLoader.vue';
 useHead({
   title: 'My profile'
 });
+const props = defineProps<ProfileProps>();
 type ProfileProps = {
   account: object;
   foreign: boolean;
 };
-const props = defineProps<ProfileProps>();
+
+useSeoMeta({
+  title: `Player profile ${props.account.name}`,
+  ogTitle: `Player profile ${props.account.name}`,
+  description: `Profile of ${props.account.name} Synohunt player`,
+  ogDescription: `Profile of ${props.account.name} Synohunt player`,
+  ogImage: 'https://www.synohunt.ru/img/biglogo.png',
+  ogUrl: `${import.meta.env.VITE_AUTH_ORIGIN}profile/`
+});
 
 type TabItem = {
   label: string,

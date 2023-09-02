@@ -12,6 +12,15 @@ useHead({
 definePageMeta({
   auth: false
 });
+
+useSeoMeta({
+  title: 'About Synohunt',
+  ogTitle: 'About Synohunt',
+  description: 'Learn more about Synohunt',
+  ogDescription: 'Learn more about Synohunt',
+  ogImage: 'https://www.synohunt.ru/img/biglogo.png',
+  ogUrl: `${import.meta.env.VITE_AUTH_ORIGIN}about`
+});
 </script>
 
 <template>

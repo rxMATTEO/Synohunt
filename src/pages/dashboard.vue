@@ -10,7 +10,7 @@ useHead({
 });
 
 useSeoMeta({
-  title: 'Synohunt',
+  title: 'Dashboard',
   ogTitle: 'Synohunt',
   description: 'Synohunt dashboard. Solve synonyms, train your languages skills and get points!',
   ogDescription: 'Synohunt dashboard. Solve synonyms, train your languages skills and get points!',

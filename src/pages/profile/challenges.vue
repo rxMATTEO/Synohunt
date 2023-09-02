@@ -2,6 +2,15 @@
 useHead({
   title: 'My challenges'
 });
+
+useSeoMeta({
+  title: 'Synohunt my created challenges',
+  ogTitle: 'Synohunt my created challenges',
+  description: 'Created synonym words challenges',
+  ogDescription: 'Created synonym words challenges',
+  ogImage: 'https://www.synohunt.ru/img/biglogo.png',
+  ogUrl: `${import.meta.env.VITE_AUTH_ORIGIN}profile/completed`
+});
 </script>
 
 <template>

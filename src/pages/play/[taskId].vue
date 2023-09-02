@@ -35,6 +35,19 @@ export type TaskResponse = {
   task: Task[]
 }
 const { data: { value: { user: { account } } } } = useAuth();
+const task = reactive<{value: TaskResponse}>({ value: (await useFetch(`/api/task/${route.params.taskId}`)).data });
+
+useHead({
+  title: `${task.value.Word.word}`
+});
+useSeoMeta({
+  title: `Guess synonym to ${task.value.Word.word} word`,
+  ogTitle: `Guess synonym to ${task.value.Word.word} word`,
+  description: `Guess synonym to ${task.value.Word.word} word in Synohunt challenge game`,
+  ogDescription: `Guess synonym to ${task.value.Word.word} word in Synohunt challenge game`,
+  ogImage: 'https://www.synohunt.ru/img/biglogo.png',
+  ogUrl: `${import.meta.env.VITE_AUTH_ORIGIN}play/${route.params.taskId}`
+});
 const pointsStore = usePointsStore();
 const moneyStore = useMoneyStore();
 const coinSpin = ref();
@@ -138,12 +151,6 @@ function shake () {
   isShaking.value = true;
   setTimeout(() => { isShaking.value = false; }, 1000);
 }
-
-const task = reactive<{value: TaskResponse}>({ value: (await useFetch(`/api/task/${route.params.taskId}`)).data });
-
-useHead({
-  title: `${task.value.Word.word}`
-});
 
 const synonyms = reactive({ value: task.value.Word.Synonym });
 const solvedSynonyms = reactive({ value: [] });

@@ -9,6 +9,15 @@ useHead({
   title: 'Create task'
 });
 
+useSeoMeta({
+  title: 'Create new synonym challenge in Synohunt',
+  ogTitle: 'Create new synonym challenge in Synohunt',
+  description: 'Create new synonym challenge in Synohunt and make players guess all synonyms of your word',
+  ogDescription: 'Create new synonym challenge in Synohunt and make players guess all synonyms of your word',
+  ogImage: 'https://www.synohunt.ru/img/biglogo.png',
+  ogUrl: `${import.meta.env.VITE_AUTH_ORIGIN}create/task`
+});
+
 const { data: { value: { user: { account } } } } = useAuth();
 const diffs = reactive({ value: [] as ServerDiff[] });
 const langs = reactive({ value: [] as ServerLang[] });

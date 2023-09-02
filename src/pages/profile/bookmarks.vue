@@ -12,6 +12,15 @@ const completedTasks = (await useFetch('/api/task/allBookmarks', {
 useHead({
   title: 'Bookmarks'
 });
+
+useServerSeoMeta({
+  title: 'Synohunt my bookmarked challenges',
+  ogTitle: 'Synohunt my bookmarked challenges',
+  description: 'Bookmarked synonym words challenges',
+  ogDescription: 'Bookmarked synonym words challenges',
+  ogImage: 'https://www.synohunt.ru/img/biglogo.png',
+  ogUrl: `${import.meta.env.VITE_AUTH_ORIGIN}profile/bookmarks`
+});
 </script>
 
 <template>
@@ -21,7 +30,16 @@ useHead({
         <div
           class="surface-ground t-rounded-md p-5"
         >
+          <h1 class="text-4xl font-bold mb-5">
+            Bookmarked challenges
+          </h1>
+          <div v-if="completedTasks.length === 0">
+            <div>
+              <span>No bookmarks challenges yet. If you want keep challenge for later, you can <span class="bg-primary-500 text-white"><i class="pi pi-bookmark" /> bookmark them</span></span>
+            </div>
+          </div>
           <DataView
+            v-else
             :value="completedTasks"
             paginator
             :rows="5"
