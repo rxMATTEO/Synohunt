@@ -58,10 +58,10 @@ onMounted(() => {
             </div>
             <div class="flex max-md:t-flex-col">
               <NuxtLink
-                to="/"
+                to="/contact"
                 class="mr-3 hover:text-primary transition-colors t-duration-300"
               >
-                Services
+                Contact us
               </NuxtLink>
             </div>
           </div>

@@ -36,7 +36,7 @@ useSeoMeta({
         <h1 class="text-6xl font-bold text-center">
           About Synohunt
         </h1>
-        <div class="surface-section px-4 py-8 md:px-6 lg:px-8 text-center mt-5 t-rounded-xl">
+        <div class="surface-ground px-4 py-8 md:px-6 lg:px-8 text-center mt-5 t-rounded-xl">
           <div class="mb-3 font-bold text-2xl">
             <span class="text-900">One Game, </span>
             <span class="text-indigo-600">Many Advantages</span>
