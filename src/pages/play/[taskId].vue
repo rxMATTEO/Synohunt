@@ -37,7 +37,10 @@ const { data: { value: { user: { account } } } } = useAuth();
 const task = reactive<{value: TaskResponse}>({ value: (await useFetch(`/api/task/${route.params.taskId}`)).data });
 
 useHead({
-  title: `${task.value.Word.word}`
+  title: `${task.value.Word.word}`,
+  link: [{
+    rel: 'canonical', href: `${import.meta.env.VITE_AUTH_ORIGIN}play/${route.params.taskId}`
+  }],
 });
 useSeoMeta({
   title: `Guess synonym to ${task.value.Word.word} word`,
@@ -47,6 +50,7 @@ useSeoMeta({
   ogImage: 'https://www.synohunt.ru/img/biglogo.png',
   ogUrl: `${import.meta.env.VITE_AUTH_ORIGIN}play/${route.params.taskId}`
 });
+
 const pointsStore = usePointsStore();
 const moneyStore = useMoneyStore();
 const coinSpin = ref();

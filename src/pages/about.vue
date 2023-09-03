@@ -6,7 +6,10 @@ useHead({
   title: 'About us',
   meta: [
     { name: 'description', content: 'About Synohunt' }
-  ]
+  ],
+  link: [{
+    rel: 'canonical', href: `${import.meta.env.VITE_AUTH_ORIGIN}about`
+  }],
 });
 
 definePageMeta({

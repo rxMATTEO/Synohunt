@@ -10,7 +10,10 @@ const completedTasks = (await useFetch('/api/task/allBookmarks', {
 })).data.value;
 
 useHead({
-  title: 'Bookmarks'
+  title: 'Bookmarks',
+  link: [{
+    rel: 'canonical', href: `${import.meta.env.VITE_AUTH_ORIGIN}profile/bookmarks`
+  }],
 });
 
 useServerSeoMeta({

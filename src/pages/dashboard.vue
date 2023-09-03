@@ -6,7 +6,10 @@ useHead({
   title: 'Dashboard',
   meta: [
     { name: 'description', content: 'Synohunt dashboard. Solve synonyms, train your languages skills and get points!' }
-  ]
+  ],
+  link: [{
+    rel: 'canonical', href: `${import.meta.env.VITE_AUTH_ORIGIN}dashboard`
+  }],
 });
 
 useSeoMeta({

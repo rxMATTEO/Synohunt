@@ -6,7 +6,10 @@ import type { ServerDiff, ServerLang } from '../dashboard.vue';
 import validateWeakness from '@/composables/validator';
 
 useHead({
-  title: 'Create task'
+  title: 'Create task',
+  link: [{
+    rel: 'canonical', href: `${import.meta.env.VITE_AUTH_ORIGIN}create/task`
+  }],
 });
 
 useSeoMeta({

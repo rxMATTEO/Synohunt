@@ -89,9 +89,9 @@ const nuxtConfig: NuxtConfig = {
   },
   app: {
     head: {
-      link: [{
-        rel: 'canonical', href: 'https://www.synohunt.ru/'
-      }],
+      // link: [{
+      //   rel: 'canonical', href: 'https://www.synohunt.ru/'
+      // }],
       meta: [
         { name: 'description', content: 'Synohunt is ultimate word challenge that will train your knowledge of the languages. Solve challenges and get points.' }
       ],

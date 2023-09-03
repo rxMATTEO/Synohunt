@@ -283,6 +283,12 @@ import LandingHeader from '@/components/LandingHeader.vue';
 
 definePageMeta({ auth: false });
 
+useHead({
+  link: [{
+    rel: 'canonical', href: `${import.meta.env.VITE_AUTH_ORIGIN}`
+  }],
+})
+
 useSeoMeta({
   title: 'Ultimate language challenge',
   ogTitle: 'Synohunt',

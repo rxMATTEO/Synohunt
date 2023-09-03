@@ -1,6 +1,9 @@
 <script lang="ts" setup>
 useHead({
-  title: 'Completed challenges'
+  title: 'Completed challenges',
+  link: [{
+    rel: 'canonical', href: `${import.meta.env.VITE_AUTH_ORIGIN}profile/completed`
+  }],
 });
 
 useSeoMeta({

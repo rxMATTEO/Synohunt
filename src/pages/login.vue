@@ -11,7 +11,10 @@ useHead({
   title: 'Login',
   meta: [
     { name: 'description', content: 'Login your account on Synohunt' }
-  ]
+  ],
+  link: [{
+    rel: 'canonical', href: `${import.meta.env.VITE_AUTH_ORIGIN}login`
+  }],
 });
 
 useSeoMeta({

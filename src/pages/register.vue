@@ -11,7 +11,10 @@ useHead({
   title: 'Registration',
   meta: [
     { name: 'description', content: 'Register new account on Synohunt' }
-  ]
+  ],
+  link: [{
+    rel: 'canonical', href: `${import.meta.env.VITE_AUTH_ORIGIN}register`
+  }],
 });
 
 useSeoMeta({

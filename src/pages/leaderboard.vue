@@ -3,7 +3,10 @@ useHead({
   title: 'Leaderboard',
   meta: [
     { name: 'description', content: 'Leaderboard of Synohunt player' }
-  ]
+  ],
+  link: [{
+    rel: 'canonical', href: `${import.meta.env.VITE_AUTH_ORIGIN}leaderboard`
+  }],
 });
 
 useSeoMeta({
