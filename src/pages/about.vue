@@ -36,7 +36,7 @@ useSeoMeta({
         <h1 class="text-6xl font-bold text-center">
           About Synohunt
         </h1>
-        <div class="surface-section px-4 py-8 md:px-6 lg:px-8 text-center">
+        <div class="surface-section px-4 py-8 md:px-6 lg:px-8 text-center mt-5 t-rounded-xl">
           <div class="mb-3 font-bold text-2xl">
             <span class="text-900">One Game, </span>
             <span class="text-indigo-600">Many Advantages</span>
@@ -100,8 +100,8 @@ useSeoMeta({
               <span class="text-700 text-sm line-height-3">In this immersive online gaming experience, you'll have the opportunity to not only enhance your language skills but also showcase your creativity. Create custom challenges with words of your choice and post them for other users to solve. </span>
             </div>
           </div>
-          <Footer />
         </div>
+          <Footer class="my-5"/>
       </div>
     </div>
   </div>
