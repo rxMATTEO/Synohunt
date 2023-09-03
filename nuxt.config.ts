@@ -52,8 +52,16 @@ const nuxtConfig: NuxtConfig = {
     '@pinia/nuxt',
     '@sidebase/nuxt-auth',
     '@nuxt/image',
-    '@vite-pwa/nuxt'
+    '@vite-pwa/nuxt',
+    'nuxt-simple-sitemap',
+    'nuxt-simple-robots'
   ],
+  site: {
+    url: process.env.AUTH_ORIGIN
+  },
+  sitemap: {
+    exclude: ['/message/**']
+  },
   auth: {
     isEnabled: true,
     origin: process.env.AUTH_ORIGIN,
