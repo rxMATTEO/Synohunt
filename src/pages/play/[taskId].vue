@@ -59,7 +59,7 @@ const coinSpin = ref();
 async function solveUserSyno () {
     const foundSynoIndex = synonyms.value.findIndex(syno => syno.value.toLowerCase() === userSyno.value.toLowerCase());
     if (foundSynoIndex !== -1) {
-      solvedSynonyms.value.push(synonyms.value[foundSynoIndex]);
+      solvedSynonyms.value.push(synonyms.value[foundSynoIndex] as never);
       const { pointsForGuess, moneyForGuess } = synonyms.value[foundSynoIndex];
       synonyms.value.splice(foundSynoIndex, 1);
       userSyno.value = '';

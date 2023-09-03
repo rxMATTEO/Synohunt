@@ -9,7 +9,7 @@ useHead({
   ],
   link: [{
     rel: 'canonical', href: `${import.meta.env.VITE_AUTH_ORIGIN}about`
-  }],
+  }]
 });
 
 definePageMeta({
@@ -101,7 +101,7 @@ useSeoMeta({
             </div>
           </div>
         </div>
-          <Footer class="my-5"/>
+        <Footer class="my-5" />
       </div>
     </div>
   </div>

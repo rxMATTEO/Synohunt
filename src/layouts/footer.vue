@@ -13,8 +13,7 @@
       <NuxtLink to="/about" class="hover:text-primary transition-colors t-duration-200 t-ease-in-out">
         About
       </NuxtLink>
-      <a href="/" class="hover:text-primary transition-colors t-duration-200 t-ease-in-out">Privacy</a>
-      <a href="/" class=" hover:text-primary transition-colors t-duration-200 t-ease-in-out">Contact</a>
+      <NuxtLink to="/contact" class="hover:text-primary transition-colors t-duration-200 t-ease-in-out">Contact</NuxtLink>
     </div>
   </div>
 </template>
