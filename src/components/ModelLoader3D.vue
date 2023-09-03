@@ -41,7 +41,6 @@ const lights = [
     intensity: 0.2
   }
 ];
-// todo figure out wtf is happenning if theme chaning it's speeding up
 const height = computed(() => process.client ? window.innerHeight / 2 : 0);
 const width = computed(() => process.client ? window.innerWidth / 2 : 0);
 

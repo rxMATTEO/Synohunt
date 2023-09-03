@@ -34,7 +34,6 @@ const unsubscribe = notificationsStore.$onAction(
   }
 );
 
-// todo delete toasts from object and do some id idk and types PLS
 </script>
 
 <template>

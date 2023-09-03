@@ -192,7 +192,6 @@ async function onSave () {
   });
 }
 </script>
-<!--todo fix footer-->
 <template>
   <div class="">
     <div class="flex flex-column md:flex-row mt-5 gap-5">

@@ -129,7 +129,6 @@ function addSynonym () {
   });
   addingSynonym.value = '';
 }
-// todo add button loader and shake button up
 const isAddSynoShake = ref(false);
 </script>
 

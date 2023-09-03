@@ -107,7 +107,6 @@ const items = ref<Hint[]>([
   }
 ]);
 
-// todo move this into store
 
 const isListening = ref(false);
 const hovered = ref();
