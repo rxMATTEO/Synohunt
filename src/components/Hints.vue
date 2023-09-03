@@ -17,7 +17,7 @@ function showHintsPanel (e: MouseEvent) {
   hidden.value = false;
 }
 
-type Hint = {
+export type Hint = {
   label: string;
   icon: string;
   cost: number;

@@ -3,6 +3,7 @@ import { reactive, ref } from 'vue';
 import { usePointsStore } from '../../stores/pointsStore';
 import { useMoneyStore } from '@/stores/moneyStore';
 import Hints from '@/components/Hints.vue';
+import type { Hint } from '@/components/Hints.vue';
 
 type RouteParams = {
   params: {
@@ -55,8 +56,7 @@ const pointsStore = usePointsStore();
 const moneyStore = useMoneyStore();
 const coinSpin = ref();
 
-async function solveUserSyno (e?: KeyboardEvent) {
-  if (!e || e.key === 'Enter') {
+async function solveUserSyno () {
     const foundSynoIndex = synonyms.value.findIndex(syno => syno.value.toLowerCase() === userSyno.value.toLowerCase());
     if (foundSynoIndex !== -1) {
       solvedSynonyms.value.push(synonyms.value[foundSynoIndex]);
@@ -73,7 +73,6 @@ async function solveUserSyno (e?: KeyboardEvent) {
     } else {
       shake();
     }
-  }
 }
 
 const items = ref<Hint[]>([
@@ -266,7 +265,7 @@ const isDialogVisible = ref(false);
         </template>
       </Dialog>
 
-      <PaddingBox @keyup="solveUserSyno">
+      <PaddingBox @keyup.enter="solveUserSyno">
         <div class="surface-ground t-rounded-md p-3 md:p-5 h-fit">
           <div class="relative">
             <Button v-tooltip="'Goto next challenge'" class="absolute right-0 text-right" icon="pi pi-arrow-right" unstyled @click="gotoRandomTask(task.value.Difficulity.name, task.value.Language.langFull, task.value.id)" />
