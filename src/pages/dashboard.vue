@@ -60,7 +60,7 @@ useSeoMeta({
           </div>
 
           <div class="flex t-flex-col md:flex-row align-items-stretch mt-5">
-            <div class="w-full max-md:t-mt-3 md:t-w-1/4 md:t-pl-5">
+            <div class="w-full max-md:t-mt-3 md:t-w-1/4">
               <div class="p-3 surface-ground t-rounded-md h-full flex">
                 <div class="">
                   <h1 class="font-bold text-xl mb-1">
@@ -96,7 +96,7 @@ useSeoMeta({
           <p>
             But it's not just about bragging rights. Our leaderboard is a testament to your dedication and wordplay excellence. Whether you're a casual wordsmith or a die-hard vocabulary aficionado, the leaderboard offers a level playing field where everyone has a chance to excel.
           </p>
-          <Leaderboard :limit="5" />
+          <Leaderboard :limit="5" class="mt-3" />
         </div>
       </PaddingBox>
     </NuxtLayout>
