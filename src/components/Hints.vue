@@ -34,7 +34,6 @@ function onHintClick (hint: Hint) {
     position: 'bottom',
     accept: async () => {
       const setMoneyResult = await moneyStore.setMoney(-hint.cost);
-      console.log(setMoneyResult);
       if (setMoneyResult) {
         notificationsStore.addNotification({
           title: 'Congratulations',

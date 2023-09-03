@@ -143,11 +143,17 @@ async function completeTask () {
   });
 }
 
-const contextHtml = computed({
-  get () {
-    return (task.value.description as string).replaceAll(task.value.Word.word, `<span class="bg-primary-500 text-white">${task.value.Word.word}</span>`);
+const contextHtml = computed(
+  () => {
+    const result = (task.value.description).toLowerCase().replaceAll(task.value.Word.word.toLowerCase(), `<span class="bg-primary-500 text-white">${task.value.Word.word.toLowerCase()}</span>`)
+    return result
   }
-});
+);
+
+function getSlicedSyno(syno: string){
+  const lettersBetween = syno.slice(2, -2).length;
+  return syno.slice(0, 2)+ '*'.repeat(lettersBetween)  + syno.slice(-2);
+}
 
 const isShaking = reactive({ value: false });
 function shake () {
@@ -286,7 +292,7 @@ const isDialogVisible = ref(false);
               Context:
             </p>
             <div class="mt-3">
-              <span v-html="contextHtml" />
+              <pre v-html="contextHtml" />
             </div>
           </div>
 
@@ -297,7 +303,7 @@ const isDialogVisible = ref(false);
               </p>
               <div class="mt-5">
                 <p v-for="(syno) in synonyms.value" :class="{ 'bg-primary-500 cursor-pointer': syno.id === hovered?.id }" @mouseover="mouseOverSyno(syno)" @click="click(syno)">
-                  {{ syno.value }}
+                  {{ getSlicedSyno(syno.value) }}
                 </p>
               </div>
             </div>

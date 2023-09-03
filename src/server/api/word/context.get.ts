@@ -6,5 +6,5 @@ const reverso = new Index();
 export default defineEventHandler(async (event) => {
   const { word, lang } = getQuery(event);
 
-  return await reverso.getContext(word, lang);
+  return await reverso.getContext(word);
 });
