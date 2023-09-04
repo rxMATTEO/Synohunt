@@ -41,7 +41,7 @@ useHead({
   title: `${task.value.Word.word}`,
   link: [{
     rel: 'canonical', href: `${import.meta.env.VITE_AUTH_ORIGIN}play/${route.params.taskId}`
-  }],
+  }]
 });
 useSeoMeta({
   title: `Guess synonym to ${task.value.Word.word} word`,
@@ -57,22 +57,22 @@ const moneyStore = useMoneyStore();
 const coinSpin = ref();
 
 async function solveUserSyno () {
-    const foundSynoIndex = synonyms.value.findIndex(syno => syno.value.toLowerCase() === userSyno.value.toLowerCase());
-    if (foundSynoIndex !== -1) {
-      solvedSynonyms.value.push(synonyms.value[foundSynoIndex] as never);
-      const { pointsForGuess, moneyForGuess } = synonyms.value[foundSynoIndex];
-      synonyms.value.splice(foundSynoIndex, 1);
-      userSyno.value = '';
-      coinSpin.value.append(async () => { await moneyStore.setMoney(moneyForGuess); });
+  const foundSynoIndex = synonyms.value.findIndex(syno => syno.value.toLowerCase() === userSyno.value.toLowerCase());
+  if (foundSynoIndex !== -1) {
+    solvedSynonyms.value.push(synonyms.value[foundSynoIndex] as never);
+    const { pointsForGuess, moneyForGuess } = synonyms.value[foundSynoIndex];
+    synonyms.value.splice(foundSynoIndex, 1);
+    userSyno.value = '';
+    coinSpin.value.append(async () => { await moneyStore.setMoney(moneyForGuess); });
 
-      await pointsStore.setPoints(pointsForGuess);
+    await pointsStore.setPoints(pointsForGuess);
 
-      if (synonyms.value.length === 0) {
-        completeTask();
-      }
-    } else {
-      shake();
+    if (synonyms.value.length === 0) {
+      completeTask();
     }
+  } else {
+    shake();
+  }
 }
 
 const items = ref<Hint[]>([
@@ -105,7 +105,6 @@ const items = ref<Hint[]>([
     cost: 10
   }
 ]);
-
 
 const isListening = ref(false);
 const hovered = ref();
@@ -143,14 +142,14 @@ async function completeTask () {
 
 const contextHtml = computed(
   () => {
-    const result = (task.value.description).toLowerCase().replaceAll(task.value.Word.word.toLowerCase(), `<span class="bg-primary-500 text-white">${task.value.Word.word.toLowerCase()}</span>`)
-    return result
+    const result = (task.value.description).toLowerCase().replaceAll(task.value.Word.word.toLowerCase(), `<span class="bg-primary-500 text-white">${task.value.Word.word.toLowerCase()}</span>`);
+    return result;
   }
 );
 
-function getSlicedSyno(syno: string){
+function getSlicedSyno (syno: string) {
   const lettersBetween = syno.slice(2, -2).length;
-  return syno.slice(0, 2)+ '*'.repeat(lettersBetween)  + syno.slice(-2);
+  return syno.slice(0, 2) + '*'.repeat(lettersBetween) + syno.slice(-2);
 }
 
 const isShaking = reactive({ value: false });
@@ -290,7 +289,7 @@ const isDialogVisible = ref(false);
               Context:
             </p>
             <div class="mt-3">
-              <pre v-html="contextHtml" />
+              <p v-for="html in contextHtml.split('.')" v-html="html + '.'" />
             </div>
           </div>
 
