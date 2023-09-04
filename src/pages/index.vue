@@ -180,14 +180,26 @@
           <div
             class="flex sm:justify-content-between flex-column align-items-center t-py-24"
           >
-            <span
-              class="block sm:w-5 font-bold text-center uppercase text-primary"
-            >Your ultimate challenge!</span>
-            <span class="block sm:w-5 sm:text-6xl text-4xl font-bold text-center">SynoHunt: The <span class="gradient-primary">Ultimate</span> Word
-              Challenge!</span>
-            <span class="block sm:w-5 text-lg mt-5 md:text-center">Get ready to embark on a thrilling journey through the world of
-              synonyms and unleash your inner linguist, and dive into a realm of
-              words and wonders with SynoHunt.</span>
+            <div class="sm:w-5">
+              <article class="flex flex-column sm">
+                <h1
+                  class="block font-bold text-center uppercase text-primary"
+                >
+                  Your ultimate challenge!
+                </h1>
+                <article class="block ">
+                  <h1 class="text-center">
+                    <span class="block sm:text-6xl text-4xl font-bold text-center">SynoHunt: The <span class="gradient-primary">Ultimate</span> Word
+                      Challenge!</span>
+                  </h1>
+                </article>
+                <section class="block">
+                  <span class="block text-lg mt-5 md:text-center">Get ready to embark on a thrilling journey through the world of
+                    synonyms and unleash your inner linguist, and dive into a realm of
+                    words and wonders with SynoHunt.</span>
+                </section>
+              </article>
+            </div>
           </div>
 
           <div v-for="(link) in beautyLinks" :key="link.mainText">
@@ -206,8 +218,14 @@
                     <i :class="`pi pi-fw pi-${link.picon} text-2xl`" />
                   </div>
                   <div class="flex-column ml-4">
-                    <span class="text-900 block">{{ link.mainText }}</span>
-                    <span class="text-600">{{ link.header }}</span>
+                    <article>
+                      <h1 class="text-900 block">
+                        {{ link.mainText }}
+                      </h1>
+                      <section>
+                        <span class="text-600">{{ link.header }}</span>
+                      </section>
+                    </article>
                   </div>
                 </div>
               </div>
@@ -228,12 +246,16 @@
                   />
                 </div>
                 <div class="desc px-3">
-                  <h1 class="text-900 text-4xl font-bold">
-                    Create your word challenges
-                  </h1>
-                  <p class="mt-3">
-                    Create custom challenges with words of your choice and post them for other users to solve. Challenge your friends, family, and fellow word enthusiasts to see who can guess the most synonyms correctly and earn bragging rights as the ultimate wordsmith.
-                  </p>
+                  <article>
+                    <h1 class="text-900 text-4xl font-bold">
+                      Create your word challenges
+                    </h1>
+                    <section>
+                      <p class="mt-3">
+                        Create custom challenges with words of your choice and post them for other users to solve. Challenge your friends, family, and fellow word enthusiasts to see who can guess the most synonyms correctly and earn bragging rights as the ultimate wordsmith.
+                      </p>
+                    </section>
+                  </article>
                 </div>
               </div>
             </div>
@@ -250,54 +272,66 @@
                   />
                 </div>
                 <div class="desc px-3">
-                  <h1 class="text-900 text-4xl font-bold">
-                    Points and Coins
-                  </h1>
-                  <p class="mt-3">
-                    Solve challenges, get points and coins for correctly guessing synonyms. Points can be used for leveling up, and coins can be spent on in-game items or power-ups.
-                  </p>
+                  <article>
+                    <h1 class="text-900 text-4xl font-bold">
+                      Points and Coins
+                    </h1>
+                    <section>
+                      <p class="mt-3">
+                        Solve challenges, get points and coins for correctly guessing synonyms. Points can be used for leveling up, and coins can be spent on in-game items or power-ups.
+                      </p>
+                    </section>
+                  </article>
                 </div>
               </div>
             </div>
           </div>
 
           <div class="mt-5">
-            <h1 class="text-900 text-6xl sm:text-7xl font-bold mb-5">
-              Have <span class="gradient-hard text-white">questions?</span>
-            </h1>
-            <div class="flex justify-content-between flex-column sm:flex-row gap-3">
-              <div class="sm:pr-5 border-round-3xl flex-1 surface-overlay p-3">
-                <h1 class="text-900 text-4xl font-bold">
-                  How do I start playing Synohunt?
-                </h1>
-                <Divider />
-                <p class="mt-3">
-                  To <span class="gradient-medium text-white">play the game</span>, simply <NuxtLink class="text-primary" to="/register">
-                    register new account
-                  </NuxtLink>, choose a language, and you'll be presented with a word for which you need to guess synonyms. Type in your answers, and if correct, you'll earn points and coins.
-                </p>
+            <article>
+              <h1 class="text-900 text-6xl sm:text-7xl font-bold mb-5">
+                Have <span class="gradient-hard text-white">questions?</span>
+              </h1>
+              <div class="flex justify-content-between flex-column sm:flex-row gap-3">
+                <div class="sm:pr-5 border-round-3xl flex-1 surface-overlay p-3">
+                  <article>
+                    <h1 class="text-900 text-4xl font-bold">
+                      How do I start playing Synohunt?
+                    </h1>
+                    <Divider />
+                    <section class="mt-3">
+                      To <span class="gradient-medium text-white">play the game</span>, simply <NuxtLink class="text-primary" to="/register">
+                        register new account
+                      </NuxtLink>, choose a language, and you'll be presented with a word for which you need to guess synonyms. Type in your answers, and if correct, you'll earn points and coins.
+                    </section>
+                  </article>
+                </div>
+                <div class="sm:px-5 border-round-3xl flex-1 surface-overlay p-3">
+                  <article>
+                    <h1 class="text-900 text-4xl font-bold">
+                      How can I create my own synonym challenge?
+                    </h1>
+                    <Divider />
+                    <section class="mt-3">
+                      To <span class="gradient-easy text-white">create a challenge</span>, go to the <NuxtLink to="/create/task" class="text-primary">
+                        Create Challenge
+                      </NuxtLink> section in dashboard, input the word and its synonyms, set the difficulty level, and add any specific instructions. Once created, you can share it with friends or the community.
+                    </section>
+                  </article>
+                </div>
+                <div class="sm:pl-5 border-round-3xl flex-1 surface-overlay p-3">
+                  <article>
+                    <h1 class="text-900 text-4xl font-bold">
+                      Can I compete with others in the game?
+                    </h1>
+                    <Divider />
+                    <article class="mt-3">
+                      Yes! We have a <span class="gradient-indigo text-white">real-time leaderboard</span> where you can compete with other players based on your total points. Rise through the ranks and earn recognition as one of the top players.
+                    </article>
+                  </article>
+                </div>
               </div>
-              <div class="sm:px-5 border-round-3xl flex-1 surface-overlay p-3">
-                <h1 class="text-900 text-4xl font-bold">
-                  How can I create my own synonym challenge?
-                </h1>
-                <Divider />
-                <p class="mt-3">
-                  To <span class="gradient-easy text-white">create a challenge</span>, go to the <NuxtLink to="/create/task" class="text-primary">
-                    Create Challenge
-                  </NuxtLink> section in dashboard, input the word and its synonyms, set the difficulty level, and add any specific instructions. Once created, you can share it with friends or the community.
-                </p>
-              </div>
-              <div class="sm:pl-5 border-round-3xl flex-1 surface-overlay p-3">
-                <h1 class="text-900 text-4xl font-bold">
-                  Can I compete with others in the game?
-                </h1>
-                <Divider />
-                <p class="mt-3">
-                  Yes! We have a <span class="gradient-indigo text-white">real-time leaderboard</span> where you can compete with other players based on your total points. Rise through the ranks and earn recognition as one of the top players.
-                </p>
-              </div>
-            </div>
+            </article>
           </div>
           <div class="t-py-10">
             <NuxtLayout name="footer" />

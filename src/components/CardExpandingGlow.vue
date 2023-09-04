@@ -14,18 +14,23 @@ const isOpened = ref(false);
     <div class="card" :class="{'opened': isOpened}" @pointerdown="isOpened = !isOpened" @mouseenter="isOpened = true" @mouseleave="isOpened = false">
       <div class="face face1">
         <div class="content">
-          <i class="fab fa-apple" />
-          <h3>{{ header }}</h3>
+          <article>
+            <h3>{{ header }}</h3>
+          </article>
         </div>
       </div>
       <div class="face face2">
         <div class="content">
-          <p>
-            {{ mainText }}
-          </p>
-          <NuxtLink target="_blank" :href="buttonHref" type="button">
-            {{ buttonText }}
-          </NuxtLink>
+          <section>
+            <p>
+              {{ mainText }}
+            </p>
+          </section>
+          <nav>
+            <NuxtLink target="_blank" :href="buttonHref" type="button">
+              {{ buttonText }}
+            </NuxtLink>
+          </nav>
         </div>
       </div>
     </div>
