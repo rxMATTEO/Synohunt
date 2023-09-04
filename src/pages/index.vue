@@ -11,37 +11,52 @@
               <div
                 class="main z-1 flex flex-column align-items-start justify-content-center"
               >
-                <p class="t-uppercase t-tracking-wider text-indigo-300">
-                  Online browser game
-                </p>
-                <p
-                  class="welcome-text text-2xl md:text-6xl text-left font-bold capitalize mt-3"
-                >
-                  Unleash your word wizardry and conquer synonyms with
-                  <span class="gradient-primary text">Synohunt</span>
-                </p>
-                <div class="mt-5">
-                  <p>
-                    Get ready to embark on a thrilling journey through the world
-                    of synonyms and unleash your inner linguist, and dive into a
-                    realm of words and wonders with SynoHunt.
-                  </p>
-                </div>
-                <div class="mt-5">
-                  <Button
-                    label="Play Now"
-                    class="mr-3 gradient-indigo t-border-transparent text-white"
-                    @click="() => navigateTo('/dashboard')"
-                  />
-                  <NuxtLink to="/about" target="_blank">
-                    <Button
-                      label="More about us"
-                      class="t-border-0"
-                      :type="null"
-                      outlined
-                    />
-                  </NuxtLink>
-                </div>
+                <section>
+                  <h1 class="t-uppercase t-tracking-wider text-indigo-300">
+                    Online browser game
+                  </h1>
+                  <article>
+                    <p
+                      class="welcome-text text-2xl md:text-6xl text-left font-bold capitalize mt-3"
+                    >
+                      Unleash your word wizardry and conquer synonyms with
+                      <span class="gradient-primary text">Synohunt</span>
+                    </p>
+                  </article>
+                  <div class="mt-5">
+                    <article>
+                      <p>
+                        Get ready to embark on a thrilling journey through the world
+                        of synonyms and unleash your inner linguist, and dive into a
+                        realm of words and wonders with SynoHunt.
+                      </p>
+                    </article>
+                  </div>
+                  <div class="mt-5">
+                    <nav>
+                      <ul class="flex">
+                        <li>
+                          <NuxtLink to="/dashboard">
+                            <Button
+                              label="Play Now"
+                              class="mr-3 gradient-indigo t-border-transparent text-white"
+                            />
+                          </NuxtLink>
+                        </li>
+                        <li>
+                          <NuxtLink to="/about" target="_blank">
+                            <Button
+                              label="More about us"
+                              class="t-border-0"
+                              :type="null"
+                              outlined
+                            />
+                          </NuxtLink>
+                        </li>
+                      </ul>
+                    </nav>
+                  </div>
+                </section>
               </div>
             </div>
             <div
@@ -55,46 +70,54 @@
       <div class="t-px-3 max-w-full surface-ground">
         <div class="2xl:!t-px-64 2xl:t-mx-20">
           <div class="flex gap-5 max-md:t-flex-wrap">
-            <div
-              class="shadow-6 w-full surface-card px-5 py-3 t-rounded-lg relative up-hover"
-            >
-              <p class="text-center vertical-align-top text-3xl font-bold">
-                100
-              </p>
-              <p class="text-center uppercase text-color-secondary">
-                Challenges
-              </p>
-            </div>
-            <div
-              class="shadow-6 w-full surface-card px-5 py-3 t-rounded-lg relative up-hover"
-            >
-              <p class="text-center vertical-align-top text-3xl font-bold">
-                2
-              </p>
-              <p class="text-center uppercase text-color-secondary">
-                Languages
-              </p>
-            </div>
-            <div
-              class="shadow-6 w-full surface-card px-5 py-3 t-rounded-lg relative up-hover"
-            >
-              <p class="text-center vertical-align-top text-3xl font-bold">
-                ~200
-              </p>
-              <p class="text-center uppercase text-color-secondary">
-                Players
-              </p>
-            </div>
-            <div
-              class="shadow-6 w-full surface-card px-5 py-3 t-rounded-lg relative up-hover"
-            >
-              <p class="text-center vertical-align-top text-3xl font-bold">
-                100%
-              </p>
-              <p class="text-center uppercase text-color-secondary">
-                Fun
-              </p>
-            </div>
+            <article class="flex-1">
+              <div
+                class="shadow-6 w-full surface-card px-5 py-3 t-rounded-lg relative up-hover"
+              >
+                <p class="text-center vertical-align-top text-3xl font-bold">
+                  100
+                </p>
+                <p class="text-center uppercase text-color-secondary">
+                  Challenges
+                </p>
+              </div>
+            </article>
+            <article class="flex-1">
+              <div
+                class="shadow-6 w-full surface-card px-5 py-3 t-rounded-lg relative up-hover"
+              >
+                <p class="text-center vertical-align-top text-3xl font-bold">
+                  2
+                </p>
+                <p class="text-center uppercase text-color-secondary">
+                  Languages
+                </p>
+              </div>
+            </article>
+            <article class="flex-1">
+              <div
+                class="shadow-6 w-full surface-card px-5 py-3 t-rounded-lg relative up-hover"
+              >
+                <p class="text-center vertical-align-top text-3xl font-bold">
+                  ~200
+                </p>
+                <p class="text-center uppercase text-color-secondary">
+                  Players
+                </p>
+              </div>
+            </article>
+            <article class="flex-1">
+              <div
+                class="shadow-6 w-full surface-card px-5 py-3 t-rounded-lg relative up-hover"
+              >
+                <p class="text-center vertical-align-top text-3xl font-bold">
+                  100%
+                </p>
+                <p class="text-center uppercase text-color-secondary">
+                  Fun
+                </p>
+              </div>
+            </article>
           </div>
 
           <div
@@ -111,30 +134,40 @@
               />
             </div>
             <div class="md:t-w-1/2 max-md:t-text-center">
-              <p class="uppercase text-primary font-bold">
-                Explore your word creativity!
-              </p>
-              <p class="capitalize text-5xl mt-3 font-bold">
-                <span class="gradient-primary text">Welcome to</span> the ultimate online browser game for word enthusiasts!
-              </p>
-              <div class="mt-5 text-left">
-                <p>
-                  Dive into the world of words and synonyms as you challenge your vocabulary skills in our exciting and engaging game. In this captivating online experience, users can choose from a variety of languages, earn points and coins, and compete on the leaderboard while sharpening their synonym-finding abilities.
+              <article>
+                <p class="uppercase text-primary font-bold">
+                  Explore your word creativity!
                 </p>
-                <br>
-                <p>
-                  Our game is designed to keep you engaged, entertained, and continuously learning as you guess synonyms for words. With a wide range of languages to choose from, you can put your linguistic prowess to the test and earn points and coins to climb to the top of the global leaderboard.
-                </p>
-                <div class="mt-5">
-                  <NuxtLink to="/register">
-                    <Button
-                      label="Start playing"
-                      class="animated-gradient-rainbow t-border-0 text-white"
-                      :type="null"
-                    />
-                  </NuxtLink>
+              </article>
+              <article>
+                <h1 class="capitalize text-5xl mt-3 font-bold">
+                  <span class="gradient-primary text">Welcome to</span> the ultimate online browser game for word enthusiasts!
+                </h1>
+                <div class="mt-5 text-left">
+                  <section>
+                    Dive into the world of words and synonyms as you challenge your vocabulary skills in our exciting and engaging game. In this captivating online experience, users can choose from a variety of languages, earn points and coins, and compete on the leaderboard while sharpening their synonym-finding abilities.
+                  </section>
+                  <br>
+                  <section>
+                    Our game is designed to keep you engaged, entertained, and continuously learning as you guess synonyms for words. With a wide range of languages to choose from, you can put your linguistic prowess to the test and earn points and coins to climb to the top of the global leaderboard.
+                  </section>
+                  <div class="mt-5">
+                    <nav>
+                      <ul>
+                        <li>
+                          <NuxtLink to="/register">
+                            <Button
+                              label="Start playing"
+                              class="animated-gradient-rainbow t-border-0 text-white"
+                              :type="null"
+                            />
+                          </NuxtLink>
+                        </li>
+                      </ul>
+                    </nav>
+                  </div>
                 </div>
-              </div>
+              </article>
             </div>
           </div>
 
@@ -286,8 +319,8 @@ definePageMeta({ auth: false });
 useHead({
   link: [{
     rel: 'canonical', href: `${import.meta.env.VITE_AUTH_ORIGIN}`
-  }],
-})
+  }]
+});
 
 useSeoMeta({
   title: 'Ultimate language challenge',
