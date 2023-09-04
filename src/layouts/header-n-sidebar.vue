@@ -18,7 +18,9 @@ function onNavigate () {
     <LazySidebar :is-expanded="isExpanded" :toggle="sidebarStore.toggleMenu" @navigate="onNavigate" />
     <div class="w-full flex-1">
       <div class="t-ml-0 h-4rem">
-        <LazyHeader :expanded="sidebarStore.toggleMenu" />
+        <header>
+          <LazyHeader :expanded="sidebarStore.toggleMenu" />
+        </header>
       </div>
       <div class="max-w-full relative">
         <NuxtLayout name="footer">
