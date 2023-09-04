@@ -1,7 +1,6 @@
 import { NuxtConfig } from '@nuxt/types';
 import ViteMinifyPlugin from 'vite-plugin-minify';
 
-const baseUrl = '/';
 const nuxtConfig: NuxtConfig = {
   devtools: { enabled: true, enableTimeline: true },
   buildModules: ['@nuxt/typescript-build'],
