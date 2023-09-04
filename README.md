@@ -18,6 +18,7 @@
 ![GitHub](https://img.shields.io/github/license/rxmatteo/synohunt)
 
 - [Synohunt](#Synohunt)
+    - [Welcome](#welcome-to-synohunt-)
     - [Getting Started](#getting-started)
         - [Clone](#clone-the-repository)
         - [Install dependencies](#install-dependencies)
@@ -26,13 +27,19 @@
         - [Start dev server](#start-the-development-server)
         - [After build](#after-build)
     - [Features](#features)
+    - [Performance](#performance)
+    - [Adaptive](#adaptive)
+    - [PWA support](#pwa-support)
     - [License](#license)
 
 # Synohunt
 
-Welcome to **Synohunt**, a free web application, fun and educational game for word lovers to test their knowledge of the languages.
-It's allows users to create and solve challenges to find synonyms for words.
-It supports two languages and three difficulty levels.
+### Welcome to Synohunt! 
+
+It's a **fast**, **free**, **secure**, **adaptive** web application with **PWA** support. 
+
+Also, it's a fun and educational game for word lovers to test their knowledge of the languages, that allows users to create and solve challenges to find synonyms for words.
+We're supporting two languages and three difficulty levels.
 
 ![img.png](img.png)
 
@@ -102,7 +109,7 @@ Open your browser and visit `http://localhost:3000` to see Synohunt in action.
 
 ## Technologies Used
 
-- **Nuxt 3**: The SSR framework for building this web application.
+- **Nuxt 3**: The SSR-friendly framework for building this web application.
 - **Vue 3**: The JavaScript framework for creating user interfaces.
 - **Vite**: A fast and efficient build tool.
 - **Typescript**: A typed superset of JavaScript for enhanced code quality.
@@ -122,6 +129,21 @@ Open your browser and visit `http://localhost:3000` to see Synohunt in action.
 - **Easy to Use**: With a user-friendly interface and a vast database of words and synonyms, our online browser game offers endless hours of fun and learning. Join a vibrant community of language enthusiasts, compete for the top spot on the leaderboard, and discover just how expansive your vocabulary can be.
 - **Points** and **Coins** system to track your progress and earn rewards.
 - **Leaderboard**: Create a competitive element by displaying a leaderboard that ranks players based on their scores.
+
+## Performance
+
+With the help of a Lighthouse, you can see how fast Synohunt is.
+![img_2.png](img_2.png)
+
+## Adaptive
+Since it's using **best** and **modern** utility-first CSS frameworks like **Tailwind** and **PrimeFlex**, Synohunt is full compatible with any device and browser.
+
+![img_3.png](img_3.png)
+
+## PWA Support
+
+You can actually use a Synohunt as PWA. You can build the production version and try it by yourself or try it on site. 
+
 ## License
 
 Released under the [MIT license](LICENSE)
