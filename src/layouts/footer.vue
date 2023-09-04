@@ -6,9 +6,9 @@
   <div>
     <slot />
     <footer>
-      <div class="flex t-items-center t-justify-center mt-5 flex-wrap gap-3">
+      <div>
         <nav>
-          <ul>
+          <ul class="flex t-items-center t-justify-center mt-5 flex-wrap gap-3">
             <li>
               <a href="https://github.com/rxMATTEO/Synohunt/" rel="external" class=" hover:text-primary transition-colors t-duration-200 t-ease-in-out" target="_blank">
                 <span>Contribute on Github</span>
