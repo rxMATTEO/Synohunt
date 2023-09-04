@@ -41,7 +41,7 @@ It's a **fast**, **free**, **secure**, **adaptive** web application with **PWA**
 Also, it's a fun and educational game for word lovers to test their knowledge of the languages, that allows users to create and solve challenges to find synonyms for words.
 We're supporting two languages and three difficulty levels.
 
-![img.png](demo-image/img.png)
+![img.png](src/public/img/demo-image/img.png)
 
 ## Getting started
 
@@ -133,12 +133,12 @@ Open your browser and visit `http://localhost:3000` to see Synohunt in action.
 ## Performance
 
 With the help of a Lighthouse, you can see how fast Synohunt is.
-![img_2.png](demo-image/img_2.png)
+![img_2.png](src/public/img/demo-image/img_2.png)
 
 ## Adaptive
 Since it's using **best** and **modern** utility-first CSS frameworks like **Tailwind** and **PrimeFlex**, Synohunt is full compatible with any device and browser.
 
-![img_3.png](demo-image/img_3.png)
+![img_3.png](src/public/img/demo-image/img_3.png)
 
 ## PWA Support
 
