@@ -18,42 +18,39 @@
 ![GitHub](https://img.shields.io/github/license/rxmatteo/synohunt)
 
 - [Synohunt](#Synohunt)
-    - [Table of Contents](#table-of-contents)
-    - [About](#about)
-    - [Technologies Used](#technologies-used)
-    - [Features](#features)
     - [Getting Started](#getting-started)
-        - [Prerequisites](#prerequisites)
-        - [Installation](#installation)
-    - [Usage](#usage)
-    - [Screenshots](#screenshots)
-    - [API Documentation](#api-documentation)
-    - [Contributing](#contributing)
+        - [Clone](#clone-the-repository)
+        - [Install dependencies](#install-dependencies)
+        - [Configure](#configure-your-env-variables)
+        - [Prisma](#set-up-prisma)
+        - [Start dev server](#start-the-development-server)
+        - [After build](#after-build)
+    - [Features](#features)
     - [License](#license)
-    - [Acknowledgments](#acknowledgments)
-    - [Contact](#contact)
 
 # Synohunt
 
-Welcome to **Synohunt**, a web application that allows users to create and solve challenges to find synonyms for words. It supports two languages and three difficulty levels.
+Welcome to **Synohunt**, a free web application, fun and educational game for word lovers to test their knowledge of the languages.
+It's allows users to create and solve challenges to find synonyms for words.
+It supports two languages and three difficulty levels.
 
 ![img.png](img.png)
 
 ## Getting started
 
-**Clone the repository**
+### **Clone the repository**
 
 ``
 git clone https://github.com/rxMATTEO/Synohunt.git
 ``
 
-**Install dependencies**
+### **Install dependencies**
 ```
 cd synohunt
 npm i
 ```
 
-**Configure your .env variables**
+### **Configure your .env variables**
 
 So, if you're looking for a development environment, create and set up `.env.development` and if you're building a production environment, set up `.env.production` 
 by this template:
@@ -85,7 +82,7 @@ GOOGLE_TAG=your_google_tag to analytics (optional)
 # Replace the placeholders (your_github_public_client_id, your_github_client_secret, etc.) with the actual values for your environment variables. Additionally, ensure that you keep this file secure and do not share sensitive information.
 ```
 
-**Set Up Prisma**:
+### **Set Up Prisma**:
 
 After configuring your database connection:
 - Run migrations to create database tables:
@@ -93,13 +90,13 @@ After configuring your database connection:
 npx prisma migrate dev
 ```
 
-**Start the Development Server**
+### **Start the Development Server**
 
 ``
 npm run dev
 ``
 
-**After build**
+### **After build**
 
 Open your browser and visit `http://localhost:3000` to see Synohunt in action.
 
@@ -118,7 +115,13 @@ Open your browser and visit `http://localhost:3000` to see Synohunt in action.
 
 ## Features
 
-- Create and solve challenges to find synonyms for words.
-- Support for two languages (add your supported languages here).
-- Three difficulty levels (describe the levels here).
+- **Create and solve challenges** to find synonyms for words.
+- **Support for two languages**: - **English** and **Russian** for now.
+- **Three difficulty levels**: **Easy**, **Medium** and **Hard**
+- **End-to-End Encryption**: **RSA** secure
+- **Easy to Use**: With a user-friendly interface and a vast database of words and synonyms, our online browser game offers endless hours of fun and learning. Join a vibrant community of language enthusiasts, compete for the top spot on the leaderboard, and discover just how expansive your vocabulary can be.
+- **Points** and **Coins** system to track your progress and earn rewards.
+- **Leaderboard**: Create a competitive element by displaying a leaderboard that ranks players based on their scores.
+## License
 
+Released under the [MIT license](LICENSE)
