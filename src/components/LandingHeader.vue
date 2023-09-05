@@ -113,6 +113,7 @@ onMounted(() => {
                               class="text-white t-border-0 bg-indigo-500 w-full"
                               label="Play"
                               :type="null"
+                              size="small"
                             />
                           </NuxtLink>
 
@@ -120,6 +121,7 @@ onMounted(() => {
                             class="text-white max-md:t-mt-2 t-border-0 bg-indigo-500 md:ml-3"
                             label="Sign out"
                             :type="null"
+                            size="small"
                             @click="signOut"
                           />
                         </div>
