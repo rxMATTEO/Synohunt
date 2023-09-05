@@ -38,97 +38,58 @@ function copyMail () {
     <LandingHeader />
     <div class="2xl:!t-px-64 2xl:t-mx-20 t-px-3 max-w-full h-full">
       <div class="mt-5">
-        <h1 class="text-6xl font-bold text-center">
-          Contact Synohunt
-        </h1>
-        <div class="surface-ground px-4 py-8 md:px-6 lg:px-8 text-center mt-5 t-rounded-xl">
-          <div class="flex flex-wrap gap-2 align-items-center justify-content-center">
-            <Button type="button" class="google" @click="copyMail">
-              <span class="flex align-items-center px-2 bg-purple-700 text-white">
-                <i :class="gmailIcon" />
-              </span>
-              <span class="px-3 py-2 flex align-items-center text-white">synohunt.here@gmail.com</span>
-            </Button>
-            <a href="https://github.com/rxMATTEO/Synohunt" target="_blank">
-              <Button type="button" class="github">
-                <span class="flex align-items-center px-2 bg-bluegray-800 text-white">
-                  <i class="pi pi-github" />
+        <article>
+          <h1 class="text-6xl font-bold text-center">
+            Contact Synohunt
+          </h1>
+          <div class="surface-ground px-4 py-8 md:px-6 lg:px-8 text-center mt-5 t-rounded-xl">
+            <div class="flex flex-wrap gap-2 align-items-center justify-content-center">
+              <Button type="button" class="google" @click="copyMail">
+                <span class="flex align-items-center px-2 bg-purple-700 text-white">
+                  <i :class="gmailIcon" />
                 </span>
-                <span class="px-3 py-2 flex align-items-center text-white">Github</span>
+                <span class="px-3 py-2 flex align-items-center text-white">synohunt.here@gmail.com</span>
               </Button>
-            </a>
+              <a href="https://github.com/rxMATTEO/Synohunt" rel="external" target="_blank">
+                <Button type="button" class="github">
+                  <span class="flex align-items-center px-2 bg-bluegray-800 text-white">
+                    <i class="pi pi-github" />
+                  </span>
+                  <span class="px-3 py-2 flex align-items-center text-white">Github</span>
+                </Button>
+              </a>
+            </div>
           </div>
-        </div>
+        </article>
         <Footer class="my-5" />
       </div>
     </div>
   </div>
 </template>
 
-<style scoped lang="scss">
-.google {
-  background: linear-gradient(to left, var(--purple-600) 50%, var(--purple-700) 50%);
-  background-size: 200% 100%;
-  background-position: right bottom;
-  transition: background-position 0.5s ease-out;
-  border-color: var(--purple-700);
-  display: flex;
-  align-items: stretch;
-  padding: 0;
+<style scoped lang="sass">
+@mixin filling-button($gradient-from, $gradient-to)
+  background: linear-gradient(to left, var($gradient-from) 50%, var($gradient-to) 50%)
+  background-size: 200% 100%
+  background-position: right bottom
+  transition: background-position 0.5s ease-out
+  border-color: var($gradient-to)
+  display: flex
+  align-items: stretch
+  padding: 0
 
-  &:enabled:hover {
-    background: linear-gradient(to left, var(--purple-600) 50%, var(--purple-700) 50%);
-    background-size: 200% 100%;
-    background-position: left bottom;
-    border-color: var(--purple-700);
-}
+  &:enabled:hover
+    background: linear-gradient(to left, var($gradient-from) 50%, var($gradient-to) 50%)
+    background-size: 200% 100%
+    background-position: left bottom
 
-  &:focus {
-    box-shadow: 0 0 0 1px var(--purple-400);
-}
-}
+  &:focus
+    box-shadow: 0 0 0 1px var(--purple-400)
 
-.twitter {
-  background: linear-gradient(to left, var(--blue-400) 50%, var(--blue-500) 50%);
-  background-size: 200% 100%;
-  background-position: right bottom;
-  transition: background-position 0.5s ease-out;
-  border-color: var(--blue-500);
-  padding: 0;
-  display: flex;
-  align-items: stretch;
+.google
+  @include filling-button(--purple-600, --purple-700)
 
-  &:enabled:hover {
-    background: linear-gradient(to left, var(--blue-400) 50%, var(--blue-500) 50%);
-    background-size: 200% 100%;
-    background-position: left bottom;
-    border-color: var(--blue-500);
-}
+.github
+  @include filling-button(--bluegray-600, --bluegray-800)
 
-  &:focus {
-    box-shadow: 0 0 0 1px var(--blue-200);
-}
-}
-
-.github {
-  background: linear-gradient(to left, var(--bluegray-700) 50%, var(--bluegray-800) 50%);
-  background-size: 200% 100%;
-  background-position: right bottom;
-  transition: background-position 0.5s ease-out;
-  border-color: var(--bluegray-800);
-  padding: 0;
-  display: flex;
-  align-items: stretch;
-
-  &:enabled:hover {
-    background: linear-gradient(to left, var(--bluegray-700) 50%, var(--bluegray-800) 50%);
-    background-size: 200% 100%;
-    background-position: left bottom;
-    border-color: var(--bluegray-800);
-}
-
-  &:focus {
-    box-shadow: 0 0 0 1px var(--purple-500);
-}
-}
 </style>
