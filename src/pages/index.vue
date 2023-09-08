@@ -1,10 +1,10 @@
 <template>
   <div class="surface-ground">
-    <GradientBlur class="md:!t-hidden" />
-    <div class="h-screen t-max-h-screen">
-      <div class="text-color py-3 absolute right-0 left-0" />
-      <LandingHeader class="fixed left-0 right-0 top-0 t-z-50" />
-      <main>
+    <main>
+      <GradientBlur class="md:!t-hidden" />
+      <div class="h-screen t-max-h-screen">
+        <div class="text-color py-3 absolute right-0 left-0" />
+        <LandingHeader class="fixed left-0 right-0 top-0 t-z-50" />
         <div class="2xl:!t-px-64 2xl:t-mx-20 t-px-3 max-w-full h-full surface-ground">
           <div class="h-full">
             <div class="flex h-full align-items-center">
@@ -339,8 +339,8 @@
             </div>
           </div>
         </div>
-      </main>
-    </div>
+      </div>
+    </main>
   </div>
 </template>
 
