@@ -9,10 +9,9 @@
 import { onMounted } from 'vue';
 import { storeToRefs } from 'pinia';
 import { Platforms } from './app.config.ts';
-import { useAppConfig } from '#imports';
-import { useThemeStore } from '@/stores/themeStore';
-import { usePlatformStore } from '@/stores/platformStore';
-import { useSidebarStore } from '@/stores/sidebarStore';
+import { useThemeStore } from '@/stores/themeStore.ts';
+import { usePlatformStore } from '@/stores/platformStore.ts';
+import { useSidebarStore } from '@/stores/sidebarStore.ts';
 
 const themeStore = useThemeStore();
 themeStore.applyFromCookie();
@@ -22,8 +21,6 @@ useHead({
     return chunk ? `${chunk} - Synohunt` : 'Synohunt';
   }
 });
-
-const appConfig = useAppConfig();
 
 onMounted(() => {
   const platformStore = usePlatformStore();
