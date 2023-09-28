@@ -5,7 +5,7 @@ import Footer from '@/layouts/footer.vue';
 useHead({
   title: 'About us',
   meta: [
-    { name: 'description', content: 'About Synohunt' }
+    { name: 'description', content: 'About' }
   ],
   link: [{
     rel: 'canonical', href: `${import.meta.env.VITE_AUTH_ORIGIN}about`
